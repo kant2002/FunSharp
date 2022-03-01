@@ -35,7 +35,7 @@ let mutable Player_Lives = 10
 let nbrisland = 5 //nomber of island images
 let islandcount = 5 //nomber of island in the wall field
 
-// Window title
+// Заголовок окна
 let gameTitle = "1942, Score: "
 
 GraphicsWindow.Hide()

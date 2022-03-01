@@ -1,6 +1,7 @@
-﻿#I "../lib"
-#r "../lib/Xwt.dll"
-#r "../src/bin/Debug/FunSharp.Library.dll"
+﻿//#I "../lib"
+#r "nuget: Xwt"
+#r "../src/bin/Debug/net48/FunSharp.Library.dll"
+//#r "../../../xwt/Xwt.GtkSharp/bin/Debug/netstandard2.0/Xwt.GtkSharp.dll"
 
 open System
 open System.Collections.Generic

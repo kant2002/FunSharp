@@ -1,8 +1,8 @@
-﻿#I "../lib"
-#r "../lib/Xwt.dll"
-#r "../src/bin/Debug/FunSharp.Library.dll"
+﻿#r "nuget: Xwt"
+#r "../src/bin/Debug/net48/FunSharp.Library.dll"
 
 open Library
+open System.Threading
 
 let onKeyDown () =
    match GraphicsWindow.LastKey with
@@ -32,3 +32,4 @@ GraphicsWindow.PenColor <- Colors.White
 GraphicsWindow.MouseDown <- Callback(onMouseDown)
 GraphicsWindow.MouseMove <- Callback(onMouseMove)
 GraphicsWindow.KeyDown <- Callback(onKeyDown)
+Thread.Sleep 2_000

@@ -2,6 +2,7 @@
 
 open Xwt
 open System
+open System.Runtime.InteropServices
 open System.Threading
 
 type Callback = delegate of unit -> unit
@@ -71,14 +72,15 @@ type internal MyApp () =
       initCanvas ()
       showWindow ()         
       let onInit = unbox<unit->unit> onInit
-      onInit ()        
+      // onInit ()
       Application.Run()
+      onInit ()
    let startAppThread () =
       use isInitialized = new AutoResetEvent(false)
       let thread = Thread(ParameterizedThreadStart runApp)
-      thread.SetApartmentState(ApartmentState.STA)
+      if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) then thread.SetApartmentState(ApartmentState.STA)
       thread.Start(fun () -> isInitialized.Set() |> ignore)
-      isInitialized.WaitOne() |> ignore      
+      isInitialized.WaitOne() |> ignore
    do startAppThread()
    member app.Window = mainWindow
    member app.SetWindowWidth(width) =
@@ -115,7 +117,9 @@ type internal My private () =
    static let sync = obj ()
    static let isFsi () =
       let args = System.Environment.GetCommandLineArgs()
-      args.Length > 0 && System.IO.Path.GetFileName(args.[0]) = "fsi.exe"
+      let netFxFsi = args.Length > 0 && System.IO.Path.GetFileName(args.[0]) = "fsi.exe"
+      let netcoreFsi = args.Length > 1 && System.IO.Path.GetFileName(args.[1]) = "fsi"
+      netFxFsi || netcoreFsi
    static let closeApp () =
       lock (sync) (fun () ->
          Application.Exit()

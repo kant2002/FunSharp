@@ -1,8 +1,8 @@
-﻿#I "../lib"
-#r "../lib/Xwt.dll"
-#r "../src/bin/Debug/FunSharp.Library.dll"
+﻿#r "nuget: Xwt"
+#r "../src/bin/Debug/net48/FunSharp.Library.dll"
 
 open Library
+open System.Threading
 
 let mutable p = 0
 
@@ -189,3 +189,5 @@ let clicked () =
         Controls.SetTextBoxText(t, string (float a / float b))
 
 Controls.ButtonClicked <- Callback(clicked)
+
+Thread.Sleep 1000

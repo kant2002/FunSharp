@@ -1,8 +1,8 @@
-﻿#I "../lib"
-#r "../lib/Xwt.dll"
-#r "../src/bin/Debug/FunSharp.Library.dll"
+﻿#r "nuget: Xwt"
+#r "../src/bin/Debug/net48/FunSharp.Library.dll"
 
 open Library
+open System.Threading
 
 let angle = 30.0
 let delta = 10.0
@@ -18,3 +18,4 @@ let rec drawTree distance =
       Turtle.Move(-distance)
 
 drawTree 60.0
+Thread.Sleep 2_000

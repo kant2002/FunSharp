@@ -1,8 +1,8 @@
-﻿#I "../lib"
-#r "../lib/Xwt.dll"
-#r "../src/bin/Debug/FunSharp.Library.dll"
+﻿#r "nuget: Xwt"
+#r "../src/bin/Debug/net48/FunSharp.Library.dll"
 
 open Library
+open System.Threading
 
 let ball = Shapes.AddRectangle(200.0, 100.0)
 
@@ -12,3 +12,4 @@ let OnMouseDown () =
   Shapes.Move(ball, x, y)
 
 GraphicsWindow.MouseDown <- Callback(OnMouseDown)
+Thread.Sleep 2_000

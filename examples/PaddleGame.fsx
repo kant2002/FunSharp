@@ -1,7 +1,5 @@
-﻿#r "../lib/Xwt.dll"
-#r "../src/bin/debug/FunSharp.Library.dll"
-
-// TODO: move this into games
+﻿#r "nuget: Xwt"
+#r "../src/bin/Debug/net48/FunSharp.Library.dll"
 
 open Library
 
@@ -53,3 +51,4 @@ while (y < gh) do
   Program.Delay(15)
   
 GraphicsWindow.ShowMessage("Your score is: " + score.ToString(), "Paddle")
+Program.Delay(1_500)
