@@ -7,7 +7,7 @@ open Draw
 [<AllowNullLiteral>]
 type internal DrawingCanvas () =
    inherit Canvas ()
-   let turtleImage = Xwt.Drawing.Image.FromResource("turtle.png")
+   let turtleImage = Xwt.Drawing.Image.FromResource(typeof<DrawingCanvas>, "FunSharp.Library.turtle.png")
    let drawings = ResizeArray<DrawingInfo>()
    let turtle =
       let w,h = turtleImage.Width, turtleImage.Height

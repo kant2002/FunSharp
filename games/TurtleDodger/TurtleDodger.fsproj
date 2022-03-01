@@ -5,11 +5,8 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<None Include="App.config" />
-		<EmbeddedResource Include="Turtle.png" />
+		<EmbeddedResource Include="turtle.png" LogicalName="turtle.png" />
 		<Compile Include="TurtleDodger.fs" />
-	</ItemGroup>
-	<ItemGroup>
-	  <PackageReference Include="GdkSharp" Version="3.24.24.34" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\FunSharp.Library.fsproj" />

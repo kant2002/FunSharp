@@ -34,7 +34,10 @@
 		<EmbeddedResource Include="Sounds\Pause.wav" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<!-- <ItemGroup>
 	  <PackageReference Include="Xwt.Gtk3" Version="0.2.251" />
+	</ItemGroup> -->
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\xwt\Xwt.GtkSharp\Xwt.GtkSharp.csproj" />
 	</ItemGroup>
 </Project>

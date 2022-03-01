@@ -66,7 +66,7 @@ type internal MyApp () =
             true
          )
    let runApp onInit =      
-      Application.Initialize (ToolkitType.Gtk)      
+      Application.Initialize (ToolkitType.Gtk3)      
       mainWindow <- new Window(Title="App", Padding = WidgetSpacing(), Width=640.0, Height=480.0)
       initCanvas ()
       showWindow ()         
