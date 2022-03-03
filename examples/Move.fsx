@@ -1,7 +1,7 @@
 ﻿#r "nuget: Xwt"
 #r "../src/bin/Debug/net48/FunSharp.Library.dll"
 
-open Library
+open Библиотека
 open System.Threading
 
 let ball = Shapes.AddRectangle(200.0, 100.0)

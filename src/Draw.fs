@@ -1,4 +1,4 @@
-﻿module internal Library.Draw
+﻿module internal Библиотека.Draw
 
 open Xwt
 open Xwt.Drawing

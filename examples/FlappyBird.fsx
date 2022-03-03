@@ -1,7 +1,7 @@
 ﻿#r "nuget: Xwt"
 #r "../src/bin/Debug/net48/FunSharp.Library.dll"
 
-open Library
+open Библиотека
 
 let bg = Shapes.AddImage("http://flappycreator.com/default/bg.png")
 let ground = Shapes.AddImage("http://flappycreator.com/default/ground.png")

@@ -1,4 +1,4 @@
-﻿module Library.Math
+﻿module Библиотека.Math
 
 let private rand = System.Random()
 let GetRadians (deg:float) = deg * System.Math.PI / 180.

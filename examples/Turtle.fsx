@@ -1,10 +1,10 @@
 ﻿#r "nuget: Xwt"
 #r "../src/bin/Debug/net48/FunSharp.Library.dll"
 
-open Library
+open Библиотека
 open System.Threading
 
-ГрафическоеОкно.PenColor <- Colors.Purple
+ГрафическоеОкно.PenColor <- Цвета.Purple
 Turtle.X <- 150.
 Turtle.Y <- 150.
 for i in 0..5..200 do

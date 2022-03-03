@@ -8,12 +8,12 @@
 		<Compile Include="DrawingTypes.fs" />
 		<Compile Include="Draw.fs" />
 		<Compile Include="DrawingCanvas.fs" />
-		<Compile Include="Colors.fs" />
+		<Compile Include="Цвета.fs" />
 		<Compile Include="App.fs" />
 		<Compile Include="Http.fs" />
 		<Compile Include="Resource.fs" />
 		<Compile Include="ImageList.fs" />
-		<Compile Include="GraphicsWindow.fs" />
+		<Compile Include="ГрафическоеОкно.fs" />
 		<Compile Include="Shapes.fs" />
 		<Compile Include="Turtle.fs" />
 		<Compile Include="Controls.fs" />
@@ -25,7 +25,6 @@
 		<Compile Include="Sound.fs" />
 		<Compile Include="Program.fs" />
 		<Compile Include="Collections.fs" />
-		<Compile Include="Colors.fs" />
 		<EmbeddedResource Include="turtle.png" />
 		<EmbeddedResource Include="Sounds\BeepBeep.wav" />
 		<EmbeddedResource Include="Sounds\BellRing.wav" />

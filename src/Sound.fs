@@ -1,4 +1,4 @@
-﻿module Library.Sound
+﻿module Библиотека.Sound
 
 open System.Media
 

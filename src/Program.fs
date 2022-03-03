@@ -1,4 +1,4 @@
-﻿namespace Library
+﻿namespace Библиотека
 
 open System
 open System.Threading

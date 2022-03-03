@@ -1,7 +1,7 @@
 ﻿#r "nuget: Xwt"
 #r "../src/bin/Debug/net48/FunSharp.Library.dll"
 
-open Library
+open Библиотека
 open System.Threading
 
 let angle = 30.0

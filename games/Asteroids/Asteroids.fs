@@ -3,7 +3,7 @@
 #r "./bin/debug/FunSharp.dll"
 #endif
 
-open Library
+open Библиотека
 
 // Asteroids Game
 // Copyright (C) 2009, Jason T. Jacques 
@@ -12,7 +12,7 @@ open Library
 // Game area controls
 let gameWidth  = 640.0
 let gameHeight = 480.0
-let backColor = Colors.Black
+let backColor = Цвета.Black
 
 // Window title
 let gameTitle = "Asteroids, Score: "
@@ -30,20 +30,20 @@ let pauseKey = "P"
 
 // Asteroid (rock) settings
 let rockSpeed = 1.0
-let rockColor = Colors.White
+let rockColor = Цвета.White
 let rockMin = 20 // small size rock
 let rockTypes = 3 // number of rock sizes (multiples of small rock size)
 let mutable initRocks = 5
 
 // Ammo settings
 let ammoSpeed = 5.0
-let ammoColor = Colors.White
+let ammoColor = Цвета.White
 let ammoLife = 60 // moves before auto destruct
 let ammoMax = 10
 let ammoSize = 5.0
 
 // Player settings
-let playerColor = Colors.White
+let playerColor = Цвета.White
 let playerHeight = 30.0
 let playerWidth = 20.0
 let mutable player = ""

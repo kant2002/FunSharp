@@ -1,11 +1,11 @@
-﻿namespace Library
+﻿namespace Библиотека
 
 open System
 
 [<Sealed>]
 type ГрафическоеОкно private () =   
    static let rnd = Random()
-   static let mutable фоновыйЦвет = Colors.White
+   static let mutable фоновыйЦвет = Цвета.White
    static let mutable ширина = 640
    static let mutable высота = 480
    static let pen () = Pen(ГрафическоеОкно.PenColor,ГрафическоеОкно.PenWidth)
@@ -35,9 +35,9 @@ type ГрафическоеОкно private () =
    static member CanResize
       with get () = true
       and set (value:bool) = ()
-   static member val PenColor = Colors.Black with get, set
+   static member val PenColor = Цвета.Black with get, set
    static member val PenWidth = 2.0 with get, set
-   static member val ЦветКисти = Colors.Purple with get,set
+   static member val ЦветКисти = Цвета.Purple with get,set
    static member val FontSize = 12.0 with get,set
    static member val FontName = "" with get,set
    static member val FontBold = false with get,set

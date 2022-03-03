@@ -3,7 +3,7 @@
 #r "./bin/debug/FunSharp.dll"
 #endif
 
-open Library
+open Библиотека
 
 // Turtle Dodger 0.5b
 // Copyright (c) 2014 Nonki Takahashi.
@@ -35,7 +35,7 @@ let mutable collisionDetected = false
 let mutable passed = 0
 let mutable lastKey = ""
 let mutable lastems = 0
-let color = dict [1,Colors.Orange; 2, Colors.Cyan; 3, Colors.Lime]
+let color = dict [1,Цвета.Orange; 2, Цвета.Cyan; 3, Цвета.Lime]
 let size = dict [1,20; 2,16; 3,12]
 let mutable score = "<shape name>"
 let mutable iMin = 0
@@ -48,7 +48,7 @@ let objects = ResizeArray<Object>()
 let rec Closing () =
    Timer.Pause()
    Turtle.Повернуть(720)
-   ГрафическоеОкно.ЦветКисти <- Colors.White
+   ГрафическоеОкно.ЦветКисти <- Цвета.White
    ГрафическоеОкно.FontName <- "Trebuchet MS"
    ГрафическоеОкно.FontSize <- 40.0
    let x = (gw - 217) / 2
@@ -59,7 +59,7 @@ and Opening () =
    let url = "" // "http://www.nonkit.com/smallbasic.files/"
    let bigTurtle = Shapes.AddImage(url + "turtle.png")
    Shapes.Move(bigTurtle, 180, 140)
-   ГрафическоеОкно.ЦветКисти <- Colors.White
+   ГрафическоеОкно.ЦветКисти <- Цвета.White
    ГрафическоеОкно.FontName <- "Trebuchet MS"
    ГрафическоеОкно.FontSize <- 50.0
    let x = (gw - 443) / 2
@@ -82,12 +82,12 @@ and Game () =
    Turtle.PenUp()
    let x = gw / 2
    let y = gh - 40
-   ГрафическоеОкно.ЦветКисти <- Colors.White
+   ГрафическоеОкно.ЦветКисти <- Цвета.White
    ГрафическоеОкно.FontSize <- 18.0
    score <- Shapes.AddText("0")
    Shapes.Move(score, 20, 20)
    if debug then
-     ГрафическоеОкно.ЦветКисти <- Colors.White
+     ГрафическоеОкно.ЦветКисти <- Цвета.White
      ГрафическоеОкно.FontSize <- 12.0
      pos <- Shapes.AddText("(" + x.ToString() + "," + y.ToString() + ")")
      ГрафическоеОкно.PenWidth <- 1.0
@@ -121,7 +121,7 @@ and Game () =
      else
        Program.Delay(100)      
 and Init () =
-   ГрафическоеОкно.ФоновыйЦвет <- Colors.DodgerBlue
+   ГрафическоеОкно.ФоновыйЦвет <- Цвета.DodgerBlue
    ГрафическоеОкно.Ширина <- gw
    ГрафическоеОкно.Высота <- gh   
    passed <- 0

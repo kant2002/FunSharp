@@ -1,4 +1,4 @@
-﻿namespace Library
+﻿namespace Библиотека
 
 open Xwt
 open Xwt.Drawing

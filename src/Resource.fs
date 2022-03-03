@@ -1,4 +1,4 @@
-﻿module internal Library.Resource
+﻿module internal Библиотека.Resource
 
 let private assembly = System.Reflection.Assembly.GetEntryAssembly()
 let GetStream path =

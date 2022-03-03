@@ -1,14 +1,14 @@
 ﻿#r "nuget: Xwt"
 #r "../src/bin/Debug/net48/FunSharp.Library.dll"
 
-open Library
+open Библиотека
 open System.Threading
 
 let onKeyDown () =
    match ГрафическоеОкно.LastKey with
-   | "K1" -> ГрафическоеОкно.PenColor <- Colors.Red
-   | "K2" -> ГрафическоеОкно.PenColor <- Colors.Blue
-   | "K3" -> ГрафическоеОкно.PenColor <- Colors.LightGreen
+   | "K1" -> ГрафическоеОкно.PenColor <- Цвета.Red
+   | "K2" -> ГрафическоеОкно.PenColor <- Цвета.Blue
+   | "K3" -> ГрафическоеОкно.PenColor <- Цвета.LightGreen
    | "c" -> ГрафическоеОкно.Очистить()
    | s -> printfn "'%s'" s; System.Diagnostics.Debug.WriteLine(s)
 
@@ -27,8 +27,8 @@ let onMouseMove () =
    prevX <- x
    prevY <- y
 
-ГрафическоеОкно.ФоновыйЦвет <- Colors.Black
-ГрафическоеОкно.PenColor <- Colors.White
+ГрафическоеОкно.ФоновыйЦвет <- Цвета.Black
+ГрафическоеОкно.PenColor <- Цвета.White
 ГрафическоеОкно.MouseDown <- Callback(onMouseDown)
 ГрафическоеОкно.MouseMove <- Callback(onMouseMove)
 ГрафическоеОкно.KeyDown <- Callback(onKeyDown)

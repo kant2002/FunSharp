@@ -1,4 +1,4 @@
-﻿open Library
+﻿open Библиотека
 
 let gw = float ГрафическоеОкно.Ширина
 let gh = float ГрафическоеОкно.Высота
@@ -12,9 +12,9 @@ let OnMouseMove () =
 
 let PrintScore () =
   // Clear the score first and then draw the real score text
-  ГрафическоеОкно.ЦветКисти <- Colors.White
+  ГрафическоеОкно.ЦветКисти <- Цвета.White
   ГрафическоеОкно.ЗаполнитьПрямоугольник(10, 10, 200, 20)
-  ГрафическоеОкно.ЦветКисти <- Colors.Black
+  ГрафическоеОкно.ЦветКисти <- Цвета.Black
   ГрафическоеОкно.НарисоватьТекст(10, 10, "Score: " + score.ToString())
 
 ГрафическоеОкно.FontSize <- 14.0

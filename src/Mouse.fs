@@ -1,4 +1,4 @@
-﻿namespace Library
+﻿namespace Библиотека
 
 [<Sealed>]
 type Mouse private () =

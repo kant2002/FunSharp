@@ -3,7 +3,7 @@
 #r "./bin/debug/FunSharp.dll"
 #endif
 
-open Library
+open Библиотека
 
 let mutable BOXES = 4      // number of boxes per piece
 let mutable BWIDTH = 25    // box width in pixels
@@ -182,7 +182,7 @@ and CopyPiece () = // in basetemplate, template, rotation
 
   if not (templates.ContainsKey template) then
       templates.[template] <-
-         { Values=[|0;0;0;0|]; Color=Colors.Black; Dim=0; ViewX=0; ViewY=0 }        
+         { Values=[|0;0;0;0|]; Color=Цвета.Black; Dim=0; ViewX=0; ViewY=0 }        
 
   if rotation = "CW" then
     for i = 0 to BOXES - 1 do // x' = y y' = L - 1 - x
@@ -229,7 +229,7 @@ and CreatePiece () = // in: template ret: h
   pieceToTemplate.[h] <- template
 
   ГрафическоеОкно.PenWidth <- 1.0
-  ГрафическоеОкно.PenColor <- Colors.Black
+  ГрафическоеОкно.PenColor <- Цвета.Black
   ГрафическоеОкно.ЦветКисти <- templates.[template].Color
 
   pieces.[h] <- Boxes()
@@ -349,25 +349,25 @@ and SetupCanvas () =
 
   Program.Delay(200)
   ГрафическоеОкно.PenWidth <- 1.0
-  ГрафическоеОкно.PenColor <- Colors.Pink
+  ГрафическоеОкно.PenColor <- Цвета.Pink
   for x = 0 to CWIDTH-1 do
     for y = 0 to CHEIGHT-1 do
       spots.[x + y * CWIDTH] <- "." // "." indicates spot is free
       ГрафическоеОкно.DrawRectangle(XOFFSET + x * BWIDTH, YOFFSET + y * BWIDTH, BWIDTH, BWIDTH)
 
   ГрафическоеОкно.PenWidth <- 4.0
-  ГрафическоеОкно.PenColor <- Colors.Black
+  ГрафическоеОкно.PenColor <- Цвета.Black
   ГрафическоеОкно.НарисоватьЛинию(XOFFSET, YOFFSET, XOFFSET, YOFFSET + CHEIGHT*BWIDTH)
   ГрафическоеОкно.НарисоватьЛинию(XOFFSET + CWIDTH*BWIDTH, YOFFSET, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
   ГрафическоеОкно.НарисоватьЛинию(XOFFSET, YOFFSET + CHEIGHT*BWIDTH, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
 
-  ГрафическоеОкно.PenColor <- Colors.Lime
+  ГрафическоеОкно.PenColor <- Цвета.Lime
   ГрафическоеОкно.НарисоватьЛинию(XOFFSET - 4, YOFFSET, XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 6)
   ГрафическоеОкно.НарисоватьЛинию(XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 6)
   ГрафическоеОкно.НарисоватьЛинию(XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 4, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 4)
 
-  ГрафическоеОкно.PenColor <- Colors.Black
-  ГрафическоеОкно.ЦветКисти <- Colors.Pink
+  ГрафическоеОкно.PenColor <- Цвета.Black
+  ГрафическоеОкно.ЦветКисти <- Цвета.Pink
   let x = XOFFSET + PREVIEW_xpos * BWIDTH - BWIDTH
   let y = YOFFSET + PREVIEW_ypos * BWIDTH - BWIDTH
   ГрафическоеОкно.ЗаполнитьПрямоугольник(x - 20, y, BWIDTH * 5, BWIDTH * 6)
@@ -376,7 +376,7 @@ and SetupCanvas () =
   ГрафическоеОкно.ЗаполнитьПрямоугольник(x - 20, y + 190, 310, 170)
   ГрафическоеОкно.DrawRectangle(x - 20, y + 190, 310, 170)
 
-  ГрафическоеОкно.ЦветКисти <- Colors.Black
+  ГрафическоеОкно.ЦветКисти <- Цвета.Black
   ГрафическоеОкно.FontItalic <- false
   ГрафическоеОкно.FontName <- "Comic Sans MS"
   ГрафическоеОкно.FontSize <- 16.0
@@ -389,7 +389,7 @@ and SetupCanvas () =
 
   Program.Delay(200) // without this delay, the above text will use the fontsize of the score 
 
-  ГрафическоеОкно.ЦветКисти <- Colors.Black
+  ГрафическоеОкно.ЦветКисти <- Цвета.Black
   ГрафическоеОкно.FontName <- "Georgia"
   ГрафическоеОкно.FontItalic <- true
   ГрафическоеОкно.FontSize <- 36.0
@@ -404,14 +404,14 @@ and SetupCanvas () =
 
 and PrintScore () =
   ГрафическоеОкно.PenWidth <- 4.0
-  ГрафическоеОкно.ЦветКисти <- Colors.Pink
+  ГрафическоеОкно.ЦветКисти <- Цвета.Pink
   ГрафическоеОкно.ЗаполнитьПрямоугольник(480, 65, 150, 50)
-  ГрафическоеОкно.ЦветКисти <- Colors.Black
+  ГрафическоеОкно.ЦветКисти <- Цвета.Black
   ГрафическоеОкно.DrawRectangle(480, 65, 150, 50)
   ГрафическоеОкно.FontItalic <- false
   ГрафическоеОкно.FontSize <- 32.0
   ГрафическоеОкно.FontName <- "Impact"
-  ГрафическоеОкно.ЦветКисти <- Colors.Black
+  ГрафическоеОкно.ЦветКисти <- Цвета.Black
   ГрафическоеОкно.НарисоватьТекст(485, 70, Text.Append(Text.GetSubText( "00000000", 0, 8 - Text.GetLength( string score ) ), score))
 
 and SetupTemplates () =
@@ -422,38 +422,38 @@ and SetupTemplates () =
   //_X_
   //_X_
   //_XX
-  templates.["template1"] <- { Values=[|10;11;12;22|]; Color=Colors.Yellow; Dim=3; ViewX = -12; ViewY = 12 }
+  templates.["template1"] <- { Values=[|10;11;12;22|]; Color=Цвета.Yellow; Dim=3; ViewX = -12; ViewY = 12 }
 
   //_X_
   //_X_
   //XX_
-  templates.["template2"] <- { Values=[|10;11;12;02|]; Color=Colors.Magenta; Dim=3; ViewX=12; ViewY=12 }
+  templates.["template2"] <- { Values=[|10;11;12;02|]; Color=Цвета.Magenta; Dim=3; ViewX=12; ViewY=12 }
 
   //_X_
   //XXX
   //_
-  templates.["template3"] <- { Values=[|10;01;11;21|]; Color=Colors.Gray; Dim=3; ViewX=0; ViewY=25}
+  templates.["template3"] <- { Values=[|10;01;11;21|]; Color=Цвета.Gray; Dim=3; ViewX=0; ViewY=25}
 
   //XX_
   //XX_
   //_
-  templates.["template4"] <- { Values=[|00;10;01;11|]; Color=Colors.Cyan; Dim=2; ViewX=12; ViewY=25 }
+  templates.["template4"] <- { Values=[|00;10;01;11|]; Color=Цвета.Cyan; Dim=2; ViewX=12; ViewY=25 }
 
   //XX_
   //_XX
   //_
-  templates.["template5"] <- { Values=[|00;10;11;21|]; Color=Colors.Green; Dim=3; ViewX=0; ViewY=25 }
+  templates.["template5"] <- { Values=[|00;10;11;21|]; Color=Цвета.Green; Dim=3; ViewX=0; ViewY=25 }
 
   //_XX
   //XX_
   //_
-  templates.["template6"] <- { Values=[|10;20;01;11|]; Color=Colors.Blue; Dim=3; ViewX=0; ViewY=25}
+  templates.["template6"] <- { Values=[|10;20;01;11|]; Color=Цвета.Blue; Dim=3; ViewX=0; ViewY=25}
 
   //_X
   //_X
   //_X
   //_X
-  templates.["template7"] <- { Values=[|10;11;12;13|]; Color=Colors.Red; Dim=4; ViewX=0; ViewY=0}
+  templates.["template7"] <- { Values=[|10;11;12;13|]; Color=Цвета.Red; Dim=4; ViewX=0; ViewY=0}
 
 ГрафическоеОкно.Высота <- 580
 ГрафическоеОкно.Ширина <- 700

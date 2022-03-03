@@ -5,7 +5,7 @@
 
 open System
 open System.Collections.Generic
-open Library
+open Библиотека
 
 let GW = float ГрафическоеОкно.Ширина
 let GH = float ГрафическоеОкно.Высота
@@ -16,8 +16,8 @@ let MidY = GW/2.0
 let initWindow () =
    ГрафическоеОкно.Show()
    ГрафическоеОкно.Заголовок <- "Analog Clock"
-   ГрафическоеОкно.ФоновыйЦвет <- Colors.Black
-   ГрафическоеОкно.ЦветКисти <- Colors.BurlyWood
+   ГрафическоеОкно.ФоновыйЦвет <- Цвета.Black
+   ГрафическоеОкно.ЦветКисти <- Цвета.BurlyWood
    ГрафическоеОкно.DrawEllipse(MidX-Radius-15.,MidY-Radius-5.,Radius*2.+30.,Radius*2.+20.)
    ГрафическоеОкно.ЗаполнитьЭллипс(MidX-Radius-15.,MidY-Radius-5.,Radius*2.+30.,Radius*2.+20.)
    for angle in 1.0..180.0 do
@@ -33,7 +33,7 @@ let initWindow () =
          blue)
      ГрафическоеОкно.PenColor <- color
      Shapes.AddLine(x,y1,x,y2) |> ignore
-   ГрафическоеОкно.ЦветКисти <- Colors.White   
+   ГрафическоеОкно.ЦветКисти <- Цвета.White   
    let ClockNum = Dictionary()
    for i in 1. .. 12. do
      let Radians = Math.GetRadians(-i * 30. + 90.)
@@ -50,7 +50,7 @@ let setHands () =
    if (float Clock.Hour + float Clock.Minute/60. + float Clock.Second/3600. <> Hour) then
      Shapes.Remove(HourHand)
      Hour <- float Clock.Hour + float Clock.Minute/60. + float Clock.Second/3600.
-     ГрафическоеОкно.PenColor <- Colors.Black
+     ГрафическоеОкно.PenColor <- Цвета.Black
      ГрафическоеОкно.PenWidth <- 3.
      HourHand <- 
        Shapes.AddLine(
@@ -61,7 +61,7 @@ let setHands () =
    if float Clock.Minute <> Minute then
      Shapes.Remove(MinuteHand)
      Minute <- float Clock.Minute + float Clock.Second/60.
-     ГрафическоеОкно.PenColor <- Colors.Blue
+     ГрафическоеОкно.PenColor <- Цвета.Blue
      ГрафическоеОкно.PenWidth <- 2.
      MinuteHand <- 
        Shapes.AddLine(
@@ -72,7 +72,7 @@ let setHands () =
    if float Clock.Second <> Second then
      Shapes.Remove(SecondHand)
      Second <- float Clock.Second
-     ГрафическоеОкно.PenColor <- Colors.Red
+     ГрафическоеОкно.PenColor <- Цвета.Red
      ГрафическоеОкно.PenWidth <- 1.
      SecondHand <- 
        Shapes.AddLine(

@@ -3,7 +3,7 @@
 #r "./bin/debug/FunSharp.dll"
 #endif
 
-open Library
+open Библиотека
 
 type System.Collections.Generic.Dictionary<'TKey,'TValue> with
    member this.GetOrDefault(key:'TKey,value:'TValue) =
@@ -161,8 +161,8 @@ let rec Init() =
 
    player <- Shapes.AddImage(player0)
    ГрафическоеОкно.FontSize <- 20.0
-   ГрафическоеОкно.ФоновыйЦвет <- Colors.Gray
-   ГрафическоеОкно.PenColor <- Colors.Yellow
+   ГрафическоеОкно.ФоновыйЦвет <- Цвета.Gray
+   ГрафическоеОкно.PenColor <- Цвета.Yellow
 
 
 
