@@ -102,11 +102,11 @@ let rec MainLoop () =
 
 and HandleKey () =
   // Stop game
-  if GraphicsWindow.LastKey = "Escape" then
+  if ГрафическоеОкно.LastKey = "Escape" then
     Program.End()  
 
   // Move piece left
-  if GraphicsWindow.LastKey = "Left" then
+  if ГрафическоеОкно.LastKey = "Left" then
     moveDirection <- -1
     ValidateMove()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
     if invalidMove = 0 then
@@ -114,7 +114,7 @@ and HandleKey () =
     MovePiece()   // in: ypos, xpos, h 
 
   // Move piece right
-  if GraphicsWindow.LastKey = "Right" then
+  if ГрафическоеОкно.LastKey = "Right" then
     moveDirection <- 1
     ValidateMove()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
     if invalidMove = 0 then
@@ -122,11 +122,11 @@ and HandleKey () =
     MovePiece()  // in: ypos, xpos, h  
 
   // Move piece down
-  if GraphicsWindow.LastKey = "Down" || GraphicsWindow.LastKey = "Space" then
+  if ГрафическоеОкно.LastKey = "Down" || ГрафическоеОкно.LastKey = "Space" then
     delay <- 0
  
   // Rotate piece
-  if GraphicsWindow.LastKey = "Up" then
+  if ГрафическоеОкно.LastKey = "Up" then
     basetemplate <- pieceToTemplate.[h]
     template <- "temptemplate"
     rotation <- "CW"
@@ -212,7 +212,7 @@ and CopyPiece () = // in basetemplate, template, rotation
     for i = 0 to BOXES - 1 do
       templates.[template].Values.[i] <- templates.[basetemplate].Values.[i]
   else
-    GraphicsWindow.ShowMessage("invalid parameter", "Error")
+    ГрафическоеОкно.ShowMessage("invalid parameter", "Error")
     Program.End() 
 
   // Copy the remain properties from basetemplate to template.
@@ -228,9 +228,9 @@ and CreatePiece () = // in: template ret: h
 
   pieceToTemplate.[h] <- template
 
-  GraphicsWindow.PenWidth <- 1.0
-  GraphicsWindow.PenColor <- Colors.Black
-  GraphicsWindow.BrushColor <- templates.[template].Color
+  ГрафическоеОкно.PenWidth <- 1.0
+  ГрафическоеОкно.PenColor <- Colors.Black
+  ГрафическоеОкно.BrushColor <- templates.[template].Color
 
   pieces.[h] <- Boxes()
   for i = 0 to BOXES - 1 do
@@ -344,75 +344,75 @@ and DeleteLines () =
 and SetupCanvas () =
 // GraphicsWindow.DrawResizedImage( Flickr.GetRandomPicture( "bricks" ), 0, 0, GraphicsWindow.Width, GraphicsWindow.Height)
 
-  GraphicsWindow.BrushColor <- GraphicsWindow.BackgroundColor
-  GraphicsWindow.FillRectangle(XOFFSET, YOFFSET, CWIDTH*BWIDTH, CHEIGHT*BWIDTH)
+  ГрафическоеОкно.BrushColor <- ГрафическоеОкно.BackgroundColor
+  ГрафическоеОкно.FillRectangle(XOFFSET, YOFFSET, CWIDTH*BWIDTH, CHEIGHT*BWIDTH)
 
   Program.Delay(200)
-  GraphicsWindow.PenWidth <- 1.0
-  GraphicsWindow.PenColor <- Colors.Pink
+  ГрафическоеОкно.PenWidth <- 1.0
+  ГрафическоеОкно.PenColor <- Colors.Pink
   for x = 0 to CWIDTH-1 do
     for y = 0 to CHEIGHT-1 do
       spots.[x + y * CWIDTH] <- "." // "." indicates spot is free
-      GraphicsWindow.DrawRectangle(XOFFSET + x * BWIDTH, YOFFSET + y * BWIDTH, BWIDTH, BWIDTH)
+      ГрафическоеОкно.DrawRectangle(XOFFSET + x * BWIDTH, YOFFSET + y * BWIDTH, BWIDTH, BWIDTH)
 
-  GraphicsWindow.PenWidth <- 4.0
-  GraphicsWindow.PenColor <- Colors.Black
-  GraphicsWindow.DrawLine(XOFFSET, YOFFSET, XOFFSET, YOFFSET + CHEIGHT*BWIDTH)
-  GraphicsWindow.DrawLine(XOFFSET + CWIDTH*BWIDTH, YOFFSET, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
-  GraphicsWindow.DrawLine(XOFFSET, YOFFSET + CHEIGHT*BWIDTH, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
+  ГрафическоеОкно.PenWidth <- 4.0
+  ГрафическоеОкно.PenColor <- Colors.Black
+  ГрафическоеОкно.DrawLine(XOFFSET, YOFFSET, XOFFSET, YOFFSET + CHEIGHT*BWIDTH)
+  ГрафическоеОкно.DrawLine(XOFFSET + CWIDTH*BWIDTH, YOFFSET, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
+  ГрафическоеОкно.DrawLine(XOFFSET, YOFFSET + CHEIGHT*BWIDTH, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
 
-  GraphicsWindow.PenColor <- Colors.Lime
-  GraphicsWindow.DrawLine(XOFFSET - 4, YOFFSET, XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 6)
-  GraphicsWindow.DrawLine(XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 6)
-  GraphicsWindow.DrawLine(XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 4, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 4)
+  ГрафическоеОкно.PenColor <- Colors.Lime
+  ГрафическоеОкно.DrawLine(XOFFSET - 4, YOFFSET, XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 6)
+  ГрафическоеОкно.DrawLine(XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 6)
+  ГрафическоеОкно.DrawLine(XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 4, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 4)
 
-  GraphicsWindow.PenColor <- Colors.Black
-  GraphicsWindow.BrushColor <- Colors.Pink
+  ГрафическоеОкно.PenColor <- Colors.Black
+  ГрафическоеОкно.BrushColor <- Colors.Pink
   let x = XOFFSET + PREVIEW_xpos * BWIDTH - BWIDTH
   let y = YOFFSET + PREVIEW_ypos * BWIDTH - BWIDTH
-  GraphicsWindow.FillRectangle(x - 20, y, BWIDTH * 5, BWIDTH * 6)
-  GraphicsWindow.DrawRectangle(x - 20, y, BWIDTH * 5, BWIDTH * 6)
+  ГрафическоеОкно.FillRectangle(x - 20, y, BWIDTH * 5, BWIDTH * 6)
+  ГрафическоеОкно.DrawRectangle(x - 20, y, BWIDTH * 5, BWIDTH * 6)
 
-  GraphicsWindow.FillRectangle(x - 20, y + 190, 310, 170)
-  GraphicsWindow.DrawRectangle(x - 20, y + 190, 310, 170)
+  ГрафическоеОкно.FillRectangle(x - 20, y + 190, 310, 170)
+  ГрафическоеОкно.DrawRectangle(x - 20, y + 190, 310, 170)
 
-  GraphicsWindow.BrushColor <- Colors.Black
-  GraphicsWindow.FontItalic <- false
-  GraphicsWindow.FontName <- "Comic Sans MS"
-  GraphicsWindow.FontSize <- 16.0
-  GraphicsWindow.DrawText(x, y + 200, "Game control keys:")
-  GraphicsWindow.DrawText(x + 25, y + 220, "Left Arrow = Move piece left")
-  GraphicsWindow.DrawText(x + 25, y + 240, "Right Arrow = Move piece right")
-  GraphicsWindow.DrawText(x + 25, y + 260, "Up Arrow = Rotate piece")
-  GraphicsWindow.DrawText(x + 25, y + 280, "Down Arrow = Drop piece")
-  GraphicsWindow.DrawText(x, y + 320, "Press to stop game")
+  ГрафическоеОкно.BrushColor <- Colors.Black
+  ГрафическоеОкно.FontItalic <- false
+  ГрафическоеОкно.FontName <- "Comic Sans MS"
+  ГрафическоеОкно.FontSize <- 16.0
+  ГрафическоеОкно.DrawText(x, y + 200, "Game control keys:")
+  ГрафическоеОкно.DrawText(x + 25, y + 220, "Left Arrow = Move piece left")
+  ГрафическоеОкно.DrawText(x + 25, y + 240, "Right Arrow = Move piece right")
+  ГрафическоеОкно.DrawText(x + 25, y + 260, "Up Arrow = Rotate piece")
+  ГрафическоеОкно.DrawText(x + 25, y + 280, "Down Arrow = Drop piece")
+  ГрафическоеОкно.DrawText(x, y + 320, "Press to stop game")
 
   Program.Delay(200) // without this delay, the above text will use the fontsize of the score 
 
-  GraphicsWindow.BrushColor <- Colors.Black
-  GraphicsWindow.FontName <- "Georgia"
-  GraphicsWindow.FontItalic <- true
-  GraphicsWindow.FontSize <- 36.0
-  GraphicsWindow.DrawText(x - 20, y + 400, "Small Basic Tetris")
+  ГрафическоеОкно.BrushColor <- Colors.Black
+  ГрафическоеОкно.FontName <- "Georgia"
+  ГрафическоеОкно.FontItalic <- true
+  ГрафическоеОкно.FontSize <- 36.0
+  ГрафическоеОкно.DrawText(x - 20, y + 400, "Small Basic Tetris")
   Program.Delay(200) // without this delay, the above text will use the fontsize of the score 
-  GraphicsWindow.FontSize <- 16.0
-  GraphicsWindow.DrawText(x - 20, y + 440, "ver.0.1")
+  ГрафическоеОкно.FontSize <- 16.0
+  ГрафическоеОкно.DrawText(x - 20, y + 440, "ver.0.1")
 
   Program.Delay(200) // without this delay, the above text will use the fontsize of the score 
   score <- 0
   PrintScore()
 
 and PrintScore () =
-  GraphicsWindow.PenWidth <- 4.0
-  GraphicsWindow.BrushColor <- Colors.Pink
-  GraphicsWindow.FillRectangle(480, 65, 150, 50)
-  GraphicsWindow.BrushColor <- Colors.Black
-  GraphicsWindow.DrawRectangle(480, 65, 150, 50)
-  GraphicsWindow.FontItalic <- false
-  GraphicsWindow.FontSize <- 32.0
-  GraphicsWindow.FontName <- "Impact"
-  GraphicsWindow.BrushColor <- Colors.Black
-  GraphicsWindow.DrawText(485, 70, Text.Append(Text.GetSubText( "00000000", 0, 8 - Text.GetLength( string score ) ), score))
+  ГрафическоеОкно.PenWidth <- 4.0
+  ГрафическоеОкно.BrushColor <- Colors.Pink
+  ГрафическоеОкно.FillRectangle(480, 65, 150, 50)
+  ГрафическоеОкно.BrushColor <- Colors.Black
+  ГрафическоеОкно.DrawRectangle(480, 65, 150, 50)
+  ГрафическоеОкно.FontItalic <- false
+  ГрафическоеОкно.FontSize <- 32.0
+  ГрафическоеОкно.FontName <- "Impact"
+  ГрафическоеОкно.BrushColor <- Colors.Black
+  ГрафическоеОкно.DrawText(485, 70, Text.Append(Text.GetSubText( "00000000", 0, 8 - Text.GetLength( string score ) ), score))
 
 and SetupTemplates () =
   // each piece has 4 boxes.
@@ -455,10 +455,10 @@ and SetupTemplates () =
   //_X
   templates.["template7"] <- { Values=[|10;11;12;13|]; Color=Colors.Red; Dim=4; ViewX=0; ViewY=0}
 
-GraphicsWindow.Height <- 580
-GraphicsWindow.Width <- 700
-GraphicsWindow.KeyDown <- Callback(HandleKey)
-GraphicsWindow.BackgroundColor <- GraphicsWindow.GetColorFromRGB( 253, 252, 251 )
+ГрафическоеОкно.Height <- 580
+ГрафическоеОкно.Width <- 700
+ГрафическоеОкно.KeyDown <- Callback(HandleKey)
+ГрафическоеОкно.BackgroundColor <- ГрафическоеОкно.GetColorFromRGB( 253, 252, 251 )
 
 while true do
   BOXES <- 4      // number of boxes per piece
@@ -472,15 +472,15 @@ while true do
   PREVIEW_xpos <- 13
   PREVIEW_ypos <- 2
 
-  GraphicsWindow.Clear()
-  GraphicsWindow.Title <- "Small Basic Tetris"
+  ГрафическоеОкно.Clear()
+  ГрафическоеОкно.Title <- "Small Basic Tetris"
 
-  GraphicsWindow.Show()
+  ГрафическоеОкно.Show()
 
   SetupTemplates()
   SetupCanvas()
   MainLoop()
 
-  GraphicsWindow.ShowMessage( "Game Over", "Small Basic Tetris" )
+  ГрафическоеОкно.ShowMessage( "Game Over", "Small Basic Tetris" )
 
 

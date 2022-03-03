@@ -7,9 +7,9 @@ open System.Threading
 let ball = Shapes.AddRectangle(200.0, 100.0)
 
 let OnMouseDown () =
-  let x = GraphicsWindow.MouseX
-  let y = GraphicsWindow.MouseY
+  let x = ГрафическоеОкно.MouseX
+  let y = ГрафическоеОкно.MouseY
   Shapes.Move(ball, x, y)
 
-GraphicsWindow.MouseDown <- Callback(OnMouseDown)
+ГрафическоеОкно.MouseDown <- Callback(OnMouseDown)
 Thread.Sleep 2_000

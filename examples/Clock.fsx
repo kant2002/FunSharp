@@ -7,33 +7,33 @@ open System
 open System.Collections.Generic
 open Library
 
-let GW = float GraphicsWindow.Width
-let GH = float GraphicsWindow.Height
+let GW = float ГрафическоеОкно.Width
+let GH = float ГрафическоеОкно.Height
 let Radius = 200.0
 let MidX = GW/2.0
 let MidY = GW/2.0
 
 let initWindow () =
-   GraphicsWindow.Show()
-   GraphicsWindow.Title <- "Analog Clock"
-   GraphicsWindow.BackgroundColor <- Colors.Black
-   GraphicsWindow.BrushColor <- Colors.BurlyWood
-   GraphicsWindow.DrawEllipse(MidX-Radius-15.,MidY-Radius-5.,Radius*2.+30.,Radius*2.+20.)
-   GraphicsWindow.FillEllipse(MidX-Radius-15.,MidY-Radius-5.,Radius*2.+30.,Radius*2.+20.)
+   ГрафическоеОкно.Show()
+   ГрафическоеОкно.Title <- "Analog Clock"
+   ГрафическоеОкно.BackgroundColor <- Colors.Black
+   ГрафическоеОкно.BrushColor <- Colors.BurlyWood
+   ГрафическоеОкно.DrawEllipse(MidX-Radius-15.,MidY-Radius-5.,Radius*2.+30.,Radius*2.+20.)
+   ГрафическоеОкно.FillEllipse(MidX-Radius-15.,MidY-Radius-5.,Radius*2.+30.,Radius*2.+20.)
    for angle in 1.0..180.0 do
      let x = MidX+(Radius+15.)*Math.Cos(Math.GetRadians(angle))
      let y1 = MidY+Radius*Math.Sin(Math.GetRadians(angle))+15.
      let y2 = MidY+(Radius+15.)*Math.Sin(Math.GetRadians(-angle))+10.
      let blue = Math.GetRandomNumber(40)+30
-     GraphicsWindow.PenWidth <- Math.GetRandomNumber(5) |> float
+     ГрафическоеОкно.PenWidth <- Math.GetRandomNumber(5) |> float
      let color = 
-       GraphicsWindow.GetColorFromRGB(
+       ГрафическоеОкно.GetColorFromRGB(
          blue+100+Math.GetRandomNumber(10),
          blue+60+Math.GetRandomNumber(20),
          blue)
-     GraphicsWindow.PenColor <- color
+     ГрафическоеОкно.PenColor <- color
      Shapes.AddLine(x,y1,x,y2) |> ignore
-   GraphicsWindow.BrushColor <- Colors.White   
+   ГрафическоеОкно.BrushColor <- Colors.White   
    let ClockNum = Dictionary()
    for i in 1. .. 12. do
      let Radians = Math.GetRadians(-i * 30. + 90.)
@@ -50,8 +50,8 @@ let setHands () =
    if (float Clock.Hour + float Clock.Minute/60. + float Clock.Second/3600. <> Hour) then
      Shapes.Remove(HourHand)
      Hour <- float Clock.Hour + float Clock.Minute/60. + float Clock.Second/3600.
-     GraphicsWindow.PenColor <- Colors.Black
-     GraphicsWindow.PenWidth <- 3.
+     ГрафическоеОкно.PenColor <- Colors.Black
+     ГрафическоеОкно.PenWidth <- 3.
      HourHand <- 
        Shapes.AddLine(
          MidX,
@@ -61,8 +61,8 @@ let setHands () =
    if float Clock.Minute <> Minute then
      Shapes.Remove(MinuteHand)
      Minute <- float Clock.Minute + float Clock.Second/60.
-     GraphicsWindow.PenColor <- Colors.Blue
-     GraphicsWindow.PenWidth <- 2.
+     ГрафическоеОкно.PenColor <- Colors.Blue
+     ГрафическоеОкно.PenWidth <- 2.
      MinuteHand <- 
        Shapes.AddLine(
          MidX,
@@ -72,8 +72,8 @@ let setHands () =
    if float Clock.Second <> Second then
      Shapes.Remove(SecondHand)
      Second <- float Clock.Second
-     GraphicsWindow.PenColor <- Colors.Red
-     GraphicsWindow.PenWidth <- 1.
+     ГрафическоеОкно.PenColor <- Colors.Red
+     ГрафическоеОкно.PenWidth <- 1.
      SecondHand <- 
        Shapes.AddLine(
          MidX,

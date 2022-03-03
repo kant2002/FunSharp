@@ -7,144 +7,144 @@ open System.Threading
 
 type Callback = delegate of unit -> unit
 
-type internal MyApp () =
-   let mutable isHidden : bool = true
-   let mutable mainWindow : Window = null
-   let mutable mainCanvas : DrawingCanvas = null
-   let mutable keyUp = Callback(ignore)
-   let mutable keyDown = Callback(ignore)   
-   let mutable mouseDown = Callback(ignore)
-   let mutable mouseUp = Callback(ignore)
+type internal МоеПриложение () =
+   let mutable скрыто : bool = true
+   let mutable главноеОкно : Window = null
+   let mutable главныйХолст : DrawingCanvas = null
+   let mutable кнопкаВверх = Callback(ignore)
+   let mutable кнопкаВниз = Callback(ignore)   
+   let mutable мышьВниз = Callback(ignore)
+   let mutable мышьВверх = Callback(ignore)
    let mutable mouseMove = Callback(ignore)
    let mutable timerTick = Callback(ignore)
    let mutable timerPaused = false
-   let mutable lastKey = ""
-   let mutable mouseX = 0.0
-   let mutable mouseY = 0.0
+   let mutable последняяКнопка = ""
+   let mutable мышьX = 0.0
+   let mutable мышьY = 0.0
    let mutable isLeftButtonDown = false
    let mutable isRightButtonDown = false
-   let initCanvas () =
-      mainCanvas <- new DrawingCanvas(BackgroundColor=toXwtColor Colors.White)
-      mainCanvas.KeyPressed.Add(fun args -> 
-         lastKey <- args.Key.ToString()
-         if keyDown <> null then keyDown.Invoke()
+   let инициализироватьХолст () =
+      главныйХолст <- new DrawingCanvas(BackgroundColor=toXwtColor Colors.White)
+      главныйХолст.KeyPressed.Add(fun args -> 
+         последняяКнопка <- args.Key.ToString()
+         if кнопкаВниз <> null then кнопкаВниз.Invoke()
       )
-      mainCanvas.KeyReleased.Add(fun args ->
-         lastKey <- args.Key.ToString()
-         if keyUp <> null then keyUp.Invoke()
+      главныйХолст.KeyReleased.Add(fun args ->
+         последняяКнопка <- args.Key.ToString()
+         if кнопкаВверх <> null then кнопкаВверх.Invoke()
       )
-      mainCanvas.ButtonPressed.Add(fun args ->
-         mouseX <- args.X
-         mouseY <- args.Y
+      главныйХолст.ButtonPressed.Add(fun args ->
+         мышьX <- args.X
+         мышьY <- args.Y
          if args.Button = PointerButton.Left then isLeftButtonDown <-true
          if args.Button = PointerButton.Right then isRightButtonDown <-true
-         if mouseDown <> null then mouseDown.Invoke()
+         if мышьВниз <> null then мышьВниз.Invoke()
       )
-      mainCanvas.ButtonReleased.Add(fun args ->
-         mouseX <- args.X
-         mouseY <- args.Y
+      главныйХолст.ButtonReleased.Add(fun args ->
+         мышьX <- args.X
+         мышьY <- args.Y
          if args.Button = PointerButton.Left then isLeftButtonDown <- false
-         if mouseUp <> null then mouseUp.Invoke()
+         if мышьВверх <> null then мышьВверх.Invoke()
       )
-      mainCanvas.MouseMoved.Add(fun args ->
-         mouseX <- args.X
-         mouseY <- args.Y
+      главныйХолст.MouseMoved.Add(fun args ->
+         мышьX <- args.X
+         мышьY <- args.Y
          if mouseMove <> null then mouseMove.Invoke()
       )
-      mainWindow.Content <- mainCanvas
-      mainCanvas.CanGetFocus <- true
-      mainCanvas.SetFocus()
-   let showWindow () = 
-      if isHidden then mainWindow.Show(); isHidden <- false
-   let hideWindow () = 
-      if not isHidden then mainWindow.Hide(); isHidden <- true
+      главноеОкно.Content <- главныйХолст
+      главныйХолст.CanGetFocus <- true
+      главныйХолст.SetFocus()
+   let показатьОкно () = 
+      if скрыто then главноеОкно.Show(); скрыто <- false
+   let спрятатьОкно () = 
+      if not скрыто then главноеОкно.Hide(); скрыто <- true
    let mutable timerDisposable : IDisposable = null
-   let setTimerInterval (ms:int) =
+   let установитьИнтервалТаймера (мс:int) =
       if timerDisposable <> null then timerDisposable.Dispose()
       timerDisposable <-
-         Application.TimeoutInvoke(ms, fun () -> 
+         Application.TimeoutInvoke(мс, fun () -> 
             if not timerPaused then timerTick.Invoke()
             true
          )
-   let runApp onInit =      
+   let запуститьПриложение наИниц =      
       Application.Initialize (ToolkitType.Gtk3)      
-      mainWindow <- new Window(Title="App", Padding = WidgetSpacing(), Width=640.0, Height=480.0)
-      initCanvas ()
-      showWindow ()         
-      let onInit = unbox<unit->unit> onInit
-      // onInit ()
+      главноеОкно <- new Window(Title="App", Padding = WidgetSpacing(), Width=640.0, Height=480.0)
+      инициализироватьХолст ()
+      показатьОкно ()         
+      let наИниц = unbox<unit->unit> наИниц
+      наИниц ()
       Application.Run()
-      onInit ()
-   let startAppThread () =
-      use isInitialized = new AutoResetEvent(false)
-      let thread = Thread(ParameterizedThreadStart runApp)
-      if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) then thread.SetApartmentState(ApartmentState.STA)
-      thread.Start(fun () -> isInitialized.Set() |> ignore)
-      isInitialized.WaitOne() |> ignore
-   do startAppThread()
-   member app.Window = mainWindow
+      //наИниц ()
+   let запуститьПотокПриложения () =
+      use инициализирован = new AutoResetEvent(false)
+      let поток = Thread(ParameterizedThreadStart запуститьПриложение)
+      if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) then поток.SetApartmentState(ApartmentState.STA)
+      поток.Start(fun () -> инициализирован.Set() |> ignore)
+      инициализирован.WaitOne() |> ignore
+   do запуститьПотокПриложения()
+   member app.Окно = главноеОкно
    member app.SetWindowWidth(width) =
-      hideWindow()     
-      mainWindow.Width <- width
-      showWindow()
+      спрятатьОкно()     
+      главноеОкно.Width <- width
+      показатьОкно()
    member app.SetWindowHeight(height) =
-      hideWindow()     
-      mainWindow.Height <- height
-      showWindow()
-   member app.Canvas = mainCanvas
-   member app.Invoke action = Application.Invoke action   
-   member app.KeyUp with set callback = keyUp <- callback
-   member app.KeyDown with set callback = keyDown <- callback
-   member app.LastKey with get() = lastKey
-   member app.MouseDown with set callback = mouseDown <- callback
-   member app.MouseUp with set callback = mouseUp <- callback
+      спрятатьОкно()     
+      главноеОкно.Height <- height
+      показатьОкно()
+   member app.Холст = главныйХолст
+   member app.Вызвать действие = Application.Invoke действие   
+   member app.KeyUp with set callback = кнопкаВверх <- callback
+   member app.KeyDown with set callback = кнопкаВниз <- callback
+   member app.LastKey with get() = последняяКнопка
+   member app.MouseDown with set callback = мышьВниз <- callback
+   member app.MouseUp with set callback = мышьВверх <- callback
    member app.MouseMove with set callback = mouseMove <- callback
-   member app.MouseX with get() = mouseX
-   member app.MouseY with get() = mouseY
+   member app.MouseX with get() = мышьX
+   member app.MouseY with get() = мышьY
    member app.IsLeftButtonDown with get() = isLeftButtonDown
    member app.IsRightButtonDown with get() = isRightButtonDown
-   member app.Show() = app.Invoke (fun () -> showWindow())
-   member app.Hide() = app.Invoke (fun () -> hideWindow())
+   member app.Показать() = app.Вызвать (fun () -> показатьОкно())
+   member app.Спрятать() = app.Вызвать (fun () -> спрятатьОкно())
    member app.TimerTick with set callback = timerTick <- callback
    member app.PauseTimer() = timerPaused <- true
    member app.ResumeTimer() = timerPaused <- false
-   member app.TimerInterval with set ms = app.Invoke(fun () -> setTimerInterval ms)
-   member app.ShowMessage(text:string,title) = MessageDialog.ShowMessage(mainWindow,text,title)
+   member app.TimerInterval with set ms = app.Вызвать(fun () -> установитьИнтервалТаймера ms)
+   member app.ПоказатьСообщение(текст:string,заголовок) = MessageDialog.ShowMessage(главноеОкно,текст,заголовок)
 
 [<Sealed>]
-type internal My private () = 
-   static let mutable app = None
+type internal Мое private () = 
+   static let mutable приложение = None
    static let sync = obj ()
    static let isFsi () =
       let args = System.Environment.GetCommandLineArgs()
       let netFxFsi = args.Length > 0 && System.IO.Path.GetFileName(args.[0]) = "fsi.exe"
       let netcoreFsi = args.Length > 1 && System.IO.Path.GetFileName(args.[1]) = "fsi"
       netFxFsi || netcoreFsi
-   static let closeApp () =
+   static let закрытьПриложение () =
       lock (sync) (fun () ->
          Application.Exit()
          if not (isFsi()) then
             Environment.Exit(0)
-         app <- None       
+         приложение <- None       
       )
-   static let getApp () =
+   static let получитьПриложение () =
       lock (sync) (fun () ->
-         match app with
-         | Some app -> app
+         match приложение with
+         | Some приложение -> приложение
          | None ->
-            let newApp = MyApp()
-            app <- Some (newApp)
-            newApp.Window.CloseRequested.Add(fun e ->
-               closeApp()
+            let новоеПриложение = МоеПриложение()
+            приложение <- Some (новоеПриложение)
+            новоеПриложение.Окно.CloseRequested.Add(fun e ->
+               закрытьПриложение()
             )
-            newApp
+            новоеПриложение
       )      
-   static member App = getApp ()
+   static member Приложение = получитьПриложение ()
 
 [<AutoOpen>]
 module internal AppDrawing =
    let addDrawing drawing =
-      My.App.Invoke (fun () -> My.App.Canvas.AddDrawing(drawing))
+      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.AddDrawing(drawing))
    let addDrawingAt drawing (x,y) =
-      My.App.Invoke (fun () -> My.App.Canvas.AddDrawingAt(drawing,Point(x,y)))
+      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.AddDrawingAt(drawing,Point(x,y)))
 

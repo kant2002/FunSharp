@@ -4,7 +4,7 @@
 open Library
 open System.Threading
 
-GraphicsWindow.PenColor <- Colors.Purple
+ГрафическоеОкно.PenColor <- Colors.Purple
 Turtle.X <- 150.
 Turtle.Y <- 150.
 for i in 0..5..200 do

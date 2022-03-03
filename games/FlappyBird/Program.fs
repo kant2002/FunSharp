@@ -1,7 +1,7 @@
 ﻿open Library
 
-GraphicsWindow.Width <- 288
-GraphicsWindow.Height <- 440
+ГрафическоеОкно.Width <- 288
+ГрафическоеОкно.Height <- 440
 
 let bg = Shapes.AddImage("bg.png")
 let ground = Shapes.AddImage("ground.png")
@@ -40,9 +40,9 @@ let scroll = ref 0
 let flappy = ref { X = 30.0; Y = 150.0; VY = 0.0; IsAlive=true }
 let flapme () = if (!flappy).IsAlive then flappy := flap !flappy
 
-GraphicsWindow.KeyDown <-    
-    fun () -> if GraphicsWindow.LastKey = "Space" then flapme ()
-GraphicsWindow.MouseDown <-
+ГрафическоеОкно.KeyDown <-    
+    fun () -> if ГрафическоеОкно.LastKey = "Space" then flapme ()
+ГрафическоеОкно.MouseDown <-
     fun () -> flapme ()
 
 while true do

@@ -50,5 +50,5 @@ while (y < gh) do
   Shapes.Move(ball, x, y)
   Program.Delay(15)
   
-GraphicsWindow.ShowMessage("Your score is: " + score.ToString(), "Paddle")
+ГрафическоеОкно.ShowMessage("Your score is: " + score.ToString(), "Paddle")
 Program.Delay(1_500)

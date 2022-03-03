@@ -16,6 +16,6 @@ Shapes.Move(t2, 150.0, 150.0)
 Shapes.Move(ground, 0.0, 340.0)
 Shapes.Rotate(bird,45.0*4.0)
 Shapes.Move(bird,50.0,100.0)
-GraphicsWindow.Show()
-GraphicsWindow.Width <- 288
-GraphicsWindow.Height <- 440
+ГрафическоеОкно.Show()
+ГрафическоеОкно.Width <- 288
+ГрафическоеОкно.Height <- 440

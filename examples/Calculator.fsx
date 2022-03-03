@@ -6,14 +6,14 @@ open System.Threading
 
 let mutable p = 0
 
-GraphicsWindow.CanResize <- false
-GraphicsWindow.Width <- 260
-GraphicsWindow.Height <- 230
-GraphicsWindow.Title <- "Calculator v. 1.0 by Alex_2000"
+ГрафическоеОкно.CanResize <- false
+ГрафическоеОкно.Width <- 260
+ГрафическоеОкно.Height <- 230
+ГрафическоеОкно.Title <- "Calculator v. 1.0 by Alex_2000"
 
-GraphicsWindow.BackgroundColor = GraphicsWindow.GetColorFromRGB(240, 240, 240)
-GraphicsWindow.FontBold <- false
-GraphicsWindow.BrushColor <- Colors.Black
+ГрафическоеОкно.BackgroundColor = ГрафическоеОкно.GetColorFromRGB(240, 240, 240)
+ГрафическоеОкно.FontBold <- false
+ГрафическоеОкно.BrushColor <- Colors.Black
 
 let m = Shapes.AddText("M")
 Shapes.Move(m, 22, 62)
@@ -39,65 +39,65 @@ let C5 = C4 + (222-181)*N
 let T0 = C0
 let T1 = T0 + (139-58)*N
 let T2 = T1 + (202-139)*N 
-GraphicsWindow.BrushColor <- Colors.Red
-let keyMC = Controls.AddButton("MC", C0, R1)
+ГрафическоеОкно.BrushColor <- Colors.Red
+let keyMC = Controls.ДобавитьКнопку("MC", C0, R1)
 Controls.SetSize(keyMC, 35*N, 25*N)
-let keyMR = Controls.AddButton("MR", C0, R2)
+let keyMR = Controls.ДобавитьКнопку("MR", C0, R2)
 Controls.SetSize(keyMR, 35*N, 25*N)
-let keyMS = Controls.AddButton("MS", C0, R3)
+let keyMS = Controls.ДобавитьКнопку("MS", C0, R3)
 Controls.SetSize(keyMS, 35*N, 25*N)
-let keyMP = Controls.AddButton("M+", C0, R4)
+let keyMP = Controls.ДобавитьКнопку("M+", C0, R4)
 Controls.SetSize(keyMP, 35*N, 25*N)
-let keyC = Controls.AddButton("C", T2, R0)
+let keyC = Controls.ДобавитьКнопку("C", T2, R0)
 Controls.SetSize(keyC, 55*N, 25*N )
-let keyCE = Controls.AddButton("CE", T1, R0)
+let keyCE = Controls.ДобавитьКнопку("CE", T1, R0)
 Controls.SetSize(keyCE, 55*N, 25*N)
-let keyBackspase = Controls.AddButton("Backspace", T0, R0)
+let keyBackspase = Controls.ДобавитьКнопку("Backspace", T0, R0)
 Controls.SetSize(keyBackspase, 70*N, 25*N)
 
-let keydelenie = Controls.AddButton("/", C4, R1)
+let keydelenie = Controls.ДобавитьКнопку("/", C4, R1)
 Controls.SetSize(keydelenie, 35*N, 25*N)
-let keyumnogenie = Controls.AddButton("*", C4, R2)
+let keyumnogenie = Controls.ДобавитьКнопку("*", C4, R2)
 Controls.SetSize(keyumnogenie, 35*N, 25*N)
-let keyminus = Controls.AddButton("-", C4, R3)
+let keyminus = Controls.ДобавитьКнопку("-", C4, R3)
 Controls.SetSize(keyminus, 35*N, 25*N)
-let keyplus = Controls.AddButton("+", C4, R4)
+let keyplus = Controls.ДобавитьКнопку("+", C4, R4)
 Controls.SetSize(keyplus, 35*N, 25*N)
-let keyravno = Controls.AddButton("=", C5, R4)
+let keyravno = Controls.ДобавитьКнопку("=", C5, R4)
 Controls.SetSize(keyravno, 35*N, 25*N)
 
-GraphicsWindow.BrushColor <- Colors.Blue
-let key7 = Controls.AddButton("7", C1, R1)
+ГрафическоеОкно.BrushColor <- Colors.Blue
+let key7 = Controls.ДобавитьКнопку("7", C1, R1)
 Controls.SetSize(key7, 35*N, 25*N)
-let key8 = Controls.AddButton("8", C2, R1)
+let key8 = Controls.ДобавитьКнопку("8", C2, R1)
 Controls.SetSize(key8, 35*N, 25*N)
-let key9 = Controls.AddButton("9", C3, R1)
+let key9 = Controls.ДобавитьКнопку("9", C3, R1)
 Controls.SetSize(key9, 35*N, 25*N)
-let key4 = Controls.AddButton("4", C1, R2)
+let key4 = Controls.ДобавитьКнопку("4", C1, R2)
 Controls.SetSize(key4, 35*N, 25*N)
-let key5 = Controls.AddButton("5", C2, R2)
+let key5 = Controls.ДобавитьКнопку("5", C2, R2)
 Controls.SetSize(key5, 35*N, 25*N)
-let key6 = Controls.AddButton("6", C3, R2)
+let key6 = Controls.ДобавитьКнопку("6", C3, R2)
 Controls.SetSize(key6, 35*N, 25*N)
-let key1 = Controls.AddButton("1", C1, R3)
+let key1 = Controls.ДобавитьКнопку("1", C1, R3)
 Controls.SetSize(key1, 35*N, 25*N)
-let key2 = Controls.AddButton("2", C2, R3)
+let key2 = Controls.ДобавитьКнопку("2", C2, R3)
 Controls.SetSize(key2, 35*N, 25*N)
-let key3 = Controls.AddButton("3", C3, R3)
+let key3 = Controls.ДобавитьКнопку("3", C3, R3)
 Controls.SetSize(key3, 35*N, 25*N)
-let key0 = Controls.AddButton("0", C2, R4)
+let key0 = Controls.ДобавитьКнопку("0", C2, R4)
 Controls.SetSize(key0, 35*N, 25*N)
 
-let keyplusminus = Controls.AddButton("+/-", C3, R4)
+let keyplusminus = Controls.ДобавитьКнопку("+/-", C3, R4)
 Controls.SetSize(keyplusminus, 35*N, 25*N)
-let keytochka = Controls.AddButton(".", C1, R4)
+let keytochka = Controls.ДобавитьКнопку(".", C1, R4)
 Controls.SetSize(keytochka, 35*N, 25*N)
 
-let keysqrt = Controls.AddButton("sqrt", C5, R1)
+let keysqrt = Controls.ДобавитьКнопку("sqrt", C5, R1)
 Controls.SetSize(keysqrt, 35*N, 25*N)
-let keyprocent = Controls.AddButton("%", C5, R2)
+let keyprocent = Controls.ДобавитьКнопку("%", C5, R2)
 Controls.SetSize(keyprocent, 35*N, 25*N)
-let keynax = Controls.AddButton("1/x", C5, R3)
+let keynax = Controls.ДобавитьКнопку("1/x", C5, R3)
 Controls.SetSize(keynax, 35*N, 25*N)
 
 let mutable a = ""

@@ -1,24 +1,24 @@
 ﻿open Library
 
-let gw = float GraphicsWindow.Width
-let gh = float GraphicsWindow.Height
+let gw = float ГрафическоеОкно.Width
+let gh = float ГрафическоеОкно.Height
 let paddle = Shapes.AddRectangle(120, 12)
 let ball = Shapes.AddEllipse(16, 16)
 let mutable score = 0
 
 let OnMouseMove () =
-  let paddleX = GraphicsWindow.MouseX
+  let paddleX = ГрафическоеОкно.MouseX
   Shapes.Move(paddle, paddleX - 60.0, gh - 12.0)
 
 let PrintScore () =
   // Clear the score first and then draw the real score text
-  GraphicsWindow.BrushColor <- Colors.White
-  GraphicsWindow.FillRectangle(10, 10, 200, 20)
-  GraphicsWindow.BrushColor <- Colors.Black
-  GraphicsWindow.DrawText(10, 10, "Score: " + score.ToString())
+  ГрафическоеОкно.BrushColor <- Colors.White
+  ГрафическоеОкно.FillRectangle(10, 10, 200, 20)
+  ГрафическоеОкно.BrushColor <- Colors.Black
+  ГрафическоеОкно.DrawText(10, 10, "Score: " + score.ToString())
 
-GraphicsWindow.FontSize <- 14.0
-GraphicsWindow.MouseMove <- Callback(OnMouseMove)
+ГрафическоеОкно.FontSize <- 14.0
+ГрафическоеОкно.MouseMove <- Callback(OnMouseMove)
 
 PrintScore()
 Sound.PlayBellRing (*AndWait*) ()
@@ -47,4 +47,4 @@ while (y < gh) do
   Shapes.Move(ball, x, y)
   Program.Delay(15)
   
-GraphicsWindow.ShowMessage("Your score is: " + score.ToString(), "Paddle")
+ГрафическоеОкно.ShowMessage("Your score is: " + score.ToString(), "Paddle")

@@ -2,11 +2,11 @@
 
 [<Sealed>]
 type Mouse private () =
-   static member IsLeftButtonDown = My.App.IsLeftButtonDown
-   static member IsRightButtonDown = My.App.IsRightButtonDown
-   static member X = My.App.MouseX
-   static member Y = My.App.MouseY
+   static member IsLeftButtonDown = Мое.Приложение.IsLeftButtonDown
+   static member IsRightButtonDown = Мое.Приложение.IsRightButtonDown
+   static member X = Мое.Приложение.MouseX
+   static member Y = Мое.Приложение.MouseY
    static member HideCursor () =
-      My.App.Invoke (fun () -> My.App.Canvas.Cursor <- Xwt.CursorType.Invisible)
+      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.Cursor <- Xwt.CursorType.Invisible)
    static member ShowCursor () =
-      My.App.Invoke (fun () -> My.App.Canvas.Cursor <- Xwt.CursorType.Arrow)
+      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.Cursor <- Xwt.CursorType.Arrow)

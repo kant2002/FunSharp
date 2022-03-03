@@ -38,11 +38,11 @@ let islandcount = 5 //nomber of island in the wall field
 // Заголовок окна
 let gameTitle = "1942, Score: "
 
-GraphicsWindow.Hide()
-GraphicsWindow.Title <- gameTitle + "0"
-GraphicsWindow.CanResize <- false
-GraphicsWindow.Width <- gameWidth
-GraphicsWindow.Height <- gameHeight
+ГрафическоеОкно.Hide()
+ГрафическоеОкно.Title <- gameTitle + "0"
+ГрафическоеОкно.CanResize <- false
+ГрафическоеОкно.Width <- gameWidth
+ГрафическоеОкно.Height <- gameHeight
 
 // Global variables
 
@@ -134,7 +134,7 @@ let posy = Dictionary<int,_>()
 
 // Setup world
 let rec Init() =
-   GraphicsWindow.Hide()
+   ГрафическоеОкно.Hide()
 
    Mouse.HideCursor()
 
@@ -160,15 +160,15 @@ let rec Init() =
       island_Array.[i] <- island_Array.[Math.Remainder(i,4)]
 
    player <- Shapes.AddImage(player0)
-   GraphicsWindow.FontSize <- 20.0
-   GraphicsWindow.BackgroundColor <- Colors.Gray
-   GraphicsWindow.PenColor <- Colors.Yellow
+   ГрафическоеОкно.FontSize <- 20.0
+   ГрафическоеОкно.BackgroundColor <- Colors.Gray
+   ГрафическоеОкно.PenColor <- Colors.Yellow
 
 
 
 // Main gane routine
 and Play () =
-   GraphicsWindow.Show()
+   ГрафическоеОкно.Show()
 
    // Main loop
    let play = 1
@@ -215,28 +215,28 @@ and Play () =
             moveall()
          )
 
-         GraphicsWindow.MouseMove <- Callback(OnMouseMove)
-         GraphicsWindow.MouseDown <- Callback(OnMouseDown)
+         ГрафическоеОкно.MouseMove <- Callback(OnMouseMove)
+         ГрафическоеОкно.MouseDown <- Callback(OnMouseDown)
 
          AgePlayer_Ammo()
 
 and OnMouseMove () =
-   paddleX <- int GraphicsWindow.MouseX - player_size / 2
-   paddleY <- int GraphicsWindow.MouseY - player_size
+   paddleX <- int ГрафическоеОкно.MouseX - player_size / 2
+   paddleY <- int ГрафическоеОкно.MouseY - player_size
 
    if (paddleX < 0) then
       paddleX <- 0   
    Shapes.Move(player, paddleX , paddleY )
 
 and OnMouseDown () =
-   ShootX <- GraphicsWindow.MouseX - 15.0 // in order to be from the neck of the plane
-   ShootY <- GraphicsWindow.MouseY - 80.0
+   ShootX <- ГрафическоеОкно.MouseX - 15.0 // in order to be from the neck of the plane
+   ShootY <- ГрафическоеОкно.MouseY - 80.0
    Fire()
 
 and moveall () =
    incbx <- 0.0
    incby <- 0.0
-   GraphicsWindow.Title <- gameTitle + score.ToString() + " Lives:" + Player_Lives.ToString()
+   ГрафическоеОкно.Title <- gameTitle + score.ToString() + " Lives:" + Player_Lives.ToString()
 
    if (paddleX > (gameWidth-62) ) then
       incx <- incx - bgs

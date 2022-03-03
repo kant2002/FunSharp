@@ -8,10 +8,10 @@ type internal ShapeInfo = { Shape:Shape; mutable Offset:Point; mutable Opacity:f
 
 [<Sealed>]
 type Shapes private () =
-   static let pen () = Pen(GraphicsWindow.PenColor,GraphicsWindow.PenWidth)
-   static let brush () = GraphicsWindow.BrushColor
+   static let pen () = Pen(ГрафическоеОкно.PenColor,ГрафическоеОкно.PenWidth)
+   static let brush () = ГрафическоеОкно.BrushColor
    static let font () = 
-      Font(GraphicsWindow.FontSize,GraphicsWindow.FontName,GraphicsWindow.FontBold, GraphicsWindow.FontItalic)
+      Font(ГрафическоеОкно.FontSize,ГрафическоеОкно.FontName,ГрафическоеОкно.FontBold, ГрафическоеОкно.FontItalic)
    static let shapes = Dictionary<string,ShapeInfo>()
    static let addShape name shape =
       let info = { Shape=shape; Offset=Point(); Opacity=1.0 }
@@ -23,7 +23,7 @@ type Shapes private () =
       | false, _ -> ()
    static let genName name = name + Guid.NewGuid().ToString()
    static member Remove(shapeName) =
-      My.App.Invoke (fun () -> My.App.Canvas.RemoveShape(shapeName))
+      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.RemoveShape(shapeName))
    static member AddLine(x1,y1,x2,y2) =
       let name = genName "Line"
       LineShape(Line(x1,y1,x2,y2),pen()) |> addShape name
@@ -61,12 +61,12 @@ type Shapes private () =
                async {
                   let! image = Http.LoadImageAsync imageName
                   imageRef := image
-                  My.App.Invoke(fun () -> My.App.Canvas.Invalidate())
+                  Мое.Приложение.Вызвать(fun () -> Мое.Приложение.Холст.Invalidate())
                } |> Async.Start
                imageRef
             else             
                let imageRef = ref null                 
-               My.App.Invoke(fun () ->
+               Мое.Приложение.Вызвать(fun () ->
                   use stream = Resource.GetStream(imageName)
                   imageRef := Xwt.Drawing.Image.FromStream(stream)
                )
@@ -78,13 +78,13 @@ type Shapes private () =
       TextShape(ref text, font(), brush()) |> addShape name
       name
    static member HideShape(shapeName) =      
-      My.App.Invoke (fun () -> My.App.Canvas.SetShapeVisibility(shapeName,false))      
+      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.SetShapeVisibility(shapeName,false))      
    static member ShowShape(shapeName) =
-      My.App.Invoke (fun () -> My.App.Canvas.SetShapeVisibility(shapeName,true))      
+      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.SetShapeVisibility(shapeName,true))      
    static member Move(shapeName,x,y) =
       onShape shapeName (fun info ->
          info.Offset <- Point(x,y)
-         My.App.Invoke (fun () -> My.App.Canvas.MoveShape(shapeName,info.Offset))
+         Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.MoveShape(shapeName,info.Offset))
       )
    static member Move(shapeName,x:int,y:int) =
       Shapes.Move(shapeName, float x, float y)
@@ -99,7 +99,7 @@ type Shapes private () =
    static member SetOpacity(shapeName, opacity) =
       onShape shapeName (fun info ->
          info.Opacity <- opacity
-         My.App.Invoke (fun () -> My.App.Canvas.SetShapeOpacity(shapeName,opacity))
+         Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.SetShapeOpacity(shapeName,opacity))
       )
    static member SetOpacity(shapeName, opacity:int) =
       Shapes.SetOpacity(shapeName, float opacity)
@@ -110,20 +110,20 @@ type Shapes private () =
    static member Rotate(shapeName, angle) =
       match shapes.TryGetValue(shapeName) with
       | true, info ->
-         My.App.Invoke (fun () -> My.App.Canvas.SetShapeRotation(shapeName,angle))
+         Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.SetShapeRotation(shapeName,angle))
       | false, _ -> ()
    static member Rotate(shapeName, angle:int) =
       Shapes.Rotate(shapeName, float angle)
    static member Zoom(shapeName, scaleX, scaleY) =
       match shapes.TryGetValue(shapeName) with
       | true, info ->
-         My.App.Invoke (fun () -> My.App.Canvas.SetShapeScale(shapeName,scaleX,scaleY))
+         Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.SetShapeScale(shapeName,scaleX,scaleY))
       | false, _ -> ()
    static member SetText(shapeName, text) =
       onShape shapeName (fun info ->
          match info.Shape with
          | TextShape(textRef, font, color) ->
-            My.App.Invoke (fun () -> textRef := text; My.App.Canvas.Invalidate())
+            Мое.Приложение.Вызвать (fun () -> textRef := text; Мое.Приложение.Холст.Invalidate())
          | _ -> invalidOp "Expecting text shape"
       )       
    static member Animate(shapeName,x:float,y:float,ms:int) =
