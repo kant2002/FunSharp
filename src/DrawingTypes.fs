@@ -1,6 +1,6 @@
 ﻿namespace Library
 
-type Color = 
+type Цвет = 
    struct
       val A:byte
       val R:byte
@@ -10,43 +10,43 @@ type Color =
    new (a,r,g,b) = { A=a; R=r; G=g; B=b }
 
 [<AutoOpen>]
-module internal ColorConverter =
-   let toXwtColor (color:Color) = Xwt.Drawing.Color.FromBytes(color.R, color.G, color.B, color.A)
+module internal КонвертерЦвета =
+   let кXwtЦвету (color:Цвет) = Xwt.Drawing.Color.FromBytes(color.R, color.G, color.B, color.A)
 
-type internal Width = float
+type internal Ширина = float
 type internal Height = float
-type internal Size = float
+type internal Размер = float
 type internal Family = string
 type internal IsBold = bool
 type internal IsItalic = bool
 type internal X = float
 type internal Y = float
 
-type internal Pen = Pen of Color * Width
-type internal Font = Font of Size * Family * IsBold * IsItalic
-type internal Line = Line of X * Y * X * Y
-type internal Rect = Rect of Width * Height
-type internal Triangle = Triangle of X * Y * X * Y * X * Y
-type internal Ellipse = Ellipse of Width * Height
+type internal Pen = Pen of Цвет * Ширина
+type internal Шрифт = Font of Размер * Family * IsBold * IsItalic
+type internal Линия = Line of X * Y * X * Y
+type internal Прямоугольник = Rect of Ширина * Height
+type internal Треугольник = Triangle of X * Y * X * Y * X * Y
+type internal Эллипс = Ellipse of Ширина * Height
 
 type internal Shape =
-   | LineShape of Line * Pen   
-   | RectShape of Rect * Pen * Color
-   | TriangleShape of Triangle * Pen * Color
-   | EllipseShape of Ellipse * Pen * Color
+   | LineShape of Линия * Pen   
+   | RectShape of Прямоугольник * Pen * Цвет
+   | TriangleShape of Треугольник * Pen * Цвет
+   | EllipseShape of Эллипс * Pen * Цвет
    | ImageShape of Xwt.Drawing.Image ref
-   | TextShape of string ref * Font * Color
+   | TextShape of string ref * Шрифт * Цвет
 
 type internal Drawing =
-   | DrawLine of Line * Pen
-   | DrawRect of Rect * Pen
-   | DrawTriangle of Triangle * Pen
-   | DrawEllipse of Ellipse * Pen
+   | DrawLine of Линия * Pen
+   | DrawRect of Прямоугольник * Pen
+   | DrawTriangle of Треугольник * Pen
+   | DrawEllipse of Эллипс * Pen
    | DrawImage of Xwt.Drawing.Image ref * float * float
-   | DrawText of float * float * string * Font * Color
-   | DrawBoundText of float * float * float * string * Font * Color
-   | FillRect of Rect * Color
-   | FillTriangle of Triangle * Color
-   | FillEllipse of Ellipse * Color
+   | DrawText of float * float * string * Шрифт * Цвет
+   | DrawBoundText of float * float * float * string * Шрифт * Цвет
+   | FillRect of Прямоугольник * Цвет
+   | FillTriangle of Треугольник * Цвет
+   | FillEllipse of Эллипс * Цвет
    | DrawShape of string * Shape
 

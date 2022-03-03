@@ -24,7 +24,7 @@ let drawTriangle (ctx:Context) (Triangle(x1,y1,x2,y2,x3,y3)) =
    ctx.LineTo(x1,y1)
 
 let penStroke (ctx:Context) (Pen(color,width)) =
-   ctx.SetColor(toXwtColor color)
+   ctx.SetColor(кXwtЦвету color)
    ctx.SetLineWidth(width)
    ctx.Stroke()
 
@@ -100,22 +100,22 @@ let draw (ctx:Context) (info:DrawingInfo) =
          drawImage ctx info !image (x+x',y+y')
    | DrawText(x,y,text,font,color) ->
       let layout = toLayout text font
-      ctx.SetColor(toXwtColor color)
+      ctx.SetColor(кXwtЦвету color)
       ctx.DrawTextLayout(layout,x,y)
    | DrawBoundText(x,y,width,text,font,color) ->
       let layout = toLayout text font
       layout.Width <- width      
-      ctx.SetColor(toXwtColor color)
+      ctx.SetColor(кXwtЦвету color)
       ctx.DrawTextLayout(layout,x,y)
    | FillRect(Rect(w,h),fillColor) ->
       ctx.Rectangle(x,y,w,h)
-      fill ctx (toXwtColor fillColor)
+      fill ctx (кXwtЦвету fillColor)
    | FillTriangle(triangle,fillColor) ->
       drawTriangle ctx triangle
-      fill ctx (toXwtColor fillColor)
+      fill ctx (кXwtЦвету fillColor)
    | FillEllipse(Ellipse(w,h),fillColor) ->
       drawEllipse ctx (x,y,w,h)
-      fill ctx (toXwtColor fillColor)
+      fill ctx (кXwtЦвету fillColor)
    | DrawShape(_,LineShape(Line(x1,y1,x2,y2),pen)) ->
       ctx.MoveTo(x+x1,y+y1)
       ctx.LineTo(x+x2,y+y2)
@@ -127,23 +127,23 @@ let draw (ctx:Context) (info:DrawingInfo) =
       | Some angle -> ctx.Rotate(angle)
       | None -> ()            
       ctx.Rectangle(0.,0.,w,h)
-      fill ctx (toXwtColor fillColor)
+      fill ctx (кXwtЦвету fillColor)
       ctx.Rectangle(0.,0.,w,h)
       penStroke ctx pen
       ctx.Restore()
    | DrawShape(_,TriangleShape(triangle,pen,fillColor)) ->
       drawTriangle ctx triangle
-      fill ctx (withOpacity (toXwtColor fillColor))
+      fill ctx (withOpacity (кXwtЦвету fillColor))
       drawTriangle ctx triangle
       penStroke ctx pen
    | DrawShape(_,EllipseShape(Ellipse(w,h),pen,fillColor)) ->
       drawEllipse ctx (x,y,w,h)      
-      fill ctx (withOpacity (toXwtColor fillColor))
+      fill ctx (withOpacity (кXwtЦвету fillColor))
       drawEllipse ctx (x,y,w,h)
       penStroke ctx pen
    | DrawShape(_,TextShape(textRef,font,color)) ->
       let layout = toLayout !textRef font      
-      ctx.SetColor(withOpacity (toXwtColor color))
+      ctx.SetColor(withOpacity (кXwtЦвету color))
       ctx.DrawTextLayout(layout,x,y)
    | DrawShape(_,ImageShape(image)) ->
       if !image <> null then                 

@@ -4,8 +4,8 @@
 open Library
 open System.Threading
 
-ГрафическоеОкно.BackgroundColor <- Colors.Black
+ГрафическоеОкно.ФоновыйЦвет <- Colors.Black
 for i = 1 to 1200 do
-   ГрафическоеОкно.BrushColor <- ГрафическоеОкно.GetRandomColor()
-   ГрафическоеОкно.FillEllipse(Math.GetRandomNumber(800), Math.GetRandomNumber(600), 30, 30)
+   ГрафическоеОкно.ЦветКисти <- ГрафическоеОкно.ПолучитьСлучайныйЦвет()
+   ГрафическоеОкно.ЗаполнитьЭллипс(Math.GetRandomNumber(800), Math.GetRandomNumber(600), 30, 30)
    Thread.Sleep 50

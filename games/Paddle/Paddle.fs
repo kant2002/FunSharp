@@ -1,7 +1,7 @@
 ﻿open Library
 
-let gw = float ГрафическоеОкно.Width
-let gh = float ГрафическоеОкно.Height
+let gw = float ГрафическоеОкно.Ширина
+let gh = float ГрафическоеОкно.Высота
 let paddle = Shapes.AddRectangle(120, 12)
 let ball = Shapes.AddEllipse(16, 16)
 let mutable score = 0
@@ -12,10 +12,10 @@ let OnMouseMove () =
 
 let PrintScore () =
   // Clear the score first and then draw the real score text
-  ГрафическоеОкно.BrushColor <- Colors.White
-  ГрафическоеОкно.FillRectangle(10, 10, 200, 20)
-  ГрафическоеОкно.BrushColor <- Colors.Black
-  ГрафическоеОкно.DrawText(10, 10, "Score: " + score.ToString())
+  ГрафическоеОкно.ЦветКисти <- Colors.White
+  ГрафическоеОкно.ЗаполнитьПрямоугольник(10, 10, 200, 20)
+  ГрафическоеОкно.ЦветКисти <- Colors.Black
+  ГрафическоеОкно.НарисоватьТекст(10, 10, "Score: " + score.ToString())
 
 ГрафическоеОкно.FontSize <- 14.0
 ГрафическоеОкно.MouseMove <- Callback(OnMouseMove)

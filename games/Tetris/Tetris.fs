@@ -32,7 +32,7 @@ let mutable score = 0
 
 type Template = {
    Values : int[]
-   mutable Color : Color
+   mutable Color : Цвет
    mutable Dim : int
    mutable ViewX : int
    mutable ViewY : int
@@ -230,7 +230,7 @@ and CreatePiece () = // in: template ret: h
 
   ГрафическоеОкно.PenWidth <- 1.0
   ГрафическоеОкно.PenColor <- Colors.Black
-  ГрафическоеОкно.BrushColor <- templates.[template].Color
+  ГрафическоеОкно.ЦветКисти <- templates.[template].Color
 
   pieces.[h] <- Boxes()
   for i = 0 to BOXES - 1 do
@@ -344,8 +344,8 @@ and DeleteLines () =
 and SetupCanvas () =
 // GraphicsWindow.DrawResizedImage( Flickr.GetRandomPicture( "bricks" ), 0, 0, GraphicsWindow.Width, GraphicsWindow.Height)
 
-  ГрафическоеОкно.BrushColor <- ГрафическоеОкно.BackgroundColor
-  ГрафическоеОкно.FillRectangle(XOFFSET, YOFFSET, CWIDTH*BWIDTH, CHEIGHT*BWIDTH)
+  ГрафическоеОкно.ЦветКисти <- ГрафическоеОкно.ФоновыйЦвет
+  ГрафическоеОкно.ЗаполнитьПрямоугольник(XOFFSET, YOFFSET, CWIDTH*BWIDTH, CHEIGHT*BWIDTH)
 
   Program.Delay(200)
   ГрафическоеОкно.PenWidth <- 1.0
@@ -357,46 +357,46 @@ and SetupCanvas () =
 
   ГрафическоеОкно.PenWidth <- 4.0
   ГрафическоеОкно.PenColor <- Colors.Black
-  ГрафическоеОкно.DrawLine(XOFFSET, YOFFSET, XOFFSET, YOFFSET + CHEIGHT*BWIDTH)
-  ГрафическоеОкно.DrawLine(XOFFSET + CWIDTH*BWIDTH, YOFFSET, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
-  ГрафическоеОкно.DrawLine(XOFFSET, YOFFSET + CHEIGHT*BWIDTH, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
+  ГрафическоеОкно.НарисоватьЛинию(XOFFSET, YOFFSET, XOFFSET, YOFFSET + CHEIGHT*BWIDTH)
+  ГрафическоеОкно.НарисоватьЛинию(XOFFSET + CWIDTH*BWIDTH, YOFFSET, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
+  ГрафическоеОкно.НарисоватьЛинию(XOFFSET, YOFFSET + CHEIGHT*BWIDTH, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
 
   ГрафическоеОкно.PenColor <- Colors.Lime
-  ГрафическоеОкно.DrawLine(XOFFSET - 4, YOFFSET, XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 6)
-  ГрафическоеОкно.DrawLine(XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 6)
-  ГрафическоеОкно.DrawLine(XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 4, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 4)
+  ГрафическоеОкно.НарисоватьЛинию(XOFFSET - 4, YOFFSET, XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 6)
+  ГрафическоеОкно.НарисоватьЛинию(XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 6)
+  ГрафическоеОкно.НарисоватьЛинию(XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 4, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 4)
 
   ГрафическоеОкно.PenColor <- Colors.Black
-  ГрафическоеОкно.BrushColor <- Colors.Pink
+  ГрафическоеОкно.ЦветКисти <- Colors.Pink
   let x = XOFFSET + PREVIEW_xpos * BWIDTH - BWIDTH
   let y = YOFFSET + PREVIEW_ypos * BWIDTH - BWIDTH
-  ГрафическоеОкно.FillRectangle(x - 20, y, BWIDTH * 5, BWIDTH * 6)
+  ГрафическоеОкно.ЗаполнитьПрямоугольник(x - 20, y, BWIDTH * 5, BWIDTH * 6)
   ГрафическоеОкно.DrawRectangle(x - 20, y, BWIDTH * 5, BWIDTH * 6)
 
-  ГрафическоеОкно.FillRectangle(x - 20, y + 190, 310, 170)
+  ГрафическоеОкно.ЗаполнитьПрямоугольник(x - 20, y + 190, 310, 170)
   ГрафическоеОкно.DrawRectangle(x - 20, y + 190, 310, 170)
 
-  ГрафическоеОкно.BrushColor <- Colors.Black
+  ГрафическоеОкно.ЦветКисти <- Colors.Black
   ГрафическоеОкно.FontItalic <- false
   ГрафическоеОкно.FontName <- "Comic Sans MS"
   ГрафическоеОкно.FontSize <- 16.0
-  ГрафическоеОкно.DrawText(x, y + 200, "Game control keys:")
-  ГрафическоеОкно.DrawText(x + 25, y + 220, "Left Arrow = Move piece left")
-  ГрафическоеОкно.DrawText(x + 25, y + 240, "Right Arrow = Move piece right")
-  ГрафическоеОкно.DrawText(x + 25, y + 260, "Up Arrow = Rotate piece")
-  ГрафическоеОкно.DrawText(x + 25, y + 280, "Down Arrow = Drop piece")
-  ГрафическоеОкно.DrawText(x, y + 320, "Press to stop game")
+  ГрафическоеОкно.НарисоватьТекст(x, y + 200, "Game control keys:")
+  ГрафическоеОкно.НарисоватьТекст(x + 25, y + 220, "Left Arrow = Move piece left")
+  ГрафическоеОкно.НарисоватьТекст(x + 25, y + 240, "Right Arrow = Move piece right")
+  ГрафическоеОкно.НарисоватьТекст(x + 25, y + 260, "Up Arrow = Rotate piece")
+  ГрафическоеОкно.НарисоватьТекст(x + 25, y + 280, "Down Arrow = Drop piece")
+  ГрафическоеОкно.НарисоватьТекст(x, y + 320, "Press to stop game")
 
   Program.Delay(200) // without this delay, the above text will use the fontsize of the score 
 
-  ГрафическоеОкно.BrushColor <- Colors.Black
+  ГрафическоеОкно.ЦветКисти <- Colors.Black
   ГрафическоеОкно.FontName <- "Georgia"
   ГрафическоеОкно.FontItalic <- true
   ГрафическоеОкно.FontSize <- 36.0
-  ГрафическоеОкно.DrawText(x - 20, y + 400, "Small Basic Tetris")
+  ГрафическоеОкно.НарисоватьТекст(x - 20, y + 400, "Small Basic Tetris")
   Program.Delay(200) // without this delay, the above text will use the fontsize of the score 
   ГрафическоеОкно.FontSize <- 16.0
-  ГрафическоеОкно.DrawText(x - 20, y + 440, "ver.0.1")
+  ГрафическоеОкно.НарисоватьТекст(x - 20, y + 440, "ver.0.1")
 
   Program.Delay(200) // without this delay, the above text will use the fontsize of the score 
   score <- 0
@@ -404,15 +404,15 @@ and SetupCanvas () =
 
 and PrintScore () =
   ГрафическоеОкно.PenWidth <- 4.0
-  ГрафическоеОкно.BrushColor <- Colors.Pink
-  ГрафическоеОкно.FillRectangle(480, 65, 150, 50)
-  ГрафическоеОкно.BrushColor <- Colors.Black
+  ГрафическоеОкно.ЦветКисти <- Colors.Pink
+  ГрафическоеОкно.ЗаполнитьПрямоугольник(480, 65, 150, 50)
+  ГрафическоеОкно.ЦветКисти <- Colors.Black
   ГрафическоеОкно.DrawRectangle(480, 65, 150, 50)
   ГрафическоеОкно.FontItalic <- false
   ГрафическоеОкно.FontSize <- 32.0
   ГрафическоеОкно.FontName <- "Impact"
-  ГрафическоеОкно.BrushColor <- Colors.Black
-  ГрафическоеОкно.DrawText(485, 70, Text.Append(Text.GetSubText( "00000000", 0, 8 - Text.GetLength( string score ) ), score))
+  ГрафическоеОкно.ЦветКисти <- Colors.Black
+  ГрафическоеОкно.НарисоватьТекст(485, 70, Text.Append(Text.GetSubText( "00000000", 0, 8 - Text.GetLength( string score ) ), score))
 
 and SetupTemplates () =
   // each piece has 4 boxes.
@@ -455,10 +455,10 @@ and SetupTemplates () =
   //_X
   templates.["template7"] <- { Values=[|10;11;12;13|]; Color=Colors.Red; Dim=4; ViewX=0; ViewY=0}
 
-ГрафическоеОкно.Height <- 580
-ГрафическоеОкно.Width <- 700
+ГрафическоеОкно.Высота <- 580
+ГрафическоеОкно.Ширина <- 700
 ГрафическоеОкно.KeyDown <- Callback(HandleKey)
-ГрафическоеОкно.BackgroundColor <- ГрафическоеОкно.GetColorFromRGB( 253, 252, 251 )
+ГрафическоеОкно.ФоновыйЦвет <- ГрафическоеОкно.GetColorFromRGB( 253, 252, 251 )
 
 while true do
   BOXES <- 4      // number of boxes per piece
@@ -472,8 +472,8 @@ while true do
   PREVIEW_xpos <- 13
   PREVIEW_ypos <- 2
 
-  ГрафическоеОкно.Clear()
-  ГрафическоеОкно.Title <- "Small Basic Tetris"
+  ГрафическоеОкно.Очистить()
+  ГрафическоеОкно.Заголовок <- "Small Basic Tetris"
 
   ГрафическоеОкно.Show()
 

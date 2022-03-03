@@ -39,10 +39,10 @@ let islandcount = 5 //nomber of island in the wall field
 let gameTitle = "1942, Score: "
 
 ГрафическоеОкно.Hide()
-ГрафическоеОкно.Title <- gameTitle + "0"
+ГрафическоеОкно.Заголовок <- gameTitle + "0"
 ГрафическоеОкно.CanResize <- false
-ГрафическоеОкно.Width <- gameWidth
-ГрафическоеОкно.Height <- gameHeight
+ГрафическоеОкно.Ширина <- gameWidth
+ГрафическоеОкно.Высота <- gameHeight
 
 // Global variables
 
@@ -161,7 +161,7 @@ let rec Init() =
 
    player <- Shapes.AddImage(player0)
    ГрафическоеОкно.FontSize <- 20.0
-   ГрафическоеОкно.BackgroundColor <- Colors.Gray
+   ГрафическоеОкно.ФоновыйЦвет <- Colors.Gray
    ГрафическоеОкно.PenColor <- Colors.Yellow
 
 
@@ -236,7 +236,7 @@ and OnMouseDown () =
 and moveall () =
    incbx <- 0.0
    incby <- 0.0
-   ГрафическоеОкно.Title <- gameTitle + score.ToString() + " Lives:" + Player_Lives.ToString()
+   ГрафическоеОкно.Заголовок <- gameTitle + score.ToString() + " Lives:" + Player_Lives.ToString()
 
    if (paddleX > (gameWidth-62) ) then
       incx <- incx - bgs

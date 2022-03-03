@@ -86,14 +86,14 @@ let mutable py2 = 0.0
 // Setup world
 let rec Init () =
    ГрафическоеОкно.Hide()
-   ГрафическоеОкно.Title <- gameTitle + "0"
+   ГрафическоеОкно.Заголовок <- gameTitle + "0"
    //GraphicsWindow.CanResize <- "False"
-   ГрафическоеОкно.Width <- int gameWidth
-   ГрафическоеОкно.Height <-int gameHeight
+   ГрафическоеОкно.Ширина <- int gameWidth
+   ГрафическоеОкно.Высота <-int gameHeight
 
-   ГрафическоеОкно.BackgroundColor <- backColor
-   ГрафическоеОкно.BrushColor <- backColor
-   ГрафическоеОкно.DrawImage(background, 0, 0)
+   ГрафическоеОкно.ФоновыйЦвет <- backColor
+   ГрафическоеОкно.ЦветКисти <- backColor
+   ГрафическоеОкно.НарисоватьИзображение(background, 0, 0)
 
    LevelCheck()
 
@@ -257,7 +257,7 @@ and RemoveRock nextRemove =
      score <- score + 5   
 
    // Show updated score
-   ГрафическоеОкно.Title <- gameTitle + (score * pointsMultiply).ToString()
+   ГрафическоеОкно.Заголовок <- gameTitle + (score * pointsMultiply).ToString()
 
    // Remove all references from the arrays
    Shapes.Remove(rock.[nextRemove])

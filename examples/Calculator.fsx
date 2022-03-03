@@ -7,13 +7,13 @@ open System.Threading
 let mutable p = 0
 
 ГрафическоеОкно.CanResize <- false
-ГрафическоеОкно.Width <- 260
-ГрафическоеОкно.Height <- 230
-ГрафическоеОкно.Title <- "Calculator v. 1.0 by Alex_2000"
+ГрафическоеОкно.Ширина <- 260
+ГрафическоеОкно.Высота <- 230
+ГрафическоеОкно.Заголовок <- "Calculator v. 1.0 by Alex_2000"
 
-ГрафическоеОкно.BackgroundColor = ГрафическоеОкно.GetColorFromRGB(240, 240, 240)
+ГрафическоеОкно.ФоновыйЦвет = ГрафическоеОкно.GetColorFromRGB(240, 240, 240)
 ГрафическоеОкно.FontBold <- false
-ГрафическоеОкно.BrushColor <- Colors.Black
+ГрафическоеОкно.ЦветКисти <- Colors.Black
 
 let m = Shapes.AddText("M")
 Shapes.Move(m, 22, 62)
@@ -39,7 +39,7 @@ let C5 = C4 + (222-181)*N
 let T0 = C0
 let T1 = T0 + (139-58)*N
 let T2 = T1 + (202-139)*N 
-ГрафическоеОкно.BrushColor <- Colors.Red
+ГрафическоеОкно.ЦветКисти <- Colors.Red
 let keyMC = Controls.ДобавитьКнопку("MC", C0, R1)
 Controls.SetSize(keyMC, 35*N, 25*N)
 let keyMR = Controls.ДобавитьКнопку("MR", C0, R2)
@@ -66,7 +66,7 @@ Controls.SetSize(keyplus, 35*N, 25*N)
 let keyravno = Controls.ДобавитьКнопку("=", C5, R4)
 Controls.SetSize(keyravno, 35*N, 25*N)
 
-ГрафическоеОкно.BrushColor <- Colors.Blue
+ГрафическоеОкно.ЦветКисти <- Colors.Blue
 let key7 = Controls.ДобавитьКнопку("7", C1, R1)
 Controls.SetSize(key7, 35*N, 25*N)
 let key8 = Controls.ДобавитьКнопку("8", C2, R1)

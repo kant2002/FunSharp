@@ -20,7 +20,7 @@ open Library
 // 0.1a 2014-04-02 Created. (QZN342)
 
 let title = "Turtle Dodger 0.5b"
-ГрафическоеОкно.Title <- title
+ГрафическоеОкно.Заголовок <- title
 // Debug variables
 let debug = false
 let mutable cross1 = "<shape name>"
@@ -47,26 +47,26 @@ let objects = ResizeArray<Object>()
 
 let rec Closing () =
    Timer.Pause()
-   Turtle.Turn(720)
-   ГрафическоеОкно.BrushColor <- Colors.White
+   Turtle.Повернуть(720)
+   ГрафическоеОкно.ЦветКисти <- Colors.White
    ГрафическоеОкно.FontName <- "Trebuchet MS"
    ГрафическоеОкно.FontSize <- 40.0
    let x = (gw - 217) / 2
    let y = 100
-   ГрафическоеОкно.DrawText(x, y, "GAME OVER")
+   ГрафическоеОкно.НарисоватьТекст(x, y, "GAME OVER")
    Program.Delay(3000)
 and Opening () =
    let url = "" // "http://www.nonkit.com/smallbasic.files/"
    let bigTurtle = Shapes.AddImage(url + "turtle.png")
    Shapes.Move(bigTurtle, 180, 140)
-   ГрафическоеОкно.BrushColor <- Colors.White
+   ГрафическоеОкно.ЦветКисти <- Colors.White
    ГрафическоеОкно.FontName <- "Trebuchet MS"
    ГрафическоеОкно.FontSize <- 50.0
    let x = (gw - 443) / 2
    let y = 40
-   ГрафическоеОкно.DrawText(x, y, title)
+   ГрафическоеОкно.НарисоватьТекст(x, y, title)
    Program.Delay(3000)
-   ГрафическоеОкно.Clear()
+   ГрафическоеОкно.Очистить()
 and Ready () =
    ГрафическоеОкно.FontSize <- 40.0
    let ready = Shapes.AddText("Ready?")
@@ -78,16 +78,16 @@ and Ready () =
      Program.Delay(200)
    Shapes.Remove(ready)
 and Game () =
-   Turtle.Speed <- 7
+   Turtle.Скорость <- 7
    Turtle.PenUp()
    let x = gw / 2
    let y = gh - 40
-   ГрафическоеОкно.BrushColor <- Colors.White
+   ГрафическоеОкно.ЦветКисти <- Colors.White
    ГрафическоеОкно.FontSize <- 18.0
    score <- Shapes.AddText("0")
    Shapes.Move(score, 20, 20)
    if debug then
-     ГрафическоеОкно.BrushColor <- Colors.White
+     ГрафическоеОкно.ЦветКисти <- Colors.White
      ГрафическоеОкно.FontSize <- 12.0
      pos <- Shapes.AddText("(" + x.ToString() + "," + y.ToString() + ")")
      ГрафическоеОкно.PenWidth <- 1.0
@@ -110,20 +110,20 @@ and Game () =
    while not collisionDetected do
      if moving then
        if lastKey = "Left" then
-         Turtle.TurnLeft()
+         Turtle.ПовернутьНалево()
          Turtle.Move(30)
-         Turtle.TurnRight()
+         Turtle.ПовернутьНаправо()
        elif lastKey = "Right" then
-         Turtle.TurnRight()
+         Turtle.ПовернутьНаправо()
          Turtle.Move(30)
-         Turtle.TurnLeft()      
+         Turtle.ПовернутьНалево()      
        moving <- false
      else
        Program.Delay(100)      
 and Init () =
-   ГрафическоеОкно.BackgroundColor <- Colors.DodgerBlue
-   ГрафическоеОкно.Width <- gw
-   ГрафическоеОкно.Height <- gh   
+   ГрафическоеОкно.ФоновыйЦвет <- Colors.DodgerBlue
+   ГрафическоеОкно.Ширина <- gw
+   ГрафическоеОкно.Высота <- gh   
    passed <- 0
    collisionDetected <- false
 and OnTick () =
@@ -163,7 +163,7 @@ and AddObject () =
    iMax <- iMax + 1
    ГрафическоеОкно.PenWidth <- 1.0
    let kind = Math.GetRandomNumber(3)
-   ГрафическоеОкно.BrushColor <- color.[kind]
+   ГрафическоеОкно.ЦветКисти <- color.[kind]
    let sz = size.[kind]
    let shapeName = Shapes.AddRectangle(sz, sz)
    let x = Math.GetRandomNumber(gw - 20) + 10

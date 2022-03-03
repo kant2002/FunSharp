@@ -1,7 +1,7 @@
 ﻿open Library
 
-ГрафическоеОкно.Width <- 288
-ГрафическоеОкно.Height <- 440
+ГрафическоеОкно.Ширина <- 288
+ГрафическоеОкно.Высота <- 440
 
 let bg = Shapes.AddImage("bg.png")
 let ground = Shapes.AddImage("ground.png")

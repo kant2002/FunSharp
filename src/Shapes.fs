@@ -9,7 +9,7 @@ type internal ShapeInfo = { Shape:Shape; mutable Offset:Point; mutable Opacity:f
 [<Sealed>]
 type Shapes private () =
    static let pen () = Pen(ГрафическоеОкно.PenColor,ГрафическоеОкно.PenWidth)
-   static let brush () = ГрафическоеОкно.BrushColor
+   static let brush () = ГрафическоеОкно.ЦветКисти
    static let font () = 
       Font(ГрафическоеОкно.FontSize,ГрафическоеОкно.FontName,ГрафическоеОкно.FontBold, ГрафическоеОкно.FontItalic)
    static let shapes = Dictionary<string,ShapeInfo>()

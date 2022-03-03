@@ -24,7 +24,7 @@ type internal МоеПриложение () =
    let mutable isLeftButtonDown = false
    let mutable isRightButtonDown = false
    let инициализироватьХолст () =
-      главныйХолст <- new DrawingCanvas(BackgroundColor=toXwtColor Colors.White)
+      главныйХолст <- new DrawingCanvas(BackgroundColor=кXwtЦвету Colors.White)
       главныйХолст.KeyPressed.Add(fun args -> 
          последняяКнопка <- args.Key.ToString()
          if кнопкаВниз <> null then кнопкаВниз.Invoke()

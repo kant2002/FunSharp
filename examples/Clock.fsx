@@ -7,19 +7,19 @@ open System
 open System.Collections.Generic
 open Library
 
-let GW = float ГрафическоеОкно.Width
-let GH = float ГрафическоеОкно.Height
+let GW = float ГрафическоеОкно.Ширина
+let GH = float ГрафическоеОкно.Высота
 let Radius = 200.0
 let MidX = GW/2.0
 let MidY = GW/2.0
 
 let initWindow () =
    ГрафическоеОкно.Show()
-   ГрафическоеОкно.Title <- "Analog Clock"
-   ГрафическоеОкно.BackgroundColor <- Colors.Black
-   ГрафическоеОкно.BrushColor <- Colors.BurlyWood
+   ГрафическоеОкно.Заголовок <- "Analog Clock"
+   ГрафическоеОкно.ФоновыйЦвет <- Colors.Black
+   ГрафическоеОкно.ЦветКисти <- Colors.BurlyWood
    ГрафическоеОкно.DrawEllipse(MidX-Radius-15.,MidY-Radius-5.,Radius*2.+30.,Radius*2.+20.)
-   ГрафическоеОкно.FillEllipse(MidX-Radius-15.,MidY-Radius-5.,Radius*2.+30.,Radius*2.+20.)
+   ГрафическоеОкно.ЗаполнитьЭллипс(MidX-Radius-15.,MidY-Radius-5.,Radius*2.+30.,Radius*2.+20.)
    for angle in 1.0..180.0 do
      let x = MidX+(Radius+15.)*Math.Cos(Math.GetRadians(angle))
      let y1 = MidY+Radius*Math.Sin(Math.GetRadians(angle))+15.
@@ -33,7 +33,7 @@ let initWindow () =
          blue)
      ГрафическоеОкно.PenColor <- color
      Shapes.AddLine(x,y1,x,y2) |> ignore
-   ГрафическоеОкно.BrushColor <- Colors.White   
+   ГрафическоеОкно.ЦветКисти <- Colors.White   
    let ClockNum = Dictionary()
    for i in 1. .. 12. do
      let Radians = Math.GetRadians(-i * 30. + 90.)
