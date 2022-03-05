@@ -57,8 +57,8 @@ let rec Closing () =
    Program.Delay(3000)
 and Opening () =
    let url = "" // "http://www.nonkit.com/smallbasic.files/"
-   let bigTurtle = Shapes.ДобавитьИзображение(url + "turtle.png")
-   Shapes.Переместить(bigTurtle, 180, 140)
+   let bigTurtle = Фигуры.ДобавитьИзображение(url + "turtle.png")
+   Фигуры.Переместить(bigTurtle, 180, 140)
    ГрафическоеОкно.ЦветКисти <- Цвета.White
    ГрафическоеОкно.FontName <- "Trebuchet MS"
    ГрафическоеОкно.FontSize <- 50.0
@@ -69,14 +69,14 @@ and Opening () =
    ГрафическоеОкно.Очистить()
 and Ready () =
    ГрафическоеОкно.FontSize <- 40.0
-   let ready = Shapes.ДобавитьТекст("Ready?")
+   let ready = Фигуры.ДобавитьТекст("Ready?")
    let x = (gw - 130) / 2
    let y = 100
-   Shapes.Переместить(ready, x, y)
+   Фигуры.Переместить(ready, x, y)
    for opacity in 100 .. -10 .. 0 do
-     Shapes.SetOpacity(ready, opacity)
+     Фигуры.SetOpacity(ready, opacity)
      Program.Delay(200)
-   Shapes.Удалить(ready)
+   Фигуры.Удалить(ready)
 and Game () =
    Черепаха.Скорость <- 7
    Черепаха.PenUp()
@@ -84,18 +84,18 @@ and Game () =
    let y = gh - 40
    ГрафическоеОкно.ЦветКисти <- Цвета.White
    ГрафическоеОкно.FontSize <- 18.0
-   score <- Shapes.ДобавитьТекст("0")
-   Shapes.Переместить(score, 20, 20)
+   score <- Фигуры.ДобавитьТекст("0")
+   Фигуры.Переместить(score, 20, 20)
    if debug then
      ГрафическоеОкно.ЦветКисти <- Цвета.White
      ГрафическоеОкно.FontSize <- 12.0
-     pos <- Shapes.ДобавитьТекст("(" + x.ToString() + "," + y.ToString() + ")")
+     pos <- Фигуры.ДобавитьТекст("(" + x.ToString() + "," + y.ToString() + ")")
      ГрафическоеОкно.PenWidth <- 1.0
-     cross1 <- Shapes.ДобавитьЛинию(0, -8, 0, 8)
-     cross2 <- Shapes.ДобавитьЛинию(-8, 0, 8, 0)
-     Shapes.Переместить(cross1, x, y)
-     Shapes.Переместить(cross2, x, y)
-     Shapes.Переместить(pos, gw - 100, 20)   
+     cross1 <- Фигуры.ДобавитьЛинию(0, -8, 0, 8)
+     cross2 <- Фигуры.ДобавитьЛинию(-8, 0, 8, 0)
+     Фигуры.Переместить(cross1, x, y)
+     Фигуры.Переместить(cross2, x, y)
+     Фигуры.Переместить(pos, gw - 100, 20)   
    Черепаха.ПереместитьВ(x, y)
    Черепаха.Angle <- 0.0   
    moving <- false
@@ -138,9 +138,9 @@ and OnTick () =
    if debug then
      let x = Math.Floor(Черепаха.X)
      let y = Math.Floor(Черепаха.Y)
-     Shapes.УстановитьТекст(pos, "(" + x.ToString() + "," + y.ToString() + ")")
-     Shapes.Переместить(cross1, x, y)
-     Shapes.Переместить(cross2, x, y)
+     Фигуры.УстановитьТекст(pos, "(" + x.ToString() + "," + y.ToString() + ")")
+     Фигуры.Переместить(cross1, x, y)
+     Фигуры.Переместить(cross2, x, y)
 and ScrollObject () =
    for i = iMin to iMax-1 do
      let x = objects.[i].X
@@ -152,11 +152,11 @@ and ScrollObject () =
        collisionDetected <- true   
      if y > gh then
        passed <- passed + 1
-       Shapes.УстановитьТекст(score, string passed)
-       Shapes.Удалить(objects.[i].ShapeName)
+       Фигуры.УстановитьТекст(score, string passed)
+       Фигуры.Удалить(objects.[i].ShapeName)
        iMin <- i + 1
      else
-       Shapes.Переместить(objects.[i].ShapeName, x, y)
+       Фигуры.Переместить(objects.[i].ShapeName, x, y)
        objects.[i].X <- x
        objects.[i].Y <- y   
 and AddObject () =   
@@ -165,12 +165,12 @@ and AddObject () =
    let kind = Math.GetRandomNumber(3)
    ГрафическоеОкно.ЦветКисти <- color.[kind]
    let sz = size.[kind]
-   let shapeName = Shapes.ДобавитьПрямоугольник(sz, sz)
+   let shapeName = Фигуры.ДобавитьПрямоугольник(sz, sz)
    let x = Math.GetRandomNumber(gw - 20) + 10
    let y = -20
    objects.Add({ X = x; Y=y; Kind=kind; ShapeName=shapeName})
-   Shapes.Переместить(shapeName, x, y)
-   Shapes.Повернуть(shapeName, Math.GetRandomNumber(360))
+   Фигуры.Переместить(shapeName, x, y)
+   Фигуры.Повернуть(shapeName, Math.GetRandomNumber(360))
 and OnKeyDown () =
    if not moving then
      moving <- true

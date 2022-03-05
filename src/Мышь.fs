@@ -1,12 +1,12 @@
 ﻿namespace Библиотека
 
 [<Sealed>]
-type Mouse private () =
-   static member IsLeftButtonDown = Мое.Приложение.IsLeftButtonDown
-   static member IsRightButtonDown = Мое.Приложение.IsRightButtonDown
+type Мышь private () =
+   static member ЛеваяКнопкаНажата = Мое.Приложение.ЛеваяКнопкаНажата
+   static member ПраваяКнопкаНажата = Мое.Приложение.ПраваяКнопкаНажата
    static member X = Мое.Приложение.MouseX
    static member Y = Мое.Приложение.MouseY
-   static member HideCursor () =
+   static member СкрытьКурсор () =
       Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.Cursor <- Xwt.CursorType.Invisible)
-   static member ShowCursor () =
+   static member ПоказатьКурсор () =
       Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.Cursor <- Xwt.CursorType.Arrow)

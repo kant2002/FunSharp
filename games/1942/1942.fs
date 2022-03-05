@@ -33,7 +33,7 @@ let fps = 50
 let bgs = 2 //backgroundspeed
 let mutable Player_Lives = 10
 let nbrisland = 5 //nomber of island images
-let islandcount = 5 //nomber of island in the wall field
+let количествоостровов = 5 //nomber of island in the wall field
 
 // Заголовок окна
 let gameTitle = "1942, Score: "
@@ -46,18 +46,18 @@ let gameTitle = "1942, Score: "
 
 // Global variables
 
-let mutable player = "<shape name>"
+let mutable игрок = "<shape name>"
 let mutable paddleX = 0
 let mutable paddleY = 0
-let mutable fond = "<shape name>"
+let mutable фон = "<shape name>"
 
 // addImage in the right order is needed to define the shapes depth
-let island4 = ImageList.LoadImage(Path + "island4.png")
-let island1= ImageList.LoadImage(Path + "island1.png")
-let island2= ImageList.LoadImage(Path + "island2.png")
-let island3= ImageList.LoadImage(Path + "island3.png")
-let island5= ImageList.LoadImage(Path + "island5.png")
-let player0 = ImageList.LoadImage(Path + "myplane1.png")
+let остров4 = ImageList.LoadImage(Path + "island4.png")
+let остров1= ImageList.LoadImage(Path + "island1.png")
+let остров2= ImageList.LoadImage(Path + "island2.png")
+let остров3= ImageList.LoadImage(Path + "island3.png")
+let остров5= ImageList.LoadImage(Path + "island5.png")
+let игрок0 = ImageList.LoadImage(Path + "myplane1.png")
 let background = ImageList.LoadImage(Path + "fond.png")
 let bullet0 = ImageList.LoadImage(Path + "bullet.png")
 let enemy= ImageList.LoadImage(Path + "enemy1.png")
@@ -85,7 +85,7 @@ let enemy_size = 32
 let enemy_ammo_size = 8
 let player_bullet_size = 32
 
-let island_Array = Dictionary()
+let массив_Островов = Dictionary()
 
 let Player_Ammo = Dictionary()
 let Player_AmmoAge = Dictionary()
@@ -136,7 +136,7 @@ let posy = Dictionary<int,_>()
 let rec Init() =
    ГрафическоеОкно.Спрятать()
 
-   Mouse.HideCursor()
+   Мышь.СкрытьКурсор()
 
    // every enemy in tha array has 5 informations
    // TimeLine: each enemy has its own timeline
@@ -147,19 +147,19 @@ let rec Init() =
    //
    //
 
-   IslandsPosition()
-   create_level1()
+   ПозицииОстровов()
+   создать_уровень1()
 
-   fond <- Shapes.ДобавитьИзображение(background)
-   island_Array.[1] <- Shapes.ДобавитьИзображение(island1)
-   island_Array.[2] <- Shapes.ДобавитьИзображение(island2)
-   island_Array.[3] <- Shapes.ДобавитьИзображение(island3)
-   island_Array.[4] <- Shapes.ДобавитьИзображение(island4)
-   island_Array.[5] <- Shapes.ДобавитьИзображение(island5)
-   for i = 6 to islandcount do
-      island_Array.[i] <- island_Array.[Math.Remainder(i,4)]
+   фон <- Фигуры.ДобавитьИзображение(background)
+   массив_Островов.[1] <- Фигуры.ДобавитьИзображение(остров1)
+   массив_Островов.[2] <- Фигуры.ДобавитьИзображение(остров2)
+   массив_Островов.[3] <- Фигуры.ДобавитьИзображение(остров3)
+   массив_Островов.[4] <- Фигуры.ДобавитьИзображение(остров4)
+   массив_Островов.[5] <- Фигуры.ДобавитьИзображение(остров5)
+   for i = 6 to количествоостровов do
+      массив_Островов.[i] <- массив_Островов.[Math.Remainder(i,4)]
 
-   player <- Shapes.ДобавитьИзображение(player0)
+   игрок <- Фигуры.ДобавитьИзображение(игрок0)
    ГрафическоеОкно.FontSize <- 20.0
    ГрафическоеОкно.ЦветФона <- Цвета.Gray
    ГрафическоеОкно.ЦветПера <- Цвета.Yellow
@@ -181,14 +181,14 @@ and Play () =
    // Island initial position 
    let mutable j=0
 
-   for i=1 to islandcount do
+   for i=1 to количествоостровов do
       j <- Math.Remainder(i,6)
       posy.[i] <- islandPos.[j].[2]
       posx.[i] <- islandPos.[j].[3]
       incislandx.[i] <- 0
       incislandy.[i] <- 0   
    TimePlay <- 0
-   Shapes.Переместить(player, gameWidth/2 , gameHeight - 80 )
+   Фигуры.Переместить(игрок, gameWidth/2 , gameHeight - 80 )
    while (play = 1) do
       Program.Delay(1000/fps)
       TimePlay <- TimePlay + 1
@@ -208,7 +208,7 @@ and Play () =
             squadron <- squadron + 1
                  
          if (TimePlay > 4000) then
-            Shapes.Переместить(Shapes.ДобавитьИзображение(``end``), 230,200)
+            Фигуры.Переместить(Фигуры.ДобавитьИзображение(``end``), 230,200)
             Program.Delay(5000)
             Program.End()     
          lock ammoSync (fun () ->  
@@ -221,16 +221,16 @@ and Play () =
          AgePlayer_Ammo()
 
 and OnMouseMove () =
-   paddleX <- int ГрафическоеОкно.MouseX - player_size / 2
-   paddleY <- int ГрафическоеОкно.MouseY - player_size
+   paddleX <- int ГрафическоеОкно.МышьX - player_size / 2
+   paddleY <- int ГрафическоеОкно.МышьY - player_size
 
    if (paddleX < 0) then
       paddleX <- 0   
-   Shapes.Переместить(player, paddleX , paddleY )
+   Фигуры.Переместить(игрок, paddleX , paddleY )
 
 and OnMouseDown () =
-   ShootX <- ГрафическоеОкно.MouseX - 15.0 // in order to be from the neck of the plane
-   ShootY <- ГрафическоеОкно.MouseY - 80.0
+   ShootX <- ГрафическоеОкно.МышьX - 15.0 // in order to be from the neck of the plane
+   ShootY <- ГрафическоеОкно.МышьY - 80.0
    Fire()
 
 and moveall () =
@@ -241,57 +241,57 @@ and moveall () =
    if (paddleX > (gameWidth-62) ) then
       incx <- incx - bgs
       incbx <- incbx - float bgs
-      for i=1 to islandcount do
+      for i=1 to количествоостровов do
          incislandx.[i] <- incislandx.[i] - bgs    
       if (incx = -32 ) then
          incx <- 0            
    if (paddleX < 64 ) then
       incx <- incx + bgs
       incbx <- incbx + float bgs
-      for i=1 to islandcount do
+      for i=1 to количествоостровов do
          incislandx.[i] <- incislandx.[i] + bgs          
       if (incx = 32 ) then
          incx <- 0
-   Shapes.Переместить(fond,incx - 32 ,incy - 32)
+   Фигуры.Переместить(фон,incx - 32 ,incy - 32)
 
-   for i=1 to islandcount do
+   for i=1 to количествоостровов do
       let islx = posx.[i]+incislandx.[i]
       let isly = posy.[i]+incislandy.[i]
-      Shapes.Переместить(island_Array.[i],islx,isly)
+      Фигуры.Переместить(массив_Островов.[i],islx,isly)
 
    incy <- incy + bgs
    incby <- incby + float bgs
-   for i=1 to islandcount do
+   for i=1 to количествоостровов do
       incislandy.[i] <- incislandy.[i] + bgs    
 
    if (incy = 32) then
       incy <- 0   
 
-   for i=1 to islandcount do
+   for i=1 to количествоостровов do
       if ((posy.[i]+incislandy.[i]) > (gameHeight+15)) then // relaunch island if no more visible
          let R = int (Math.Round(float (Math.GetRandomNumber(nbrisland))))
          let AA = Math.Remainder(TimePlay,6)
          // give new coordinates
          posx.[i] <- islandPos.[AA].[2]
          posy.[i] <- islandPos.[AA].[3]
-         Shapes.Переместить(island_Array.[R],posx.[i],posy.[i])
+         Фигуры.Переместить(массив_Островов.[R],posx.[i],posy.[i])
          incislandy.[i] <- 0
          incislandx.[i] <- 0         
    // Move playerammo
    for i = 1 to Player_AmmoCount do
       let shapeName = Player_Ammo.[i]
-      let Player_Ammox = Shapes.GetLeft(shapeName) + incbx
-      let Player_Ammoy = Shapes.GetTop(shapeName) - Player_Ammospeed
-      Shapes.Переместить(shapeName, Player_Ammox, Player_Ammoy)
+      let Player_Ammox = Фигуры.GetLeft(shapeName) + incbx
+      let Player_Ammoy = Фигуры.GetTop(shapeName) - Player_Ammospeed
+      Фигуры.Переместить(shapeName, Player_Ammox, Player_Ammoy)
       let oldAge = Player_AmmoAge.GetOrDefault(i, 0)
       Player_AmmoAge.[i] <- oldAge + 1
    // Move Enemy ammo
    for iea = 1 to Enemy_AmmoCount do
       let dx = (Math.Sin((Enemy_Ammo_Angle.[iea] )) * float Enemy_Ammospeed)
       let dy = (Math.Cos((Enemy_Ammo_Angle.[iea] )) * float Enemy_Ammospeed)
-      let Enemy_Ammox = Shapes.GetLeft(Enemy_Ammo.[iea]) + dx + incbx
-      let Enemy_Ammoy = Shapes.GetTop(Enemy_Ammo.[iea]) + dy + incby * 0.1
-      Shapes.Переместить(Enemy_Ammo.[iea], Enemy_Ammox, Enemy_Ammoy)
+      let Enemy_Ammox = Фигуры.GetLeft(Enemy_Ammo.[iea]) + dx + incbx
+      let Enemy_Ammoy = Фигуры.GetTop(Enemy_Ammo.[iea]) + dy + incby * 0.1
+      Фигуры.Переместить(Enemy_Ammo.[iea], Enemy_Ammox, Enemy_Ammoy)
       let oldAge =
          match Enemy_AmmoAge.TryGetValue(iea) with
          | true, n -> n
@@ -308,7 +308,7 @@ and moveall () =
       let etl = enemyPath.[eNBR].[1].GetOrDefault(uu, 0.0)  //enemy own timeLine
       if (Time=etl) then  //it's time to rotate enemy
          let rr = enemyPath.[eNBR].[2].GetOrDefault(uu+1, 0.0)            
-         Shapes.Повернуть(enemy_Array.[i],rr)
+         Фигуры.Повернуть(enemy_Array.[i],rr)
       if (Time > etl)  then
          uu <- uu+1
          enemy_line.[i] <- uu    // next line for enemy move      
@@ -324,7 +324,7 @@ and moveall () =
             // this avoid enemy fire from outside the screen
             fire_Enemy()
 
-      Shapes.Переместить(enemy_Array.[i],xx,yy)
+      Фигуры.Переместить(enemy_Array.[i],xx,yy)
       enemy_PosX.[i] <- int xx
       enemy_PosY.[i] <- int yy
       enemy_TimeLine.[i] <- Time + 1.0
@@ -338,7 +338,7 @@ and moveall () =
       i <- i + 1
       
 and RemovePlayer_Ammo (player_Ammo_nextRemove) =
-   Shapes.Удалить(Player_Ammo.[player_Ammo_nextRemove])
+   Фигуры.Удалить(Player_Ammo.[player_Ammo_nextRemove])
    for iz = player_Ammo_nextRemove to Player_AmmoCount - 1 do
        Player_Ammo.[iz] <- Player_Ammo.[iz+1]
        Player_AmmoAge.[iz] <- Player_AmmoAge.[iz+1]
@@ -347,7 +347,7 @@ and RemovePlayer_Ammo (player_Ammo_nextRemove) =
    Player_AmmoCount <- Player_AmmoCount - 1
 
 and RemoveEnemy_Ammo (enemy_Ammo_nextRemove) =
-   Shapes.Удалить(Enemy_Ammo.[enemy_Ammo_nextRemove])
+   Фигуры.Удалить(Enemy_Ammo.[enemy_Ammo_nextRemove])
    for irea = enemy_Ammo_nextRemove to Enemy_AmmoCount - 1 do
        Enemy_Ammo.[irea] <- Enemy_Ammo.[irea+1]      
        Enemy_AmmoAge.[irea] <-
@@ -366,8 +366,8 @@ and Fire () =
 
       // Add the player Ammo
       Player_AmmoCount <- Player_AmmoCount + 1
-      Player_Ammo.[Player_AmmoCount] <- Shapes.ДобавитьИзображение(bullet0)
-      Shapes.Переместить(Player_Ammo.[Player_AmmoCount], ShootX, ShootY)
+      Player_Ammo.[Player_AmmoCount] <- Фигуры.ДобавитьИзображение(bullet0)
+      Фигуры.Переместить(Player_Ammo.[Player_AmmoCount], ShootX, ShootY)
    )
 
 and fire_Enemy () =
@@ -377,10 +377,10 @@ and fire_Enemy () =
 
    // Add the Enemy Ammo
    Enemy_AmmoCount <- Enemy_AmmoCount + 1
-   Enemy_Ammo.[Enemy_AmmoCount] <- Shapes.ДобавитьИзображение(Enemy_bullet)
+   Enemy_Ammo.[Enemy_AmmoCount] <- Фигуры.ДобавитьИзображение(Enemy_bullet)
    Enemy_Ammo_Angle.[Enemy_AmmoCount] <- Math.ArcTan(float(paddleX- Enemy_ShootX+player_size/2)/float(paddleY-Enemy_ShootY))
    let shape = Enemy_Ammo.[Enemy_AmmoCount]
-   Shapes.Переместить(shape, Enemy_ShootX, Enemy_ShootY)
+   Фигуры.Переместить(shape, Enemy_ShootX, Enemy_ShootY)
 
 //Check playerammo age
 and AgePlayer_Ammo () =
@@ -393,7 +393,7 @@ and AgeEnemy_Ammo () =
       RemoveEnemy_Ammo(1)
 
 and remove_enemy (next_enemy_remove) =
-   Shapes.Удалить(enemy_Array.[next_enemy_remove])
+   Фигуры.Удалить(enemy_Array.[next_enemy_remove])
    // Remove all references from the arrays
    for ii = next_enemy_remove to enemy_Count - 1 do
       enemy_Array.[ii] <- enemy_Array.[ii+1]
@@ -417,9 +417,9 @@ and create_enemies_left () =
       enemy_Count <- enemy_Count + 1
       enemy_PathNBR.[enemy_Count] <- pathNBR
       if (enemy_type = 2) then
-         enemy_Array.[enemy_Count] <- Shapes.ДобавитьИзображение(enemy2)
+         enemy_Array.[enemy_Count] <- Фигуры.ДобавитьИзображение(enemy2)
       else
-         enemy_Array.[enemy_Count] <- Shapes.ДобавитьИзображение(enemy)
+         enemy_Array.[enemy_Count] <- Фигуры.ДобавитьИзображение(enemy)
       enemy_line.[enemy_Count] <- 1
       enemy_PosX.[enemy_Count] <- enemyPosX1
       enemy_PosY.[enemy_Count] <- enemyPosY1
@@ -430,7 +430,7 @@ and create_enemies_left () =
    for i=(enemy_Count-enemy_Nbr+1) to enemy_Count do
       let xxx = enemy_PosX.[i]
       let yyy = enemy_PosY.[i]
-      Shapes.Переместить(enemy_Array.[i],xxx,yyy)
+      Фигуры.Переместить(enemy_Array.[i],xxx,yyy)
 
 and create_enemies_right () =
 
@@ -438,7 +438,7 @@ and create_enemies_right () =
    for i=1 to enemy_Nbr do
       enemy_Count <- enemy_Count + 1
       enemy_PathNBR.[enemy_Count] <- pathNBR
-      enemy_Array.[enemy_Count] <- Shapes.ДобавитьИзображение(enemy)
+      enemy_Array.[enemy_Count] <- Фигуры.ДобавитьИзображение(enemy)
       enemy_line.[enemy_Count] <- 1
       enemy_PosX.[enemy_Count] <- enemyPosX1
       enemy_PosY.[enemy_Count] <- enemyPosY1
@@ -450,7 +450,7 @@ and create_enemies_right () =
    for i=(enemy_Count-enemy_Nbr+1) to enemy_Count do
       let xxx=enemy_PosX.[i]
       let yyy=enemy_PosY.[i]
-      Shapes.Переместить(enemy_Array.[i],xxx,yyy)
+      Фигуры.Переместить(enemy_Array.[i],xxx,yyy)
    
 and Collision_pbe () =  // for player-bullet and enemies
 
@@ -458,8 +458,8 @@ and Collision_pbe () =  // for player-bullet and enemies
    while i1 <= Player_AmmoCount do
       // player bullet position
       let shapeName = Player_Ammo.[i1]
-      let Player_Ammox = int (Shapes.GetLeft(shapeName))
-      let Player_Ammoy = int (Shapes.GetTop(shapeName))
+      let Player_Ammox = int (Фигуры.GetLeft(shapeName))
+      let Player_Ammoy = int (Фигуры.GetTop(shapeName))
       let px1=Player_Ammox+player_bullet_size/3   // in order to have a more precise collison than the bullet image size
       let py1=Player_Ammoy+player_bullet_size/3
       let px2=px1+2*player_bullet_size/3
@@ -485,14 +485,14 @@ and Collision_pbe () =  // for player-bullet and enemies
                let next_enemy_remove = i2
                remove_enemy(next_enemy_remove)
                // begin animation for explosion at coordinate ax1, ay1
-               let toto = Shapes.ДобавитьИзображение(enemy_expl1)
-               Shapes.Переместить(toto,ax1,ay1)
+               let toto = Фигуры.ДобавитьИзображение(enemy_expl1)
+               Фигуры.Переместить(toto,ax1,ay1)
                Program.Delay(30)
-               Shapes.Удалить(toto)
-               let toto = Shapes.ДобавитьИзображение(enemy_expl2)
-               Shapes.Переместить(toto,ax1,ay1)
+               Фигуры.Удалить(toto)
+               let toto = Фигуры.ДобавитьИзображение(enemy_expl2)
+               Фигуры.Переместить(toto,ax1,ay1)
                Program.Delay(30)
-               Shapes.Удалить(toto)
+               Фигуры.Удалить(toto)
                score <- score + 100
 
          i2 <- i2 + 1
@@ -501,12 +501,12 @@ and Collision_pbe () =  // for player-bullet and enemies
       i1 <- i1 + 1
 
 and Collision_ep () =   // for enemies and player 
-   let px1 = int (Shapes.GetLeft(player))
-   let py1 = int (Shapes.GetTop(player))
+   let px1 = int (Фигуры.GetLeft(игрок))
+   let py1 = int (Фигуры.GetTop(игрок))
    let px2 = px1 + player_size
    let py2 = py1 + player_size
 
-   //Shapes.Move(Shapes.AddRectangle(px2-px1 ,py2-py1), px1, py1)
+   //Фигуры.Move(Фигуры.AddRectangle(px2-px1 ,py2-py1), px1, py1)
    let mutable i2 = 1
    while i2 <= enemy_Count do
       // enemy position 
@@ -515,7 +515,7 @@ and Collision_ep () =   // for enemies and player
 
       let ax2=ax1+enemy_size
       let ay2=ay1+enemy_size
-      //Shapes.Move(Shapes.AddRectangle(ax2-ax1 ,ay2-ay1), ax1, ay1) 
+      //Фигуры.Move(Фигуры.AddRectangle(ax2-ax1 ,ay2-ay1), ax1, ay1) 
 
       if ( (px1 < ax1 && px2 > ax1) || (px1 < ax2 && px2 > ax2) ) then
          if ( (py1 < ay1 && py2 > ay1) || (py1 < ay2 && py2 > ay2) ) then
@@ -523,14 +523,14 @@ and Collision_ep () =   // for enemies and player
             // animate explosion and decrease lives            
             remove_enemy(i2)
             // begin animation for explosion at coordinate ax1, ay1
-            let toto = Shapes.ДобавитьИзображение(enemy_expl1)
-            Shapes.Переместить(toto,ax1,ay1)
+            let toto = Фигуры.ДобавитьИзображение(enemy_expl1)
+            Фигуры.Переместить(toto,ax1,ay1)
             Program.Delay(30)
-            Shapes.Удалить(toto)
-            let toto = Shapes.ДобавитьИзображение(player_expl)
-            Shapes.Переместить(toto,ax1,ay1)
+            Фигуры.Удалить(toto)
+            let toto = Фигуры.ДобавитьИзображение(player_expl)
+            Фигуры.Переместить(toto,ax1,ay1)
             Program.Delay(300)
-            Shapes.Удалить(toto)
+            Фигуры.Удалить(toto)
             Player_Lives <- Player_Lives - 1
             if (Player_Lives = 0) then
                Program.End()
@@ -541,18 +541,18 @@ and Collision_ep () =   // for enemies and player
    let py1 = paddleY
    let px2 = px1 + player_size
    let py2 = py1 + player_size
-   // Shapes.Move(Shapes.AddRectangle(px2-px1 ,py2-py1), px1, py1)
+   // Фигуры.Move(Фигуры.AddRectangle(px2-px1 ,py2-py1), px1, py1)
    
    let mutable i3 = 1
    while i3 <= Enemy_AmmoCount do
       // enemy position 
 
-      let ax1=int (Shapes.GetLeft(Enemy_Ammo.[i3]))
-      let ay1=int (Shapes.GetTop(Enemy_Ammo.[i3]))
+      let ax1=int (Фигуры.GetLeft(Enemy_Ammo.[i3]))
+      let ay1=int (Фигуры.GetTop(Enemy_Ammo.[i3]))
 
       let ax2=ax1+enemy_ammo_size
       let ay2=ay1+enemy_ammo_size
-      //Shapes.Move(Shapes.AddRectangle(ax2-ax1 ,ay2-ay1), ax1, ay1) 
+      //Фигуры.Move(Фигуры.AddRectangle(ax2-ax1 ,ay2-ay1), ax1, ay1) 
 
       if ( (px1 < ax1 && px2 > ax1) || (px1 < ax2 && px2 > ax2) ) then
          if ( (py1 < ay1 && py2 > ay1) || (py1 < ay2 && py2 > ay2) ) then
@@ -561,21 +561,21 @@ and Collision_ep () =   // for enemies and player
             RemoveEnemy_Ammo(i3)
 
             // begin animation for explosion at coordinate ax1, ay1
-            let toto = Shapes.ДобавитьИзображение(enemy_expl1)
-            Shapes.Переместить(toto,paddleX+ player_size/2,paddleY+ player_size/2)
+            let toto = Фигуры.ДобавитьИзображение(enemy_expl1)
+            Фигуры.Переместить(toto,paddleX+ player_size/2,paddleY+ player_size/2)
             Program.Delay(30)
-            Shapes.Удалить(toto)
-            let toto = Shapes.ДобавитьИзображение(player_expl)
-            Shapes.Переместить(toto,paddleX+ player_size/2,paddleY+ player_size/2)
+            Фигуры.Удалить(toto)
+            let toto = Фигуры.ДобавитьИзображение(player_expl)
+            Фигуры.Переместить(toto,paddleX+ player_size/2,paddleY+ player_size/2)
             Program.Delay(300)
-            Shapes.Удалить(toto)
+            Фигуры.Удалить(toto)
             Player_Lives <- Player_Lives - 1
             if (Player_Lives = 0) then
                Program.End()
 
       i3 <- i3 + 1
 
-and IslandsPosition () =
+and ПозицииОстровов () =
    // island positions, avoid randomGeneration and islands overlap
    islandPos.[0] <- Dictionary()
    islandPos.[0].[1] <- 1
@@ -1040,7 +1040,7 @@ and define_paths () =
    enemyPath.[6].[4].[3] <- -enemy_speed
 
 
-and create_level1 () =  // this define the behavior of the différent squadron along the time play for level 1
+and создать_уровень1 () =  // this define the behavior of the différent squadron along the time play for level 1
    level1.[1] <- Dictionary()
    level1.[1].[1] <- 20    // when timeplay=level1[1][1]
    level1.[1].[2] <- 2    // lauch enemy with Path level1[1][2]

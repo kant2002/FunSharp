@@ -5,13 +5,13 @@ open Библиотека
 
 let gw = float ГрафическоеОкно.Ширина
 let gh = float ГрафическоеОкно.Высота
-let paddle = Shapes.ДобавитьПрямоугольник(120, 12)
-let ball = Shapes.ДобавитьЭллипс(16, 16)
+let paddle = Фигуры.ДобавитьПрямоугольник(120, 12)
+let ball = Фигуры.ДобавитьЭллипс(16, 16)
 let mutable score = 0
 
 let OnMouseMove () =
   let paddleX = ГрафическоеОкно.MouseX
-  Shapes.Переместить(paddle, paddleX - 60.0, gh - 12.0)
+  Фигуры.Переместить(paddle, paddleX - 60.0, gh - 12.0)
 
 let PrintScore () =
   // Clear the score first and then draw the real score text
@@ -40,14 +40,14 @@ while (y < gh) do
   if (y <= 0.0) then
     deltaY <- -deltaY
  
-  let padX = Shapes.GetLeft(paddle)
+  let padX = Фигуры.GetLeft(paddle)
   if (y = gh - 28.0 && x >= padX && x <= padX + 120.0) then
     //Sound.PlayClick()
     score <- score + 10
     PrintScore()
     deltaY <- -deltaY  
 
-  Shapes.Переместить(ball, x, y)
+  Фигуры.Переместить(ball, x, y)
   Program.Delay(15)
   
 ГрафическоеОкно.ПоказатьСообщение("Ваш счет: " + score.ToString(), "Ракетка")

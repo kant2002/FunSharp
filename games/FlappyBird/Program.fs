@@ -3,12 +3,12 @@
 ГрафическоеОкно.Ширина <- 288
 ГрафическоеОкно.Высота <- 440
 
-let bg = Shapes.ДобавитьИзображение("bg.png")
-let ground = Shapes.ДобавитьИзображение("ground.png")
-let bird_sing = Shapes.ДобавитьИзображение("bird_sing.png")
+let bg = Фигуры.ДобавитьИзображение("bg.png")
+let ground = Фигуры.ДобавитьИзображение("ground.png")
+let bird_sing = Фигуры.ДобавитьИзображение("bird_sing.png")
 let tube1 = ImageList.LoadImage("tube1.png")
 let tube2 = ImageList.LoadImage("tube2.png")
-Shapes.Переместить(ground, 0, 340)
+Фигуры.Переместить(ground, 0, 340)
 
 /// Bird type
 type Bird = { X:float; Y:float; VY:float; IsAlive:bool }
@@ -30,10 +30,10 @@ let level = generateLevel 10
 
 let tubes =
    [for (x,y) in level ->
-      let tube1 = Shapes.ДобавитьИзображение(tube1)
-      let tube2 = Shapes.ДобавитьИзображение(tube2)
-      Shapes.Переместить(tube1,x,y-320)
-      Shapes.Переместить(tube2,x,y+100)
+      let tube1 = Фигуры.ДобавитьИзображение(tube1)
+      let tube2 = Фигуры.ДобавитьИзображение(tube2)
+      Фигуры.Переместить(tube1,x,y-320)
+      Фигуры.Переместить(tube2,x,y+100)
       (x,y), tube1, tube2]
 
 let scroll = ref 0
@@ -48,10 +48,10 @@ let flapme () = if (!flappy).IsAlive then flappy := flap !flappy
 while true do
    flappy := update !flappy
    let bird = !flappy
-   Shapes.Переместить(bird_sing, bird.X, bird.Y)
+   Фигуры.Переместить(bird_sing, bird.X, bird.Y)
    for ((x,y),tube1,tube2) in tubes do
-      Shapes.Переместить(tube1, float (x + !scroll),float (y-320))
-      Shapes.Переместить(tube2, float (x + !scroll),float (y+100))
-   Shapes.Переместить(ground, !scroll % 48, 340)
+      Фигуры.Переместить(tube1, float (x + !scroll),float (y-320))
+      Фигуры.Переместить(tube2, float (x + !scroll),float (y+100))
+   Фигуры.Переместить(ground, !scroll % 48, 340)
    decr scroll  
    Program.Delay(20)

@@ -15,9 +15,9 @@ let mutable p = 0
 ГрафическоеОкно.FontBold <- false
 ГрафическоеОкно.ЦветКисти <- Цвета.Black
 
-let m = Shapes.ДобавитьТекст("M")
-Shapes.Переместить(m, 22, 62)
-Shapes.СкрытьФигуру(m)
+let m = Фигуры.ДобавитьТекст("M")
+Фигуры.Переместить(m, 22, 62)
+Фигуры.СкрытьФигуру(m)
 
 let N = 1
 
@@ -166,10 +166,10 @@ let clicked () =
     Controls.УстановитьТекстТекстовогоПоля(t, Text.GetSubText(Controls.ПолучитьТекстТекстовогоПоля(t), 1, Text.GetLength(Controls.ПолучитьТекстТекстовогоПоля(t))-1))
   elif Controls.ПоследняяКликнутаяКнопка = keyMP || Controls.ПоследняяКликнутаяКнопка = keyMS then
     c <- Controls.ПолучитьТекстТекстовогоПоля(t)
-    Shapes.ПоказатьФигуру(m)
+    Фигуры.ПоказатьФигуру(m)
   elif Controls.ПоследняяКликнутаяКнопка = keyMC then
     c <- ""
-    Shapes.СкрытьФигуру(m)
+    Фигуры.СкрытьФигуру(m)
   elif Controls.ПоследняяКликнутаяКнопка = keyMR then
     Controls.УстановитьТекстТекстовогоПоля(t, c)
   elif Controls.ПоследняяКликнутаяКнопка = keyprocent then

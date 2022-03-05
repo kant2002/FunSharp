@@ -32,13 +32,13 @@ let инициализироватьОкно () =
          blue+60+Math.GetRandomNumber(20),
          blue)
      ГрафическоеОкно.ЦветПера <- color
-     Shapes.ДобавитьЛинию(x,y1,x,y2) |> ignore
+     Фигуры.ДобавитьЛинию(x,y1,x,y2) |> ignore
    ГрафическоеОкно.ЦветКисти <- Цвета.White   
    let ClockNum = Dictionary()
    for i in 1. .. 12. do
      let Radians = Math.GetRadians(-i * 30. + 90.)
-     ClockNum.[i] <- Shapes.ДобавитьТекст(i.ToString())
-     Shapes.Переместить(ClockNum.[i],MidX-4.+Radius*Math.Cos(Radians),MidY-4.-Radius*Math.Sin(Radians))   
+     ClockNum.[i] <- Фигуры.ДобавитьТекст(i.ToString())
+     Фигуры.Переместить(ClockNum.[i],MidX-4.+Radius*Math.Cos(Radians),MidY-4.-Radius*Math.Sin(Radians))   
    
 let mutable HourHand = "<shape name>"
 let mutable MinuteHand = "<shape name>"
@@ -48,34 +48,34 @@ let mutable Minute = 0.
 let mutable Second = 0.
 let установитьСтрелки () = 
    if (float Часы.Час + float Часы.Минута/60. + float Часы.Секунда/3600. <> Hour) then
-     Shapes.Удалить(HourHand)
+     Фигуры.Удалить(HourHand)
      Hour <- float Часы.Час + float Часы.Минута/60. + float Часы.Секунда/3600.
      ГрафическоеОкно.ЦветПера <- Цвета.Black
      ГрафическоеОкно.PenWidth <- 3.
      HourHand <- 
-       Shapes.ДобавитьЛинию(
+       Фигуры.ДобавитьЛинию(
          MidX,
          MidY,
          MidX+Radius/2.*Math.Cos(Math.GetRadians(Hour*30.-90.)),
          MidY+Radius/2.*Math.Sin(Math.GetRadians(Hour*30.-90.)))   
    if float Часы.Минута <> Minute then
-     Shapes.Удалить(MinuteHand)
+     Фигуры.Удалить(MinuteHand)
      Minute <- float Часы.Минута + float Часы.Секунда/60.
      ГрафическоеОкно.ЦветПера <- Цвета.Blue
      ГрафическоеОкно.PenWidth <- 2.
      MinuteHand <- 
-       Shapes.ДобавитьЛинию(
+       Фигуры.ДобавитьЛинию(
          MidX,
          MidY,
          MidX+Radius/1.2*Math.Cos(Math.GetRadians(Minute*6.-90.)),
          MidY+Radius/1.2*Math.Sin(Math.GetRadians(Minute*6.-90.)))   
    if float Часы.Секунда <> Second then
-     Shapes.Удалить(SecondHand)
+     Фигуры.Удалить(SecondHand)
      Second <- float Часы.Секунда
      ГрафическоеОкно.ЦветПера <- Цвета.Red
      ГрафическоеОкно.PenWidth <- 1.
      SecondHand <- 
-       Shapes.ДобавитьЛинию(
+       Фигуры.ДобавитьЛинию(
          MidX,
          MidY,
          MidX+Radius*Math.Cos(Math.GetRadians(Second*6.-90.)),

@@ -14,10 +14,10 @@
 		<Compile Include="Resource.fs" />
 		<Compile Include="ImageList.fs" />
 		<Compile Include="ГрафическоеОкно.fs" />
-		<Compile Include="Shapes.fs" />
+		<Compile Include="Фигуры.fs" />
 		<Compile Include="Черепаха.fs" />
 		<Compile Include="Controls.fs" />
-		<Compile Include="Mouse.fs" />
+		<Compile Include="Мышь.fs" />
 		<Compile Include="Часы.fs" />
 		<Compile Include="Timer.fs" />
 		<Compile Include="Math.fs" />
