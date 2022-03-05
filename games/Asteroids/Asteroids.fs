@@ -106,7 +106,7 @@ let rec Init () =
 // Main gane routine
 and Play () =
    ГрафическоеОкно.Показать()
-   ГрафическоеОкно.KeyDown <- Callback(ChangeDirection)
+   ГрафическоеОкно.КнопкаНажата <- Callback(ChangeDirection)
 
    // Main loop
    play <- 1
@@ -121,17 +121,17 @@ and Play () =
 
 // Read key event and act
 and ChangeDirection () =   
-   if (ГрафическоеОкно.LastKey = rightKey) then
+   if (ГрафическоеОкно.ПоследняяКнопка = rightKey) then
      playerAngle <- (playerAngle + 10.0) % 360.0
-   elif (ГрафическоеОкно.LastKey = leftKey) then
+   elif (ГрафическоеОкно.ПоследняяКнопка = leftKey) then
      playerAngle <- (playerAngle - 10.0) % 360.0
-   elif (ГрафическоеОкно.LastKey = forwardKey) then
+   elif (ГрафическоеОкно.ПоследняяКнопка = forwardKey) then
      playerSpeed <- playerSpeed + 1.0
-   elif (ГрафическоеОкно.LastKey = backKey) then
+   elif (ГрафическоеОкно.ПоследняяКнопка = backKey) then
      playerSpeed <- playerSpeed - 1.0
-   elif (ГрафическоеОкно.LastKey = fireKey) then
+   elif (ГрафическоеОкно.ПоследняяКнопка = fireKey) then
      Fire()
-   elif (ГрафическоеОкно.LastKey = pauseKey) then
+   elif (ГрафическоеОкно.ПоследняяКнопка = pauseKey) then
      pause <- Math.Remainder(pause + 1, 2)  
    Фигуры.Повернуть(player, playerAngle)
 

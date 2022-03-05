@@ -102,11 +102,11 @@ let rec MainLoop () =
 
 and HandleKey () =
   // Stop game
-  if ГрафическоеОкно.LastKey = "Escape" then
+  if ГрафическоеОкно.ПоследняяКнопка = "Escape" then
     Program.End()  
 
   // Move piece left
-  if ГрафическоеОкно.LastKey = "Left" then
+  if ГрафическоеОкно.ПоследняяКнопка = "Left" then
     moveDirection <- -1
     ValidateMove()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
     if invalidMove = 0 then
@@ -114,7 +114,7 @@ and HandleKey () =
     MovePiece()   // in: ypos, xpos, h 
 
   // Move piece right
-  if ГрафическоеОкно.LastKey = "Right" then
+  if ГрафическоеОкно.ПоследняяКнопка = "Right" then
     moveDirection <- 1
     ValidateMove()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
     if invalidMove = 0 then
@@ -122,11 +122,11 @@ and HandleKey () =
     MovePiece()  // in: ypos, xpos, h  
 
   // Move piece down
-  if ГрафическоеОкно.LastKey = "Down" || ГрафическоеОкно.LastKey = "Space" then
+  if ГрафическоеОкно.ПоследняяКнопка = "Down" || ГрафическоеОкно.ПоследняяКнопка = "Space" then
     delay <- 0
  
   // Rotate piece
-  if ГрафическоеОкно.LastKey = "Up" then
+  if ГрафическоеОкно.ПоследняяКнопка = "Up" then
     basetemplate <- pieceToTemplate.[h]
     template <- "temptemplate"
     rotation <- "CW"
@@ -457,7 +457,7 @@ and SetupTemplates () =
 
 ГрафическоеОкно.Высота <- 580
 ГрафическоеОкно.Ширина <- 700
-ГрафическоеОкно.KeyDown <- Callback(HandleKey)
+ГрафическоеОкно.КнопкаНажата <- Callback(HandleKey)
 ГрафическоеОкно.ЦветФона <- ГрафическоеОкно.GetColorFromRGB( 253, 252, 251 )
 
 while true do

@@ -215,8 +215,8 @@ and Play () =
             moveall()
          )
 
-         ГрафическоеОкно.MouseMove <- Callback(OnMouseMove)
-         ГрафическоеОкно.MouseDown <- Callback(OnMouseDown)
+         ГрафическоеОкно.МышьПеремещена <- Callback(OnMouseMove)
+         ГрафическоеОкно.МышьНажата <- Callback(OnMouseDown)
 
          AgePlayer_Ammo()
 

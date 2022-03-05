@@ -95,14 +95,14 @@ type ГрафическоеОкно private () =
       FillEllipse(Ellipse(width,height),кисть()) |> нарисоватьВ (x,y)
    static member ЗаполнитьЭллипс(x:int,y:int,width:int,height:int) =
       FillEllipse(Ellipse(float width,float height),кисть()) |> нарисоватьВ (float x,float y)
-   static member LastKey with get() = Мое.Приложение.LastKey
+   static member ПоследняяКнопка with get() = Мое.Приложение.ПоследняяКнопка
    static member KeyUp with set callback = Мое.Приложение.KeyUp <- callback
-   static member KeyDown with set callback = Мое.Приложение.KeyDown <- callback 
-   static member МышьX with get() = Мое.Приложение.MouseX
-   static member МышьY with get() = Мое.Приложение.MouseY
-   static member MouseDown with set callback = Мое.Приложение.MouseDown <- callback
+   static member КнопкаНажата with set callback = Мое.Приложение.KeyDown <- callback 
+   static member МышьX with get() = Мое.Приложение.МышьX
+   static member МышьY with get() = Мое.Приложение.МышьY
+   static member МышьНажата with set callback = Мое.Приложение.MouseDown <- callback
    static member MouseUp with set callback = Мое.Приложение.MouseUp <- callback
-   static member MouseMove with set callback = Мое.Приложение.MouseMove <- callback
+   static member МышьПеремещена with set callback = Мое.Приложение.MouseMove <- callback
    static member GetColorFromRGB(r,g,b) = Цвет(255uy,byte r,byte g,byte b)
    static member ПолучитьСлучайныйЦвет() : Цвет =
       let bytes = [|1uy..3uy|]

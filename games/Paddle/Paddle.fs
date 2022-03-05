@@ -18,7 +18,7 @@ let PrintScore () =
   ГрафическоеОкно.НарисоватьТекст(10, 10, "Score: " + score.ToString())
 
 ГрафическоеОкно.FontSize <- 14.0
-ГрафическоеОкно.MouseMove <- Callback(OnMouseMove)
+ГрафическоеОкно.МышьПеремещена <- Callback(OnMouseMove)
 
 PrintScore()
 Sound.PlayBellRing (*AndWait*) ()

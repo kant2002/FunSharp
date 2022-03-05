@@ -40,9 +40,9 @@ let scroll = ref 0
 let flappy = ref { X = 30.0; Y = 150.0; VY = 0.0; IsAlive=true }
 let flapme () = if (!flappy).IsAlive then flappy := flap !flappy
 
-ГрафическоеОкно.KeyDown <-    
-    fun () -> if ГрафическоеОкно.LastKey = "Space" then flapme ()
-ГрафическоеОкно.MouseDown <-
+ГрафическоеОкно.КнопкаНажата <-    
+    fun () -> if ГрафическоеОкно.ПоследняяКнопка = "Space" then flapme ()
+ГрафическоеОкно.МышьНажата <-
     fun () -> flapme ()
 
 while true do

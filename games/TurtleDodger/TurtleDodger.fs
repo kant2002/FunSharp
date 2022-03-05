@@ -101,7 +101,7 @@ and Game () =
    moving <- false
    scrolling <- false
    Ready()
-   ГрафическоеОкно.KeyDown <- Callback(OnKeyDown)
+   ГрафическоеОкно.КнопкаНажата <- Callback(OnKeyDown)
    let tick = false
    Timer.Interval <- 1000 / 24
    Timer.Tick <- Callback(OnTick)
@@ -174,7 +174,7 @@ and AddObject () =
 and OnKeyDown () =
    if not moving then
      moving <- true
-     lastKey <- ГрафическоеОкно.LastKey   
+     lastKey <- ГрафическоеОкно.ПоследняяКнопка   
 
 Init()
 Opening()
