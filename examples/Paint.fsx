@@ -6,9 +6,9 @@ open System.Threading
 
 let onKeyDown () =
    match ГрафическоеОкно.LastKey with
-   | "K1" -> ГрафическоеОкно.PenColor <- Цвета.Red
-   | "K2" -> ГрафическоеОкно.PenColor <- Цвета.Blue
-   | "K3" -> ГрафическоеОкно.PenColor <- Цвета.LightGreen
+   | "K1" -> ГрафическоеОкно.ЦветПера <- Цвета.Red
+   | "K2" -> ГрафическоеОкно.ЦветПера <- Цвета.Blue
+   | "K3" -> ГрафическоеОкно.ЦветПера <- Цвета.LightGreen
    | "c" -> ГрафическоеОкно.Очистить()
    | s -> printfn "'%s'" s; System.Diagnostics.Debug.WriteLine(s)
 
@@ -27,8 +27,8 @@ let onMouseMove () =
    prevX <- x
    prevY <- y
 
-ГрафическоеОкно.ФоновыйЦвет <- Цвета.Black
-ГрафическоеОкно.PenColor <- Цвета.White
+ГрафическоеОкно.ЦветФона <- Цвета.Black
+ГрафическоеОкно.ЦветПера <- Цвета.White
 ГрафическоеОкно.MouseDown <- Callback(onMouseDown)
 ГрафическоеОкно.MouseMove <- Callback(onMouseMove)
 ГрафическоеОкно.KeyDown <- Callback(onKeyDown)

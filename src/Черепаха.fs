@@ -3,7 +3,7 @@
 open System
 
 [<Sealed>]
-type Turtle private () =
+type Черепаха private () =
    static let mutable userHidden = false
    static let mutable скорость = 0
    static let mutable угол = 0.0
@@ -12,7 +12,7 @@ type Turtle private () =
    static let mutable isPenDown = true
    static let показать () =
       if not userHidden then
-        Мое.Приложение.Холст.Turtle.IsVisible <- true
+        Мое.Приложение.Холст.Черепаха.IsVisible <- true
         Мое.Приложение.Холст.Invalidate()
    static member Скорость
       with get () = скорость
@@ -23,7 +23,7 @@ type Turtle private () =
       with get () = угол
       and set значение = 
          угол <- значение
-         Мое.Приложение.Холст.Turtle.Rotation <- Some угол
+         Мое.Приложение.Холст.Черепаха.Rotation <- Some угол
          показать ()
    static member X
       with get () = _x
@@ -36,14 +36,14 @@ type Turtle private () =
          _y <- значение
          показать ()
    static member Повернуть(amount:float) =
-      Turtle.Angle <- угол + amount
+      Черепаха.Angle <- угол + amount
    static member Повернуть(amount:int) =
-      Turtle.Повернуть(float amount)      
+      Черепаха.Повернуть(float amount)      
    static member ПовернутьНалево() =
-      Turtle.Повернуть(-90.0)
+      Черепаха.Повернуть(-90.0)
    static member ПовернутьНаправо() =
-      Turtle.Повернуть(90.0)
-   static member Move(дистанция:float) =
+      Черепаха.Повернуть(90.0)
+   static member Переместить(дистанция:float) =
       let r = (угол - 90.0) * Math.PI / 180.0
       let x' = _x + дистанция * cos r
       let y' = _y + дистанция * sin r
@@ -51,25 +51,25 @@ type Turtle private () =
          ГрафическоеОкно.НарисоватьЛинию(_x,_y,x',y')
       _x <- x'
       _y <- y'
-      Мое.Приложение.Холст.Turtle.Offset <- Xwt.Point(_x,_y)
+      Мое.Приложение.Холст.Черепаха.Offset <- Xwt.Point(_x,_y)
       показать ()
-   static member Move(distance:int) =
-      Turtle.Move (float distance)
-   static member MoveTo(x:float,y:float) =
+   static member Переместить(distance:int) =
+      Черепаха.Переместить (float distance)
+   static member ПереместитьВ(x:float,y:float) =
       _x <- x; _y <- y
-      Мое.Приложение.Холст.Turtle.Offset <- Xwt.Point(_x,_y)
+      Мое.Приложение.Холст.Черепаха.Offset <- Xwt.Point(_x,_y)
       показать()
-   static member MoveTo(x:int, y:int) = 
-      Turtle.MoveTo(float x, float y)
+   static member ПереместитьВ(x:int, y:int) = 
+      Черепаха.ПереместитьВ(float x, float y)
    static member PenUp() =
       isPenDown <- false
       показать ()
    static member PenDown() =
       isPenDown <- true
       показать ()
-   static member Show() =
+   static member Показать() =
       userHidden <- false
       показать()
-   static member Hide() =
+   static member Скрыть() =
       userHidden <- true
-      Мое.Приложение.Холст.Turtle.IsVisible <- false
+      Мое.Приложение.Холст.Черепаха.IsVisible <- false

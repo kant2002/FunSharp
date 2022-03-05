@@ -8,7 +8,7 @@ type ГрафическоеОкно private () =
    static let mutable фоновыйЦвет = Цвета.White
    static let mutable ширина = 640
    static let mutable высота = 480
-   static let pen () = Pen(ГрафическоеОкно.PenColor,ГрафическоеОкно.PenWidth)
+   static let pen () = Pen(ГрафическоеОкно.ЦветПера,ГрафическоеОкно.PenWidth)
    static let кисть () = ГрафическоеОкно.ЦветКисти
    static let шрифт () = 
       Шрифт.Font(ГрафическоеОкно.FontSize,ГрафическоеОкно.FontName,ГрафическоеОкно.FontBold, ГрафическоеОкно.FontItalic)
@@ -17,7 +17,7 @@ type ГрафическоеОкно private () =
    static member Заголовок
       with set title =
          Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Окно.Title <- title)
-   static member ФоновыйЦвет
+   static member ЦветФона
       with get () = фоновыйЦвет
       and set цвет = 
          фоновыйЦвет <- цвет
@@ -35,7 +35,7 @@ type ГрафическоеОкно private () =
    static member CanResize
       with get () = true
       and set (value:bool) = ()
-   static member val PenColor = Цвета.Black with get, set
+   static member val ЦветПера = Цвета.Black with get, set
    static member val PenWidth = 2.0 with get, set
    static member val ЦветКисти = Цвета.Purple with get,set
    static member val FontSize = 12.0 with get,set
@@ -108,7 +108,7 @@ type ГрафическоеОкно private () =
       let bytes = [|1uy..3uy|]
       rnd.NextBytes(bytes)
       Цвет(255uy,bytes.[0],bytes.[1],bytes.[2])
-   static member Show() = Мое.Приложение.Показать()
-   static member Hide() = Мое.Приложение.Спрятать()
-   static member ShowMessage(text:string,title) = 
+   static member Показать() = Мое.Приложение.Показать()
+   static member Спрятать() = Мое.Приложение.Спрятать()
+   static member ПоказатьСообщение(text:string,title) = 
       Мое.Приложение.Вызвать(fun () -> Мое.Приложение.ПоказатьСообщение(text,title))

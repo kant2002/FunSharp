@@ -47,7 +47,7 @@ let objects = ResizeArray<Object>()
 
 let rec Closing () =
    Timer.Pause()
-   Turtle.Повернуть(720)
+   Черепаха.Повернуть(720)
    ГрафическоеОкно.ЦветКисти <- Цвета.White
    ГрафическоеОкно.FontName <- "Trebuchet MS"
    ГрафическоеОкно.FontSize <- 40.0
@@ -78,8 +78,8 @@ and Ready () =
      Program.Delay(200)
    Shapes.Remove(ready)
 and Game () =
-   Turtle.Скорость <- 7
-   Turtle.PenUp()
+   Черепаха.Скорость <- 7
+   Черепаха.PenUp()
    let x = gw / 2
    let y = gh - 40
    ГрафическоеОкно.ЦветКисти <- Цвета.White
@@ -96,8 +96,8 @@ and Game () =
      Shapes.Move(cross1, x, y)
      Shapes.Move(cross2, x, y)
      Shapes.Move(pos, gw - 100, 20)   
-   Turtle.MoveTo(x, y)
-   Turtle.Angle <- 0.0   
+   Черепаха.ПереместитьВ(x, y)
+   Черепаха.Angle <- 0.0   
    moving <- false
    scrolling <- false
    Ready()
@@ -110,18 +110,18 @@ and Game () =
    while not collisionDetected do
      if moving then
        if lastKey = "Left" then
-         Turtle.ПовернутьНалево()
-         Turtle.Move(30)
-         Turtle.ПовернутьНаправо()
+         Черепаха.ПовернутьНалево()
+         Черепаха.Переместить(30)
+         Черепаха.ПовернутьНаправо()
        elif lastKey = "Right" then
-         Turtle.ПовернутьНаправо()
-         Turtle.Move(30)
-         Turtle.ПовернутьНалево()      
+         Черепаха.ПовернутьНаправо()
+         Черепаха.Переместить(30)
+         Черепаха.ПовернутьНалево()      
        moving <- false
      else
        Program.Delay(100)      
 and Init () =
-   ГрафическоеОкно.ФоновыйЦвет <- Цвета.DodgerBlue
+   ГрафическоеОкно.ЦветФона <- Цвета.DodgerBlue
    ГрафическоеОкно.Ширина <- gw
    ГрафическоеОкно.Высота <- gh   
    passed <- 0
@@ -136,8 +136,8 @@ and OnTick () =
      ScrollObject()
      scrolling <- false
    if debug then
-     let x = Math.Floor(Turtle.X)
-     let y = Math.Floor(Turtle.Y)
+     let x = Math.Floor(Черепаха.X)
+     let y = Math.Floor(Черепаха.Y)
      Shapes.SetText(pos, "(" + x.ToString() + "," + y.ToString() + ")")
      Shapes.Move(cross1, x, y)
      Shapes.Move(cross2, x, y)
@@ -145,8 +145,8 @@ and ScrollObject () =
    for i = iMin to iMax-1 do
      let x = objects.[i].X
      let y = objects.[i].Y + 5
-     let tx = Math.Floor(Turtle.X) |> int
-     let ty = Math.Floor(Turtle.Y) |> int
+     let tx = Math.Floor(Черепаха.X) |> int
+     let ty = Math.Floor(Черепаха.Y) |> int
      let d = Math.SquareRoot(float (Math.Power(tx - x, 2) + Math.Power(ty - y, 2))) |> int
      if d < (size.[objects.[i].Kind] + 16) / 2 then
        collisionDetected <- true   

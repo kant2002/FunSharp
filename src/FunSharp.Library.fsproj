@@ -15,7 +15,7 @@
 		<Compile Include="ImageList.fs" />
 		<Compile Include="ГрафическоеОкно.fs" />
 		<Compile Include="Shapes.fs" />
-		<Compile Include="Turtle.fs" />
+		<Compile Include="Черепаха.fs" />
 		<Compile Include="Controls.fs" />
 		<Compile Include="Mouse.fs" />
 		<Compile Include="Clock.fs" />

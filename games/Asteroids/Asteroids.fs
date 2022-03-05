@@ -85,19 +85,19 @@ let mutable py2 = 0.0
 
 // Setup world
 let rec Init () =
-   ГрафическоеОкно.Hide()
+   ГрафическоеОкно.Спрятать()
    ГрафическоеОкно.Заголовок <- gameTitle + "0"
    //GraphicsWindow.CanResize <- "False"
    ГрафическоеОкно.Ширина <- int gameWidth
    ГрафическоеОкно.Высота <-int gameHeight
 
-   ГрафическоеОкно.ФоновыйЦвет <- backColor
+   ГрафическоеОкно.ЦветФона <- backColor
    ГрафическоеОкно.ЦветКисти <- backColor
    ГрафическоеОкно.НарисоватьИзображение(background, 0, 0)
 
    LevelCheck()
 
-   ГрафическоеОкно.PenColor <- playerColor
+   ГрафическоеОкно.ЦветПера <- playerColor
    player <- Shapes.AddImage(path + "Asteroids_Ship.png")
    // player = Shapes.AddTriangle(playerWidth/2, 0, 0, playerHeight, playerWidth, playerHeight)
    Shapes.Move(player, (gameWidth - playerWidth) / 2.0, (float gameHeight - playerHeight) / 2.0)
@@ -105,7 +105,7 @@ let rec Init () =
 
 // Main gane routine
 and Play () =
-   ГрафическоеОкно.Show()
+   ГрафическоеОкно.Показать()
    ГрафическоеОкно.KeyDown <- Callback(ChangeDirection)
 
    // Main loop
@@ -226,7 +226,7 @@ and AddRock () =
          let y = Math.GetRandomNumber(int gameHeight - size)
          size,float x,float y
    // Draw the rock
-   ГрафическоеОкно.PenColor <- rockColor
+   ГрафическоеОкно.ЦветПера <- rockColor
    let image =
       if size = 60 then bigRock
       elif size = 40 then medRock
@@ -283,7 +283,7 @@ and Fire () =
    while (ammoCount > (ammoMax - 1)) do     
      RemoveAmmo 0
    // Add the ammo
-   ГрафическоеОкно.PenColor <- ammoColor   
+   ГрафическоеОкно.ЦветПера <- ammoColor   
    ammo.Add(Shapes.AddEllipse(ammoSize, ammoSize))
    Shapes.Move(ammo.[ammoCount], (px1 + px2 - ammoSize) / 2.0, (py1 + py2 - ammoSize) / 2.0)
    ammoAngle.Add(playerAngle)
@@ -307,7 +307,7 @@ and RemoveAmmo nextRemove =
 and EndGame () =
    play <- 0
    Shapes.Remove(player)
-   ГрафическоеОкно.ShowMessage("You scored " + (score * pointsMultiply).ToString() + " points. Thanks for Playing.", "Game Over!")
+   ГрафическоеОкно.ПоказатьСообщение("You scored " + (score * pointsMultiply).ToString() + " points. Thanks for Playing.", "Game Over!")
 
 // Start game
 Init()

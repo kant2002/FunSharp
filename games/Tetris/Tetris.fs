@@ -212,7 +212,7 @@ and CopyPiece () = // in basetemplate, template, rotation
     for i = 0 to BOXES - 1 do
       templates.[template].Values.[i] <- templates.[basetemplate].Values.[i]
   else
-    ГрафическоеОкно.ShowMessage("invalid parameter", "Error")
+    ГрафическоеОкно.ПоказатьСообщение("invalid parameter", "Error")
     Program.End() 
 
   // Copy the remain properties from basetemplate to template.
@@ -229,7 +229,7 @@ and CreatePiece () = // in: template ret: h
   pieceToTemplate.[h] <- template
 
   ГрафическоеОкно.PenWidth <- 1.0
-  ГрафическоеОкно.PenColor <- Цвета.Black
+  ГрафическоеОкно.ЦветПера <- Цвета.Black
   ГрафическоеОкно.ЦветКисти <- templates.[template].Color
 
   pieces.[h] <- Boxes()
@@ -344,29 +344,29 @@ and DeleteLines () =
 and SetupCanvas () =
 // GraphicsWindow.DrawResizedImage( Flickr.GetRandomPicture( "bricks" ), 0, 0, GraphicsWindow.Width, GraphicsWindow.Height)
 
-  ГрафическоеОкно.ЦветКисти <- ГрафическоеОкно.ФоновыйЦвет
+  ГрафическоеОкно.ЦветКисти <- ГрафическоеОкно.ЦветФона
   ГрафическоеОкно.ЗаполнитьПрямоугольник(XOFFSET, YOFFSET, CWIDTH*BWIDTH, CHEIGHT*BWIDTH)
 
   Program.Delay(200)
   ГрафическоеОкно.PenWidth <- 1.0
-  ГрафическоеОкно.PenColor <- Цвета.Pink
+  ГрафическоеОкно.ЦветПера <- Цвета.Pink
   for x = 0 to CWIDTH-1 do
     for y = 0 to CHEIGHT-1 do
       spots.[x + y * CWIDTH] <- "." // "." indicates spot is free
       ГрафическоеОкно.DrawRectangle(XOFFSET + x * BWIDTH, YOFFSET + y * BWIDTH, BWIDTH, BWIDTH)
 
   ГрафическоеОкно.PenWidth <- 4.0
-  ГрафическоеОкно.PenColor <- Цвета.Black
+  ГрафическоеОкно.ЦветПера <- Цвета.Black
   ГрафическоеОкно.НарисоватьЛинию(XOFFSET, YOFFSET, XOFFSET, YOFFSET + CHEIGHT*BWIDTH)
   ГрафическоеОкно.НарисоватьЛинию(XOFFSET + CWIDTH*BWIDTH, YOFFSET, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
   ГрафическоеОкно.НарисоватьЛинию(XOFFSET, YOFFSET + CHEIGHT*BWIDTH, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
 
-  ГрафическоеОкно.PenColor <- Цвета.Lime
+  ГрафическоеОкно.ЦветПера <- Цвета.Lime
   ГрафическоеОкно.НарисоватьЛинию(XOFFSET - 4, YOFFSET, XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 6)
   ГрафическоеОкно.НарисоватьЛинию(XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 6)
   ГрафическоеОкно.НарисоватьЛинию(XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 4, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 4)
 
-  ГрафическоеОкно.PenColor <- Цвета.Black
+  ГрафическоеОкно.ЦветПера <- Цвета.Black
   ГрафическоеОкно.ЦветКисти <- Цвета.Pink
   let x = XOFFSET + PREVIEW_xpos * BWIDTH - BWIDTH
   let y = YOFFSET + PREVIEW_ypos * BWIDTH - BWIDTH
@@ -458,7 +458,7 @@ and SetupTemplates () =
 ГрафическоеОкно.Высота <- 580
 ГрафическоеОкно.Ширина <- 700
 ГрафическоеОкно.KeyDown <- Callback(HandleKey)
-ГрафическоеОкно.ФоновыйЦвет <- ГрафическоеОкно.GetColorFromRGB( 253, 252, 251 )
+ГрафическоеОкно.ЦветФона <- ГрафическоеОкно.GetColorFromRGB( 253, 252, 251 )
 
 while true do
   BOXES <- 4      // number of boxes per piece
@@ -475,12 +475,12 @@ while true do
   ГрафическоеОкно.Очистить()
   ГрафическоеОкно.Заголовок <- "Small Basic Tetris"
 
-  ГрафическоеОкно.Show()
+  ГрафическоеОкно.Показать()
 
   SetupTemplates()
   SetupCanvas()
   MainLoop()
 
-  ГрафическоеОкно.ShowMessage( "Game Over", "Small Basic Tetris" )
+  ГрафическоеОкно.ПоказатьСообщение( "Игра завершена", "Small Basic Tetris" )
 
 

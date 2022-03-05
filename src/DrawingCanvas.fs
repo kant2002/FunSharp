@@ -19,7 +19,7 @@ type internal DrawingCanvas () =
          | _ -> None
       )
       |> Option.iter f   
-   member canvas.Turtle = turtle
+   member canvas.Черепаха = turtle
    member canvas.ClearDrawings() =
       drawings.Clear()
       canvas.QueueDraw()

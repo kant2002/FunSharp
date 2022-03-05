@@ -38,7 +38,7 @@ let islandcount = 5 //nomber of island in the wall field
 // Заголовок окна
 let gameTitle = "1942, Score: "
 
-ГрафическоеОкно.Hide()
+ГрафическоеОкно.Спрятать()
 ГрафическоеОкно.Заголовок <- gameTitle + "0"
 ГрафическоеОкно.CanResize <- false
 ГрафическоеОкно.Ширина <- gameWidth
@@ -134,7 +134,7 @@ let posy = Dictionary<int,_>()
 
 // Setup world
 let rec Init() =
-   ГрафическоеОкно.Hide()
+   ГрафическоеОкно.Спрятать()
 
    Mouse.HideCursor()
 
@@ -161,14 +161,14 @@ let rec Init() =
 
    player <- Shapes.AddImage(player0)
    ГрафическоеОкно.FontSize <- 20.0
-   ГрафическоеОкно.ФоновыйЦвет <- Цвета.Gray
-   ГрафическоеОкно.PenColor <- Цвета.Yellow
+   ГрафическоеОкно.ЦветФона <- Цвета.Gray
+   ГрафическоеОкно.ЦветПера <- Цвета.Yellow
 
 
 
 // Main gane routine
 and Play () =
-   ГрафическоеОкно.Show()
+   ГрафическоеОкно.Показать()
 
    // Main loop
    let play = 1

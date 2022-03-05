@@ -11,7 +11,7 @@ let mutable p = 0
 ГрафическоеОкно.Высота <- 230
 ГрафическоеОкно.Заголовок <- "Calculator v. 1.0 by Alex_2000"
 
-ГрафическоеОкно.ФоновыйЦвет = ГрафическоеОкно.GetColorFromRGB(240, 240, 240)
+ГрафическоеОкно.ЦветФона = ГрафическоеОкно.GetColorFromRGB(240, 240, 240)
 ГрафическоеОкно.FontBold <- false
 ГрафическоеОкно.ЦветКисти <- Цвета.Black
 
@@ -21,7 +21,7 @@ Shapes.HideShape(m)
 
 let N = 1
 
-let t = Controls.AddTextBox(10, 10)
+let t = Controls.ДобавитьТекстовоеПоле(10, 10)
 Controls.SetSize(t, 240*N, 22*N)
 Controls.SetTextBoxText(t, "")
 

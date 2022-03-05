@@ -13,10 +13,10 @@ let Radius = 200.0
 let MidX = GW/2.0
 let MidY = GW/2.0
 
-let initWindow () =
-   ГрафическоеОкно.Show()
+let инициализироватьОкно () =
+   ГрафическоеОкно.Показать()
    ГрафическоеОкно.Заголовок <- "Analog Clock"
-   ГрафическоеОкно.ФоновыйЦвет <- Цвета.Black
+   ГрафическоеОкно.ЦветФона <- Цвета.Black
    ГрафическоеОкно.ЦветКисти <- Цвета.BurlyWood
    ГрафическоеОкно.DrawEllipse(MidX-Radius-15.,MidY-Radius-5.,Radius*2.+30.,Radius*2.+20.)
    ГрафическоеОкно.ЗаполнитьЭллипс(MidX-Radius-15.,MidY-Radius-5.,Radius*2.+30.,Radius*2.+20.)
@@ -31,7 +31,7 @@ let initWindow () =
          blue+100+Math.GetRandomNumber(10),
          blue+60+Math.GetRandomNumber(20),
          blue)
-     ГрафическоеОкно.PenColor <- color
+     ГрафическоеОкно.ЦветПера <- color
      Shapes.AddLine(x,y1,x,y2) |> ignore
    ГрафическоеОкно.ЦветКисти <- Цвета.White   
    let ClockNum = Dictionary()
@@ -46,11 +46,11 @@ let mutable SecondHand = "<shape name>"
 let mutable Hour = 0.
 let mutable Minute = 0.
 let mutable Second = 0.
-let setHands () = 
+let установитьСтрелки () = 
    if (float Clock.Hour + float Clock.Minute/60. + float Clock.Second/3600. <> Hour) then
      Shapes.Remove(HourHand)
      Hour <- float Clock.Hour + float Clock.Minute/60. + float Clock.Second/3600.
-     ГрафическоеОкно.PenColor <- Цвета.Black
+     ГрафическоеОкно.ЦветПера <- Цвета.Black
      ГрафическоеОкно.PenWidth <- 3.
      HourHand <- 
        Shapes.AddLine(
@@ -61,7 +61,7 @@ let setHands () =
    if float Clock.Minute <> Minute then
      Shapes.Remove(MinuteHand)
      Minute <- float Clock.Minute + float Clock.Second/60.
-     ГрафическоеОкно.PenColor <- Цвета.Blue
+     ГрафическоеОкно.ЦветПера <- Цвета.Blue
      ГрафическоеОкно.PenWidth <- 2.
      MinuteHand <- 
        Shapes.AddLine(
@@ -72,7 +72,7 @@ let setHands () =
    if float Clock.Second <> Second then
      Shapes.Remove(SecondHand)
      Second <- float Clock.Second
-     ГрафическоеОкно.PenColor <- Цвета.Red
+     ГрафическоеОкно.ЦветПера <- Цвета.Red
      ГрафическоеОкно.PenWidth <- 1.
      SecondHand <- 
        Shapes.AddLine(
@@ -81,8 +81,8 @@ let setHands () =
          MidX+Radius*Math.Cos(Math.GetRadians(Second*6.-90.)),
          MidY+Radius*Math.Sin(Math.GetRadians(Second*6.-90.)))
    
-initWindow()
+инициализироватьОкно()
 while true do
-   setHands()
+   установитьСтрелки()
    //Sound.PlayClick()
    Program.Delay(1000)

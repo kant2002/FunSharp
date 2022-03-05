@@ -8,7 +8,7 @@ type Controls private () =
    static let mutable onClick = Callback(ignore)
    static let mutable lastClickedButton = ""
    static let controls = System.Collections.Generic.Dictionary<string,Widget>()
-   static let positions = System.Collections.Generic.Dictionary<string,int * int>()
+   static let позиции = System.Collections.Generic.Dictionary<string,int * int>()
    /// Adds a button to the graphics window
    static member ДобавитьКнопку(label:string, x:int, y:int) =
       let name = "Button" + Guid.NewGuid().ToString()
@@ -16,27 +16,27 @@ type Controls private () =
       button.Clicked.Add(fun _ -> lastClickedButton <- name; onClick.Invoke())
       //toXwtColor(GraphicsWindow.BrushColor)      
       controls.Add(name,button)
-      positions.Add(name,(x,y))
+      позиции.Add(name,(x,y))
       Мое.Приложение.Вызвать( fun () ->                  
          Мое.Приложение.Холст.AddChild(button,float x,float y)
       )
       name
    /// Adds a text input box to the graphics window
-   static member AddTextBox(x,y) =
-      let name = "TextBox" + Guid.NewGuid().ToString()
+   static member ДобавитьТекстовоеПоле(x,y) =
+      let название = "TextBox" + Guid.NewGuid().ToString()
       let control = new TextEntry()
       control.Text <- "Boo"
       // toXwtColor(GraphicsWindow.BrushColor)
-      controls.Add(name,control)
-      positions.Add(name,(x,y))
+      controls.Add(название,control)
+      позиции.Add(название,(x,y))
       Мое.Приложение.Вызвать( fun () ->                  
          Мое.Приложение.Холст.AddChild(control,float x,float y)
       )
-      name
+      название
    /// Sets the size of the control
    static member SetSize(controlName, width:int, height:int) =
       let control = controls.[controlName]
-      let x, y = positions.[controlName]
+      let x, y = позиции.[controlName]
       Мое.Приложение.Вызвать( fun () ->
          Мое.Приложение.Холст.RemoveChild(control)        
          control.WidthRequest <- float width
