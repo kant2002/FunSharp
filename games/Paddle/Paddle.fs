@@ -2,13 +2,13 @@
 
 let gw = float ГрафическоеОкно.Ширина
 let gh = float ГрафическоеОкно.Высота
-let paddle = Shapes.AddRectangle(120, 12)
-let ball = Shapes.AddEllipse(16, 16)
+let paddle = Shapes.ДобавитьПрямоугольник(120, 12)
+let ball = Shapes.ДобавитьЭллипс(16, 16)
 let mutable score = 0
 
 let OnMouseMove () =
   let paddleX = ГрафическоеОкно.MouseX
-  Shapes.Move(paddle, paddleX - 60.0, gh - 12.0)
+  Shapes.Переместить(paddle, paddleX - 60.0, gh - 12.0)
 
 let PrintScore () =
   // Clear the score first and then draw the real score text
@@ -44,7 +44,7 @@ while (y < gh) do
     PrintScore()
     deltaY <- -deltaY  
 
-  Shapes.Move(ball, x, y)
+  Shapes.Переместить(ball, x, y)
   Program.Delay(15)
   
 ГрафическоеОкно.ПоказатьСообщение("Your score is: " + score.ToString(), "Paddle")

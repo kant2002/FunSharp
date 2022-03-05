@@ -98,9 +98,9 @@ let rec Init () =
    LevelCheck()
 
    ГрафическоеОкно.ЦветПера <- playerColor
-   player <- Shapes.AddImage(path + "Asteroids_Ship.png")
+   player <- Shapes.ДобавитьИзображение(path + "Asteroids_Ship.png")
    // player = Shapes.AddTriangle(playerWidth/2, 0, 0, playerHeight, playerWidth, playerHeight)
-   Shapes.Move(player, (gameWidth - playerWidth) / 2.0, (float gameHeight - playerHeight) / 2.0)
+   Shapes.Переместить(player, (gameWidth - playerWidth) / 2.0, (float gameHeight - playerHeight) / 2.0)
    playerAngle <- 0.0
 
 // Main gane routine
@@ -133,26 +133,26 @@ and ChangeDirection () =
      Fire()
    elif (ГрафическоеОкно.LastKey = pauseKey) then
      pause <- Math.Remainder(pause + 1, 2)  
-   Shapes.Rotate(player, playerAngle)
+   Shapes.Повернуть(player, playerAngle)
 
 // Move all on screen items
 and Move  () =
    // Move player
    let x = Math.Remainder(Shapes.GetLeft(player) + (Math.Cos(Math.GetRadians(playerAngle - 90.0)) * playerSpeed) + gameWidth, gameWidth)
    let y = Math.Remainder(Shapes.GetTop(player) + (Math.Sin(Math.GetRadians(playerAngle - 90.0)) * playerSpeed) + gameHeight, gameHeight)
-   Shapes.Move(player, x, y)
+   Shapes.Переместить(player, x, y)
 
    // Move rocks
    for i = 0 to rockCount-1 do
      let x = Math.Remainder(Shapes.GetLeft(rock.[i]) + (Math.Cos(Math.GetRadians(rockAngle.[i] - 90.0)) * rockSpeed) + gameWidth, gameWidth)
      let y = Math.Remainder(Shapes.GetTop(rock.[i]) + (Math.Sin(Math.GetRadians(rockAngle.[i] - 90.0)) * rockSpeed) + gameHeight, gameHeight)
-     Shapes.Move(rock.[i], x, y)
+     Shapes.Переместить(rock.[i], x, y)
 
    // Move ammo
    for i = 0 to ammoCount-1 do
      let x = Math.Remainder(Shapes.GetLeft(ammo.[i]) + (Math.Cos(Math.GetRadians(ammoAngle.[i] - 90.0)) * ammoSpeed) + gameWidth, gameWidth)
      let y = Math.Remainder(Shapes.GetTop(ammo.[i]) + (Math.Sin(Math.GetRadians(ammoAngle.[i] - 90.0)) * ammoSpeed) + gameHeight, gameHeight)
-     Shapes.Move(ammo.[i], x, y)
+     Shapes.Переместить(ammo.[i], x, y)
      ammoAge.[i] <- ammoAge.[i] + 1
 
 // Check for collisions between onscreen items
@@ -231,9 +231,9 @@ and AddRock () =
       if size = 60 then bigRock
       elif size = 40 then medRock
       else smlRock
-   rock.Add(Shapes.AddImage(image))
+   rock.Add(Shapes.ДобавитьИзображение(image))
    //Shapes.Zoom(rock.[rockCount],1.0,1.0)
-   Shapes.Move(rock.[rockCount], x, y)
+   Shapes.Переместить(rock.[rockCount], x, y)
    rockAngle.Add(float (Math.GetRandomNumber(360)))
    rockSize.Add(size)
    rockCount <- rockCount + 1
@@ -260,7 +260,7 @@ and RemoveRock nextRemove =
    ГрафическоеОкно.Заголовок <- gameTitle + (score * pointsMultiply).ToString()
 
    // Remove all references from the arrays
-   Shapes.Remove(rock.[nextRemove])
+   Shapes.Удалить(rock.[nextRemove])
       
    rock.RemoveAt(nextRemove)
    rockAngle.RemoveAt(nextRemove)
@@ -284,8 +284,8 @@ and Fire () =
      RemoveAmmo 0
    // Add the ammo
    ГрафическоеОкно.ЦветПера <- ammoColor   
-   ammo.Add(Shapes.AddEllipse(ammoSize, ammoSize))
-   Shapes.Move(ammo.[ammoCount], (px1 + px2 - ammoSize) / 2.0, (py1 + py2 - ammoSize) / 2.0)
+   ammo.Add(Shapes.ДобавитьЭллипс(ammoSize, ammoSize))
+   Shapes.Переместить(ammo.[ammoCount], (px1 + px2 - ammoSize) / 2.0, (py1 + py2 - ammoSize) / 2.0)
    ammoAngle.Add(playerAngle)
    ammoAge.Add(0)
    ammoCount <- ammoCount + 1
@@ -297,7 +297,7 @@ and AgeAmmo () =
 
 // Remove top Ammo
 and RemoveAmmo nextRemove =
-   Shapes.Remove(ammo.[nextRemove])
+   Shapes.Удалить(ammo.[nextRemove])
    ammo.RemoveAt(nextRemove)
    ammoAngle.RemoveAt(nextRemove)
    ammoAge.RemoveAt(nextRemove)
@@ -306,7 +306,7 @@ and RemoveAmmo nextRemove =
 // Display simple end game message box
 and EndGame () =
    play <- 0
-   Shapes.Remove(player)
+   Shapes.Удалить(player)
    ГрафическоеОкно.ПоказатьСообщение("You scored " + (score * pointsMultiply).ToString() + " points. Thanks for Playing.", "Game Over!")
 
 // Start game

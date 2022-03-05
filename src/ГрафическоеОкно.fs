@@ -8,7 +8,7 @@ type ГрафическоеОкно private () =
    static let mutable фоновыйЦвет = Цвета.White
    static let mutable ширина = 640
    static let mutable высота = 480
-   static let pen () = Pen(ГрафическоеОкно.ЦветПера,ГрафическоеОкно.PenWidth)
+   static let перо () = Pen(ГрафическоеОкно.ЦветПера,ГрафическоеОкно.PenWidth)
    static let кисть () = ГрафическоеОкно.ЦветКисти
    static let шрифт () = 
       Шрифт.Font(ГрафическоеОкно.FontSize,ГрафическоеОкно.FontName,ГрафическоеОкно.FontBold, ГрафическоеОкно.FontItalic)
@@ -45,17 +45,17 @@ type ГрафическоеОкно private () =
    static member Очистить () =
       Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.ClearDrawings())
    static member НарисоватьЛинию(x1,y1,x2,y2) =
-      DrawLine(Line(x1,y1,x2,y2),pen()) |> нарисовать
+      DrawLine(Line(x1,y1,x2,y2),перо()) |> нарисовать
    static member НарисоватьЛинию(x1:int,y1:int,x2:int,y2:int) =
       ГрафическоеОкно.НарисоватьЛинию(float x1, float y1, float x2, float y2)
    static member DrawRectangle(x,y,width,height) =
-      DrawRect(Rect(width,height),pen()) |> нарисоватьВ (x,y)
+      DrawRect(Rect(width,height),перо()) |> нарисоватьВ (x,y)
    static member DrawRectangle(x:int,y:int,width:int,height:int) =
       ГрафическоеОкно.DrawRectangle(float x, float y, float width, float height)
    static member НарисоватьТреугольник(x1,y1,x2,y2,x3,y3) =
-      DrawTriangle(Triangle(x1,y1,x2,y2,x3,y3),pen()) |> нарисовать
+      DrawTriangle(Triangle(x1,y1,x2,y2,x3,y3),перо()) |> нарисовать
    static member DrawEllipse(x,y,width,height) =
-      DrawEllipse(Ellipse(width,height),pen()) |> нарисоватьВ (x,y)
+      DrawEllipse(Ellipse(width,height),перо()) |> нарисоватьВ (x,y)
    static member DrawEllipse(x:int,y:int,width:int,height:int) =
       ГрафическоеОкно.DrawEllipse(float x, float y, float width, float height)
    static member НарисоватьИзображение(имяИзображения,x,y) =

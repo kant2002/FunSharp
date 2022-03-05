@@ -234,8 +234,8 @@ and CreatePiece () = // in: template ret: h
 
   pieces.[h] <- Boxes()
   for i = 0 to BOXES - 1 do
-    let s = Shapes.AddRectangle(BWIDTH, BWIDTH)
-    Shapes.Move(s, -BWIDTH, -BWIDTH) // move off screen
+    let s = Shapes.ДобавитьПрямоугольник(BWIDTH, BWIDTH)
+    Shapes.Переместить(s, -BWIDTH, -BWIDTH) // move off screen
     pieces.[h].[i] <- s    
 
 and MovePiece () = // in: ypos, xpos, h. ypos/xpos is 0-19, representing the top/left box coordinate of the piece on the canvas. h returned by CreatePiece
@@ -246,7 +246,7 @@ and MovePiece () = // in: ypos, xpos, h. ypos/xpos is 0-19, representing the top
 
     // Array.GetValue(h, i) = box for piece h.
     // xpos/ypos = are topleft of shape. x/y is the box offset within the shape.
-    Shapes.Move(pieces.[h].[i], XOFFSET + xpos * BWIDTH + x * BWIDTH, YOFFSET + ypos * BWIDTH + y * BWIDTH)  
+    Shapes.Переместить(pieces.[h].[i], XOFFSET + xpos * BWIDTH + x * BWIDTH, YOFFSET + ypos * BWIDTH + y * BWIDTH)  
 
 and ValidateMove () = // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
   let mutable i = 0
@@ -327,7 +327,7 @@ and DeleteLines () =
 
         // Delete the line
         for x1 = 0 to CWIDTH - 1 do
-          Shapes.Remove(spots.[x1 + y * CWIDTH])
+          Shapes.Удалить(spots.[x1 + y * CWIDTH])
         linesCleared <- linesCleared + 1
 
         // Move everything else down one.
@@ -335,7 +335,7 @@ and DeleteLines () =
           for x1 = 0 to CWIDTH - 1 do
             let piece = spots.[x1 + (y1 - 1) * CWIDTH]
             spots.[x1 + y1 * CWIDTH] <- piece
-            Shapes.Move(piece, Shapes.GetLeft(piece), Shapes.GetTop(piece) + float BWIDTH)
+            Shapes.Переместить(piece, Shapes.GetLeft(piece), Shapes.GetTop(piece) + float BWIDTH)
 
   if linesCleared > 0 then
     score <- score + 100 * int (Math.Round(float linesCleared * 2.15 - 1.0))

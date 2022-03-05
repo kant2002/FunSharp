@@ -22,7 +22,7 @@ type internal IsItalic = bool
 type internal X = float
 type internal Y = float
 
-type internal Pen = Pen of Цвет * Ширина
+type internal Перо = Pen of Цвет * Ширина
 type internal Шрифт = Font of Размер * Family * IsBold * IsItalic
 type internal Линия = Line of X * Y * X * Y
 type internal Прямоугольник = Rect of Ширина * Height
@@ -30,18 +30,18 @@ type internal Треугольник = Triangle of X * Y * X * Y * X * Y
 type internal Эллипс = Ellipse of Ширина * Height
 
 type internal Shape =
-   | LineShape of Линия * Pen   
-   | RectShape of Прямоугольник * Pen * Цвет
-   | TriangleShape of Треугольник * Pen * Цвет
-   | EllipseShape of Эллипс * Pen * Цвет
+   | LineShape of Линия * Перо   
+   | RectShape of Прямоугольник * Перо * Цвет
+   | TriangleShape of Треугольник * Перо * Цвет
+   | EllipseShape of Эллипс * Перо * Цвет
    | ImageShape of Xwt.Drawing.Image ref
    | TextShape of string ref * Шрифт * Цвет
 
 type internal Drawing =
-   | DrawLine of Линия * Pen
-   | DrawRect of Прямоугольник * Pen
-   | DrawTriangle of Треугольник * Pen
-   | DrawEllipse of Эллипс * Pen
+   | DrawLine of Линия * Перо
+   | DrawRect of Прямоугольник * Перо
+   | DrawTriangle of Треугольник * Перо
+   | DrawEllipse of Эллипс * Перо
    | DrawImage of Xwt.Drawing.Image ref * float * float
    | DrawText of float * float * string * Шрифт * Цвет
    | DrawBoundText of float * float * float * string * Шрифт * Цвет

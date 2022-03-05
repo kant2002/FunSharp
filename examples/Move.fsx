@@ -4,12 +4,12 @@
 open Библиотека
 open System.Threading
 
-let ball = Shapes.AddRectangle(200.0, 100.0)
+let мяч = Shapes.ДобавитьПрямоугольник(200.0, 100.0)
 
 let OnMouseDown () =
   let x = ГрафическоеОкно.MouseX
   let y = ГрафическоеОкно.MouseY
-  Shapes.Move(ball, x, y)
+  Shapes.Переместить(мяч, x, y)
 
 ГрафическоеОкно.MouseDown <- Callback(OnMouseDown)
 Thread.Sleep 2_000

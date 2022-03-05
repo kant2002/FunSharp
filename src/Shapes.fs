@@ -22,37 +22,37 @@ type Shapes private () =
       | true, info -> action info
       | false, _ -> ()
    static let genName name = name + Guid.NewGuid().ToString()
-   static member Remove(shapeName) =
+   static member Удалить(shapeName) =
       Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.RemoveShape(shapeName))
-   static member AddLine(x1,y1,x2,y2) =
-      let name = genName "Line"
-      LineShape(Line(x1,y1,x2,y2),pen()) |> addShape name
-      name
-   static member AddLine(x1:int,y1:int,x2:int,y2:int) =
-      Shapes.AddLine(float x1, float y1, float x2, float y2)
-   static member AddRectangle(width,height) =
-      let name = genName "Rectangle"
-      RectShape(Rect(width,height),pen(),brush()) |> addShape name
-      name
-   static member AddRectangle(width:int,height:int) =
-      Shapes.AddRectangle(float width, float height)
-   static member AddTriangle(x1,y1,x2,y2,x3,y3) =
-      let name = genName "Triangle"
-      TriangleShape(Triangle(x1,y1,x2,y2,x3,y3),pen(),brush()) |> addShape name
-      name
-   static member AddEllipse(width,height) =
-      let name = genName "Ellipse"
-      EllipseShape(Ellipse(width,height),pen(),brush()) |> addShape name
-      name
-   static member AddEllipse(width:int,height:int) =
-      Shapes.AddEllipse(float width,float height)
-   static member AddImage(imageName) =
-      let name = genName "Image"
+   static member ДобавитьЛинию(x1,y1,x2,y2) =
+      let имя = genName "Line"
+      LineShape(Line(x1,y1,x2,y2),pen()) |> addShape имя
+      имя
+   static member ДобавитьЛинию(x1:int,y1:int,x2:int,y2:int) =
+      Shapes.ДобавитьЛинию(float x1, float y1, float x2, float y2)
+   static member ДобавитьПрямоугольник(ширина,высота) =
+      let имя = genName "Rectangle"
+      RectShape(Rect(ширина,высота),pen(),brush()) |> addShape имя
+      имя
+   static member ДобавитьПрямоугольник(ширина:int,высота:int) =
+      Shapes.ДобавитьПрямоугольник(float ширина, float высота)
+   static member ДобавитьТреугольник(x1,y1,x2,y2,x3,y3) =
+      let имя = genName "Triangle"
+      TriangleShape(Triangle(x1,y1,x2,y2,x3,y3),pen(),brush()) |> addShape имя
+      имя
+   static member ДобавитьЭллипс(ширина,высота) =
+      let имя = genName "Ellipse"
+      EllipseShape(Ellipse(ширина,высота),pen(),brush()) |> addShape имя
+      имя
+   static member ДобавитьЭллипс(ширина:int,высота:int) =
+      Shapes.ДобавитьЭллипс(float ширина,float высота)
+   static member ДобавитьИзображение(imageName) =
+      let имя = genName "Image"
       match ImageList.TryGetImageBytes(imageName) with
       | Some bytes ->
          let stream = new System.IO.MemoryStream(bytes)
          let image = Xwt.Drawing.Image.FromStream(stream)
-         ImageShape(ref image) |> addShape name
+         ImageShape(ref image) |> addShape имя
       | None ->
          let imageRef = 
             if imageName.StartsWith("http:") || imageName.StartsWith("https:") 
@@ -71,23 +71,23 @@ type Shapes private () =
                   imageRef := Xwt.Drawing.Image.FromStream(stream)
                )
                imageRef
-         ImageShape(imageRef) |> addShape name
-      name
-   static member AddText(text) =
+         ImageShape(imageRef) |> addShape имя
+      имя
+   static member ДобавитьТекст(text) =
       let name = genName "Text"
       TextShape(ref text, font(), brush()) |> addShape name
       name
-   static member HideShape(shapeName) =      
+   static member СкрытьФигуру(shapeName) =      
       Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.SetShapeVisibility(shapeName,false))      
-   static member ShowShape(shapeName) =
+   static member ПоказатьФигуру(shapeName) =
       Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.SetShapeVisibility(shapeName,true))      
-   static member Move(shapeName,x,y) =
+   static member Переместить(shapeName,x,y) =
       onShape shapeName (fun info ->
          info.Offset <- Point(x,y)
          Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.MoveShape(shapeName,info.Offset))
       )
-   static member Move(shapeName,x:int,y:int) =
-      Shapes.Move(shapeName, float x, float y)
+   static member Переместить(shapeName,x:int,y:int) =
+      Shapes.Переместить(shapeName, float x, float y)
    static member GetLeft(shapeName) =      
       match shapes.TryGetValue(shapeName) with
       | true, info -> info.Offset.X
@@ -107,19 +107,19 @@ type Shapes private () =
       match shapes.TryGetValue(shapeName) with
       | true, info -> info.Opacity
       | false, _ -> 1.0
-   static member Rotate(shapeName, angle) =
+   static member Повернуть(shapeName, angle) =
       match shapes.TryGetValue(shapeName) with
       | true, info ->
          Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.SetShapeRotation(shapeName,angle))
       | false, _ -> ()
-   static member Rotate(shapeName, angle:int) =
-      Shapes.Rotate(shapeName, float angle)
+   static member Повернуть(shapeName, angle:int) =
+      Shapes.Повернуть(shapeName, float angle)
    static member Zoom(shapeName, scaleX, scaleY) =
       match shapes.TryGetValue(shapeName) with
       | true, info ->
          Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.SetShapeScale(shapeName,scaleX,scaleY))
       | false, _ -> ()
-   static member SetText(shapeName, text) =
+   static member УстановитьТекст(shapeName, text) =
       onShape shapeName (fun info ->
          match info.Shape with
          | TextShape(textRef, font, color) ->
@@ -127,7 +127,7 @@ type Shapes private () =
          | _ -> invalidOp "Expecting text shape"
       )       
    static member Animate(shapeName,x:float,y:float,ms:int) =
-      Shapes.Move(shapeName, x, y)
+      Shapes.Переместить(shapeName, x, y)
    static member Animate(shapeName,x:int,y:int,ms:int) =
       Shapes.Animate(shapeName, float x, float y, ms)
 
