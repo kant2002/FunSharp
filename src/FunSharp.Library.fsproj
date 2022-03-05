@@ -18,7 +18,7 @@
 		<Compile Include="Черепаха.fs" />
 		<Compile Include="Controls.fs" />
 		<Compile Include="Mouse.fs" />
-		<Compile Include="Clock.fs" />
+		<Compile Include="Часы.fs" />
 		<Compile Include="Timer.fs" />
 		<Compile Include="Math.fs" />
 		<Compile Include="Text.fs" />

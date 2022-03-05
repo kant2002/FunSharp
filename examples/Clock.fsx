@@ -47,9 +47,9 @@ let mutable Hour = 0.
 let mutable Minute = 0.
 let mutable Second = 0.
 let установитьСтрелки () = 
-   if (float Clock.Hour + float Clock.Minute/60. + float Clock.Second/3600. <> Hour) then
+   if (float Часы.Час + float Часы.Минута/60. + float Часы.Секунда/3600. <> Hour) then
      Shapes.Remove(HourHand)
-     Hour <- float Clock.Hour + float Clock.Minute/60. + float Clock.Second/3600.
+     Hour <- float Часы.Час + float Часы.Минута/60. + float Часы.Секунда/3600.
      ГрафическоеОкно.ЦветПера <- Цвета.Black
      ГрафическоеОкно.PenWidth <- 3.
      HourHand <- 
@@ -58,9 +58,9 @@ let установитьСтрелки () =
          MidY,
          MidX+Radius/2.*Math.Cos(Math.GetRadians(Hour*30.-90.)),
          MidY+Radius/2.*Math.Sin(Math.GetRadians(Hour*30.-90.)))   
-   if float Clock.Minute <> Minute then
+   if float Часы.Минута <> Minute then
      Shapes.Remove(MinuteHand)
-     Minute <- float Clock.Minute + float Clock.Second/60.
+     Minute <- float Часы.Минута + float Часы.Секунда/60.
      ГрафическоеОкно.ЦветПера <- Цвета.Blue
      ГрафическоеОкно.PenWidth <- 2.
      MinuteHand <- 
@@ -69,9 +69,9 @@ let установитьСтрелки () =
          MidY,
          MidX+Radius/1.2*Math.Cos(Math.GetRadians(Minute*6.-90.)),
          MidY+Radius/1.2*Math.Sin(Math.GetRadians(Minute*6.-90.)))   
-   if float Clock.Second <> Second then
+   if float Часы.Секунда <> Second then
      Shapes.Remove(SecondHand)
-     Second <- float Clock.Second
+     Second <- float Часы.Секунда
      ГрафическоеОкно.ЦветПера <- Цвета.Red
      ГрафическоеОкно.PenWidth <- 1.
      SecondHand <- 

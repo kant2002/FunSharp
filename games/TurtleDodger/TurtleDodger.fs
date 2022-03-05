@@ -105,7 +105,7 @@ and Game () =
    let tick = false
    Timer.Interval <- 1000 / 24
    Timer.Tick <- Callback(OnTick)
-   lastems <- Clock.ElapsedMilliseconds
+   lastems <- Часы.ПрошедшиеМиллисекунды
    iMin <- 0
    while not collisionDetected do
      if moving then
@@ -129,7 +129,7 @@ and Init () =
 and OnTick () =
    if not scrolling then
      scrolling <- true
-     let ems = Clock.ElapsedMilliseconds
+     let ems = Часы.ПрошедшиеМиллисекунды
      if ems - lastems > 500 then
        AddObject()
        lastems <- ems    
