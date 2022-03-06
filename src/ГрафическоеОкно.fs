@@ -11,7 +11,7 @@ type ГрафическоеОкно private () =
    static let перо () = Pen(ГрафическоеОкно.ЦветПера,ГрафическоеОкно.ШиринаПера)
    static let кисть () = ГрафическоеОкно.ЦветКисти
    static let шрифт () = 
-      Шрифт.Font(ГрафическоеОкно.РазмерШрифта,ГрафическоеОкно.FontName,ГрафическоеОкно.FontBold, ГрафическоеОкно.FontItalic)
+      Шрифт.Font(ГрафическоеОкно.РазмерШрифта,ГрафическоеОкно.FontName,ГрафическоеОкно.ЖирностьШрифта, ГрафическоеОкно.FontItalic)
    static let нарисовать drawing = addDrawing drawing      
    static let нарисоватьВ (x,y) drawing = addDrawingAt drawing (x,y)
    static member Заголовок
@@ -40,7 +40,7 @@ type ГрафическоеОкно private () =
    static member val ЦветКисти = Цвета.Purple with get,set
    static member val РазмерШрифта = 12.0 with get,set
    static member val FontName = "" with get,set
-   static member val FontBold = false with get,set
+   static member val ЖирностьШрифта = false with get,set
    static member val FontItalic = false with get,set
    static member Очистить () =
       Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.ClearDrawings())
