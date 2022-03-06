@@ -16,7 +16,7 @@
 		<Compile Include="ГрафическоеОкно.fs" />
 		<Compile Include="Фигуры.fs" />
 		<Compile Include="Черепаха.fs" />
-		<Compile Include="Controls.fs" />
+		<Compile Include="ЭлементыУправления.fs" />
 		<Compile Include="Мышь.fs" />
 		<Compile Include="Часы.fs" />
 		<Compile Include="Timer.fs" />

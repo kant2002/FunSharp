@@ -4,14 +4,14 @@ open System
 
 [<Sealed>]
 type ГрафическоеОкно private () =   
-   static let rnd = Random()
+   static let рнд = Random()
    static let mutable фоновыйЦвет = Цвета.White
    static let mutable ширина = 640
    static let mutable высота = 480
    static let перо () = Pen(ГрафическоеОкно.ЦветПера,ГрафическоеОкно.ШиринаПера)
    static let кисть () = ГрафическоеОкно.ЦветКисти
    static let шрифт () = 
-      Шрифт.Font(ГрафическоеОкно.РазмерШрифта,ГрафическоеОкно.FontName,ГрафическоеОкно.ЖирностьШрифта, ГрафическоеОкно.FontItalic)
+      Шрифт.Font(ГрафическоеОкно.РазмерШрифта,ГрафическоеОкно.ИмяШрифта,ГрафическоеОкно.ЖирностьШрифта, ГрафическоеОкно.КурсивностьШрифта)
    static let нарисовать drawing = addDrawing drawing      
    static let нарисоватьВ (x,y) drawing = addDrawingAt drawing (x,y)
    static member Заголовок
@@ -39,25 +39,25 @@ type ГрафическоеОкно private () =
    static member val ШиринаПера = 2.0 with get, set
    static member val ЦветКисти = Цвета.Purple with get,set
    static member val РазмерШрифта = 12.0 with get,set
-   static member val FontName = "" with get,set
+   static member val ИмяШрифта = "" with get,set
    static member val ЖирностьШрифта = false with get,set
-   static member val FontItalic = false with get,set
+   static member val КурсивностьШрифта = false with get,set
    static member Очистить () =
       Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.ClearDrawings())
    static member НарисоватьЛинию(x1,y1,x2,y2) =
       DrawLine(Line(x1,y1,x2,y2),перо()) |> нарисовать
    static member НарисоватьЛинию(x1:int,y1:int,x2:int,y2:int) =
       ГрафическоеОкно.НарисоватьЛинию(float x1, float y1, float x2, float y2)
-   static member DrawRectangle(x,y,width,height) =
+   static member НарисоватьПрямоугольник(x,y,width,height) =
       DrawRect(Rect(width,height),перо()) |> нарисоватьВ (x,y)
-   static member DrawRectangle(x:int,y:int,width:int,height:int) =
-      ГрафическоеОкно.DrawRectangle(float x, float y, float width, float height)
+   static member НарисоватьПрямоугольник(x:int,y:int,width:int,height:int) =
+      ГрафическоеОкно.НарисоватьПрямоугольник(float x, float y, float width, float height)
    static member НарисоватьТреугольник(x1,y1,x2,y2,x3,y3) =
       DrawTriangle(Triangle(x1,y1,x2,y2,x3,y3),перо()) |> нарисовать
-   static member DrawEllipse(x,y,width,height) =
+   static member НарисоватьЭллипс(x,y,width,height) =
       DrawEllipse(Ellipse(width,height),перо()) |> нарисоватьВ (x,y)
-   static member DrawEllipse(x:int,y:int,width:int,height:int) =
-      ГрафическоеОкно.DrawEllipse(float x, float y, float width, float height)
+   static member НарисоватьЭллипс(x:int,y:int,width:int,height:int) =
+      ГрафическоеОкно.НарисоватьЭллипс(float x, float y, float width, float height)
    static member НарисоватьИзображение(имяИзображения,x,y) =
       let imageRef =
          match ImageList.TryGetImageBytes имяИзображения with
@@ -96,17 +96,17 @@ type ГрафическоеОкно private () =
    static member ЗаполнитьЭллипс(x:int,y:int,width:int,height:int) =
       FillEllipse(Ellipse(float width,float height),кисть()) |> нарисоватьВ (float x,float y)
    static member ПоследняяКнопка with get() = Мое.Приложение.ПоследняяКнопка
-   static member KeyUp with set callback = Мое.Приложение.KeyUp <- callback
+   static member КнопкаОтпущена with set callback = Мое.Приложение.KeyUp <- callback
    static member КнопкаНажата with set callback = Мое.Приложение.KeyDown <- callback 
    static member МышьX with get() = Мое.Приложение.МышьX
    static member МышьY with get() = Мое.Приложение.МышьY
    static member МышьНажата with set callback = Мое.Приложение.MouseDown <- callback
-   static member MouseUp with set callback = Мое.Приложение.MouseUp <- callback
+   static member МышьОтпущена with set callback = Мое.Приложение.MouseUp <- callback
    static member МышьПеремещена with set callback = Мое.Приложение.MouseMove <- callback
-   static member GetColorFromRGB(r,g,b) = Цвет(255uy,byte r,byte g,byte b)
+   static member ПолучитьЦветИзRGB(r,g,b) = Цвет(255uy,byte r,byte g,byte b)
    static member ПолучитьСлучайныйЦвет() : Цвет =
       let bytes = [|1uy..3uy|]
-      rnd.NextBytes(bytes)
+      рнд.NextBytes(bytes)
       Цвет(255uy,bytes.[0],bytes.[1],bytes.[2])
    static member Показать() = Мое.Приложение.Показать()
    static member Спрятать() = Мое.Приложение.Спрятать()

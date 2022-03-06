@@ -1,20 +1,20 @@
-﻿module Библиотека.Sound
+﻿module Библиотека.Звук
 
 open System.Media
 
-type private IMarker = interface end
+type private ИМаркер = interface end
 
-let private play name =
-    let assembly = System.Reflection.Assembly.GetAssembly(typeof<IMarker>)
-    let stream = assembly.GetManifestResourceStream(name+".wav")
-    let player = new SoundPlayer(stream)
-    player.Play()   
+let private играть name =
+    let сборка = System.Reflection.Assembly.GetAssembly(typeof<ИМаркер>)
+    let поток = сборка.GetManifestResourceStream(name+".wav")
+    let музыкант = new SoundPlayer(поток)
+    музыкант.Play()   
 
-let PlayBellRing () =
-    play "BellRing"
+let ИгратьЗвонок () =
+    играть "BellRing"
 
-let PlayChime () =
-    play "Chime"
+let ИгратьПерезвон () =
+    играть "Chime"
 
-let PlayClick () =
-    play "Click"
+let ИгратьЩелчек () =
+    играть "Click"

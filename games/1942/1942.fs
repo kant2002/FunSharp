@@ -6,10 +6,10 @@
 open Библиотека
 
 type System.Collections.Generic.Dictionary<'TKey,'TValue> with
-   member this.GetOrDefault(key:'TKey,value:'TValue) =
-      match this.TryGetValue(key) with
-      | true, value -> value
-      | false, _ -> value
+   member this.GetOrDefault(ключ:'TKey,значение:'TValue) =
+      match this.TryGetValue(ключ) with
+      | true, значение -> значение
+      | false, _ -> значение
 
 
 // 1942 like Game ID: KJW676
@@ -22,27 +22,27 @@ let ammoSync = obj()
 
 //-------------------------
 // or load from web url
-//let Path= "http://imode.free.fr/images1942/"
-let Path = ""
+//let Путь= "http://imode.free.fr/images1942/"
+let Путь = ""
 //-------------------------
 
 // Game area controls
-let gameWidth  = 640
-let gameHeight = 480
+let ширинаИгры  = 640
+let высотаИгры = 480
 let fps = 50
-let bgs = 2 //backgroundspeed
+let скф = 2 //backgroundspeed
 let mutable Player_Lives = 10
-let nbrisland = 5 //nomber of island images
+let клвостровов = 5 //nomber of island images
 let количествоостровов = 5 //nomber of island in the wall field
 
 // Заголовок окна
-let gameTitle = "1942, Score: "
+let заголовокИгры = "1942, Счет: "
 
 ГрафическоеОкно.Спрятать()
-ГрафическоеОкно.Заголовок <- gameTitle + "0"
+ГрафическоеОкно.Заголовок <- заголовокИгры + "0"
 ГрафическоеОкно.CanResize <- false
-ГрафическоеОкно.Ширина <- gameWidth
-ГрафическоеОкно.Высота <- gameHeight
+ГрафическоеОкно.Ширина <- ширинаИгры
+ГрафическоеОкно.Высота <- высотаИгры
 
 // Global variables
 
@@ -52,21 +52,21 @@ let mutable paddleY = 0
 let mutable фон = "<shape name>"
 
 // addImage in the right order is needed to define the shapes depth
-let остров4 = ImageList.LoadImage(Path + "island4.png")
-let остров1= ImageList.LoadImage(Path + "island1.png")
-let остров2= ImageList.LoadImage(Path + "island2.png")
-let остров3= ImageList.LoadImage(Path + "island3.png")
-let остров5= ImageList.LoadImage(Path + "island5.png")
-let игрок0 = ImageList.LoadImage(Path + "myplane1.png")
-let background = ImageList.LoadImage(Path + "fond.png")
-let bullet0 = ImageList.LoadImage(Path + "bullet.png")
-let enemy= ImageList.LoadImage(Path + "enemy1.png")
-let enemy2 = ImageList.LoadImage(Path + "enemy2.png")
-let enemy_expl1=ImageList.LoadImage(Path + "explo1.png")
-let enemy_expl2=ImageList.LoadImage(Path + "explo2.png")
-let player_expl=ImageList.LoadImage(Path + "explo2.png")
-let Enemy_bullet=ImageList.LoadImage(Path + "E_bullet.png")
-let ``end`` = ImageList.LoadImage(Path + "End.png")
+let остров4 = ImageList.LoadImage(Путь + "island4.png")
+let остров1= ImageList.LoadImage(Путь + "island1.png")
+let остров2= ImageList.LoadImage(Путь + "island2.png")
+let остров3= ImageList.LoadImage(Путь + "island3.png")
+let остров5= ImageList.LoadImage(Путь + "island5.png")
+let игрок0 = ImageList.LoadImage(Путь + "myplane1.png")
+let background = ImageList.LoadImage(Путь + "fond.png")
+let пуля0 = ImageList.LoadImage(Путь + "bullet.png")
+let враг= ImageList.LoadImage(Путь + "enemy1.png")
+let враг2 = ImageList.LoadImage(Путь + "enemy2.png")
+let взрв_врага1=ImageList.LoadImage(Путь + "explo1.png")
+let взрв_врага2=ImageList.LoadImage(Путь + "explo2.png")
+let взрв_игрока=ImageList.LoadImage(Путь + "explo2.png")
+let Enemy_bullet=ImageList.LoadImage(Путь + "E_bullet.png")
+let ``end`` = ImageList.LoadImage(Путь + "End.png")
 
 let enemy_Array = Dictionary() // Array that contain all the enemies
 let enemy_TimeLine = Dictionary()
@@ -92,7 +92,7 @@ let Player_AmmoAge = Dictionary()
 Player_AmmoAge.[1] <- 0
 let Player_AmmoMax = 50
 let mutable Player_AmmoCount = 0
-let Player_Ammospeed = float bgs + 4.0
+let Player_Ammospeed = float скф + 4.0
 let Player_AmmoLife = 100
 
 let mutable ShootX = nan
@@ -109,7 +109,7 @@ Enemy_AmmoAge.[1] <- 0
 let Enemy_Ammo_Angle= Dictionary()
 let Enemy_AmmoMax = 30
 let mutable Enemy_AmmoCount = 0
-let Enemy_Ammospeed = bgs + 4
+let Enemy_Ammospeed = скф + 4
 let Enemy_AmmoLife = 50
 let Enemy_Agresivity = 200
 let mutable Enemy_ShootX = 0
@@ -133,7 +133,7 @@ let posx = Dictionary<int,_>()
 let posy = Dictionary<int,_>()
 
 // Setup world
-let rec Init() =
+let rec Инициализация() =
    ГрафическоеОкно.Спрятать()
 
    Мышь.СкрытьКурсор()
@@ -166,8 +166,8 @@ let rec Init() =
 
 
 
-// Main gane routine
-and Play () =
+// Главная игровая процедура
+and Игра () =
    ГрафическоеОкно.Показать()
 
    // Main loop
@@ -188,7 +188,7 @@ and Play () =
       incislandx.[i] <- 0
       incislandy.[i] <- 0   
    TimePlay <- 0
-   Фигуры.Переместить(игрок, gameWidth/2 , gameHeight - 80 )
+   Фигуры.Переместить(игрок, ширинаИгры/2 , высотаИгры - 80 )
    while (play = 1) do
       Программа.Задержка(1000/fps)
       TimePlay <- TimePlay + 1
@@ -236,20 +236,20 @@ and OnMouseDown () =
 and moveall () =
    incbx <- 0.0
    incby <- 0.0
-   ГрафическоеОкно.Заголовок <- gameTitle + score.ToString() + " Lives:" + Player_Lives.ToString()
+   ГрафическоеОкно.Заголовок <- заголовокИгры + score.ToString() + " Lives:" + Player_Lives.ToString()
 
-   if (paddleX > (gameWidth-62) ) then
-      incx <- incx - bgs
-      incbx <- incbx - float bgs
+   if (paddleX > (ширинаИгры-62) ) then
+      incx <- incx - скф
+      incbx <- incbx - float скф
       for i=1 to количествоостровов do
-         incislandx.[i] <- incislandx.[i] - bgs    
+         incislandx.[i] <- incislandx.[i] - скф    
       if (incx = -32 ) then
          incx <- 0            
    if (paddleX < 64 ) then
-      incx <- incx + bgs
-      incbx <- incbx + float bgs
+      incx <- incx + скф
+      incbx <- incbx + float скф
       for i=1 to количествоостровов do
-         incislandx.[i] <- incislandx.[i] + bgs          
+         incislandx.[i] <- incislandx.[i] + скф          
       if (incx = 32 ) then
          incx <- 0
    Фигуры.Переместить(фон,incx - 32 ,incy - 32)
@@ -259,17 +259,17 @@ and moveall () =
       let isly = posy.[i]+incislandy.[i]
       Фигуры.Переместить(массив_Островов.[i],islx,isly)
 
-   incy <- incy + bgs
-   incby <- incby + float bgs
+   incy <- incy + скф
+   incby <- incby + float скф
    for i=1 to количествоостровов do
-      incislandy.[i] <- incislandy.[i] + bgs    
+      incislandy.[i] <- incislandy.[i] + скф    
 
    if (incy = 32) then
       incy <- 0   
 
    for i=1 to количествоостровов do
-      if ((posy.[i]+incislandy.[i]) > (gameHeight+15)) then // relaunch island if no more visible
-         let R = int (Math.Round(float (Math.GetRandomNumber(nbrisland))))
+      if ((posy.[i]+incislandy.[i]) > (высотаИгры+15)) then // relaunch island if no more visible
+         let R = int (Math.Round(float (Math.GetRandomNumber(клвостровов))))
          let AA = Math.Remainder(TimePlay,6)
          // give new coordinates
          posx.[i] <- islandPos.[AA].[2]
@@ -320,7 +320,7 @@ and moveall () =
       if (Math.GetRandomNumber(Enemy_Agresivity)=1) then
          Enemy_ShootX <- xx1 + 16
          Enemy_ShootY <- yy1 + 4
-         if (yy1 > 0 && xx1 > 0 && yy1 < gameHeight && xx1 < gameWidth) then
+         if (yy1 > 0 && xx1 > 0 && yy1 < высотаИгры && xx1 < ширинаИгры) then
             // this avoid enemy fire from outside the screen
             fire_Enemy()
 
@@ -366,7 +366,7 @@ and Fire () =
 
       // Add the player Ammo
       Player_AmmoCount <- Player_AmmoCount + 1
-      Player_Ammo.[Player_AmmoCount] <- Фигуры.ДобавитьИзображение(bullet0)
+      Player_Ammo.[Player_AmmoCount] <- Фигуры.ДобавитьИзображение(пуля0)
       Фигуры.Переместить(Player_Ammo.[Player_AmmoCount], ShootX, ShootY)
    )
 
@@ -417,9 +417,9 @@ and create_enemies_left () =
       enemy_Count <- enemy_Count + 1
       enemy_PathNBR.[enemy_Count] <- pathNBR
       if (enemy_type = 2) then
-         enemy_Array.[enemy_Count] <- Фигуры.ДобавитьИзображение(enemy2)
+         enemy_Array.[enemy_Count] <- Фигуры.ДобавитьИзображение(враг2)
       else
-         enemy_Array.[enemy_Count] <- Фигуры.ДобавитьИзображение(enemy)
+         enemy_Array.[enemy_Count] <- Фигуры.ДобавитьИзображение(враг)
       enemy_line.[enemy_Count] <- 1
       enemy_PosX.[enemy_Count] <- enemyPosX1
       enemy_PosY.[enemy_Count] <- enemyPosY1
@@ -438,7 +438,7 @@ and create_enemies_right () =
    for i=1 to enemy_Nbr do
       enemy_Count <- enemy_Count + 1
       enemy_PathNBR.[enemy_Count] <- pathNBR
-      enemy_Array.[enemy_Count] <- Фигуры.ДобавитьИзображение(enemy)
+      enemy_Array.[enemy_Count] <- Фигуры.ДобавитьИзображение(враг)
       enemy_line.[enemy_Count] <- 1
       enemy_PosX.[enemy_Count] <- enemyPosX1
       enemy_PosY.[enemy_Count] <- enemyPosY1
@@ -485,11 +485,11 @@ and Collision_pbe () =  // for player-bullet and enemies
                let next_enemy_remove = i2
                remove_enemy(next_enemy_remove)
                // begin animation for explosion at coordinate ax1, ay1
-               let toto = Фигуры.ДобавитьИзображение(enemy_expl1)
+               let toto = Фигуры.ДобавитьИзображение(взрв_врага1)
                Фигуры.Переместить(toto,ax1,ay1)
                Программа.Задержка(30)
                Фигуры.Удалить(toto)
-               let toto = Фигуры.ДобавитьИзображение(enemy_expl2)
+               let toto = Фигуры.ДобавитьИзображение(взрв_врага2)
                Фигуры.Переместить(toto,ax1,ay1)
                Программа.Задержка(30)
                Фигуры.Удалить(toto)
@@ -523,11 +523,11 @@ and Collision_ep () =   // for enemies and player
             // animate explosion and decrease lives            
             remove_enemy(i2)
             // begin animation for explosion at coordinate ax1, ay1
-            let toto = Фигуры.ДобавитьИзображение(enemy_expl1)
+            let toto = Фигуры.ДобавитьИзображение(взрв_врага1)
             Фигуры.Переместить(toto,ax1,ay1)
             Программа.Задержка(30)
             Фигуры.Удалить(toto)
-            let toto = Фигуры.ДобавитьИзображение(player_expl)
+            let toto = Фигуры.ДобавитьИзображение(взрв_игрока)
             Фигуры.Переместить(toto,ax1,ay1)
             Программа.Задержка(300)
             Фигуры.Удалить(toto)
@@ -561,11 +561,11 @@ and Collision_ep () =   // for enemies and player
             RemoveEnemy_Ammo(i3)
 
             // begin animation for explosion at coordinate ax1, ay1
-            let toto = Фигуры.ДобавитьИзображение(enemy_expl1)
+            let toto = Фигуры.ДобавитьИзображение(взрв_врага1)
             Фигуры.Переместить(toto,paddleX+ player_size/2,paddleY+ player_size/2)
             Программа.Задержка(30)
             Фигуры.Удалить(toto)
-            let toto = Фигуры.ДобавитьИзображение(player_expl)
+            let toto = Фигуры.ДобавитьИзображение(взрв_игрока)
             Фигуры.Переместить(toto,paddleX+ player_size/2,paddleY+ player_size/2)
             Программа.Задержка(300)
             Фигуры.Удалить(toto)
@@ -583,27 +583,27 @@ and ПозицииОстровов () =
    islandPos.[0].[3] <- -150
    islandPos.[1] <- Dictionary()
    islandPos.[1].[1] <- 1
-   islandPos.[1].[2] <- - int (Math.Round(float gameWidth/2.0))
+   islandPos.[1].[2] <- - int (Math.Round(float ширинаИгры/2.0))
    islandPos.[1].[3] <- -150
    islandPos.[2] <- Dictionary()
    islandPos.[2].[1] <- 2
-   islandPos.[2].[2] <- -2 * int (Math.Round(float gameWidth/3.0))
+   islandPos.[2].[2] <- -2 * int (Math.Round(float ширинаИгры/3.0))
    islandPos.[2].[3] <- -150
    islandPos.[3] <- Dictionary()
    islandPos.[3].[1] <- 1
-   islandPos.[3].[2] <- 2 * int (Math.Round(float gameWidth/3.0))
+   islandPos.[3].[2] <- 2 * int (Math.Round(float ширинаИгры/3.0))
    islandPos.[3].[3] <- -150
    islandPos.[4] <- Dictionary()
    islandPos.[4].[1] <- 2
-   islandPos.[4].[2] <- gameWidth
+   islandPos.[4].[2] <- ширинаИгры
    islandPos.[4].[3] <- -150
    islandPos.[5] <- Dictionary()
    islandPos.[5].[1] <- 3
-   islandPos.[5].[2] <- int (Math.Round(float gameWidth/3.0))
+   islandPos.[5].[2] <- int (Math.Round(float ширинаИгры/3.0))
    islandPos.[5].[3] <- -150
    islandPos.[6] <- Dictionary()
    islandPos.[6].[1] <- 3
-   islandPos.[6].[2] <- -gameWidth
+   islandPos.[6].[2] <- -ширинаИгры
    islandPos.[6].[3] <- -150
 
 and define_paths () =
@@ -1052,7 +1052,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
    level1.[2] <- Dictionary()
    level1.[2].[1] <- 80
    level1.[2].[2] <- 6
-   level1.[2].[3] <- gameWidth/2
+   level1.[2].[3] <- ширинаИгры/2
    level1.[2].[4] <- -500
    level1.[2].[5] <- 1
    level1.[2].[6] <- 3
@@ -1076,7 +1076,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
    level1.[5] <- Dictionary()
    level1.[5].[1] <- 410
    level1.[5].[2] <- 6
-   level1.[5].[3] <- gameWidth/3
+   level1.[5].[3] <- ширинаИгры/3
    level1.[5].[4] <- -50
    level1.[5].[5] <- 1
    level1.[5].[6] <- 3
@@ -1084,7 +1084,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
    level1.[6] <- Dictionary()
    level1.[6].[1] <- 430
    level1.[6].[2] <- 6
-   level1.[6].[3] <- 2*gameWidth/3
+   level1.[6].[3] <- 2*ширинаИгры/3
    level1.[6].[4] <- -50
    level1.[6].[5] <- 2
    level1.[6].[6] <- 3
@@ -1092,7 +1092,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
 
    level1.[5].[1] <- 500
    level1.[5].[2] <- 6
-   level1.[5].[3] <- gameWidth/3
+   level1.[5].[3] <- ширинаИгры/3
    level1.[5].[4] <- -50
    level1.[5].[5] <- 1
    level1.[5].[6] <- 6
@@ -1109,7 +1109,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
    level1.[7] <- Dictionary()
    level1.[7].[1] <- 690
    level1.[7].[2] <- 6
-   level1.[7].[3] <- gameWidth/3
+   level1.[7].[3] <- ширинаИгры/3
    level1.[7].[4] <- -50
    level1.[7].[5] <- 2
    level1.[7].[6] <- 3
@@ -1118,7 +1118,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
       level1.[7+i] <- Dictionary()
       level1.[7+i].[1] <- 700+50*i
       level1.[7+i].[2] <- 6
-      level1.[7+i].[3] <- Math.GetRandomNumber(gameWidth)
+      level1.[7+i].[3] <- Math.GetRandomNumber(ширинаИгры)
       level1.[7+i].[4] <- -50 + i
       level1.[7+i].[5] <- Math.GetRandomNumber(2)
       level1.[7+i].[6] <- Math.GetRandomNumber(3)
@@ -1126,7 +1126,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
    level1.[18] <- Dictionary()
    level1.[18].[1] <- 1300
    level1.[18].[2] <- 1
-   level1.[18].[3] <- gameWidth
+   level1.[18].[3] <- ширинаИгры
    level1.[18].[4] <- -10
    level1.[18].[5] <- 2
    level1.[18].[6] <- 6
@@ -1156,7 +1156,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
      level1.[38+i] <- Dictionary()
      level1.[38+i].[1] <- 2450+100*i
      level1.[38+i].[2] <- 6
-     level1.[38+i].[3] <- Math.GetRandomNumber(gameWidth)
+     level1.[38+i].[3] <- Math.GetRandomNumber(ширинаИгры)
      level1.[38+i].[4] <- -50 + i
      level1.[38+i].[5] <- Math.GetRandomNumber(2)
      level1.[38+i].[6] <- Math.GetRandomNumber(5)
@@ -1166,8 +1166,8 @@ and создать_уровень1 () =  // this define the behavior of the diff
 // todo
 
 // Start game
-Init()
+Инициализация()
 define_paths()
 //create_enemies1()
-Play()
+Игра()
 printfn "GAME OVER"

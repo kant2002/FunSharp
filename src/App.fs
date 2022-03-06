@@ -106,8 +106,8 @@ type internal МоеПриложение () =
    member app.Показать() = app.Вызвать (fun () -> показатьОкно())
    member app.Спрятать() = app.Вызвать (fun () -> спрятатьОкно())
    member app.TimerTick with set callback = timerTick <- callback
-   member app.PauseTimer() = timerPaused <- true
-   member app.ResumeTimer() = timerPaused <- false
+   member app.ПаузаТаймера() = timerPaused <- true
+   member app.ВозобновитьТаймер() = timerPaused <- false
    member app.TimerInterval with set ms = app.Вызвать(fun () -> установитьИнтервалТаймера ms)
    member app.ПоказатьСообщение(текст:string,заголовок) = MessageDialog.ShowMessage(главноеОкно,текст,заголовок)
 

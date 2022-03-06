@@ -3,11 +3,10 @@
 		<TargetFramework>net48</TargetFramework>
 		<OutputType>Exe</OutputType>
 	</PropertyGroup>
-	<ItemGroup>
-		<None Include="App.config" />
-		<EmbeddedResource Include="turtle.png" LogicalName="turtle.png" />
-		<Compile Include="TurtleDodger.fs" />
-	</ItemGroup>
+  <ItemGroup>
+    <Compile Include="Тетрис.fs" />
+    <None Include="App.config" />
+  </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\FunSharp.Library.fsproj" />
 	</ItemGroup>

@@ -4,7 +4,7 @@
 		<OutputType>Exe</OutputType>
 	</PropertyGroup>
   <ItemGroup>
-    <Compile Include="Paddle.fs" />
+    <Compile Include="Ракетка.fs" />
     <None Include="App.config" />
   </ItemGroup>
 	<ItemGroup>

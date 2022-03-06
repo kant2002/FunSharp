@@ -4,7 +4,7 @@
 		<OutputType>Exe</OutputType>
 	</PropertyGroup>
   <ItemGroup>
-    <Compile Include="Asteroids.fs" />
+    <Compile Include="Астероиды.fs" />
     <None Include="App.config" />
     <EmbeddedResource Include="Asteroids_BigRock.png" LogicalName="Asteroids_BigRock.png" />
     <EmbeddedResource Include="Asteroids_MediumRock.png" LogicalName="Asteroids_MediumRock.png" />
