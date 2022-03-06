@@ -54,4 +54,4 @@ while true do
       Фигуры.Переместить(tube2, float (x + !scroll),float (y+100))
    Фигуры.Переместить(ground, !scroll % 48, 340)
    decr scroll  
-   Program.Delay(20)
+   Программа.Задержка(20)

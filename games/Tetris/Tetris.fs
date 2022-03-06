@@ -89,7 +89,7 @@ let rec MainLoop () =
       // Delay, but break if the delay get set to 0 if the piece gets dropped
       let mutable delayIndex = delay
       while delayIndex > 0 && delay > 0 do
-        Program.Delay(10)
+        Программа.Задержка(10)
         delayIndex <- delayIndex - 10      
 
       if yposdelta > 0 then
@@ -103,7 +103,7 @@ let rec MainLoop () =
 and HandleKey () =
   // Stop game
   if ГрафическоеОкно.ПоследняяКнопка = "Escape" then
-    Program.End()  
+    Программа.Закончить()  
 
   // Move piece left
   if ГрафическоеОкно.ПоследняяКнопка = "Left" then
@@ -213,7 +213,7 @@ and CopyPiece () = // in basetemplate, template, rotation
       templates.[template].Values.[i] <- templates.[basetemplate].Values.[i]
   else
     ГрафическоеОкно.ПоказатьСообщение("invalid parameter", "Error")
-    Program.End() 
+    Программа.Закончить() 
 
   // Copy the remain properties from basetemplate to template.
   templates.[template].Color <- templates.[basetemplate].Color
@@ -228,7 +228,7 @@ and CreatePiece () = // in: template ret: h
 
   pieceToTemplate.[h] <- template
 
-  ГрафическоеОкно.PenWidth <- 1.0
+  ГрафическоеОкно.ШиринаПера <- 1.0
   ГрафическоеОкно.ЦветПера <- Цвета.Black
   ГрафическоеОкно.ЦветКисти <- templates.[template].Color
 
@@ -335,7 +335,7 @@ and DeleteLines () =
           for x1 = 0 to CWIDTH - 1 do
             let piece = spots.[x1 + (y1 - 1) * CWIDTH]
             spots.[x1 + y1 * CWIDTH] <- piece
-            Фигуры.Переместить(piece, Фигуры.GetLeft(piece), Фигуры.GetTop(piece) + float BWIDTH)
+            Фигуры.Переместить(piece, Фигуры.ПолучитьЛево(piece), Фигуры.ПолучитьВерх(piece) + float BWIDTH)
 
   if linesCleared > 0 then
     score <- score + 100 * int (Math.Round(float linesCleared * 2.15 - 1.0))
@@ -347,15 +347,15 @@ and SetupCanvas () =
   ГрафическоеОкно.ЦветКисти <- ГрафическоеОкно.ЦветФона
   ГрафическоеОкно.ЗаполнитьПрямоугольник(XOFFSET, YOFFSET, CWIDTH*BWIDTH, CHEIGHT*BWIDTH)
 
-  Program.Delay(200)
-  ГрафическоеОкно.PenWidth <- 1.0
+  Программа.Задержка(200)
+  ГрафическоеОкно.ШиринаПера <- 1.0
   ГрафическоеОкно.ЦветПера <- Цвета.Pink
   for x = 0 to CWIDTH-1 do
     for y = 0 to CHEIGHT-1 do
       spots.[x + y * CWIDTH] <- "." // "." indicates spot is free
       ГрафическоеОкно.DrawRectangle(XOFFSET + x * BWIDTH, YOFFSET + y * BWIDTH, BWIDTH, BWIDTH)
 
-  ГрафическоеОкно.PenWidth <- 4.0
+  ГрафическоеОкно.ШиринаПера <- 4.0
   ГрафическоеОкно.ЦветПера <- Цвета.Black
   ГрафическоеОкно.НарисоватьЛинию(XOFFSET, YOFFSET, XOFFSET, YOFFSET + CHEIGHT*BWIDTH)
   ГрафическоеОкно.НарисоватьЛинию(XOFFSET + CWIDTH*BWIDTH, YOFFSET, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
@@ -379,7 +379,7 @@ and SetupCanvas () =
   ГрафическоеОкно.ЦветКисти <- Цвета.Black
   ГрафическоеОкно.FontItalic <- false
   ГрафическоеОкно.FontName <- "Comic Sans MS"
-  ГрафическоеОкно.FontSize <- 16.0
+  ГрафическоеОкно.РазмерШрифта <- 16.0
   ГрафическоеОкно.НарисоватьТекст(x, y + 200, "Game control keys:")
   ГрафическоеОкно.НарисоватьТекст(x + 25, y + 220, "Left Arrow = Move piece left")
   ГрафическоеОкно.НарисоватьТекст(x + 25, y + 240, "Right Arrow = Move piece right")
@@ -387,29 +387,29 @@ and SetupCanvas () =
   ГрафическоеОкно.НарисоватьТекст(x + 25, y + 280, "Down Arrow = Drop piece")
   ГрафическоеОкно.НарисоватьТекст(x, y + 320, "Press to stop game")
 
-  Program.Delay(200) // without this delay, the above text will use the fontsize of the score 
+  Программа.Задержка(200) // without this delay, the above text will use the fontsize of the score 
 
   ГрафическоеОкно.ЦветКисти <- Цвета.Black
   ГрафическоеОкно.FontName <- "Georgia"
   ГрафическоеОкно.FontItalic <- true
-  ГрафическоеОкно.FontSize <- 36.0
+  ГрафическоеОкно.РазмерШрифта <- 36.0
   ГрафическоеОкно.НарисоватьТекст(x - 20, y + 400, "Small Basic Tetris")
-  Program.Delay(200) // without this delay, the above text will use the fontsize of the score 
-  ГрафическоеОкно.FontSize <- 16.0
+  Программа.Задержка(200) // without this delay, the above text will use the fontsize of the score 
+  ГрафическоеОкно.РазмерШрифта <- 16.0
   ГрафическоеОкно.НарисоватьТекст(x - 20, y + 440, "ver.0.1")
 
-  Program.Delay(200) // without this delay, the above text will use the fontsize of the score 
+  Программа.Задержка(200) // without this delay, the above text will use the fontsize of the score 
   score <- 0
   PrintScore()
 
 and PrintScore () =
-  ГрафическоеОкно.PenWidth <- 4.0
+  ГрафическоеОкно.ШиринаПера <- 4.0
   ГрафическоеОкно.ЦветКисти <- Цвета.Pink
   ГрафическоеОкно.ЗаполнитьПрямоугольник(480, 65, 150, 50)
   ГрафическоеОкно.ЦветКисти <- Цвета.Black
   ГрафическоеОкно.DrawRectangle(480, 65, 150, 50)
   ГрафическоеОкно.FontItalic <- false
-  ГрафическоеОкно.FontSize <- 32.0
+  ГрафическоеОкно.РазмерШрифта <- 32.0
   ГрафическоеОкно.FontName <- "Impact"
   ГрафическоеОкно.ЦветКисти <- Цвета.Black
   ГрафическоеОкно.НарисоватьТекст(485, 70, Text.Append(Text.GetSubText( "00000000", 0, 8 - Text.GetLength( string score ) ), score))

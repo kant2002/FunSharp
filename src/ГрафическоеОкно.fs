@@ -8,10 +8,10 @@ type ГрафическоеОкно private () =
    static let mutable фоновыйЦвет = Цвета.White
    static let mutable ширина = 640
    static let mutable высота = 480
-   static let перо () = Pen(ГрафическоеОкно.ЦветПера,ГрафическоеОкно.PenWidth)
+   static let перо () = Pen(ГрафическоеОкно.ЦветПера,ГрафическоеОкно.ШиринаПера)
    static let кисть () = ГрафическоеОкно.ЦветКисти
    static let шрифт () = 
-      Шрифт.Font(ГрафическоеОкно.FontSize,ГрафическоеОкно.FontName,ГрафическоеОкно.FontBold, ГрафическоеОкно.FontItalic)
+      Шрифт.Font(ГрафическоеОкно.РазмерШрифта,ГрафическоеОкно.FontName,ГрафическоеОкно.FontBold, ГрафическоеОкно.FontItalic)
    static let нарисовать drawing = addDrawing drawing      
    static let нарисоватьВ (x,y) drawing = addDrawingAt drawing (x,y)
    static member Заголовок
@@ -36,9 +36,9 @@ type ГрафическоеОкно private () =
       with get () = true
       and set (value:bool) = ()
    static member val ЦветПера = Цвета.Black with get, set
-   static member val PenWidth = 2.0 with get, set
+   static member val ШиринаПера = 2.0 with get, set
    static member val ЦветКисти = Цвета.Purple with get,set
-   static member val FontSize = 12.0 with get,set
+   static member val РазмерШрифта = 12.0 with get,set
    static member val FontName = "" with get,set
    static member val FontBold = false with get,set
    static member val FontItalic = false with get,set

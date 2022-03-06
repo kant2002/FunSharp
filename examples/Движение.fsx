@@ -2,7 +2,6 @@
 #r "../src/bin/Debug/net48/FunSharp.Library.dll"
 
 open Библиотека
-open System.Threading
 
 let мяч = Фигуры.ДобавитьПрямоугольник(200.0, 100.0)
 
@@ -12,4 +11,4 @@ let OnMouseDown () =
   Фигуры.Переместить(мяч, x, y)
 
 ГрафическоеОкно.MouseDown <- Callback(OnMouseDown)
-Thread.Sleep 2_000
+Программа.Задержка(2_000)

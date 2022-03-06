@@ -112,7 +112,7 @@ and Play () =
    play <- 1
    pause <- 0
    while (play = 1) do
-     Program.Delay(1000/fps)
+     Программа.Задержка(1000/fps)
      if (pause = 0) then
        Move()
        CollisionCheck()
@@ -138,28 +138,28 @@ and ChangeDirection () =
 // Move all on screen items
 and Move  () =
    // Move player
-   let x = Math.Remainder(Фигуры.GetLeft(player) + (Math.Cos(Math.GetRadians(playerAngle - 90.0)) * playerSpeed) + gameWidth, gameWidth)
-   let y = Math.Remainder(Фигуры.GetTop(player) + (Math.Sin(Math.GetRadians(playerAngle - 90.0)) * playerSpeed) + gameHeight, gameHeight)
+   let x = Math.Remainder(Фигуры.ПолучитьЛево(player) + (Math.Cos(Math.GetRadians(playerAngle - 90.0)) * playerSpeed) + gameWidth, gameWidth)
+   let y = Math.Remainder(Фигуры.ПолучитьВерх(player) + (Math.Sin(Math.GetRadians(playerAngle - 90.0)) * playerSpeed) + gameHeight, gameHeight)
    Фигуры.Переместить(player, x, y)
 
    // Move rocks
    for i = 0 to rockCount-1 do
-     let x = Math.Remainder(Фигуры.GetLeft(rock.[i]) + (Math.Cos(Math.GetRadians(rockAngle.[i] - 90.0)) * rockSpeed) + gameWidth, gameWidth)
-     let y = Math.Remainder(Фигуры.GetTop(rock.[i]) + (Math.Sin(Math.GetRadians(rockAngle.[i] - 90.0)) * rockSpeed) + gameHeight, gameHeight)
+     let x = Math.Remainder(Фигуры.ПолучитьЛево(rock.[i]) + (Math.Cos(Math.GetRadians(rockAngle.[i] - 90.0)) * rockSpeed) + gameWidth, gameWidth)
+     let y = Math.Remainder(Фигуры.ПолучитьВерх(rock.[i]) + (Math.Sin(Math.GetRadians(rockAngle.[i] - 90.0)) * rockSpeed) + gameHeight, gameHeight)
      Фигуры.Переместить(rock.[i], x, y)
 
    // Move ammo
    for i = 0 to ammoCount-1 do
-     let x = Math.Remainder(Фигуры.GetLeft(ammo.[i]) + (Math.Cos(Math.GetRadians(ammoAngle.[i] - 90.0)) * ammoSpeed) + gameWidth, gameWidth)
-     let y = Math.Remainder(Фигуры.GetTop(ammo.[i]) + (Math.Sin(Math.GetRadians(ammoAngle.[i] - 90.0)) * ammoSpeed) + gameHeight, gameHeight)
+     let x = Math.Remainder(Фигуры.ПолучитьЛево(ammo.[i]) + (Math.Cos(Math.GetRadians(ammoAngle.[i] - 90.0)) * ammoSpeed) + gameWidth, gameWidth)
+     let y = Math.Remainder(Фигуры.ПолучитьВерх(ammo.[i]) + (Math.Sin(Math.GetRadians(ammoAngle.[i] - 90.0)) * ammoSpeed) + gameHeight, gameHeight)
      Фигуры.Переместить(ammo.[i], x, y)
      ammoAge.[i] <- ammoAge.[i] + 1
 
 // Check for collisions between onscreen items
 and CollisionCheck () =
    // Calculate player bounding box.
-   px1 <- Фигуры.GetLeft(player) - ( (Math.Abs(playerWidth * Math.Cos(Math.GetRadians(playerAngle)) + playerHeight * Math.Sin(Math.GetRadians(playerAngle))) - playerWidth) / 2.0)
-   py1 <- Фигуры.GetTop(player) - ( (Math.Abs(playerWidth * Math.Sin(Math.GetRadians(playerAngle)) + playerHeight * Math.Cos(Math.GetRadians(playerAngle))) - playerHeight) / 2.0)
+   px1 <- Фигуры.ПолучитьЛево(player) - ( (Math.Abs(playerWidth * Math.Cos(Math.GetRadians(playerAngle)) + playerHeight * Math.Sin(Math.GetRadians(playerAngle))) - playerWidth) / 2.0)
+   py1 <- Фигуры.ПолучитьВерх(player) - ( (Math.Abs(playerWidth * Math.Sin(Math.GetRadians(playerAngle)) + playerHeight * Math.Cos(Math.GetRadians(playerAngle))) - playerHeight) / 2.0)
    px2 <- px1 + Math.Abs(playerWidth * Math.Cos(Math.GetRadians(playerAngle)) + playerHeight * Math.Sin(Math.GetRadians(playerAngle)))
    py2 <- py1 + Math.Abs(playerWidth * Math.Sin(Math.GetRadians(playerAngle)) + playerHeight * Math.Cos(Math.GetRadians(playerAngle)))
 
@@ -177,8 +177,8 @@ and CollisionCheck () =
    let ammoToRemove = ResizeArray()
    // Check if each rock has hit something
    for i = 0 to rockCount-1 do
-     let ax1 = Фигуры.GetLeft(rock.[i])
-     let ay1 = Фигуры.GetTop(rock.[i])
+     let ax1 = Фигуры.ПолучитьЛево(rock.[i])
+     let ay1 = Фигуры.ПолучитьВерх(rock.[i])
      let ax2 = ax1 + float rockSize.[i]
      let ay2 = ay1 + float rockSize.[i]
 
@@ -190,8 +190,8 @@ and CollisionCheck () =
 
      // Ammo collison
      for j in 0..ammoCount-1 do          
-         let bx1 = Фигуры.GetLeft(ammo.[j])
-         let by1 = Фигуры.GetTop(ammo.[j])
+         let bx1 = Фигуры.ПолучитьЛево(ammo.[j])
+         let by1 = Фигуры.ПолучитьВерх(ammo.[j])
          let bx2 = bx1 + ammoSize
          let by2 = by1 + ammoSize
 
@@ -215,8 +215,8 @@ and AddRock () =
    let size,x,y =
       if (nextSize <> 0) then
          let size = rockMin * nextSize
-         let x = Фигуры.GetLeft(nextPosition)
-         let y = Фигуры.GetTop(nextPosition)
+         let x = Фигуры.ПолучитьЛево(nextPosition)
+         let y = Фигуры.ПолучитьВерх(nextPosition)
          nextSize <- 0
          size,x,y
       else

@@ -17,7 +17,7 @@ let PrintScore () =
   ГрафическоеОкно.ЦветКисти <- Цвета.Black
   ГрафическоеОкно.НарисоватьТекст(10, 10, "Score: " + score.ToString())
 
-ГрафическоеОкно.FontSize <- 14.0
+ГрафическоеОкно.РазмерШрифта <- 14.0
 ГрафическоеОкно.МышьПеремещена <- Callback(OnMouseMove)
 
 PrintScore()
@@ -37,7 +37,7 @@ while (y < gh) do
   if (y <= 0.0) then
     deltaY <- -deltaY
  
-  let padX = Фигуры.GetLeft(paddle)
+  let padX = Фигуры.ПолучитьЛево(paddle)
   if (y = gh - 28.0 && x >= padX && x <= padX + 120.0) then
     //Sound.PlayClick()
     score <- score + 10
@@ -45,6 +45,6 @@ while (y < gh) do
     deltaY <- -deltaY  
 
   Фигуры.Переместить(ball, x, y)
-  Program.Delay(15)
+  Программа.Задержка(15)
   
 ГрафическоеОкно.ПоказатьСообщение("Your score is: " + score.ToString(), "Paddle")

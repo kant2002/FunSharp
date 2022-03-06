@@ -2,7 +2,6 @@
 #r "../src/bin/Debug/net48/FunSharp.Library.dll"
 
 open Библиотека
-open System.Threading
 
 let угол = 30.0
 let дельта = 10.0
@@ -18,4 +17,4 @@ let rec нарисоватьДерево дистанция =
       Черепаха.Переместить(-дистанция)
 
 нарисоватьДерево 60.0
-Thread.Sleep 2_000
+Программа.Задержка(2_000)

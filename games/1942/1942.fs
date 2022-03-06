@@ -160,7 +160,7 @@ let rec Init() =
       массив_Островов.[i] <- массив_Островов.[Math.Remainder(i,4)]
 
    игрок <- Фигуры.ДобавитьИзображение(игрок0)
-   ГрафическоеОкно.FontSize <- 20.0
+   ГрафическоеОкно.РазмерШрифта <- 20.0
    ГрафическоеОкно.ЦветФона <- Цвета.Gray
    ГрафическоеОкно.ЦветПера <- Цвета.Yellow
 
@@ -190,7 +190,7 @@ and Play () =
    TimePlay <- 0
    Фигуры.Переместить(игрок, gameWidth/2 , gameHeight - 80 )
    while (play = 1) do
-      Program.Delay(1000/fps)
+      Программа.Задержка(1000/fps)
       TimePlay <- TimePlay + 1
 
       if (pause = 0) then
@@ -209,8 +209,8 @@ and Play () =
                  
          if (TimePlay > 4000) then
             Фигуры.Переместить(Фигуры.ДобавитьИзображение(``end``), 230,200)
-            Program.Delay(5000)
-            Program.End()     
+            Программа.Задержка(5000)
+            Программа.Закончить()     
          lock ammoSync (fun () ->  
             moveall()
          )
@@ -280,8 +280,8 @@ and moveall () =
    // Move playerammo
    for i = 1 to Player_AmmoCount do
       let shapeName = Player_Ammo.[i]
-      let Player_Ammox = Фигуры.GetLeft(shapeName) + incbx
-      let Player_Ammoy = Фигуры.GetTop(shapeName) - Player_Ammospeed
+      let Player_Ammox = Фигуры.ПолучитьЛево(shapeName) + incbx
+      let Player_Ammoy = Фигуры.ПолучитьВерх(shapeName) - Player_Ammospeed
       Фигуры.Переместить(shapeName, Player_Ammox, Player_Ammoy)
       let oldAge = Player_AmmoAge.GetOrDefault(i, 0)
       Player_AmmoAge.[i] <- oldAge + 1
@@ -289,8 +289,8 @@ and moveall () =
    for iea = 1 to Enemy_AmmoCount do
       let dx = (Math.Sin((Enemy_Ammo_Angle.[iea] )) * float Enemy_Ammospeed)
       let dy = (Math.Cos((Enemy_Ammo_Angle.[iea] )) * float Enemy_Ammospeed)
-      let Enemy_Ammox = Фигуры.GetLeft(Enemy_Ammo.[iea]) + dx + incbx
-      let Enemy_Ammoy = Фигуры.GetTop(Enemy_Ammo.[iea]) + dy + incby * 0.1
+      let Enemy_Ammox = Фигуры.ПолучитьЛево(Enemy_Ammo.[iea]) + dx + incbx
+      let Enemy_Ammoy = Фигуры.ПолучитьВерх(Enemy_Ammo.[iea]) + dy + incby * 0.1
       Фигуры.Переместить(Enemy_Ammo.[iea], Enemy_Ammox, Enemy_Ammoy)
       let oldAge =
          match Enemy_AmmoAge.TryGetValue(iea) with
@@ -458,8 +458,8 @@ and Collision_pbe () =  // for player-bullet and enemies
    while i1 <= Player_AmmoCount do
       // player bullet position
       let shapeName = Player_Ammo.[i1]
-      let Player_Ammox = int (Фигуры.GetLeft(shapeName))
-      let Player_Ammoy = int (Фигуры.GetTop(shapeName))
+      let Player_Ammox = int (Фигуры.ПолучитьЛево(shapeName))
+      let Player_Ammoy = int (Фигуры.ПолучитьВерх(shapeName))
       let px1=Player_Ammox+player_bullet_size/3   // in order to have a more precise collison than the bullet image size
       let py1=Player_Ammoy+player_bullet_size/3
       let px2=px1+2*player_bullet_size/3
@@ -487,11 +487,11 @@ and Collision_pbe () =  // for player-bullet and enemies
                // begin animation for explosion at coordinate ax1, ay1
                let toto = Фигуры.ДобавитьИзображение(enemy_expl1)
                Фигуры.Переместить(toto,ax1,ay1)
-               Program.Delay(30)
+               Программа.Задержка(30)
                Фигуры.Удалить(toto)
                let toto = Фигуры.ДобавитьИзображение(enemy_expl2)
                Фигуры.Переместить(toto,ax1,ay1)
-               Program.Delay(30)
+               Программа.Задержка(30)
                Фигуры.Удалить(toto)
                score <- score + 100
 
@@ -501,8 +501,8 @@ and Collision_pbe () =  // for player-bullet and enemies
       i1 <- i1 + 1
 
 and Collision_ep () =   // for enemies and player 
-   let px1 = int (Фигуры.GetLeft(игрок))
-   let py1 = int (Фигуры.GetTop(игрок))
+   let px1 = int (Фигуры.ПолучитьЛево(игрок))
+   let py1 = int (Фигуры.ПолучитьВерх(игрок))
    let px2 = px1 + player_size
    let py2 = py1 + player_size
 
@@ -525,15 +525,15 @@ and Collision_ep () =   // for enemies and player
             // begin animation for explosion at coordinate ax1, ay1
             let toto = Фигуры.ДобавитьИзображение(enemy_expl1)
             Фигуры.Переместить(toto,ax1,ay1)
-            Program.Delay(30)
+            Программа.Задержка(30)
             Фигуры.Удалить(toto)
             let toto = Фигуры.ДобавитьИзображение(player_expl)
             Фигуры.Переместить(toto,ax1,ay1)
-            Program.Delay(300)
+            Программа.Задержка(300)
             Фигуры.Удалить(toto)
             Player_Lives <- Player_Lives - 1
             if (Player_Lives = 0) then
-               Program.End()
+               Программа.Закончить()
 
       i2 <- i2 + 1
 
@@ -547,8 +547,8 @@ and Collision_ep () =   // for enemies and player
    while i3 <= Enemy_AmmoCount do
       // enemy position 
 
-      let ax1=int (Фигуры.GetLeft(Enemy_Ammo.[i3]))
-      let ay1=int (Фигуры.GetTop(Enemy_Ammo.[i3]))
+      let ax1=int (Фигуры.ПолучитьЛево(Enemy_Ammo.[i3]))
+      let ay1=int (Фигуры.ПолучитьВерх(Enemy_Ammo.[i3]))
 
       let ax2=ax1+enemy_ammo_size
       let ay2=ay1+enemy_ammo_size
@@ -563,15 +563,15 @@ and Collision_ep () =   // for enemies and player
             // begin animation for explosion at coordinate ax1, ay1
             let toto = Фигуры.ДобавитьИзображение(enemy_expl1)
             Фигуры.Переместить(toto,paddleX+ player_size/2,paddleY+ player_size/2)
-            Program.Delay(30)
+            Программа.Задержка(30)
             Фигуры.Удалить(toto)
             let toto = Фигуры.ДобавитьИзображение(player_expl)
             Фигуры.Переместить(toto,paddleX+ player_size/2,paddleY+ player_size/2)
-            Program.Delay(300)
+            Программа.Задержка(300)
             Фигуры.Удалить(toto)
             Player_Lives <- Player_Lives - 1
             if (Player_Lives = 0) then
-               Program.End()
+               Программа.Закончить()
 
       i3 <- i3 + 1
 

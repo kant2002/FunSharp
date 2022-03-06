@@ -4,8 +4,8 @@ open System
 open System.Threading
 
 [<Sealed>]
-type Program private () =
-   static member Delay(ms:int) = Thread.Sleep(ms)
-   static member End() = 
+type Программа private () =
+   static member Задержка(мс:int) = Thread.Sleep(мс)
+   static member Закончить() = 
       Xwt.Application.Exit()
       Environment.Exit(0)     
