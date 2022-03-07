@@ -48,7 +48,7 @@ type Фигуры private () =
       Фигуры.ДобавитьЭллипс(float ширина,float высота)
    static member ДобавитьИзображение(имяИзображения) =
       let имя = генИмя "Image"
-      match ImageList.TryGetImageBytes(имяИзображения) with
+      match СписокИзображений.ПопробоватьПолучитьБайтыИзображения(имяИзображения) with
       | Some байты ->
          let поток = new System.IO.MemoryStream(байты)
          let изображение = Xwt.Drawing.Image.FromStream(поток)
@@ -67,7 +67,7 @@ type Фигуры private () =
             else             
                let изображениеСсыл = ref null                 
                Мое.Приложение.Вызвать(fun () ->
-                  use поток = Resource.GetStream(имяИзображения)
+                  use поток = Ресурс.ПолучитьПоток(имяИзображения)
                   изображениеСсыл := Xwt.Drawing.Image.FromStream(поток)
                )
                изображениеСсыл

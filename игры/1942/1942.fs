@@ -52,28 +52,28 @@ let mutable ракеткаY = 0
 let mutable фон = "<shape name>"
 
 // addImage in the right order is needed to define the shapes depth
-let остров4 = ImageList.LoadImage(Путь + "island4.png")
-let остров1= ImageList.LoadImage(Путь + "island1.png")
-let остров2= ImageList.LoadImage(Путь + "island2.png")
-let остров3= ImageList.LoadImage(Путь + "island3.png")
-let остров5= ImageList.LoadImage(Путь + "island5.png")
-let игрок0 = ImageList.LoadImage(Путь + "myplane1.png")
-let background = ImageList.LoadImage(Путь + "fond.png")
-let пуля0 = ImageList.LoadImage(Путь + "bullet.png")
-let враг= ImageList.LoadImage(Путь + "enemy1.png")
-let враг2 = ImageList.LoadImage(Путь + "enemy2.png")
-let взрв_врага1=ImageList.LoadImage(Путь + "explo1.png")
-let взрв_врага2=ImageList.LoadImage(Путь + "explo2.png")
-let взрв_игрока=ImageList.LoadImage(Путь + "explo2.png")
-let Enemy_bullet=ImageList.LoadImage(Путь + "E_bullet.png")
-let ``end`` = ImageList.LoadImage(Путь + "End.png")
+let остров4 = СписокИзображений.ЗагрузитьИзображение(Путь + "island4.png")
+let остров1= СписокИзображений.ЗагрузитьИзображение(Путь + "island1.png")
+let остров2= СписокИзображений.ЗагрузитьИзображение(Путь + "island2.png")
+let остров3= СписокИзображений.ЗагрузитьИзображение(Путь + "island3.png")
+let остров5= СписокИзображений.ЗагрузитьИзображение(Путь + "island5.png")
+let игрок0 = СписокИзображений.ЗагрузитьИзображение(Путь + "myplane1.png")
+let background = СписокИзображений.ЗагрузитьИзображение(Путь + "fond.png")
+let пуля0 = СписокИзображений.ЗагрузитьИзображение(Путь + "bullet.png")
+let враг= СписокИзображений.ЗагрузитьИзображение(Путь + "enemy1.png")
+let враг2 = СписокИзображений.ЗагрузитьИзображение(Путь + "enemy2.png")
+let взрв_врага1=СписокИзображений.ЗагрузитьИзображение(Путь + "explo1.png")
+let взрв_врага2=СписокИзображений.ЗагрузитьИзображение(Путь + "explo2.png")
+let взрв_игрока=СписокИзображений.ЗагрузитьИзображение(Путь + "explo2.png")
+let Enemy_bullet=СписокИзображений.ЗагрузитьИзображение(Путь + "E_bullet.png")
+let ``end`` = СписокИзображений.ЗагрузитьИзображение(Путь + "End.png")
 
-let массив_Врагов = Dictionary() // Array that contain all the enemies
-let enemy_TimeLine = Dictionary()
-let линия_врага = Dictionary()
-let позX_Врага = Dictionary()
-let позY_Врага = Dictionary()
-let enemy_PathNBR = Dictionary()
+let массив_Врагов = Словарь() // Array that contain all the enemies
+let enemy_TimeLine = Словарь()
+let линия_врага = Словарь()
+let позX_Врага = Словарь()
+let позY_Врага = Словарь()
+let enemy_PathNBR = Словарь()
 
 let mutable enemy_Nbr = 6
 let mutable количество_Врагов = 0
@@ -85,10 +85,10 @@ let enemy_size = 32
 let enemy_ammo_size = 8
 let player_bullet_size = 32
 
-let массив_Островов = Dictionary()
+let массив_Островов = Словарь()
 
-let Пули_Игрока = Dictionary()
-let ВозрастПули_Игрока = Dictionary()
+let Пули_Игрока = Словарь()
+let ВозрастПули_Игрока = Словарь()
 ВозрастПули_Игрока.[1] <- 0
 let Игрок_МаксПуль = 50
 let mutable Игрок_КоличествоПуль = 0
@@ -103,10 +103,10 @@ let mutable incy = 0  // Y-axis increment for background
 let mutable incbx = 0.0 // increment for bullets and all objects on X
 let mutable incby = 0.0 // increment for bullets and all objects on Y
 
-let Пули_Врага = Dictionary()
-let ВозрастПули_Врага = Dictionary()
+let Пули_Врага = Словарь()
+let ВозрастПули_Врага = Словарь()
 ВозрастПули_Врага.[1] <- 0
-let Угол_Пуль_Врага= Dictionary()
+let Угол_Пуль_Врага= Словарь()
 let Враг_МаксПуль = 30
 let mutable КоличествоПуль_Врага = 0
 let Скорость_ПульВрага = скф + 4
@@ -124,13 +124,13 @@ let mutable enemy_type = 0
 
 let mutable score = 0
 
-let позОстровов = Dictionary<int,Dictionary<int,int>>()
-let incislandx = Dictionary<int,int>()
-let incislandy = Dictionary<int,int>()
-let уровень1 = Dictionary<int,Dictionary<int,int>>()
-let путьВрага = Dictionary<int, Dictionary<int, Dictionary<int,float>>>()
-let позx = Dictionary<int,_>()
-let позy = Dictionary<int,_>()
+let позОстровов = Словарь<int,Словарь<int,int>>()
+let incislandx = Словарь<int,int>()
+let incislandy = Словарь<int,int>()
+let уровень1 = Словарь<int,Словарь<int,int>>()
+let путьВрага = Словарь<int, Словарь<int, Словарь<int,float>>>()
+let позx = Словарь<int,_>()
+let позy = Словарь<int,_>()
 
 // Setup world
 let rec Инициализация() =
@@ -577,40 +577,40 @@ and Столкновения_ви () =   // для врагов и игрока
 
 and ПозицииОстровов () =
    // island positions, avoid randomGeneration and islands overlap
-   позОстровов.[0] <- Dictionary()
+   позОстровов.[0] <- Словарь()
    позОстровов.[0].[1] <- 1
    позОстровов.[0].[2] <- 0
    позОстровов.[0].[3] <- -150
-   позОстровов.[1] <- Dictionary()
+   позОстровов.[1] <- Словарь()
    позОстровов.[1].[1] <- 1
    позОстровов.[1].[2] <- - int (Math.Round(float ширинаИгры/2.0))
    позОстровов.[1].[3] <- -150
-   позОстровов.[2] <- Dictionary()
+   позОстровов.[2] <- Словарь()
    позОстровов.[2].[1] <- 2
    позОстровов.[2].[2] <- -2 * int (Math.Round(float ширинаИгры/3.0))
    позОстровов.[2].[3] <- -150
-   позОстровов.[3] <- Dictionary()
+   позОстровов.[3] <- Словарь()
    позОстровов.[3].[1] <- 1
    позОстровов.[3].[2] <- 2 * int (Math.Round(float ширинаИгры/3.0))
    позОстровов.[3].[3] <- -150
-   позОстровов.[4] <- Dictionary()
+   позОстровов.[4] <- Словарь()
    позОстровов.[4].[1] <- 2
    позОстровов.[4].[2] <- ширинаИгры
    позОстровов.[4].[3] <- -150
-   позОстровов.[5] <- Dictionary()
+   позОстровов.[5] <- Словарь()
    позОстровов.[5].[1] <- 3
    позОстровов.[5].[2] <- int (Math.Round(float ширинаИгры/3.0))
    позОстровов.[5].[3] <- -150
-   позОстровов.[6] <- Dictionary()
+   позОстровов.[6] <- Словарь()
    позОстровов.[6].[1] <- 3
    позОстровов.[6].[2] <- -ширинаИгры
    позОстровов.[6].[3] <- -150
 
 and определить_пути () =
    for i = 0 to 6 do
-      путьВрага.[i] <- Dictionary()
+      путьВрага.[i] <- Словарь()
       for j = 0 to 4 do 
-         путьВрага.[i].[j] <- Dictionary()
+         путьВрага.[i].[j] <- Словарь()
 
    путьВрага.[0].[0].[0] <- 3.   // nbr of strait lines of path
    путьВрага.[0].[1].[1] <- 30.  // from 0 to this in timeline
@@ -1041,7 +1041,7 @@ and определить_пути () =
 
 
 and создать_уровень1 () =  // this define the behavior of the différent squadron along the time play for level 1
-   уровень1.[1] <- Dictionary()
+   уровень1.[1] <- Словарь()
    уровень1.[1].[1] <- 20    // when timeplay=level1[1][1]
    уровень1.[1].[2] <- 2    // lauch enemy with Path level1[1][2]
    уровень1.[1].[3] <- -10  // at x coordinate level1[1][3]
@@ -1049,7 +1049,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
    уровень1.[1].[5] <- 1   // 1 for create enemy at the left side; 2 for the right side of screen
    уровень1.[1].[6] <- 4   // level[1][6] is the number of enemies
    уровень1.[1].[7] <- 1   // type of enemy
-   уровень1.[2] <- Dictionary()
+   уровень1.[2] <- Словарь()
    уровень1.[2].[1] <- 80
    уровень1.[2].[2] <- 6
    уровень1.[2].[3] <- ширинаИгры/2
@@ -1057,7 +1057,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
    уровень1.[2].[5] <- 1
    уровень1.[2].[6] <- 3
    уровень1.[2].[7] <- 1
-   уровень1.[3] <- Dictionary()
+   уровень1.[3] <- Словарь()
    уровень1.[3].[1] <- 150
    уровень1.[3].[2] <- 0
    уровень1.[3].[3] <- -10
@@ -1065,7 +1065,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
    уровень1.[3].[5] <- 1
    уровень1.[3].[6] <- 6
    уровень1.[3].[7] <- 2
-   уровень1.[4] <- Dictionary()
+   уровень1.[4] <- Словарь()
    уровень1.[4].[1] <- 280
    уровень1.[4].[2] <- 4
    уровень1.[4].[3] <- -10
@@ -1073,7 +1073,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
    уровень1.[4].[5] <- 1
    уровень1.[4].[6] <- 3
    уровень1.[4].[7] <- 2
-   уровень1.[5] <- Dictionary()
+   уровень1.[5] <- Словарь()
    уровень1.[5].[1] <- 410
    уровень1.[5].[2] <- 6
    уровень1.[5].[3] <- ширинаИгры/3
@@ -1081,7 +1081,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
    уровень1.[5].[5] <- 1
    уровень1.[5].[6] <- 3
    уровень1.[5].[7] <- 1
-   уровень1.[6] <- Dictionary()
+   уровень1.[6] <- Словарь()
    уровень1.[6].[1] <- 430
    уровень1.[6].[2] <- 6
    уровень1.[6].[3] <- 2*ширинаИгры/3
@@ -1106,7 +1106,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
    уровень1.[6].[6] <- 3
    уровень1.[6].[7] <- 3
   
-   уровень1.[7] <- Dictionary()
+   уровень1.[7] <- Словарь()
    уровень1.[7].[1] <- 690
    уровень1.[7].[2] <- 6
    уровень1.[7].[3] <- ширинаИгры/3
@@ -1115,7 +1115,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
    уровень1.[7].[6] <- 3
    уровень1.[7].[7] <- 2
    for i= 1 to 10 do
-      уровень1.[7+i] <- Dictionary()
+      уровень1.[7+i] <- Словарь()
       уровень1.[7+i].[1] <- 700+50*i
       уровень1.[7+i].[2] <- 6
       уровень1.[7+i].[3] <- Math.GetRandomNumber(ширинаИгры)
@@ -1123,7 +1123,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
       уровень1.[7+i].[5] <- Math.GetRandomNumber(2)
       уровень1.[7+i].[6] <- Math.GetRandomNumber(3)
       уровень1.[7+i].[7] <- Math.GetRandomNumber(2)
-   уровень1.[18] <- Dictionary()
+   уровень1.[18] <- Словарь()
    уровень1.[18].[1] <- 1300
    уровень1.[18].[2] <- 1
    уровень1.[18].[3] <- ширинаИгры
@@ -1133,7 +1133,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
    уровень1.[18].[7] <- 2
 
    for i=1 to 10 do
-      уровень1.[18+i] <- Dictionary()
+      уровень1.[18+i] <- Словарь()
       уровень1.[18+i].[1] <- 1330+50*i
       уровень1.[18+i].[2] <- 4+Math.GetRandomNumber(2)
       уровень1.[18+i].[3] <- Math.GetRandomNumber(50)
@@ -1143,7 +1143,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
       уровень1.[18+i].[7] <- Math.GetRandomNumber(2)
 
    for i= 1 to 10 do
-      уровень1.[28+i] <- Dictionary()
+      уровень1.[28+i] <- Словарь()
       уровень1.[28+i].[1] <- 1900+50*i
       уровень1.[28+i].[2] <- 4+Math.GetRandomNumber(2)
       уровень1.[28+i].[3] <- -Math.GetRandomNumber(50)
@@ -1153,7 +1153,7 @@ and создать_уровень1 () =  // this define the behavior of the diff
       уровень1.[28+i].[7] <- Math.GetRandomNumber(2)
 
    for i= 1 to 10 do
-     уровень1.[38+i] <- Dictionary()
+     уровень1.[38+i] <- Словарь()
      уровень1.[38+i].[1] <- 2450+100*i
      уровень1.[38+i].[2] <- 6
      уровень1.[38+i].[3] <- Math.GetRandomNumber(ширинаИгры)

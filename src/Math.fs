@@ -1,12 +1,12 @@
 ﻿module Библиотека.Math
 
-let private rand = System.Random()
-let GetRadians (deg:float) = deg * System.Math.PI / 180.
-let GetRandomNumber(n) = rand.Next(n) + 1
+let private ранд = System.Random()
+let GetRadians (град:float) = град * System.Math.PI / 180.
+let GetRandomNumber(n) = ранд.Next(n) + 1
 let inline Remainder(x,y) = x % y
-let Cos(angle) = cos angle
-let Sin(angle) = sin angle
-let ArcTan(angle) = atan angle
+let Cos(угол) = cos угол
+let Sin(угол) = sin угол
+let ArcTan(угол) = atan угол
 let inline Abs(n) = abs n
 let inline Floor(n) = floor n |> int
 let inline Round(n) = round n

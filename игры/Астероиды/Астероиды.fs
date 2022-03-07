@@ -66,10 +66,10 @@ let mutable количествоАстероидов = 0
 let mutable количествоПуль = 0
 
 let путь = "" // "http://smallbasic.com/drop/"
-let большойАстероид = ImageList.LoadImage(путь + "Asteroids_BigRock.png")
-let среднийАстероид = ImageList.LoadImage(путь + "Asteroids_MediumRock.png")
-let малАстероид = ImageList.LoadImage(путь + "Asteroids_SmallRock.png")
-let фон = ImageList.LoadImage(путь + "Asteroids_Sky.png")
+let большойАстероид = СписокИзображений.ЗагрузитьИзображение(путь + "Asteroids_BigRock.png")
+let среднийАстероид = СписокИзображений.ЗагрузитьИзображение(путь + "Asteroids_MediumRock.png")
+let малАстероид = СписокИзображений.ЗагрузитьИзображение(путь + "Asteroids_SmallRock.png")
+let фон = СписокИзображений.ЗагрузитьИзображение(путь + "Asteroids_Sky.png")
 
 let mutable пауза = 0
 let mutable игра = 0

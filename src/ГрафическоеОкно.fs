@@ -60,10 +60,10 @@ type ГрафическоеОкно private () =
       ГрафическоеОкно.НарисоватьЭллипс(float x, float y, float width, float height)
    static member НарисоватьИзображение(имяИзображения,x,y) =
       let imageRef =
-         match ImageList.TryGetImageBytes имяИзображения with
-         | Some bytes -> 
-            use memoryStream = new System.IO.MemoryStream(bytes)
-            ref (Xwt.Drawing.Image.FromStream(memoryStream))           
+         match СписокИзображений.ПопробоватьПолучитьБайтыИзображения имяИзображения with
+         | Some байты -> 
+            use потокПамяти = new System.IO.MemoryStream(байты)
+            ref (Xwt.Drawing.Image.FromStream(потокПамяти))           
          | None ->
             if имяИзображения.StartsWith("http:") || имяИзображения.StartsWith("https:") 
             then

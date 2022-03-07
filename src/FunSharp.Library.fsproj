@@ -5,32 +5,32 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<Compile Include="Коллекции.fs" />
 		<Compile Include="DrawingTypes.fs" />
 		<Compile Include="Draw.fs" />
 		<Compile Include="DrawingCanvas.fs" />
 		<Compile Include="Цвета.fs" />
-		<Compile Include="App.fs" />
+		<Compile Include="Приложение.fs" />
 		<Compile Include="Http.fs" />
-		<Compile Include="Resource.fs" />
-		<Compile Include="ImageList.fs" />
+		<Compile Include="Ресурс.fs" />
+		<Compile Include="СписокИзображений.fs" />
 		<Compile Include="ГрафическоеОкно.fs" />
 		<Compile Include="Фигуры.fs" />
 		<Compile Include="Черепаха.fs" />
 		<Compile Include="ЭлементыУправления.fs" />
 		<Compile Include="Мышь.fs" />
 		<Compile Include="Часы.fs" />
-		<Compile Include="Timer.fs" />
+		<Compile Include="Таймер.fs" />
 		<Compile Include="Math.fs" />
-		<Compile Include="Text.fs" />
-		<Compile Include="Sound.fs" />
-		<Compile Include="Program.fs" />
-		<Compile Include="Collections.fs" />
+		<Compile Include="Текст.fs" />
+		<Compile Include="Звук.fs" />
+		<Compile Include="Программа.fs" />
 		<EmbeddedResource Include="turtle.png" />
-		<EmbeddedResource Include="Sounds\BeepBeep.wav" />
-		<EmbeddedResource Include="Sounds\BellRing.wav" />
-		<EmbeddedResource Include="Sounds\Chime.wav" />
-		<EmbeddedResource Include="Sounds\Click.wav" />
-		<EmbeddedResource Include="Sounds\Pause.wav" />
+		<EmbeddedResource Include="Звук\BeepBeep.wav" />
+		<EmbeddedResource Include="Звук\BellRing.wav" />
+		<EmbeddedResource Include="Звук\Chime.wav" />
+		<EmbeddedResource Include="Звук\Click.wav" />
+		<EmbeddedResource Include="Звук\Pause.wav" />
 	</ItemGroup>
 
 	<!-- <ItemGroup>

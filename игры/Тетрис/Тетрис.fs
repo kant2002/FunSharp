@@ -39,7 +39,7 @@ type Шаблон = {
    }
 
 /// Named templates
-let шаблоны = Dictionary<string,Шаблон>()
+let шаблоны = Словарь<string,Шаблон>()
 /// Array of box shape names
 type Квадраты () as this=
    inherit ResizeArray<string>()
@@ -52,7 +52,7 @@ let кускиКШаблонам = System.Collections.Generic.Dictionary<string,
 let spots = Array.create (ШИРИНАХ*(ВЫСОТАХ+1)) ""
 
 let rec ГлавныйЦикл () =
-  шаблон <- Text.Append("template", Math.GetRandomNumber(7))
+  шаблон <- Текст.Добавить("template", Math.GetRandomNumber(7))
 
   СоздатьКусок() // in: template ret: h
   следующийКусок <- h
@@ -65,7 +65,7 @@ let rec ГлавныйЦикл () =
 
     задержка <- задержкаСессии
     let этотКусок = следующийКусок
-    шаблон <- Text.Append("template", Math.GetRandomNumber(7))
+    шаблон <- Текст.Добавить("template", Math.GetRandomNumber(7))
 
     СоздатьКусок() // in: template ret: h
     следующийКусок <- h
@@ -224,7 +224,7 @@ and СкопироватьКусок () = // in basetemplate, template, rotation
 and СоздатьКусок () = // in: template ret: h
   // Create a new handle, representing an arrayName, that will represent the piece
   количествоh <- количествоh + 1
-  h <- Text.Append("piece", количествоh)
+  h <- Текст.Добавить("piece", количествоh)
 
   кускиКШаблонам.[h] <- шаблон
 
@@ -412,7 +412,7 @@ and НапечататьСчет () =
   ГрафическоеОкно.РазмерШрифта <- 32.0
   ГрафическоеОкно.ИмяШрифта <- "Impact"
   ГрафическоеОкно.ЦветКисти <- Цвета.Black
-  ГрафическоеОкно.НарисоватьТекст(485, 70, Text.Append(Text.GetSubText( "00000000", 0, 8 - Text.GetLength( string счет ) ), счет))
+  ГрафическоеОкно.НарисоватьТекст(485, 70, Текст.Добавить(Текст.ПолучитьПодТекст( "00000000", 0, 8 - Текст.ПолучитьДлину( string счет ) ), счет))
 
 and НастроитьШаблоны () =
   // each piece has 4 boxes.
