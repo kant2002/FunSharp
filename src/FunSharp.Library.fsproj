@@ -6,8 +6,8 @@
 
 	<ItemGroup>
 		<Compile Include="Коллекции.fs" />
-		<Compile Include="DrawingTypes.fs" />
-		<Compile Include="Draw.fs" />
+		<Compile Include="ТипыРисунков.fs" />
+		<Compile Include="Рисовать.fs" />
 		<Compile Include="DrawingCanvas.fs" />
 		<Compile Include="Цвета.fs" />
 		<Compile Include="Приложение.fs" />
@@ -25,11 +25,11 @@
 		<Compile Include="Текст.fs" />
 		<Compile Include="Звук.fs" />
 		<Compile Include="Программа.fs" />
-		<EmbeddedResource Include="turtle.png" />
+		<EmbeddedResource Include="черепаха.png" />
 		<EmbeddedResource Include="Звук\BeepBeep.wav" />
-		<EmbeddedResource Include="Звук\BellRing.wav" />
-		<EmbeddedResource Include="Звук\Chime.wav" />
-		<EmbeddedResource Include="Звук\Click.wav" />
+		<EmbeddedResource Include="Звук\Звонок.wav" />
+		<EmbeddedResource Include="Звук\Перезвон.wav" />
+		<EmbeddedResource Include="Звук\Щелчек.wav" />
 		<EmbeddedResource Include="Звук\Pause.wav" />
 	</ItemGroup>
 

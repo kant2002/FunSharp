@@ -12,7 +12,7 @@ type Черепаха private () =
    static let mutable пероНажато = true
    static let показать () =
       if not скрытоПользователем then
-        Мое.Приложение.Холст.Черепаха.IsVisible <- true
+        Мое.Приложение.Холст.Черепаха.Видим <- true
         Мое.Приложение.Холст.Invalidate()
    static member Скорость
       with get () = скорость
@@ -23,7 +23,7 @@ type Черепаха private () =
       with get () = угол
       and set значение = 
          угол <- значение
-         Мое.Приложение.Холст.Черепаха.Rotation <- Some угол
+         Мое.Приложение.Холст.Черепаха.Врашение <- Some угол
          показать ()
    static member X
       with get () = _x
@@ -51,13 +51,13 @@ type Черепаха private () =
          ГрафическоеОкно.НарисоватьЛинию(_x,_y,x',y')
       _x <- x'
       _y <- y'
-      Мое.Приложение.Холст.Черепаха.Offset <- Xwt.Point(_x,_y)
+      Мое.Приложение.Холст.Черепаха.Смещение <- Xwt.Point(_x,_y)
       показать ()
    static member Переместить(distance:int) =
       Черепаха.Переместить (float distance)
    static member ПереместитьВ(x:float,y:float) =
       _x <- x; _y <- y
-      Мое.Приложение.Холст.Черепаха.Offset <- Xwt.Point(_x,_y)
+      Мое.Приложение.Холст.Черепаха.Смещение <- Xwt.Point(_x,_y)
       показать()
    static member ПереместитьВ(x:int, y:int) = 
       Черепаха.ПереместитьВ(float x, float y)
@@ -72,4 +72,4 @@ type Черепаха private () =
       показать()
    static member Скрыть() =
       скрытоПользователем <- true
-      Мое.Приложение.Холст.Черепаха.IsVisible <- false
+      Мое.Приложение.Холст.Черепаха.Видим <- false
