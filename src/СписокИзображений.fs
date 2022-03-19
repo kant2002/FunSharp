@@ -11,7 +11,7 @@ type СписокИзображений private () =
       let имя = "ImageList" + Guid.NewGuid().ToString()
       let байты =
          if путь.StartsWith("http:") || путь.StartsWith("https:") 
-         then Http.ЗагрузитьБайты путь
+         then Хттп.ЗагрузитьБайты путь
          else Ресурс.ЗагрузитьБайты путь
       изображения.Add(имя, байты)
       имя

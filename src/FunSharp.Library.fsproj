@@ -8,10 +8,10 @@
 		<Compile Include="Коллекции.fs" />
 		<Compile Include="ТипыРисунков.fs" />
 		<Compile Include="Рисовать.fs" />
-		<Compile Include="DrawingCanvas.fs" />
+		<Compile Include="ХолстДляРисования.fs" />
 		<Compile Include="Цвета.fs" />
 		<Compile Include="Приложение.fs" />
-		<Compile Include="Http.fs" />
+		<Compile Include="Хттп.fs" />
 		<Compile Include="Ресурс.fs" />
 		<Compile Include="СписокИзображений.fs" />
 		<Compile Include="ГрафическоеОкно.fs" />
@@ -21,7 +21,7 @@
 		<Compile Include="Мышь.fs" />
 		<Compile Include="Часы.fs" />
 		<Compile Include="Таймер.fs" />
-		<Compile Include="Math.fs" />
+		<Compile Include="Математика.fs" />
 		<Compile Include="Текст.fs" />
 		<Compile Include="Звук.fs" />
 		<Compile Include="Программа.fs" />

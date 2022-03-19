@@ -13,13 +13,13 @@ type Черепаха private () =
    static let показать () =
       if not скрытоПользователем then
         Мое.Приложение.Холст.Черепаха.Видим <- true
-        Мое.Приложение.Холст.Invalidate()
+        Мое.Приложение.Холст.СделатьНедействительным()
    static member Скорость
       with get () = скорость
       and set значение = 
          скорость <- значение
          показать ()
-   static member Angle
+   static member Угол
       with get () = угол
       and set значение = 
          угол <- значение
@@ -36,7 +36,7 @@ type Черепаха private () =
          _y <- значение
          показать ()
    static member Повернуть(amount:float) =
-      Черепаха.Angle <- угол + amount
+      Черепаха.Угол <- угол + amount
    static member Повернуть(amount:int) =
       Черепаха.Повернуть(float amount)      
    static member ПовернутьНалево() =

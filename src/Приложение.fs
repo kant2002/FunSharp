@@ -10,7 +10,7 @@ type Callback = delegate of unit -> unit
 type internal МоеПриложение () =
    let mutable скрыто : bool = true
    let mutable главноеОкно : Window = null
-   let mutable главныйХолст : DrawingCanvas = null
+   let mutable главныйХолст : ХолстДляРисования = null
    let mutable кнопкаВверх = Callback(ignore)
    let mutable кнопкаВниз = Callback(ignore)   
    let mutable мышьВниз = Callback(ignore)
@@ -24,7 +24,7 @@ type internal МоеПриложение () =
    let mutable isLeftButtonDown = false
    let mutable isRightButtonDown = false
    let инициализироватьХолст () =
-      главныйХолст <- new DrawingCanvas(BackgroundColor=кXwtЦвету Цвета.White)
+      главныйХолст <- new ХолстДляРисования(BackgroundColor=кXwtЦвету Цвета.White)
       главныйХолст.KeyPressed.Add(fun args -> 
          последняяКнопка <- args.Key.ToString()
          if кнопкаВниз <> null then кнопкаВниз.Invoke()
@@ -144,7 +144,7 @@ type internal Мое private () =
 [<AutoOpen>]
 module internal AppDrawing =
    let addDrawing drawing =
-      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.AddDrawing(drawing))
+      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.ДобавитьРисунок(drawing))
    let addDrawingAt drawing (x,y) =
       Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.AddDrawingAt(drawing,Point(x,y)))
 
