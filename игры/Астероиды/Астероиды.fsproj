@@ -13,6 +13,6 @@
     <EmbeddedResource Include="Asteroids_Sky.png" LogicalName="Asteroids_Sky.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FunSharp.Library.fsproj" />
+    <ProjectReference Include="..\..\исх\ВеселШарп.Библиотека.fsproj" />
   </ItemGroup>
 </Project>

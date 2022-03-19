@@ -1,13 +1,17 @@
-# FunSharp
+# ВеселШарп
 Веселая кросс-платформенная графическая библиотека, основанная на библиотеке из [Small Basic](http://smallbasic.com/), сделанная специально для F# и C#.
+
+## Перевод
+
+Данная библиотека является переводом [FunSharp](https://github.com/ptrelford/FunSharp) на русский язык. Мне кажется такой подход будет в первую очередь интересен тем для кого программирование в новинку.
 
 ## Развертывание
 
-FunSharp запускается на Raspbian, Linux и Windows.
+ВеселШарп запускается на Raspbian, Linux и Windows.
 
 ## Зависимости
 
-FunSharp исользует Mono-вский [Xwt](https://github.com/mono/xwt) и [Gtk#](http://www.mono-project.com/docs/gui/gtksharp/).
+ВеселШарп исользует Mono-вский [Xwt](https://github.com/mono/xwt) и [Gtk#](http://www.mono-project.com/docs/gui/gtksharp/).
 
 ## Сборка
 

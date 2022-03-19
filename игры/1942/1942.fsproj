@@ -22,6 +22,6 @@
     <EmbeddedResource Include="End.png" LogicalName="End.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\FunSharp.Library.fsproj" />
+    <ProjectReference Include="..\..\исх\ВеселШарп.Библиотека.fsproj" />
   </ItemGroup>
 </Project>
