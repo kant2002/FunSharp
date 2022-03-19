@@ -4,14 +4,14 @@ open System
 
 [<Sealed>]
 type Черепаха private () =
-   static let mutable userHidden = false
+   static let mutable скрытоПользователем = false
    static let mutable скорость = 0
    static let mutable угол = 0.0
    static let mutable _x = float ГрафическоеОкно.Ширина / 2.0
    static let mutable _y = float ГрафическоеОкно.Высота / 2.0
-   static let mutable isPenDown = true
+   static let mutable пероНажато = true
    static let показать () =
-      if not userHidden then
+      if not скрытоПользователем then
         Мое.Приложение.Холст.Черепаха.IsVisible <- true
         Мое.Приложение.Холст.Invalidate()
    static member Скорость
@@ -47,7 +47,7 @@ type Черепаха private () =
       let r = (угол - 90.0) * Math.PI / 180.0
       let x' = _x + дистанция * cos r
       let y' = _y + дистанция * sin r
-      if isPenDown then
+      if пероНажато then
          ГрафическоеОкно.НарисоватьЛинию(_x,_y,x',y')
       _x <- x'
       _y <- y'
@@ -61,15 +61,15 @@ type Черепаха private () =
       показать()
    static member ПереместитьВ(x:int, y:int) = 
       Черепаха.ПереместитьВ(float x, float y)
-   static member PenUp() =
-      isPenDown <- false
+   static member ПоднятьПеро() =
+      пероНажато <- false
       показать ()
-   static member PenDown() =
-      isPenDown <- true
+   static member ОпуститьПеро() =
+      пероНажато <- true
       показать ()
    static member Показать() =
-      userHidden <- false
+      скрытоПользователем <- false
       показать()
    static member Скрыть() =
-      userHidden <- true
+      скрытоПользователем <- true
       Мое.Приложение.Холст.Черепаха.IsVisible <- false

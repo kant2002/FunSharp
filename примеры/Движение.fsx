@@ -1,14 +1,15 @@
 ﻿#r "nuget: Xwt"
+#r "nuget: Xwt.GtkSharp"
 #r "../src/bin/Debug/net48/FunSharp.Library.dll"
 
 open Библиотека
 
 let мяч = Фигуры.ДобавитьПрямоугольник(200.0, 100.0)
 
-let OnMouseDown () =
-  let x = ГрафическоеОкно.MouseX
-  let y = ГрафическоеОкно.MouseY
+let НаМышьНажата () =
+  let x = ГрафическоеОкно.МышьX
+  let y = ГрафическоеОкно.МышьY
   Фигуры.Переместить(мяч, x, y)
 
-ГрафическоеОкно.MouseDown <- Callback(OnMouseDown)
+ГрафическоеОкно.МышьНажата <- Callback(НаМышьНажата)
 Программа.Задержка(2_000)

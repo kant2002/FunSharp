@@ -52,7 +52,7 @@ let кускиКШаблонам = System.Collections.Generic.Dictionary<string,
 let spots = Array.create (ШИРИНАХ*(ВЫСОТАХ+1)) ""
 
 let rec ГлавныйЦикл () =
-  шаблон <- Текст.Добавить("template", Math.GetRandomNumber(7))
+  шаблон <- Текст.Добавить("template", Math.ВзятьСлучайноеЧисло(7))
 
   СоздатьКусок() // in: template ret: h
   следующийКусок <- h
@@ -65,7 +65,7 @@ let rec ГлавныйЦикл () =
 
     задержка <- задержкаСессии
     let этотКусок = следующийКусок
-    шаблон <- Текст.Добавить("template", Math.GetRandomNumber(7))
+    шаблон <- Текст.Добавить("template", Math.ВзятьСлучайноеЧисло(7))
 
     СоздатьКусок() // in: template ret: h
     следующийКусок <- h
@@ -192,7 +192,7 @@ and СкопироватьКусок () = // in basetemplate, template, rotation
       //y = Math.Remainder(v, 10)
 
       // new x and y
-      let x = (Math.Remainder(v, 10))
+      let x = (Math.Остаток(v, 10))
       let y = (L - 1 - Math.Floor(float v/10.0))
       шаблоны.[шаблон].Значения.[i] <- x * 10 + y
     
@@ -204,7 +204,7 @@ and СкопироватьКусок () = // in basetemplate, template, rotation
       //y = Math.Remainder(v, 10)
 
       // new x and y
-      let x = (L - 1 - Math.Remainder(v, 10))
+      let x = (L - 1 - Math.Остаток(v, 10))
       let y = Math.Floor(float v / 10.0)
       шаблоны.[шаблон].Значения.[i] <- x * 10 + y
     
@@ -242,7 +242,7 @@ and ПереместитьКусок () = // in: ypos, xpos, h. ypos/xpos is 0-1
   for i = 0 to КВАДРАТЫ - 1 do
     let v = шаблоны.[кускиКШаблонам.[h]].Значения.[i]
     let x = Math.Floor(float v / 10.0)
-    let y = Math.Remainder(v, 10)
+    let y = Math.Остаток(v, 10)
 
     // Array.GetValue(h, i) = box for piece h.
     // xpos/ypos = are topleft of shape. x/y is the box offset within the shape.
@@ -256,7 +256,7 @@ and ВалидироватьДвижение () = // in: ypos, xpos, h, moveDire
 
     // x/y is the box offset within the shape.
     let x = Math.Floor(float v / 10.0)
-    let y = Math.Remainder(v, 10)
+    let y = Math.Остаток(v, 10)
 
     if (x + xпоз + направлениеДвижения) < 0 then
       неверноеДвижение <- -1
@@ -280,7 +280,7 @@ and ПроверитьОстановку () = // in: ypos, xpos, h ret: done
 
     // x/y is the box offset within the shape.
     let x = Math.Floor(float v / 10.0)
-    let y = Math.Remainder(v, 10)
+    let y = Math.Остаток(v, 10)
 
     if y + yпоз > ВЫСОТАХ || spots.[(x + xпоз) + (y + yпоз) * ШИРИНАХ] <> "." then
       ``готово`` <- 1
@@ -295,7 +295,7 @@ and ПроверитьОстановку () = // in: ypos, xpos, h ret: done
       //x = Math.Floor(v/10)
       //y = Math.Remainder(v, 10)
       let x = (Math.Floor(float v / 10.0) + xпоз)
-      let y = (Math.Remainder(v, 10) + yпоз - 1)
+      let y = (Math.Остаток(v, 10) + yпоз - 1)
       if y >= 0 then
          spots.[x + y * ШИРИНАХ] <- куски.[h].[i]
 
@@ -338,7 +338,7 @@ and DeleteLines () =
             Фигуры.Переместить(piece, Фигуры.ПолучитьЛево(piece), Фигуры.ПолучитьВерх(piece) + float ШИРИНАК)
 
   if linesCleared > 0 then
-    счет <- счет + 100 * int (Math.Round(float linesCleared * 2.15 - 1.0))
+    счет <- счет + 100 * int (Math.Округлить(float linesCleared * 2.15 - 1.0))
     НапечататьСчет()
 
 and НастроитьХолст () =

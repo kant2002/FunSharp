@@ -10,31 +10,31 @@ type ЭлементыУправления private () =
    static let mutable последняяНажатаяКнопка = ""
    static let элементыУправления = Dictionary<string,Widget>()
    static let позиции = Dictionary<string,int * int>()
-   /// Adds a button to the graphics window
+   /// Добавляет кнопку к графическому окну
    static member ДобавитьКнопку(метка:string, x:int, y:int) =
       let имя = "Button" + Guid.NewGuid().ToString()
       let кнопка = new Button(метка)
       кнопка.Clicked.Add(fun _ -> последняяНажатаяКнопка <- имя; наКлик.Invoke())
-      //toXwtColor(GraphicsWindow.BrushColor)      
+      //toXwtColor(ГрафическоеОкно.ЦветКисти)      
       элементыУправления.Add(имя,кнопка)
       позиции.Add(имя,(x,y))
       Мое.Приложение.Вызвать( fun () ->                  
          Мое.Приложение.Холст.AddChild(кнопка,float x,float y)
       )
       имя
-   /// Adds a text input box to the graphics window
+   /// Добавляет текстовое поле ввода к графическому окну
    static member ДобавитьТекстовоеПоле(x,y) =
       let название = "TextBox" + Guid.NewGuid().ToString()
       let элементУправления = new TextEntry()
       элементУправления.Text <- "Boo"
-      // toXwtColor(GraphicsWindow.BrushColor)
+      // toXwtColor(ГрафическоеОкно.ЦветКисти)
       элементыУправления.Add(название,элементУправления)
       позиции.Add(название,(x,y))
       Мое.Приложение.Вызвать( fun () ->                  
          Мое.Приложение.Холст.AddChild(элементУправления,float x,float y)
       )
       название
-   /// Sets the size of the control
+   /// Устанавливает размер элемента управления
    static member УстановитьРазмер(названиеЭлемента, ширина:int, высота:int) =
       let элементУправления = элементыУправления.[названиеЭлемента]
       let x, y = позиции.[названиеЭлемента]
@@ -46,7 +46,7 @@ type ЭлементыУправления private () =
          элементУправления.MinHeight <- float высота
          Мое.Приложение.Холст.AddChild(элементУправления,float x,float y)
       )
-   /// Sets the text of the specified text box
+   /// Устанавливает текст указанного текстового поля
    static member УстановитьТекстТекстовогоПоля(названиеЭлемента, текст) = 
       let элементУправления = элементыУправления.[названиеЭлемента] :?> Xwt.TextEntry
       элементУправления.Text <- текст
@@ -54,7 +54,7 @@ type ЭлементыУправления private () =
          элементУправления.SetFocus()
          элементУправления.QueueForReallocate()
       )
-   /// Gets the current text of the specified text box
+   /// Получает текущий текст в указанном текстовом поле
    static member ПолучитьТекстТекстовогоПоля(названиеЭлемента) =
       let элементУправления = элементыУправления.[названиеЭлемента] :?> Xwt.TextEntry
       элементУправления.Text

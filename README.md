@@ -1,47 +1,46 @@
 # FunSharp
-Fun cross-platform graphics library, based on [Small Basic](http://smallbasic.com/)'s library, made specifically for F# and C#.
+Веселая кросс-платформенная графическая библиотека, основанная на библиотеке из [Small Basic](http://smallbasic.com/), сделанная специально для F# и C#.
 
-## Deployment
+## Развертывание
 
-FunSharp runs on Raspbian, Linux and Windows.
+FunSharp запускается на Raspbian, Linux и Windows.
 
-## Dependencies
+## Зависимости
 
-FunSharp uses Mono's [Xwt](https://github.com/mono/xwt) and [Gtk#](http://www.mono-project.com/docs/gui/gtksharp/) libraries.
-On Windows you will need to install [Gtk# for .Net](http://www.mono-project.com/download/#download-win)
+FunSharp исользует Mono-вский [Xwt](https://github.com/mono/xwt) и [Gtk#](http://www.mono-project.com/docs/gui/gtksharp/).
 
-## Building
+## Сборка
 
 * Appveyor: [![Build status](https://ci.appveyor.com/api/projects/status/94dkcwcrkwhj06vj?svg=true)](https://ci.appveyor.com/project/ptrelford/funsharp)
 * Travis: [![Build Status](https://travis-ci.org/ptrelford/FunSharp.png?branch=master)](https://travis-ci.org/ptrelford/FunSharp/)
 
-## Example
+## Пример
 
 ```F#
-open Library
+open Библиотека
 
-GraphicsWindow.PenColor <- Colors.Purple
-Turtle.X <- 150.
-Turtle.Y <- 150.
+ГрафическоеОкно.ЦветПера <- Цвета.Purple
+Черепаха.X <- 150.
+Черепаха.Y <- 150.
 for i in 0..5..200 do
-   Turtle.Move(i)
-   Turtle.Turn(90)
+   Черепаха.Переместить(i)
+   Черепаха.Повернуть(90)
 ```
-![Alt text](http://trelford.com/FunSharp/Turtle_Example.png "Turtle Example")
+![Alt text](http://trelford.com/FunSharp/Turtle_Example.png "Пример Черепахи")
 
-## Games
+## Игры
 
 ![Alt text](http://trelford.com/FunSharp/1942.png "1942")
 
-![Alt text](http://trelford.com/FunSharp/Asteroids.png "Asteroids")
+![Alt text](http://trelford.com/FunSharp/Asteroids.png "Астероиды")
 
-![Alt text](http://trelford.com/FunSharp/Tetris.png "Tetris")
+![Alt text](http://trelford.com/FunSharp/Tetris.png "Тетрис")
 
-## Contributing
+## Сотрудничество
 
-Contributions are welcome, particularly new examples, bug fixes and filling out the API via the up-for-grabs issues.
+Сотрудничество приветствуется, в частности новые пример, исправления ошибок и пополнение API через задачи up-for-grabs.
 
 ## Up-for-grabs
 
-- implement Shapes.Animate(x,y,duration)
-- implement Controls.AddMultilineTextBox(left,top)
+- реализовать Фигуры.Анимировать(x,y,длительность)
+- реализовать ЭлементыУправления.ДобавитьМногострочноеТекстовоеПоле(лево,верх)

@@ -6,8 +6,8 @@ open Библиотека
 let фон = Фигуры.ДобавитьИзображение("http://flappycreator.com/default/bg.png")
 let земля = Фигуры.ДобавитьИзображение("http://flappycreator.com/default/ground.png")
 let птица = Фигуры.ДобавитьИзображение("http://flappycreator.com/default/bird_sing.png")
-let труба1 = ImageList.LoadImage("http://flappycreator.com/default/tube1.png")
-let труба2 = ImageList.LoadImage("http://flappycreator.com/default/tube2.png")
+let труба1 = СписокИзображений.ЗагрузитьИзображение("http://flappycreator.com/default/tube1.png")
+let труба2 = СписокИзображений.ЗагрузитьИзображение("http://flappycreator.com/default/tube2.png")
 let т1 = Фигуры.ДобавитьИзображение(труба1)
 let т2 = Фигуры.ДобавитьИзображение(труба2)
 
