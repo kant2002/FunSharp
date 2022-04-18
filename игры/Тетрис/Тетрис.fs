@@ -101,11 +101,11 @@ let rec ГлавныйЦикл () =
       ПроверитьОстановку() // in: ypos, xpos, h ret: done    
 
 and ОбработатьКнопки () =
-  // Stop game
+  // Остановить игру
   if ГрафическоеОкно.ПоследняяКнопка = "Escape" then
     Программа.Закончить()  
 
-  // Move piece left
+  // Переместить фигуру влево
   if ГрафическоеОкно.ПоследняяКнопка = "Left" then
     направлениеДвижения <- -1
     ВалидироватьДвижение()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
@@ -113,7 +113,7 @@ and ОбработатьКнопки () =
       xпоз <- xпоз + направлениеДвижения   
     ПереместитьКусок()   // in: ypos, xpos, h 
 
-  // Move piece right
+  // Переместить фигуру вправо
   if ГрафическоеОкно.ПоследняяКнопка = "Right" then
     направлениеДвижения <- 1
     ВалидироватьДвижение()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
@@ -121,11 +121,11 @@ and ОбработатьКнопки () =
       xпоз <- xпоз + направлениеДвижения    
     ПереместитьКусок()  // in: ypos, xpos, h  
 
-  // Move piece down
+  // Переместить фигуру вниз
   if ГрафическоеОкно.ПоследняяКнопка = "Down" || ГрафическоеОкно.ПоследняяКнопка = "Space" then
     задержка <- 0
  
-  // Rotate piece
+  // Повернуть фигуру
   if ГрафическоеОкно.ПоследняяКнопка = "Up" then
     базовыйшаблон <- кускиКШаблонам.[h]
     шаблон <- "temptemplate"
@@ -196,7 +196,7 @@ and СкопироватьКусок () = // in basetemplate, template, rotation
       let y = (L - 1 - Математика.Floor(float v/10.0))
       шаблоны.[шаблон].Значения.[i] <- x * 10 + y
     
-  // Count-Cockwise is not currently used
+  // Против часовой стрелки сейчас не используется
   elif вращение = "CCW" then
     for i = 0 to КВАДРАТЫ - 1 do // x' = L - 1 - y y' = x
       let v = шаблоны.[базовыйшаблон].Значения.[i]
