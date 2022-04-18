@@ -1,0 +1,39 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net48</TargetFramework>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Compile Include="Коллекції.fs" />
+		<Compile Include="ТипыРисунков.fs" />
+		<Compile Include="Рисовать.fs" />
+		<Compile Include="ХолстДляРисования.fs" />
+		<Compile Include="Кольори.fs" />
+		<Compile Include="Приложение.fs" />
+		<Compile Include="Хттп.fs" />
+		<Compile Include="Ресурс.fs" />
+		<Compile Include="СписокИзображений.fs" />
+		<Compile Include="ГрафическоеОкно.fs" />
+		<Compile Include="Фигуры.fs" />
+		<Compile Include="Черепаха.fs" />
+		<Compile Include="ЭлементыУправления.fs" />
+		<Compile Include="Мышь.fs" />
+		<Compile Include="Часы.fs" />
+		<Compile Include="Таймер.fs" />
+		<Compile Include="Математика.fs" />
+		<Compile Include="Текст.fs" />
+		<Compile Include="Звук.fs" />
+		<Compile Include="Программа.fs" />
+		<EmbeddedResource Include="черепаха.png" />
+		<EmbeddedResource Include="Звук\BeepBeep.wav" />
+		<EmbeddedResource Include="Звук\Звонок.wav" />
+		<EmbeddedResource Include="Звук\Перезвон.wav" />
+		<EmbeddedResource Include="Звук\Щелчек.wav" />
+		<EmbeddedResource Include="Звук\Pause.wav" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Xwt.GtkSharp" Version="0.0.2" />
+	</ItemGroup>
+</Project>

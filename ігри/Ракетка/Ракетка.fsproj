@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net48</TargetFramework>
+		<OutputType>Exe</OutputType>
+	</PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Ракетка.fs" />
+    <None Include="App.config" />
+  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\ісх\ВеселШарп.Бiблiотека.fsproj" />
+	</ItemGroup>
+</Project>

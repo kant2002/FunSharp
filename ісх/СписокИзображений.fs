@@ -1,0 +1,24 @@
+﻿namespace Бiблiотека
+
+open System
+open System.IO
+open Xwt.Drawing
+
+[<Sealed>]
+type СписокЗображень private () =
+   static let зображення = Словник<string,byte[]>()
+   static member ЗагрузитьИзображение(путь:string) =
+      let имя = "ImageList" + Guid.NewGuid().ToString()
+      let байты =
+         if путь.StartsWith("http:") || путь.StartsWith("https:") 
+         then Хттп.ЗагрузитьБайты путь
+         else Ресурс.ЗагрузитьБайты путь
+      зображення.Add(имя, байты)
+      имя
+   static member internal ПопробоватьПолучитьБайтыИзображения(имя:string) =
+      match зображення.TryGetValue(имя) with
+      | true, байты -> Some(байты)
+      | false, _ -> None
+
+
+

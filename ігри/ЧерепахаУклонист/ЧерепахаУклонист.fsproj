@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net48</TargetFramework>
+		<OutputType>Exe</OutputType>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Include="App.config" />
+		<EmbeddedResource Include="turtle.png" LogicalName="turtle.png" />
+		<Compile Include="ЧерепахаУклонист.fs" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\ісх\ВеселШарп.Бiблiотека.fsproj" />
+	</ItemGroup>
+</Project>
