@@ -67,7 +67,8 @@ type internal МоеПриложение () =
             true
          )
    let запуститьПриложение наИниц =      
-      Application.Initialize (ToolkitType.Gtk3)      
+      let типИнтерфейса = if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) then ToolkitType.Wpf else ToolkitType.Gtk3
+      Application.Initialize (типИнтерфейса)
       главноеОкно <- new Window(Title="App", Padding = WidgetSpacing(), Width=640.0, Height=480.0)
       инициализироватьХолст ()
       показатьОкно ()         

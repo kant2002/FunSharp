@@ -7,7 +7,7 @@ open Рисовать
 [<AllowNullLiteral>]
 type internal ХолстДляРисования () =
    inherit Canvas ()
-   let изображениеЧерепахи = Image.FromResource(typeof<ХолстДляРисования>, "FunSharp.Library.черепаха.png")
+   let изображениеЧерепахи = Image.FromResource(typeof<ХолстДляРисования>, "ВеселШарп.Библиотека.черепаха.png")
    let рисунки = ResizeArray<ИнфоРисунка>()
    let черепаха =
       let ш,в = изображениеЧерепахи.Width, изображениеЧерепахи.Height

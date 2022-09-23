@@ -35,5 +35,6 @@
 
 	<ItemGroup>
 	  <PackageReference Include="Xwt.GtkSharp" Version="0.0.2" />
+	  <PackageReference Include="Xwt.WPF" Version="0.2.251" />
 	</ItemGroup>
 </Project>

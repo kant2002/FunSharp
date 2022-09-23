@@ -1,5 +1,5 @@
 ﻿#r "nuget: Xwt"
-#r "../src/bin/Debug/net48/ВеселШарп.Библиотека.dll"
+#r "../исх/bin/Debug/net48/ВеселШарп.Библиотека.dll"
 
 open Библиотека
 
