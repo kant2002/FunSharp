@@ -97,12 +97,12 @@ type ГрафичнеВікно private () =
       ЗаповнитиЕліпс(Эллипс(float ширина,float высота),кисть()) |> нарисоватьВ (float x,float y)
    static member ОстанняКнопка with get() = Мое.Приложение.ОстанняКнопка
    static member КнопкаОтпущена with set callback = Мое.Приложение.KeyUp <- callback
-   static member КнопкаНажата with set callback = Мое.Приложение.KeyDown <- callback 
+   static member КнопкаНатиснута with set callback = Мое.Приложение.KeyDown <- callback 
    static member МишаX with get() = Мое.Приложение.МишаX
    static member МишаY with get() = Мое.Приложение.МишаY
-   static member МышьНажата with set callback = Мое.Приложение.MouseDown <- callback
+   static member МишаНатиснута with set callback = Мое.Приложение.MouseDown <- callback
    static member МышьОтпущена with set callback = Мое.Приложение.MouseUp <- callback
-   static member МышьПеремещена with set callback = Мое.Приложение.MouseMove <- callback
+   static member МишаПереміщена with set callback = Мое.Приложение.MouseMove <- callback
    static member ПолучитьЦветИзRGB(r,g,b) = Колір(255uy,byte r,byte g,byte b)
    static member ОтриматиВипадковийКолір() : Колір =
       let байты = [|1uy..3uy|]
