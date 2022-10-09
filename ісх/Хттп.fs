@@ -3,20 +3,20 @@
 open System.IO
 open System.Net
 
-let ЗагрузитьБайты (url:string) =
-   let запрос = HttpWebRequest.Create(url)
-   let ответ = запрос.GetResponse()
-   use потокОтвета = ответ.GetResponseStream()
-   use потокПамяти = new MemoryStream()
-   потокОтвета.CopyTo(потокПамяти)
-   потокПамяти.GetBuffer()
+let ЗавантажитиБайти (url:string) =
+   let запит = HttpWebRequest.Create(url)
+   let відповідь = запит.GetResponse()
+   use струмВідповіді = відповідь.GetResponseStream()
+   use струмПамяті = new MemoryStream()
+   струмВідповіді.CopyTo(струмПамяті)
+   струмПамяті.GetBuffer()
 
 open Xwt.Drawing
 
-let ЗагрузитьИзображениеАсинх (url:string) = async {
-   let запрос = HttpWebRequest.Create(url)
-   use! ответ = запрос.AsyncGetResponse()
-   use поток = ответ.GetResponseStream()
-   return Image.FromStream(поток)
+let ЗавантажитиЗображенняАсінх (url:string) = async {
+   let запит = HttpWebRequest.Create(url)
+   use! відповідь = запит.AsyncGetResponse()
+   use струм = відповідь.GetResponseStream()
+   return Image.FromStream(струм)
    }
 
