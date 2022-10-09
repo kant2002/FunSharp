@@ -1,4 +1,5 @@
 ﻿#r "nuget: Xwt"
+#r "nuget: Xwt.GtkSharp"
 #r "../ісх/bin/Debug/net48/ВеселШарп.Бiблiотека.dll"
 
 open Бiблiотека

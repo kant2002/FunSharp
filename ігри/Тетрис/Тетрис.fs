@@ -327,7 +327,7 @@ and DeleteLines () =
 
         // Delete the line
         for x1 = 0 to ШИРИНАХ - 1 do
-          Фигуры.Удалить(spots.[x1 + y * ШИРИНАХ])
+          Фигуры.Видалити(spots.[x1 + y * ШИРИНАХ])
         linesCleared <- linesCleared + 1
 
         // Move everything else down one.
