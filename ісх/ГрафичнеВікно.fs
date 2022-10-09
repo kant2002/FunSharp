@@ -91,10 +91,10 @@ type ГрафичнеВікно private () =
       ГрафичнеВікно.ЗаполнитьПрямоугольник(float x,float y,float ширина,float высота)
    static member ЗаполнитьТреугольник(x1,y1,x2,y2,x3,y3) =
       ЗаполнитьТреугольник(Треугольник(x1,y1,x2,y2,x3,y3),кисть()) |> нарисовать
-   static member ЗаполнитьЭллипс(x,y,ширина,высота) =
-      ЗаполнитьЭллипс(Эллипс(ширина,высота),кисть()) |> нарисоватьВ (x,y)
-   static member ЗаполнитьЭллипс(x:int,y:int,ширина:int,высота:int) =
-      ЗаполнитьЭллипс(Эллипс(float ширина,float высота),кисть()) |> нарисоватьВ (float x,float y)
+   static member ЗаповнитиЕліпс(x,y,ширина,высота) =
+      ЗаповнитиЕліпс(Эллипс(ширина,высота),кисть()) |> нарисоватьВ (x,y)
+   static member ЗаповнитиЕліпс(x:int,y:int,ширина:int,высота:int) =
+      ЗаповнитиЕліпс(Эллипс(float ширина,float высота),кисть()) |> нарисоватьВ (float x,float y)
    static member ОстанняКнопка with get() = Мое.Приложение.ОстанняКнопка
    static member КнопкаОтпущена with set callback = Мое.Приложение.KeyUp <- callback
    static member КнопкаНажата with set callback = Мое.Приложение.KeyDown <- callback 
@@ -104,7 +104,7 @@ type ГрафичнеВікно private () =
    static member МышьОтпущена with set callback = Мое.Приложение.MouseUp <- callback
    static member МышьПеремещена with set callback = Мое.Приложение.MouseMove <- callback
    static member ПолучитьЦветИзRGB(r,g,b) = Колір(255uy,byte r,byte g,byte b)
-   static member ПолучитьСлучайныйЦвет() : Колір =
+   static member ОтриматиВипадковийКолір() : Колір =
       let байты = [|1uy..3uy|]
       рнд.NextBytes(байты)
       Колір(255uy,байты.[0],байты.[1],байты.[2])
