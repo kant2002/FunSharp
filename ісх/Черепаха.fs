@@ -7,8 +7,8 @@ type Черепаха private () =
    static let mutable скрытоПользователем = false
    static let mutable скорость = 0
    static let mutable угол = 0.0
-   static let mutable _x = float ГрафическоеОкно.Ширина / 2.0
-   static let mutable _y = float ГрафическоеОкно.Высота / 2.0
+   static let mutable _x = float ГрафичнеВікно.Ширина / 2.0
+   static let mutable _y = float ГрафичнеВікно.Высота / 2.0
    static let mutable пероНажато = true
    static let показать () =
       if not скрытоПользователем then
@@ -35,32 +35,32 @@ type Черепаха private () =
       and set значение = 
          _y <- значение
          показать ()
-   static member Повернуть(amount:float) =
+   static member Повернути(amount:float) =
       Черепаха.Угол <- угол + amount
-   static member Повернуть(amount:int) =
-      Черепаха.Повернуть(float amount)      
-   static member ПовернутьНалево() =
-      Черепаха.Повернуть(-90.0)
-   static member ПовернутьНаправо() =
-      Черепаха.Повернуть(90.0)
-   static member Переместить(дистанция:float) =
+   static member Повернути(amount:int) =
+      Черепаха.Повернути(float amount)      
+   static member ПовернутиНалево() =
+      Черепаха.Повернути(-90.0)
+   static member ПовернутиНаправо() =
+      Черепаха.Повернути(90.0)
+   static member Перемістити(відстань:float) =
       let r = (угол - 90.0) * Math.PI / 180.0
-      let x' = _x + дистанция * cos r
-      let y' = _y + дистанция * sin r
+      let x' = _x + відстань * cos r
+      let y' = _y + відстань * sin r
       if пероНажато then
-         ГрафическоеОкно.НарисоватьЛинию(_x,_y,x',y')
+         ГрафичнеВікно.НамалюватиЛінію(_x,_y,x',y')
       _x <- x'
       _y <- y'
       Мое.Приложение.Холст.Черепаха.Смещение <- Xwt.Point(_x,_y)
       показать ()
-   static member Переместить(distance:int) =
-      Черепаха.Переместить (float distance)
-   static member ПереместитьВ(x:float,y:float) =
+   static member Перемістити(distance:int) =
+      Черепаха.Перемістити (float distance)
+   static member ПереміститиВ(x:float,y:float) =
       _x <- x; _y <- y
       Мое.Приложение.Холст.Черепаха.Смещение <- Xwt.Point(_x,_y)
       показать()
-   static member ПереместитьВ(x:int, y:int) = 
-      Черепаха.ПереместитьВ(float x, float y)
+   static member ПереміститиВ(x:int, y:int) = 
+      Черепаха.ПереміститиВ(float x, float y)
    static member ПоднятьПеро() =
       пероНажато <- false
       показать ()

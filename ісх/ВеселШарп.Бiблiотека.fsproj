@@ -14,7 +14,7 @@
 		<Compile Include="Хттп.fs" />
 		<Compile Include="Ресурс.fs" />
 		<Compile Include="СписокИзображений.fs" />
-		<Compile Include="ГрафическоеОкно.fs" />
+		<Compile Include="ГрафичнеВікно.fs" />
 		<Compile Include="Фигуры.fs" />
 		<Compile Include="Черепаха.fs" />
 		<Compile Include="ЭлементыУправления.fs" />
@@ -24,7 +24,7 @@
 		<Compile Include="Математика.fs" />
 		<Compile Include="Текст.fs" />
 		<Compile Include="Звук.fs" />
-		<Compile Include="Программа.fs" />
+		<Compile Include="Програма.fs" />
 		<EmbeddedResource Include="черепаха.png" />
 		<EmbeddedResource Include="Звук\BeepBeep.wav" />
 		<EmbeddedResource Include="Звук\Звонок.wav" />
