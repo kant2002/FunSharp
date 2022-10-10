@@ -7,7 +7,7 @@
 	<ItemGroup>
 		<Compile Include="Коллекції.fs" />
 		<Compile Include="ТипыРисунков.fs" />
-		<Compile Include="Рисовать.fs" />
+		<Compile Include="Малювати.fs" />
 		<Compile Include="ХолстДляРисования.fs" />
 		<Compile Include="Кольори.fs" />
 		<Compile Include="Приложение.fs" />
@@ -15,7 +15,7 @@
 		<Compile Include="Ресурс.fs" />
 		<Compile Include="СписокИзображений.fs" />
 		<Compile Include="ГрафичнеВікно.fs" />
-		<Compile Include="Фигуры.fs" />
+		<Compile Include="Фігури.fs" />
 		<Compile Include="Черепаха.fs" />
 		<Compile Include="ЭлементыУправления.fs" />
 		<Compile Include="Мышь.fs" />

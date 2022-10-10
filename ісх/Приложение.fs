@@ -77,9 +77,9 @@ type internal МоеПриложение () =
       //наИниц ()
    let запуститьПотокПриложения () =
       use инициализирован = new AutoResetEvent(false)
-      let поток = Thread(ParameterizedThreadStart запуститьПриложение)
-      if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) then поток.SetApartmentState(ApartmentState.STA)
-      поток.Start(fun () -> инициализирован.Set() |> ignore)
+      let струм = Thread(ParameterizedThreadStart запуститьПриложение)
+      if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) then струм.SetApartmentState(ApartmentState.STA)
+      струм.Start(fun () -> инициализирован.Set() |> ignore)
       инициализирован.WaitOne() |> ignore
    do запуститьПотокПриложения()
    member app.Окно = главноеОкно
@@ -91,7 +91,7 @@ type internal МоеПриложение () =
       спрятатьОкно()     
       главноеОкно.Height <- height
       показатьОкно()
-   member app.Холст = главныйХолст
+   member app.Полотно = главныйХолст
    member app.Вызвать действие = Application.Invoke действие   
    member app.KeyUp with set callback = кнопкаВверх <- callback
    member app.KeyDown with set callback = кнопкаВниз <- callback
@@ -144,7 +144,7 @@ type internal Мое private () =
 [<AutoOpen>]
 module internal AppDrawing =
    let addDrawing drawing =
-      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.ДобавитьРисунок(drawing))
+      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Полотно.ДодатиМалюнок(drawing))
    let addDrawingAt drawing (x,y) =
-      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.AddDrawingAt(drawing,Point(x,y)))
+      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Полотно.AddDrawingAt(drawing,Point(x,y)))
 

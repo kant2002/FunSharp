@@ -87,10 +87,10 @@ let rec ГлавныйЦикл () =
       ПереміститиКусок()   // in: ypos, xpos, h
 
       // Delay, but break if the delay get set to 0 if the piece gets dropped
-      let mutable индексЗадержки = задержка
-      while индексЗадержки > 0 && задержка > 0 do
+      let mutable індексЗатримки = задержка
+      while індексЗатримки > 0 && задержка > 0 do
         Програма.Затримка(10)
-        индексЗадержки <- индексЗадержки - 10      
+        індексЗатримки <- індексЗатримки - 10      
 
       if yпоздельта > 0 then
         yпоздельта <- yпоздельта - 1  // used to create freespin, when the piece is rotated
@@ -192,7 +192,7 @@ and СкопироватьКусок () = // in basetemplate, template, rotation
       //y = Math.Remainder(v, 10)
 
       // new x and y
-      let x = (Математика.Остаток(v, 10))
+      let x = (Математика.Залишок(v, 10))
       let y = (L - 1 - Математика.Floor(float v/10.0))
       шаблоны.[шаблон].Значения.[i] <- x * 10 + y
     
@@ -204,7 +204,7 @@ and СкопироватьКусок () = // in basetemplate, template, rotation
       //y = Math.Remainder(v, 10)
 
       // new x and y
-      let x = (L - 1 - Математика.Остаток(v, 10))
+      let x = (L - 1 - Математика.Залишок(v, 10))
       let y = Математика.Floor(float v / 10.0)
       шаблоны.[шаблон].Значения.[i] <- x * 10 + y
     
@@ -234,19 +234,19 @@ and СоздатьКусок () = // in: template ret: h
 
   куски.[h] <- Квадраты()
   for i = 0 to КВАДРАТЫ - 1 do
-    let s = Фигуры.ДодатиПрямокутник(ШИРИНАК, ШИРИНАК)
-    Фигуры.Перемістити(s, -ШИРИНАК, -ШИРИНАК) // move off screen
+    let s = Фігури.ДодатиПрямокутник(ШИРИНАК, ШИРИНАК)
+    Фігури.Перемістити(s, -ШИРИНАК, -ШИРИНАК) // move off screen
     куски.[h].[i] <- s    
 
 and ПереміститиКусок () = // in: ypos, xpos, h. ypos/xpos is 0-19, representing the top/left box coordinate of the piece on the canvas. h returned by CreatePiece
   for i = 0 to КВАДРАТЫ - 1 do
     let v = шаблоны.[кускиКШаблонам.[h]].Значения.[i]
     let x = Математика.Floor(float v / 10.0)
-    let y = Математика.Остаток(v, 10)
+    let y = Математика.Залишок(v, 10)
 
     // Array.GetValue(h, i) = box for piece h.
     // xpos/ypos = are topleft of shape. x/y is the box offset within the shape.
-    Фигуры.Перемістити(куски.[h].[i], СМЕЩЩЕНИЕX + xпоз * ШИРИНАК + x * ШИРИНАК, СМЕЩЩЕНИЕY + yпоз * ШИРИНАК + y * ШИРИНАК)  
+    Фігури.Перемістити(куски.[h].[i], СМЕЩЩЕНИЕX + xпоз * ШИРИНАК + x * ШИРИНАК, СМЕЩЩЕНИЕY + yпоз * ШИРИНАК + y * ШИРИНАК)  
 
 and ВалидироватьДвижение () = // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
   let mutable i = 0
@@ -256,7 +256,7 @@ and ВалидироватьДвижение () = // in: ypos, xpos, h, moveDire
 
     // x/y is the box offset within the shape.
     let x = Математика.Floor(float v / 10.0)
-    let y = Математика.Остаток(v, 10)
+    let y = Математика.Залишок(v, 10)
 
     if (x + xпоз + направлениеДвижения) < 0 then
       неверноеДвижение <- -1
@@ -280,7 +280,7 @@ and ПроверитьОстановку () = // in: ypos, xpos, h ret: done
 
     // x/y is the box offset within the shape.
     let x = Математика.Floor(float v / 10.0)
-    let y = Математика.Остаток(v, 10)
+    let y = Математика.Залишок(v, 10)
 
     if y + yпоз > ВЫСОТАХ || spots.[(x + xпоз) + (y + yпоз) * ШИРИНАХ] <> "." then
       ``готово`` <- 1
@@ -295,7 +295,7 @@ and ПроверитьОстановку () = // in: ypos, xpos, h ret: done
       //x = Math.Floor(v/10)
       //y = Math.Remainder(v, 10)
       let x = (Математика.Floor(float v / 10.0) + xпоз)
-      let y = (Математика.Остаток(v, 10) + yпоз - 1)
+      let y = (Математика.Залишок(v, 10) + yпоз - 1)
       if y >= 0 then
          spots.[x + y * ШИРИНАХ] <- куски.[h].[i]
 
@@ -327,7 +327,7 @@ and DeleteLines () =
 
         // Delete the line
         for x1 = 0 to ШИРИНАХ - 1 do
-          Фигуры.Видалити(spots.[x1 + y * ШИРИНАХ])
+          Фігури.Видалити(spots.[x1 + y * ШИРИНАХ])
         linesCleared <- linesCleared + 1
 
         // Move everything else down one.
@@ -335,13 +335,13 @@ and DeleteLines () =
           for x1 = 0 to ШИРИНАХ - 1 do
             let piece = spots.[x1 + (y1 - 1) * ШИРИНАХ]
             spots.[x1 + y1 * ШИРИНАХ] <- piece
-            Фигуры.Перемістити(piece, Фигуры.ПолучитьЛево(piece), Фигуры.ПолучитьВерх(piece) + float ШИРИНАК)
+            Фігури.Перемістити(piece, Фігури.ПолучитьЛево(piece), Фігури.ПолучитьВерх(piece) + float ШИРИНАК)
 
   if linesCleared > 0 then
     счет <- счет + 100 * int (Математика.Округляти(float linesCleared * 2.15 - 1.0))
     НапечататьСчет()
 
-and НастроитьХолст () =
+and НастроитьПолотно () =
 // GraphicsWindow.DrawResizedImage( Flickr.GetRandomPicture( "bricks" ), 0, 0, GraphicsWindow.Width, GraphicsWindow.Height)
 
   ГрафичнеВікно.ЦветКисти <- ГрафичнеВікно.КолірФона
@@ -465,8 +465,8 @@ while true do
   ШИРИНАК <- 25    // box width in pixels
   СМЕЩЩЕНИЕX <- 40   // Screen X offset in pixels of where the board starts
   СМЕЩЩЕНИЕY <- 40   // Screen Y offset in pixels of where the board starts
-  ШИРИНАХ <- 10    // Ширина Холста в количестве квадратов
-  ВЫСОТАХ <- 20   // Высота Холста в количестве квадратов.
+  ШИРИНАХ <- 10    // Ширина Полотноа в количестве квадратов
+  ВЫСОТАХ <- 20   // Высота Полотноа в количестве квадратов.
   НАЧАЛЬНАЯЗАДЕРЖКА <- 800
   КОНЕЧНАЯЗАДЕРЖКА <- 175
   ПРЕДПРОСМОТР_xпоз <- 13
@@ -478,7 +478,7 @@ while true do
   ГрафичнеВікно.Показать()
 
   НастроитьШаблоны()
-  НастроитьХолст()
+  НастроитьПолотно()
   ГлавныйЦикл()
 
   ГрафичнеВікно.ПоказатьСообщение( "Игра завершена", "Small Basic Tetris" )

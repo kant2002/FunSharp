@@ -6,8 +6,8 @@ type private ИМаркер = interface end
 
 let private грати імя =
     let сборка = System.Reflection.Assembly.GetAssembly(typeof<ИМаркер>)
-    let поток = сборка.GetManifestResourceStream(імя+".wav")
-    let програвач = new SoundPlayer(поток)
+    let струм = сборка.GetManifestResourceStream(імя+".wav")
+    let програвач = new SoundPlayer(струм)
     програвач.Play()   
 
 let ИгратьЗвонок () =

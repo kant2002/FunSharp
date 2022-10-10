@@ -3,7 +3,7 @@
 let private ранд = System.Random()
 let ОтриматиРадіани (град:float) = град * System.Math.PI / 180.
 let ОтриматиВипадковеЧисло(n) = ранд.Next(n) + 1
-let inline Остаток(x,y) = x % y
+let inline Залишок(x,y) = x % y
 let Кос(угол) = cos угол
 let Син(угол) = sin угол
 let АркТан(угол) = atan угол

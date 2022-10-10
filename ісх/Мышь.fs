@@ -7,6 +7,6 @@ type Мышь private () =
    static member X = Мое.Приложение.МишаX
    static member Y = Мое.Приложение.МишаY
    static member СкрытьКурсор () =
-      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.Cursor <- Xwt.CursorType.Invisible)
+      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Полотно.Cursor <- Xwt.CursorType.Invisible)
    static member ПоказатьКурсор () =
-      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.Cursor <- Xwt.CursorType.Arrow)
+      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Полотно.Cursor <- Xwt.CursorType.Arrow)
