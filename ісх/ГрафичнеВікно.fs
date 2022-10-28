@@ -5,61 +5,61 @@ open System
 [<Sealed>]
 type ГрафичнеВікно private () =   
    static let рнд = Random()
-   static let mutable фоновыйЦвет = Кольори.White
+   static let mutable фоновийКолір = Кольори.White
    static let mutable ширина = 640
-   static let mutable высота = 480
+   static let mutable висота = 480
    static let перо () = Перо(ГрафичнеВікно.КолірПера,ГрафичнеВікно.ШиринаПера)
-   static let кисть () = ГрафичнеВікно.ЦветКисти
+   static let пензлик () = ГрафичнеВікно.КолірПензлика
    static let шрифт () = 
       Шрифт.Шрифт(ГрафичнеВікно.РозмірШрифта,ГрафичнеВікно.ИмяШрифта,ГрафичнеВікно.ЖирностьШрифта, ГрафичнеВікно.КурсивностьШрифта)
-   static let нарисовать drawing = addDrawing drawing      
-   static let нарисоватьВ (x,y) drawing = addDrawingAt drawing (x,y)
+   static let нарисовать малюнок = додатиМалюнок малюнок      
+   static let намалюватиУ (x,y) малюнок = додатиМалюнокУ малюнок (x,y)
    static member Заголовок
-      with set title =
-         Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Окно.Title <- title)
+      with set заголовок =
+         Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Вікно.Title <- заголовок)
    static member КолірФона
-      with get () = фоновыйЦвет
+      with get () = фоновийКолір
       and set цвет = 
-         фоновыйЦвет <- цвет
-         Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Полотно.BackgroundColor <- кXwtЦвету цвет)
+         фоновийКолір <- цвет
+         Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.BackgroundColor <- кXwtЦвету цвет)
    static member Ширина
       with get () = ширина
-      and set новаяШирина =
-         ширина <- новаяШирина
-         Мое.Приложение.Вызвать (fun () -> Мое.Приложение.SetWindowWidth(float новаяШирина))
-   static member Высота
-      with get () = высота
-      and set новаяВысота =
-         высота <- новаяВысота
-         Мое.Приложение.Вызвать (fun () -> Мое.Приложение.SetWindowHeight(float новаяВысота))
+      and set новаШирина =
+         ширина <- новаШирина
+         Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.SetWindowWidth(float новаШирина))
+   static member Висота
+      with get () = висота
+      and set новаВысота =
+         висота <- новаВысота
+         Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.SetWindowHeight(float новаВысота))
    static member CanResize
       with get () = true
       and set (value:bool) = ()
    static member val КолірПера = Кольори.Black with get, set
    static member val ШиринаПера = 2.0 with get, set
-   static member val ЦветКисти = Кольори.Purple with get,set
+   static member val КолірПензлика = Кольори.Purple with get,set
    static member val РозмірШрифта = 12.0 with get,set
    static member val ИмяШрифта = "" with get,set
    static member val ЖирностьШрифта = false with get,set
    static member val КурсивностьШрифта = false with get,set
    static member Очистити () =
-      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Полотно.ОчиститиМалюнки())
+      Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.ОчиститиМалюнки())
    static member НамалюватиЛінію(x1,y1,x2,y2) =
       НамалюватиЛінію(Линия(x1,y1,x2,y2),перо()) |> нарисовать
    static member НамалюватиЛінію(x1:int,y1:int,x2:int,y2:int) =
       ГрафичнеВікно.НамалюватиЛінію(float x1, float y1, float x2, float y2)
    static member НамалюватиПрямокутник(x,y,width,height) =
-      НамалюватиПрямокутник(Прямоугольник(width,height),перо()) |> нарисоватьВ (x,y)
+      НамалюватиПрямокутник(Прямокутник(width,height),перо()) |> намалюватиУ (x,y)
    static member НамалюватиПрямокутник(x:int,y:int,width:int,height:int) =
       ГрафичнеВікно.НамалюватиПрямокутник(float x, float y, float width, float height)
    static member НамалюватиТрикутник(x1,y1,x2,y2,x3,y3) =
       НамалюватиТрикутник(Треугольник(x1,y1,x2,y2,x3,y3),перо()) |> нарисовать
    static member НамалюватиЕліпс(x,y,width,height) =
-      НамалюватиЕліпс(Эллипс(width,height),перо()) |> нарисоватьВ (x,y)
+      НамалюватиЕліпс(Эллипс(width,height),перо()) |> намалюватиУ (x,y)
    static member НамалюватиЕліпс(x:int,y:int,width:int,height:int) =
       ГрафичнеВікно.НамалюватиЕліпс(float x, float y, float width, float height)
    static member НамалюватиЗображення(імяЗображення,x,y) =
-      let ссылкаИзображение =
+      let посиланняЗображення =
          match СписокЗображень.ПопробоватьПолучитьБайтыИзображения імяЗображення with
          | Some байты -> 
             use потокПамяти = new System.IO.MemoryStream(байты)
@@ -67,48 +67,48 @@ type ГрафичнеВікно private () =
          | None ->
             if імяЗображення.StartsWith("http:") || імяЗображення.StartsWith("https:") 
             then
-                let ссылкаИзображение = ref null
+                let посиланняЗображення = ref null
                 async {
                    let! зображення = Хттп.ЗавантажитиЗображенняАсінх імяЗображення
-                   ссылкаИзображение := зображення
-                   Мое.Приложение.Вызвать(fun () -> Мое.Приложение.Полотно.СделатьНедействительным())
+                   посиланняЗображення := зображення
+                   Моя.Апплікація.Викликати(fun () -> Моя.Апплікація.Полотно.ЗробитиНедійсним())
                 } |> Async.Start
-                ссылкаИзображение
+                посиланняЗображення
             else
                 ref (Xwt.Drawing.Image.FromResource(імяЗображення))
-      НамалюватиЗображення(ссылкаИзображение,x,y) |> нарисовать
+      НамалюватиЗображення(посиланняЗображення,x,y) |> нарисовать
    static member НамалюватиЗображення(імяЗображення,x:int,y:int) =
       ГрафичнеВікно.НамалюватиЗображення(імяЗображення, float x, float y)
-   static member НарисоватьТекст(x,y,текст) =
-      НарисоватьТекст(x,y,текст,шрифт(),кисть()) |> нарисовать
+   static member НамалюватиТекст(x,y,текст) =
+      НамалюватиТекст(x,y,текст,шрифт(),пензлик()) |> нарисовать
    static member НарисоватьТекст(x:int,y:int,текст) =
-      ГрафичнеВікно.НарисоватьТекст(float x,float y,текст)
+      ГрафичнеВікно.НамалюватиТекст(float x,float y,текст)
    static member DrawBoundText(x,y,ширина,текст) =
-      НарисоватьТекстВРамке(x,y,ширина,текст,шрифт(),кисть()) |> нарисовать
+      НамалюватиТекстУРамці(x,y,ширина,текст,шрифт(),пензлик()) |> нарисовать
    static member ЗаполнитьПрямоугольник(x,y,ширина,высота) =
-      ЗаполнитьПрямоугольник(Прямоугольник(ширина,высота),кисть()) |> нарисоватьВ (x,y)
+      ЗаполнитьПрямоугольник(Прямокутник(ширина,высота),пензлик()) |> намалюватиУ (x,y)
    static member ЗаполнитьПрямоугольник(x:int,y:int,ширина:int,высота:int) =
       ГрафичнеВікно.ЗаполнитьПрямоугольник(float x,float y,float ширина,float высота)
    static member ЗаполнитьТреугольник(x1,y1,x2,y2,x3,y3) =
-      ЗаполнитьТреугольник(Треугольник(x1,y1,x2,y2,x3,y3),кисть()) |> нарисовать
+      ЗаполнитьТреугольник(Треугольник(x1,y1,x2,y2,x3,y3),пензлик()) |> нарисовать
    static member ЗаповнитиЕліпс(x,y,ширина,высота) =
-      ЗаповнитиЕліпс(Эллипс(ширина,высота),кисть()) |> нарисоватьВ (x,y)
+      ЗаповнитиЕліпс(Эллипс(ширина,высота),пензлик()) |> намалюватиУ (x,y)
    static member ЗаповнитиЕліпс(x:int,y:int,ширина:int,высота:int) =
-      ЗаповнитиЕліпс(Эллипс(float ширина,float высота),кисть()) |> нарисоватьВ (float x,float y)
-   static member ОстанняКнопка with get() = Мое.Приложение.ОстанняКнопка
-   static member КнопкаОтпущена with set callback = Мое.Приложение.KeyUp <- callback
-   static member КнопкаНатиснута with set callback = Мое.Приложение.KeyDown <- callback 
-   static member МишаX with get() = Мое.Приложение.МишаX
-   static member МишаY with get() = Мое.Приложение.МишаY
-   static member МишаНатиснута with set callback = Мое.Приложение.MouseDown <- callback
-   static member МышьОтпущена with set callback = Мое.Приложение.MouseUp <- callback
-   static member МишаПереміщена with set callback = Мое.Приложение.MouseMove <- callback
+      ЗаповнитиЕліпс(Эллипс(float ширина,float высота),пензлик()) |> намалюватиУ (float x,float y)
+   static member ОстанняКнопка with get() = Моя.Апплікація.ОстанняКнопка
+   static member КнопкаОтпущена with set callback = Моя.Апплікація.KeyUp <- callback
+   static member КнопкаНатиснута with set callback = Моя.Апплікація.KeyDown <- callback 
+   static member МишаX with get() = Моя.Апплікація.МишаX
+   static member МишаY with get() = Моя.Апплікація.МишаY
+   static member МишаНатиснута with set callback = Моя.Апплікація.MouseDown <- callback
+   static member МышьОтпущена with set callback = Моя.Апплікація.MouseUp <- callback
+   static member МишаПереміщена with set callback = Моя.Апплікація.MouseMove <- callback
    static member ПолучитьЦветИзRGB(r,g,b) = Колір(255uy,byte r,byte g,byte b)
    static member ОтриматиВипадковийКолір() : Колір =
       let байты = [|1uy..3uy|]
       рнд.NextBytes(байты)
       Колір(255uy,байты.[0],байты.[1],байты.[2])
-   static member Показать() = Мое.Приложение.Показать()
-   static member Сховати() = Мое.Приложение.Сховати()
+   static member Показать() = Моя.Апплікація.Показать()
+   static member Сховати() = Моя.Апплікація.Сховати()
    static member ПоказатьСообщение(text:string,title) = 
-      Мое.Приложение.Вызвать(fun () -> Мое.Приложение.ПоказатьСообщение(text,title))
+      Моя.Апплікація.Викликати(fun () -> Моя.Апплікація.ПоказатьСообщение(text,title))

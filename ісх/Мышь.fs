@@ -2,11 +2,11 @@
 
 [<Sealed>]
 type Мышь private () =
-   static member ЛіваКнопкаНатиснута = Мое.Приложение.ЛіваКнопкаНатиснута
-   static member ПраваКнопкаНатиснута = Мое.Приложение.ПраваКнопкаНатиснута
-   static member X = Мое.Приложение.МишаX
-   static member Y = Мое.Приложение.МишаY
+   static member ЛіваКнопкаНатиснута = Моя.Апплікація.ЛіваКнопкаНатиснута
+   static member ПраваКнопкаНатиснута = Моя.Апплікація.ПраваКнопкаНатиснута
+   static member X = Моя.Апплікація.МишаX
+   static member Y = Моя.Апплікація.МишаY
    static member СкрытьКурсор () =
-      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Полотно.Cursor <- Xwt.CursorType.Invisible)
+      Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.Cursor <- Xwt.CursorType.Invisible)
    static member ПоказатьКурсор () =
-      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Полотно.Cursor <- Xwt.CursorType.Arrow)
+      Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.Cursor <- Xwt.CursorType.Arrow)

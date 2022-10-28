@@ -25,7 +25,7 @@ type internal Y = float
 type internal Перо = Перо of Колір * Ширина
 type internal Шрифт = Шрифт of Размер * Семейство * Жирный * Курсив
 type internal Линия = Линия of X * Y * X * Y
-type internal Прямоугольник = Прямоугольник of Ширина * Высота
+type internal Прямоугольник = Прямокутник of Ширина * Высота
 type internal Треугольник = Треугольник of X * Y * X * Y * X * Y
 type internal Эллипс = Эллипс of Ширина * Высота
 
@@ -43,8 +43,8 @@ type internal Рисование =
    | НамалюватиТрикутник of Треугольник * Перо
    | НамалюватиЕліпс of Эллипс * Перо
    | НамалюватиЗображення of Xwt.Drawing.Image ref * float * float
-   | НарисоватьТекст of float * float * string * Шрифт * Колір
-   | НарисоватьТекстВРамке of float * float * float * string * Шрифт * Колір
+   | НамалюватиТекст of float * float * string * Шрифт * Колір
+   | НамалюватиТекстУРамці of float * float * float * string * Шрифт * Колір
    | ЗаполнитьПрямоугольник of Прямоугольник * Колір
    | ЗаполнитьТреугольник of Треугольник * Колір
    | ЗаповнитиЕліпс of Эллипс * Колір

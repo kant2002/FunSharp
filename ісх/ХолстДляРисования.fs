@@ -47,7 +47,7 @@ type internal ХолстДляРисования () =
          | _ -> false 
       )
       |> function Some індекс -> малюнки.RemoveAt(індекс) | None -> ()
-   member полотно.СделатьНедействительным() =
+   member полотно.ЗробитиНедійсним() =
       полотно.QueueDraw()
    override this.OnDraw(конт, прямоугольник) =
       base.OnDraw(конт, прямоугольник)      

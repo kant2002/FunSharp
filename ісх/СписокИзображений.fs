@@ -7,7 +7,7 @@ open Xwt.Drawing
 [<Sealed>]
 type СписокЗображень private () =
    static let зображення = Словник<string,byte[]>()
-   static member ЗагрузитьИзображение(путь:string) =
+   static member ЗавантажитиЗображення(путь:string) =
       let имя = "ImageList" + Guid.NewGuid().ToString()
       let байты =
          if путь.StartsWith("http:") || путь.StartsWith("https:") 

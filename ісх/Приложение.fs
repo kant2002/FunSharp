@@ -82,7 +82,7 @@ type internal МоеПриложение () =
       струм.Start(fun () -> инициализирован.Set() |> ignore)
       инициализирован.WaitOne() |> ignore
    do запуститьПотокПриложения()
-   member app.Окно = главноеОкно
+   member app.Вікно = главноеОкно
    member app.SetWindowWidth(width) =
       спрятатьОкно()     
       главноеОкно.Width <- width
@@ -92,7 +92,7 @@ type internal МоеПриложение () =
       главноеОкно.Height <- height
       показатьОкно()
    member app.Полотно = главныйХолст
-   member app.Вызвать действие = Application.Invoke действие   
+   member app.Викликати действие = Application.Invoke действие   
    member app.KeyUp with set callback = кнопкаВверх <- callback
    member app.KeyDown with set callback = кнопкаВниз <- callback
    member app.ОстанняКнопка with get() = последняяКнопка
@@ -103,16 +103,16 @@ type internal МоеПриложение () =
    member app.МишаY with get() = мышьY
    member app.ЛіваКнопкаНатиснута with get() = isLeftButtonDown
    member app.ПраваКнопкаНатиснута with get() = isRightButtonDown
-   member app.Показать() = app.Вызвать (fun () -> показатьОкно())
-   member app.Сховати() = app.Вызвать (fun () -> спрятатьОкно())
+   member app.Показать() = app.Викликати (fun () -> показатьОкно())
+   member app.Сховати() = app.Викликати (fun () -> спрятатьОкно())
    member app.TimerTick with set callback = timerTick <- callback
    member app.ПаузаТаймера() = timerPaused <- true
    member app.ВозобновитьТаймер() = timerPaused <- false
-   member app.TimerInterval with set ms = app.Вызвать(fun () -> установитьИнтервалТаймера ms)
+   member app.TimerInterval with set ms = app.Викликати(fun () -> установитьИнтервалТаймера ms)
    member app.ПоказатьСообщение(текст:string,заголовок) = MessageDialog.ShowMessage(главноеОкно,текст,заголовок)
 
 [<Sealed>]
-type internal Мое private () = 
+type internal Моя private () = 
    static let mutable приложение = None
    static let sync = obj ()
    static let isFsi () =
@@ -134,17 +134,17 @@ type internal Мое private () =
          | None ->
             let новоеПриложение = МоеПриложение()
             приложение <- Some (новоеПриложение)
-            новоеПриложение.Окно.CloseRequested.Add(fun e ->
+            новоеПриложение.Вікно.CloseRequested.Add(fun e ->
                закрытьПриложение()
             )
             новоеПриложение
       )      
-   static member Приложение = получитьПриложение ()
+   static member Апплікація = получитьПриложение ()
 
 [<AutoOpen>]
 module internal AppDrawing =
-   let addDrawing drawing =
-      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Полотно.ДодатиМалюнок(drawing))
-   let addDrawingAt drawing (x,y) =
-      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Полотно.AddDrawingAt(drawing,Point(x,y)))
+   let додатиМалюнок drawing =
+      Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.ДодатиМалюнок(drawing))
+   let додатиМалюнокУ drawing (x,y) =
+      Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.AddDrawingAt(drawing,Point(x,y)))
 
