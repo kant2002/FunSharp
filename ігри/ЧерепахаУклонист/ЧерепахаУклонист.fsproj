@@ -1,10 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net48</TargetFramework>
-		<OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <OutputType>WinExe</OutputType>
 	</PropertyGroup>
 	<ItemGroup>
-		<None Include="App.config" />
 		<EmbeddedResource Include="turtle.png" LogicalName="turtle.png" />
 		<Compile Include="ЧерепахаУклонист.fs" />
 	</ItemGroup>

@@ -11,12 +11,13 @@ let ЗавантажитиБайти (url:string) =
    струмВідповіді.CopyTo(струмПамяті)
    струмПамяті.GetBuffer()
 
-open Xwt.Drawing
+open Avalonia.Media.Imaging
+open Avalonia.Media
 
 let ЗавантажитиЗображенняАсінх (url:string) = async {
    let запит = HttpWebRequest.Create(url)
    use! відповідь = запит.AsyncGetResponse()
    use струм = відповідь.GetResponseStream()
-   return Image.FromStream(струм)
+   return new Bitmap(струм) :> IImage
    }
 

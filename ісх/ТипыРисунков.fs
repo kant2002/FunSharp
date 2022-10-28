@@ -11,7 +11,7 @@ type Колір =
 
 [<AutoOpen>]
 module internal КонвертерЦвета =
-   let кXwtЦвету (color:Колір) = Xwt.Drawing.Color.FromBytes(color.R, color.G, color.B, color.A)
+   let кXwtЦвету (color:Колір) = Avalonia.Media.Color.FromArgb(color.A, color.R, color.G, color.B)
 
 type internal Ширина = float
 type internal Высота = float
@@ -34,7 +34,7 @@ type internal Фигура =
    | ФигураПрямоугольника of Прямоугольник * Перо * Колір
    | ФигураТреугольника of Треугольник * Перо * Колір
    | ФигураЭллипса of Эллипс * Перо * Колір
-   | ФигураИзображения of Xwt.Drawing.Image ref
+   | ФигураИзображения of Avalonia.Media.IImage ref
    | ФигураТекста of string ref * Шрифт * Колір
 
 type internal Рисование =
@@ -42,7 +42,7 @@ type internal Рисование =
    | НамалюватиПрямокутник of Прямоугольник * Перо
    | НамалюватиТрикутник of Треугольник * Перо
    | НамалюватиЕліпс of Эллипс * Перо
-   | НамалюватиЗображення of Xwt.Drawing.Image ref * float * float
+   | НамалюватиЗображення of Avalonia.Media.IImage ref * float * float
    | НамалюватиТекст of float * float * string * Шрифт * Колір
    | НамалюватиТекстУРамці of float * float * float * string * Шрифт * Колір
    | ЗаполнитьПрямоугольник of Прямоугольник * Колір

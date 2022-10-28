@@ -1,6 +1,6 @@
 ﻿namespace Бiблiотека
 
-open Xwt
+open Avalonia
 open System
 open System.Collections.Generic
 
@@ -51,7 +51,7 @@ type Фігури private () =
       match СписокЗображень.ПопробоватьПолучитьБайтыИзображения(імяЗображення) with
       | Some байты ->
          let струм = new System.IO.MemoryStream(байты)
-         let зображення = Xwt.Drawing.Image.FromStream(струм)
+         let зображення = new Avalonia.Media.Imaging.Bitmap(струм) :> Avalonia.Media.IImage
          ФигураИзображения(ref зображення) |> добавитьФигуру имя
       | None ->
          let зображенняПосил = 
@@ -68,7 +68,7 @@ type Фігури private () =
                let зображенняПосил = ref null                 
                Моя.Апплікація.Викликати(fun () ->
                   use струм = Ресурс.ОтриматиСтрум(імяЗображення)
-                  зображенняПосил := Xwt.Drawing.Image.FromStream(струм)
+                  зображенняПосил := new Avalonia.Media.Imaging.Bitmap(струм) :> Avalonia.Media.IImage
                )
                зображенняПосил
          ФигураИзображения(зображенняПосил) |> добавитьФигуру имя
