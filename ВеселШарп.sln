@@ -1,34 +1,36 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ВеселШарп.Бiблiотека", "ісх\ВеселШарп.Бiблiотека.fsproj", "{D17DE6DC-A64B-4A97-B66B-21338289DFC6}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33006.217
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ВеселШарп.Бiблiотека", "ісх\ВеселШарп.Бiблiотека.fsproj", "{D17DE6DC-A64B-4A97-B66B-21338289DFC6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ігри", "Ігри", "{8B1CDF39-DA8F-4841-8042-5A86638C12CA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Приклади", "Приклади", "{A3310CF2-DBF6-4E2A-9B07-692C61C70AA4}"
 	ProjectSection(SolutionItems) = preProject
+		приклади\ИграРакетка.fsx = приклади\ИграРакетка.fsx
+		приклади\Годинник.fsx = приклади\Годинник.fsx
 		приклади\Калькулятор.fsx = приклади\Калькулятор.fsx
 		приклади\Коло.fsx = приклади\Коло.fsx
-		приклади\Часы.fsx = приклади\Часы.fsx
-		приклади\ПтичкаХлоп.fsx = приклади\ПтичкаХлоп.fsx
-		приклади\ФрактальнеДерево.fsx = приклади\ФрактальнеДерево.fsx
-		приклади\Движение.fsx = приклади\Движение.fsx
 		приклади\Малювання.fsx = приклади\Малювання.fsx
+		приклади\ПтичкаХлоп.fsx = приклади\ПтичкаХлоп.fsx
+		приклади\Переміщення.fsx = приклади\Переміщення.fsx
+		приклади\ФрактальнеДерево.fsx = приклади\ФрактальнеДерево.fsx
 		приклади\Черепаха.fsx = приклади\Черепаха.fsx
-		приклади\ИграРакетка.fsx = приклади\ИграРакетка.fsx
 	EndProjectSection
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "1942", "ігри\1942\1942.fsproj", "{BCF9F647-631E-4D78-A553-6FF49EAFF370}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "1942", "ігри\1942\1942.fsproj", "{BCF9F647-631E-4D78-A553-6FF49EAFF370}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Тетрис", "ігри\Тетрис\Тетрис.fsproj", "{CC3B753E-2218-4B5E-82F3-0F1A9480E2FA}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Тетрис", "ігри\Тетрис\Тетрис.fsproj", "{CC3B753E-2218-4B5E-82F3-0F1A9480E2FA}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Астероиды", "ігри\Астероиды\Астероиды.fsproj", "{03AE56AB-98BF-4F00-B175-F81491B61758}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Астероиды", "ігри\Астероиды\Астероиды.fsproj", "{03AE56AB-98BF-4F00-B175-F81491B61758}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ЧерепахаУклонист", "ігри\ЧерепахаУклонист\ЧерепахаУклонист.fsproj", "{7BE2A778-89F3-49EE-86B5-BD193B5C3BD6}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ЧерепахаУклонист", "ігри\ЧерепахаУклонист\ЧерепахаУклонист.fsproj", "{7BE2A778-89F3-49EE-86B5-BD193B5C3BD6}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Ракетка", "ігри\Ракетка\Ракетка.fsproj", "{1F86C6E6-7B14-4D76-A115-5D64C6F781A5}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Ракетка", "ігри\Ракетка\Ракетка.fsproj", "{1F86C6E6-7B14-4D76-A115-5D64C6F781A5}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "ПтичкаХлоп", "ігри\ПтичкаХлоп\ПтичкаХлоп.fsproj", "{64A58352-7FF9-4E99-9830-BA0CC982F05E}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ПтичкаХлоп", "ігри\ПтичкаХлоп\ПтичкаХлоп.fsproj", "{64A58352-7FF9-4E99-9830-BA0CC982F05E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,5 +77,8 @@ Global
 		{7BE2A778-89F3-49EE-86B5-BD193B5C3BD6} = {8B1CDF39-DA8F-4841-8042-5A86638C12CA}
 		{1F86C6E6-7B14-4D76-A115-5D64C6F781A5} = {8B1CDF39-DA8F-4841-8042-5A86638C12CA}
 		{64A58352-7FF9-4E99-9830-BA0CC982F05E} = {8B1CDF39-DA8F-4841-8042-5A86638C12CA}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {16CC5439-ED14-4F31-8E75-33DC074A009B}
 	EndGlobalSection
 EndGlobal
