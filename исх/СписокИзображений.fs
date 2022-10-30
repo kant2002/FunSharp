@@ -1,8 +1,6 @@
 ﻿namespace Библиотека
 
 open System
-open System.IO
-open Xwt.Drawing
 
 [<Sealed>]
 type СписокИзображений private () =

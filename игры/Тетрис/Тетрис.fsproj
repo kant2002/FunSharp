@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net48</TargetFramework>
-		<OutputType>Exe</OutputType>
-	</PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <OutputType>WinExe</OutputType>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Тетрис.fs" />
-    <None Include="App.config" />
   </ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\исх\ВеселШарп.Библиотека.fsproj" />

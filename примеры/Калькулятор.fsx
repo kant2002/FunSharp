@@ -1,5 +1,6 @@
-﻿#r "nuget: Xwt"
-#r "../исх/bin/Debug/net48/ВеселШарп.Библиотека.dll"
+﻿#r "nuget: Avalonia.Desktop, 11.0.0-preview3"
+#r "nuget: Avalonia.Themes.Fluent, 11.0.0-preview3"
+#r "../исх/bin/Debug/net7.0/ВеселШарп.Библиотека.dll"
 
 open Библиотека
 

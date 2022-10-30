@@ -7,6 +7,6 @@ type Мышь private () =
    static member X = Мое.Приложение.МышьX
    static member Y = Мое.Приложение.МышьY
    static member СкрытьКурсор () =
-      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.Cursor <- Xwt.CursorType.Invisible)
+      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.Cursor <- null)
    static member ПоказатьКурсор () =
-      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.Cursor <- Xwt.CursorType.Arrow)
+      Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.Cursor <- Avalonia.Input.Cursor.Default)

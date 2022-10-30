@@ -1,6 +1,6 @@
 ﻿namespace Библиотека
 
-open Xwt
+open Avalonia
 open System
 open System.Collections.Generic
 
@@ -51,7 +51,7 @@ type Фигуры private () =
       match СписокИзображений.ПопробоватьПолучитьБайтыИзображения(имяИзображения) with
       | Some байты ->
          let поток = new System.IO.MemoryStream(байты)
-         let изображение = Xwt.Drawing.Image.FromStream(поток)
+         let изображение = new Avalonia.Media.Imaging.Bitmap(поток) :> Avalonia.Media.IImage
          ФигураИзображения(ref изображение) |> добавитьФигуру имя
       | None ->
          let изображениеСсыл = 
@@ -68,7 +68,7 @@ type Фигуры private () =
                let изображениеСсыл = ref null                 
                Мое.Приложение.Вызвать(fun () ->
                   use поток = Ресурс.ПолучитьПоток(имяИзображения)
-                  изображениеСсыл := Xwt.Drawing.Image.FromStream(поток)
+                  изображениеСсыл := new Avalonia.Media.Imaging.Bitmap(поток) :> Avalonia.Media.IImage
                )
                изображениеСсыл
          ФигураИзображения(изображениеСсыл) |> добавитьФигуру имя

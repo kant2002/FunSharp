@@ -1,6 +1,8 @@
 ﻿namespace Библиотека
 
 open System
+open Avalonia.Media.Imaging
+open Avalonia.Media
 
 [<Sealed>]
 type ГрафическоеОкно private () =   
@@ -21,7 +23,7 @@ type ГрафическоеОкно private () =
       with get () = фоновыйЦвет
       and set цвет = 
          фоновыйЦвет <- цвет
-         Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.BackgroundColor <- кXwtЦвету цвет)
+         Мое.Приложение.Вызвать (fun () -> Мое.Приложение.Холст.Background <- new Avalonia.Media.SolidColorBrush(кXwtЦвету цвет))
    static member Ширина
       with get () = ширина
       and set новаяШирина =
@@ -63,7 +65,7 @@ type ГрафическоеОкно private () =
          match СписокИзображений.ПопробоватьПолучитьБайтыИзображения имяИзображения with
          | Some байты -> 
             use потокПамяти = new System.IO.MemoryStream(байты)
-            ref (Xwt.Drawing.Image.FromStream(потокПамяти))           
+            ref (new Bitmap(потокПамяти) :> Avalonia.Media.IImage)
          | None ->
             if имяИзображения.StartsWith("http:") || имяИзображения.StartsWith("https:") 
             then
@@ -75,7 +77,7 @@ type ГрафическоеОкно private () =
                 } |> Async.Start
                 ссылкаИзображение
             else
-                ref (Xwt.Drawing.Image.FromResource(имяИзображения))
+                ref (new Bitmap(Reflection.Assembly.GetEntryAssembly().GetManifestResourceStream(имяИзображения)) :> IImage)
       НарисоватьИзображение(ссылкаИзображение,x,y) |> нарисовать
    static member НарисоватьИзображение(имяИзображения,x:int,y:int) =
       ГрафическоеОкно.НарисоватьИзображение(имяИзображения, float x, float y)

@@ -1,12 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net48</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Compile Include="Коллекции.fs" />
 		<Compile Include="ТипыРисунков.fs" />
+    <Compile Include="Математика.fs" />
 		<Compile Include="Рисовать.fs" />
 		<Compile Include="ХолстДляРисования.fs" />
 		<Compile Include="Цвета.fs" />
@@ -21,7 +22,6 @@
 		<Compile Include="Мышь.fs" />
 		<Compile Include="Часы.fs" />
 		<Compile Include="Таймер.fs" />
-		<Compile Include="Математика.fs" />
 		<Compile Include="Текст.fs" />
 		<Compile Include="Звук.fs" />
 		<Compile Include="Программа.fs" />
@@ -34,7 +34,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Xwt.GtkSharp" Version="0.0.2" />
-	  <PackageReference Include="Xwt.WPF" Version="0.2.251" />
+    <PackageReference Include="System.Windows.Extensions" Version="6.0.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview3" />
+	  <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0-preview3" />
 	</ItemGroup>
 </Project>

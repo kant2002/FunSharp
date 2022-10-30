@@ -11,12 +11,13 @@ let ЗагрузитьБайты (url:string) =
    потокОтвета.CopyTo(потокПамяти)
    потокПамяти.GetBuffer()
 
-open Xwt.Drawing
+open Avalonia.Media.Imaging
+open Avalonia.Media
 
 let ЗагрузитьИзображениеАсинх (url:string) = async {
    let запрос = HttpWebRequest.Create(url)
    use! ответ = запрос.AsyncGetResponse()
    use поток = ответ.GetResponseStream()
-   return Image.FromStream(поток)
+   return new Bitmap(поток) :> IImage
    }
 

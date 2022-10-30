@@ -1,11 +1,22 @@
 ﻿namespace Библиотека
 
-open Xwt
 open System
 open System.Runtime.InteropServices
 open System.Threading
+open System.Threading.Tasks
+open Avalonia
+open Avalonia.Themes.Fluent
+open Avalonia.Controls.ApplicationLifetimes
+open Avalonia.Controls
+open Avalonia.Threading
 
 type Callback = delegate of unit -> unit
+
+type AvaloniaApp() =
+    inherit Avalonia.Application()
+    override self.Initialize() =
+        let theme = new FluentTheme(new Uri("avares://ВеселШарп.Бiблiотека"), Mode = FluentThemeMode.Light)
+        self.Styles.Add(theme)
 
 type internal МоеПриложение () =
    let mutable скрыто : bool = true
@@ -23,37 +34,47 @@ type internal МоеПриложение () =
    let mutable мышьY = 0.0
    let mutable isLeftButtonDown = false
    let mutable isRightButtonDown = false
+   let runOnUiThread (action: Func<'a>) =
+    let mutable result : 'a = null
+    async {
+        let! x = Dispatcher.UIThread.InvokeAsync(action) |> Async.AwaitTask
+        result <- x
+    } |> Async.RunSynchronously
+    result
    let инициализироватьХолст () =
-      главныйХолст <- new ХолстДляРисования(BackgroundColor=кXwtЦвету Цвета.White)
-      главныйХолст.KeyPressed.Add(fun args -> 
+      главныйХолст <- new ХолстДляРисования(Background=new Avalonia.Media.SolidColorBrush(кXwtЦвету Цвета.White))
+      главныйХолст.KeyUp.Add(fun args -> 
          последняяКнопка <- args.Key.ToString()
          if кнопкаВниз <> null then кнопкаВниз.Invoke()
       )
-      главныйХолст.KeyReleased.Add(fun args ->
+      главныйХолст.KeyDown.Add(fun args ->
          последняяКнопка <- args.Key.ToString()
          if кнопкаВверх <> null then кнопкаВверх.Invoke()
       )
-      главныйХолст.ButtonPressed.Add(fun args ->
-         мышьX <- args.X
-         мышьY <- args.Y
-         if args.Button = PointerButton.Left then isLeftButtonDown <-true
-         if args.Button = PointerButton.Right then isRightButtonDown <-true
+      главныйХолст.PointerPressed.Add(fun args ->
+         let point = args.GetCurrentPoint(главныйХолст)
+         мышьX <- point.Position.X
+         мышьY <- point.Position.Y
+         if point.Properties.IsLeftButtonPressed then isLeftButtonDown <-true
+         if point.Properties.IsRightButtonPressed then isRightButtonDown <-true
          if мышьВниз <> null then мышьВниз.Invoke()
       )
-      главныйХолст.ButtonReleased.Add(fun args ->
-         мышьX <- args.X
-         мышьY <- args.Y
-         if args.Button = PointerButton.Left then isLeftButtonDown <- false
+      главныйХолст.PointerReleased.Add(fun args ->
+         let point = args.GetCurrentPoint(главныйХолст)
+         мышьX <- point.Position.X
+         мышьY <- point.Position.Y
+         if point.Properties.IsLeftButtonPressed then isLeftButtonDown <- false
          if мышьВверх <> null then мышьВверх.Invoke()
       )
-      главныйХолст.MouseMoved.Add(fun args ->
-         мышьX <- args.X
-         мышьY <- args.Y
+      главныйХолст.PointerMoved.Add(fun args ->
+         let position = args.GetPosition(главныйХолст)
+         мышьX <- position.X
+         мышьY <- position.Y
          if mouseMove <> null then mouseMove.Invoke()
       )
       главноеОкно.Content <- главныйХолст
-      главныйХолст.CanGetFocus <- true
-      главныйХолст.SetFocus()
+      главныйХолст.Focusable <- true
+      главныйХолст.Focus()
    let показатьОкно () = 
       if скрыто then главноеОкно.Show(); скрыто <- false
    let спрятатьОкно () = 
@@ -61,20 +82,21 @@ type internal МоеПриложение () =
    let mutable timerDisposable : IDisposable = null
    let установитьИнтервалТаймера (мс:int) =
       if timerDisposable <> null then timerDisposable.Dispose()
-      timerDisposable <-
-         Application.TimeoutInvoke(мс, fun () -> 
-            if not timerPaused then timerTick.Invoke()
-            true
-         )
+      let timer = new System.Timers.Timer(мс)
+      timer.Elapsed.Add(fun (_) -> if not timerPaused then timerTick.Invoke())
+      timer.Start()
+      timerDisposable <- timer
    let запуститьПриложение наИниц =      
-      let типИнтерфейса = if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) then ToolkitType.Wpf else ToolkitType.Gtk3
-      Application.Initialize (типИнтерфейса)
-      главноеОкно <- new Window(Title="App", Padding = WidgetSpacing(), Width=640.0, Height=480.0)
-      инициализироватьХолст ()
-      показатьОкно ()         
-      let наИниц = unbox<unit->unit> наИниц
-      наИниц ()
-      Application.Run()
+      let app = AppBuilder.Configure<AvaloniaApp>().UsePlatformDetect();
+      app.AfterSetup(fun (_) ->
+        главноеОкно <- new Window(Title="App", (* Padding = WidgetSpacing(), *) Width=640.0, Height=480.0)
+        инициализироватьХолст ()
+        показатьОкно ()         
+        let наИниц = unbox<unit->unit> наИниц
+        наИниц ()
+      ) |> ignore
+      //Application.Run()
+      app.StartWithClassicDesktopLifetime(Environment.GetCommandLineArgs()) |> ignore
       //наИниц ()
    let запуститьПотокПриложения () =
       use инициализирован = new AutoResetEvent(false)
@@ -93,7 +115,8 @@ type internal МоеПриложение () =
       главноеОкно.Height <- height
       показатьОкно()
    member app.Холст = главныйХолст
-   member app.Вызвать действие = Application.Invoke действие   
+   member app.Вызвать действие = Dispatcher.UIThread.Post действие
+   member app.ВызватьСРезультатом действие = runOnUiThread действие 
    member app.KeyUp with set callback = кнопкаВверх <- callback
    member app.KeyDown with set callback = кнопкаВниз <- callback
    member app.ПоследняяКнопка with get() = последняяКнопка
@@ -110,7 +133,16 @@ type internal МоеПриложение () =
    member app.ПаузаТаймера() = timerPaused <- true
    member app.ВозобновитьТаймер() = timerPaused <- false
    member app.TimerInterval with set ms = app.Вызвать(fun () -> установитьИнтервалТаймера ms)
-   member app.ПоказатьСообщение(текст:string,заголовок) = MessageDialog.ShowMessage(главноеОкно,текст,заголовок)
+   member app.ПоказатьСообщение(текст:string,заголовок) = 
+    let w = new Window()
+    w.Title <- заголовок
+    w.Content <- TextBlock(Text = текст)
+    w.Width <- 200
+    w.Height <- 100
+    using (new CancellationTokenSource()) (fun source ->
+        w.ShowDialog(главноеОкно).ContinueWith(fun t -> source.Cancel(), TaskScheduler.Default) |> ignore
+        Dispatcher.UIThread.MainLoop(source.Token);
+    )
 
 [<Sealed>]
 type internal Мое private () = 
@@ -123,7 +155,7 @@ type internal Мое private () =
       netFxFsi || netcoreFsi
    static let закрытьПриложение () =
       lock (sync) (fun () ->
-         Application.Exit()
+         (Application.Current.ApplicationLifetime :?> IClassicDesktopStyleApplicationLifetime).TryShutdown(0) |> ignore
          if not (isFsi()) then
             Environment.Exit(0)
          приложение <- None       
@@ -135,7 +167,7 @@ type internal Мое private () =
          | None ->
             let новоеПриложение = МоеПриложение()
             приложение <- Some (новоеПриложение)
-            новоеПриложение.Окно.CloseRequested.Add(fun e ->
+            новоеПриложение.Окно.Closed.Add(fun e ->
                закрытьПриложение()
             )
             новоеПриложение
