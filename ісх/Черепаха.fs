@@ -1,6 +1,7 @@
 ﻿namespace Бiблiотека
 
 open System
+open Avalonia
 
 [<Sealed>]
 type Черепаха private () =
@@ -51,13 +52,13 @@ type Черепаха private () =
          ГрафичнеВікно.НамалюватиЛінію(_x,_y,x',y')
       _x <- x'
       _y <- y'
-      Моя.Апплікація.Полотно.Черепаха.Зсув <- Xwt.Point(_x,_y)
+      Моя.Апплікація.Полотно.Черепаха.Зсув <- Point(_x,_y)
       показать ()
    static member Перемістити(distance:int) =
       Черепаха.Перемістити (float distance)
    static member ПереміститиВ(x:float,y:float) =
       _x <- x; _y <- y
-      Моя.Апплікація.Полотно.Черепаха.Зсув <- Xwt.Point(_x,_y)
+      Моя.Апплікація.Полотно.Черепаха.Зсув <- Point(_x,_y)
       показать()
    static member ПереміститиВ(x:int, y:int) = 
       Черепаха.ПереміститиВ(float x, float y)

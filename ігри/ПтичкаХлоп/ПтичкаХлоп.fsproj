@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net48</TargetFramework>
-		<OutputType>Exe</OutputType>
-	</PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <OutputType>WinExe</OutputType>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="Програма.fs" />
-    <None Include="App.config" />
     <EmbeddedResource Include="bg.png" LogicalName="bg.png" />
     <EmbeddedResource Include="bird.png" LogicalName="bird.png" />
     <EmbeddedResource Include="bird_sing.png" LogicalName="bird_sing.png" />

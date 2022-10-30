@@ -1,6 +1,8 @@
 ﻿namespace Бiблiотека
 
 open System
+open Avalonia.Media.Imaging
+open Avalonia.Media
 
 [<Sealed>]
 type ГрафичнеВікно private () =   
@@ -21,7 +23,7 @@ type ГрафичнеВікно private () =
       with get () = фоновийКолір
       and set цвет = 
          фоновийКолір <- цвет
-         Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.BackgroundColor <- кXwtЦвету цвет)
+         Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.Background <- new Avalonia.Media.SolidColorBrush(кXwtЦвету цвет))
    static member Ширина
       with get () = ширина
       and set новаШирина =
@@ -63,7 +65,7 @@ type ГрафичнеВікно private () =
          match СписокЗображень.ПопробоватьПолучитьБайтыИзображения імяЗображення with
          | Some байты -> 
             use потокПамяти = new System.IO.MemoryStream(байты)
-            ref (Xwt.Drawing.Image.FromStream(потокПамяти))           
+            ref (new Bitmap(потокПамяти) :> Avalonia.Media.IImage)           
          | None ->
             if імяЗображення.StartsWith("http:") || імяЗображення.StartsWith("https:") 
             then
@@ -75,7 +77,7 @@ type ГрафичнеВікно private () =
                 } |> Async.Start
                 посиланняЗображення
             else
-                ref (Xwt.Drawing.Image.FromResource(імяЗображення))
+                ref (new Bitmap(Reflection.Assembly.GetEntryAssembly().GetManifestResourceStream(імяЗображення)) :> IImage)
       НамалюватиЗображення(посиланняЗображення,x,y) |> нарисовать
    static member НамалюватиЗображення(імяЗображення,x:int,y:int) =
       ГрафичнеВікно.НамалюватиЗображення(імяЗображення, float x, float y)

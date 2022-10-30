@@ -1,6 +1,6 @@
-﻿#r "nuget: Xwt"
-#r "nuget: Xwt.GtkSharp"
-#r "../ісх/bin/Debug/net48/ВеселШарп.Бiблiотека.dll"
+﻿#r "nuget: Avalonia.Desktop, 11.0.0-preview3"
+#r "nuget: Avalonia.Themes.Fluent, 11.0.0-preview3"
+#r "../ісх/bin/Debug/net7.0/ВеселШарп.Бiблiотека.dll"
 
 open Бiблiотека
 
@@ -9,7 +9,7 @@ let наНатискКнопки () =
    | "F1" -> ГрафичнеВікно.КолірПера <- Кольори.Red
    | "F2" -> ГрафичнеВікно.КолірПера <- Кольори.Blue
    | "F3" -> ГрафичнеВікно.КолірПера <- Кольори.LightGreen
-   | "c" -> ГрафичнеВікно.Очистити()
+   | "C" -> ГрафичнеВікно.Очистити()
    | s -> printfn "'%s'" s; System.Diagnostics.Debug.WriteLine(s)
 
 let mutable останX = 0.0
