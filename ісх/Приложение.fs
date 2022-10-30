@@ -18,13 +18,6 @@ type AvaloniaApp() =
         let theme = new FluentTheme(new Uri("avares://ВеселШарп.Бiблiотека"), Mode = FluentThemeMode.Light)
         self.Styles.Add(theme)
 
-    override self.OnFrameworkInitializationCompleted() =
-        let desktop = self.ApplicationLifetime :?> IClassicDesktopStyleApplicationLifetime
-        //desktop.ShutdownMode <- ShutdownMode.OnMainWindowClose
-        //desktop.MainWindow <- Моя.главноеОкно
-        //desktop.MainWindow <- new Window()
-        base.OnFrameworkInitializationCompleted()
-
 
 type internal МоеПриложение () =
    let mutable скрыто : bool = true
@@ -104,9 +97,7 @@ type internal МоеПриложение () =
         let наИниц = unbox<unit->unit> наИниц
         наИниц ()
       ) |> ignore
-      //Application.Run()
       app.StartWithClassicDesktopLifetime(Environment.GetCommandLineArgs()) |> ignore
-      //наИниц ()
    let запуститьПотокПриложения () =
       use инициализирован = new AutoResetEvent(false)
       let струм = Thread(ParameterizedThreadStart запуститьПриложение)

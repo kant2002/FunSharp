@@ -34,7 +34,6 @@ let нарисоватьИзображение (конт:DrawingContext) (инф
    match инфо.Врашение with
    | Some угол ->           
       let ш,в = зображення.Size.Width, зображення.Size.Height
-      //конт.PushClip
       let currentTransform = конт.CurrentTransform;
       let source = new Rect(new Point(0.0,0.0),зображення.Size)
       конт.PushPreTransform (Matrix.CreateTranslation(x+ш/2.0,y+в/2.0)) |> ignore
@@ -44,22 +43,15 @@ let нарисоватьИзображение (конт:DrawingContext) (инф
       | Some(sx,sy) -> конт.PushPreTransform (Matrix.CreateScale(sx,sy)) |> ignore
       | None -> ()    
       конт.DrawImage(зображення, source)
-      //let узор = new ImagePattern(зображення)            
-      //конт.Pattern <- узор           
-      //конт.Fill()
-      //конт.Restore()
       конт.PushSetTransform currentTransform;
    | None ->
       let currentTransform = конт.CurrentTransform;
-      //конт.Save()            
       match инфо.Масштаб with
       | Some(sx,sy) -> 
-         //конт.Scale(sx,sy)
          конт.PushPreTransform (Matrix.CreateScale(sx,sy)) |> ignore
          конт.DrawImage(зображення,new Rect(x, y, зображення.Size.Width/sx,зображення.Size.Height/sy))
       | None ->
          конт.DrawImage(зображення,new Rect(x, y, зображення.Size.Width, зображення.Size.Height))
-      //конт.Restore()
       конт.PushSetTransform currentTransform;
 
 let нарисовать (конт:DrawingContext) (інфо:ИнфоМалюнка) =
@@ -118,11 +110,7 @@ let нарисовать (конт:DrawingContext) (інфо:ИнфоМалюн�
       конт.DrawLine(перо, Avalonia.Point(x+ x1, y+y1), Avalonia.Point(x+ x2, y+y2))
    | НамалюватиФігуру(_,ФигураПрямоугольника(Прямокутник(w,h),Перо(колір,ширина),цветЗаливки)) ->
       let currentTransform = конт.CurrentTransform;
-      //конт.Save() 
       конт.PushPreTransform (Matrix.CreateTranslation(x,y)) |> ignore
-      //конт.PushPreTransform (Matrix.CreateRotation(угол)) |> ignore
-      //конт.PushPreTransform (Matrix.CreateTranslation(-ш / 2.0, -в / 2.0)) |> ignore
-      //конт.Translate(x,y)
       match інфо.Врашение with
       | Some угол -> конт.PushPreTransform (Matrix.CreateRotation(угол)) |> ignore
       | None -> ()            
@@ -130,7 +118,6 @@ let нарисовать (конт:DrawingContext) (інфо:ИнфоМалюн�
       let colorBackground = кXwtЦвету цветЗаливки
       let перо = new Pen(new SolidColorBrush(color, 1.0), ширина)
       конт.DrawRectangle(new SolidColorBrush(colorBackground, 1.0), перо, Avalonia.Rect(0.,0.,w,h))
-      //конт.Restore()
       конт.PushSetTransform currentTransform |> ignore;
    | НамалюватиФігуру(_,ФигураТреугольника(трикутник,Перо(колір,ширина),цветЗаливки)) ->
       let пензлик = new SolidColorBrush(сНепрозрачностью (кXwtЦвету цветЗаливки), 1.0)
