@@ -19,17 +19,17 @@
 		<Compile Include="Фігури.fs" />
 		<Compile Include="Черепаха.fs" />
 		<Compile Include="ЭлементыУправления.fs" />
-		<Compile Include="Мышь.fs" />
-		<Compile Include="Часы.fs" />
+		<Compile Include="Миша.fs" />
+		<Compile Include="Годинник.fs" />
 		<Compile Include="Таймер.fs" />
 		<Compile Include="Текст.fs" />
 		<Compile Include="Звук.fs" />
 		<Compile Include="Програма.fs" />
 		<EmbeddedResource Include="черепаха.png" />
 		<EmbeddedResource Include="Звук\BeepBeep.wav" />
-		<EmbeddedResource Include="Звук\Звонок.wav" />
-		<EmbeddedResource Include="Звук\Перезвон.wav" />
-		<EmbeddedResource Include="Звук\Щелчек.wav" />
+		<EmbeddedResource Include="Звук\Дзвінок.wav" />
+		<EmbeddedResource Include="Звук\БійГодинника.wav" />
+		<EmbeddedResource Include="Звук\Клацання.wav" />
 		<EmbeddedResource Include="Звук\Pause.wav" />
 	</ItemGroup>
 
