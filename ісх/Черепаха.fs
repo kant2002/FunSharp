@@ -5,39 +5,39 @@ open Avalonia
 
 [<Sealed>]
 type Черепаха private () =
-   static let mutable скрытоПользователем = false
-   static let mutable скорость = 0
-   static let mutable угол = 0.0
+   static let mutable прихованоКористувачем = false
+   static let mutable швидкість = 0
+   static let mutable кут = 0.0
    static let mutable _x = float ГрафичнеВікно.Ширина / 2.0
    static let mutable _y = float ГрафичнеВікно.Висота / 2.0
    static let mutable пероНажато = true
-   static let показать () =
-      if not скрытоПользователем then
+   static let показати () =
+      if not прихованоКористувачем then
         Моя.Апплікація.Полотно.Черепаха.Видно <- true
         Моя.Апплікація.Полотно.ЗробитиНедійсним()
-   static member Скорость
-      with get () = скорость
-      and set значение = 
-         скорость <- значение
-         показать ()
-   static member Угол
-      with get () = угол
-      and set значение = 
-         угол <- значение
-         Моя.Апплікація.Полотно.Черепаха.Обертання <- Some угол
-         показать ()
+   static member Швидкість
+      with get () = швидкість
+      and set значення = 
+         швидкість <- значення
+         показати ()
+   static member Кут
+      with get () = кут
+      and set значення = 
+         кут <- значення
+         Моя.Апплікація.Полотно.Черепаха.Обертання <- Some кут
+         показати ()
    static member X
       with get () = _x
-      and set значение = 
-         _x <- значение
-         показать ()
+      and set значення = 
+         _x <- значення
+         показати ()
    static member Y
       with get () = _y
-      and set значение = 
-         _y <- значение
-         показать ()
+      and set значення = 
+         _y <- значення
+         показати ()
    static member Повернути(amount:float) =
-      Черепаха.Угол <- угол + amount
+      Черепаха.Кут <- кут + amount
    static member Повернути(amount:int) =
       Черепаха.Повернути(float amount)      
    static member ПовернутиНалево() =
@@ -45,7 +45,7 @@ type Черепаха private () =
    static member ПовернутиНаправо() =
       Черепаха.Повернути(90.0)
    static member Перемістити(відстань:float) =
-      let r = (угол - 90.0) * Math.PI / 180.0
+      let r = (кут - 90.0) * Math.PI / 180.0
       let x' = _x + відстань * cos r
       let y' = _y + відстань * sin r
       if пероНажато then
@@ -53,24 +53,24 @@ type Черепаха private () =
       _x <- x'
       _y <- y'
       Моя.Апплікація.Полотно.Черепаха.Зсув <- Point(_x,_y)
-      показать ()
+      показати ()
    static member Перемістити(distance:int) =
       Черепаха.Перемістити (float distance)
    static member ПереміститиВ(x:float,y:float) =
       _x <- x; _y <- y
       Моя.Апплікація.Полотно.Черепаха.Зсув <- Point(_x,_y)
-      показать()
+      показати()
    static member ПереміститиВ(x:int, y:int) = 
       Черепаха.ПереміститиВ(float x, float y)
-   static member ПоднятьПеро() =
+   static member ПіднятиПеро() =
       пероНажато <- false
-      показать ()
-   static member ОпуститьПеро() =
+      показати ()
+   static member ОпуститиПеро() =
       пероНажато <- true
-      показать ()
-   static member Показать() =
-      скрытоПользователем <- false
-      показать()
-   static member Скрыть() =
-      скрытоПользователем <- true
+      показати ()
+   static member Показати() =
+      прихованоКористувачем <- false
+      показати()
+   static member Сховати() =
+      прихованоКористувачем <- true
       Моя.Апплікація.Полотно.Черепаха.Видно <- false

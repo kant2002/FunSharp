@@ -4,7 +4,7 @@
     <OutputType>WinExe</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Астероиды.fs" />
+    <Compile Include="Астероїди.fs" />
     <EmbeddedResource Include="Asteroids_BigRock.png" LogicalName="Asteroids_BigRock.png" />
     <EmbeddedResource Include="Asteroids_MediumRock.png" LogicalName="Asteroids_MediumRock.png" />
     <EmbeddedResource Include="Asteroids_SmallRock.png" LogicalName="Asteroids_SmallRock.png" />

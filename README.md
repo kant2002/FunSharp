@@ -11,14 +11,9 @@
 
 ## Зависимости
 
-ВеселШарп використовує Mono [Xwt](https://github.com/mono/xwt) та [Gtk#](http://www.mono-project.com/docs/gui/gtksharp/).
+ВеселШарп використовує [Avalonia](https://github.com/AvaloniaUI/Avalonia).
 
-## Сборка
-
-* Appveyor: [![Build status](https://ci.appveyor.com/api/projects/status/94dkcwcrkwhj06vj?svg=true)](https://ci.appveyor.com/project/ptrelford/funsharp)
-* Travis: [![Build Status](https://travis-ci.org/ptrelford/FunSharp.png?branch=master)](https://travis-ci.org/ptrelford/FunSharp/)
-
-## Пример
+## Приклад
 
 ```F#
 open Бібліотека
@@ -32,13 +27,13 @@ for i in 0..5..200 do
 ```
 ![Alt text](http://trelford.com/FunSharp/Turtle_Example.png "Приклад Черепахи")
 
-## Игры
+## Ігри
 
 ![Alt text](http://trelford.com/FunSharp/1942.png "1942")
 
-![Alt text](http://trelford.com/FunSharp/Asteroids.png "Астероиды")
+![Alt text](http://trelford.com/FunSharp/Asteroids.png "Астероіди")
 
-![Alt text](http://trelford.com/FunSharp/Tetris.png "Тетрис")
+![Alt text](http://trelford.com/FunSharp/Tetris.png "Тетріс")
 
 ## Співпраця
 
@@ -46,5 +41,5 @@ for i in 0..5..200 do
 
 ## Up-for-grabs
 
-- реализовать Фігури.Анимировать(x,y,длительность)
-- реализовать ЭлементыУправления.ДобавитьМногострочноеТекстовоеПоле(лево,верх)
+- реализувати Фігури.Анимировать(x,y,длительность)
+- реализувати ЭлементиКерування.ДодатиБагатоторядковеТекстовеВікно(ліво,верх)

@@ -5,7 +5,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<EmbeddedResource Include="turtle.png" LogicalName="turtle.png" />
-		<Compile Include="ЧерепахаУклонист.fs" />
+		<Compile Include="ЧерепахаУхиляка.fs" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\ісх\ВеселШарп.Бібліотека.fsproj" />
