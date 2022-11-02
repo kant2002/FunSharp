@@ -9,9 +9,9 @@
 		<Compile Include="ТипыРисунков.fs" />
     <Compile Include="Математика.fs" />
 		<Compile Include="Малювати.fs" />
-		<Compile Include="ХолстДляРисования.fs" />
+		<Compile Include="ПолотноДляМалювання.fs" />
 		<Compile Include="Кольори.fs" />
-		<Compile Include="Приложение.fs" />
+		<Compile Include="Апплікація.fs" />
 		<Compile Include="Хттп.fs" />
 		<Compile Include="Ресурс.fs" />
 		<Compile Include="СписокИзображений.fs" />

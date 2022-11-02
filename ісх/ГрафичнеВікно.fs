@@ -1,4 +1,4 @@
-﻿namespace Бiблiотека
+﻿namespace Бібліотека
 
 open System
 open Avalonia.Media.Imaging
@@ -23,17 +23,17 @@ type ГрафичнеВікно private () =
       with get () = фоновийКолір
       and set цвет = 
          фоновийКолір <- цвет
-         Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.Background <- new Avalonia.Media.SolidColorBrush(кXwtЦвету цвет))
+         Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.Background <- new Avalonia.Media.SolidColorBrush(доКольораАвалонії цвет))
    static member Ширина
       with get () = ширина
       and set новаШирина =
          ширина <- новаШирина
-         Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.SetWindowWidth(float новаШирина))
+         Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.ВстановитиШиринуВікна(float новаШирина))
    static member Висота
       with get () = висота
       and set новаВысота =
          висота <- новаВысота
-         Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.SetWindowHeight(float новаВысота))
+         Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.ВстановитиВисотуВікна(float новаВысота))
    static member CanResize
       with get () = true
       and set (value:bool) = ()
@@ -47,7 +47,7 @@ type ГрафичнеВікно private () =
    static member Очистити () =
       Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.ОчиститиМалюнки())
    static member НамалюватиЛінію(x1,y1,x2,y2) =
-      НамалюватиЛінію(Линия(x1,y1,x2,y2),перо()) |> нарисовать
+      НамалюватиЛінію(Лінія(x1,y1,x2,y2),перо()) |> нарисовать
    static member НамалюватиЛінію(x1:int,y1:int,x2:int,y2:int) =
       ГрафичнеВікно.НамалюватиЛінію(float x1, float y1, float x2, float y2)
    static member НамалюватиПрямокутник(x,y,width,height) =
@@ -55,14 +55,14 @@ type ГрафичнеВікно private () =
    static member НамалюватиПрямокутник(x:int,y:int,width:int,height:int) =
       ГрафичнеВікно.НамалюватиПрямокутник(float x, float y, float width, float height)
    static member НамалюватиТрикутник(x1,y1,x2,y2,x3,y3) =
-      НамалюватиТрикутник(Треугольник(x1,y1,x2,y2,x3,y3),перо()) |> нарисовать
+      НамалюватиТрикутник(Трикутник(x1,y1,x2,y2,x3,y3),перо()) |> нарисовать
    static member НамалюватиЕліпс(x,y,width,height) =
-      НамалюватиЕліпс(Эллипс(width,height),перо()) |> намалюватиУ (x,y)
+      НамалюватиЕлліпс(Елліпс(width,height),перо()) |> намалюватиУ (x,y)
    static member НамалюватиЕліпс(x:int,y:int,width:int,height:int) =
       ГрафичнеВікно.НамалюватиЕліпс(float x, float y, float width, float height)
    static member НамалюватиЗображення(імяЗображення,x,y) =
       let посиланняЗображення =
-         match СписокЗображень.ПопробоватьПолучитьБайтыИзображения імяЗображення with
+         match СписокЗображень.СпробуватиОтриматиБайтиЗображення імяЗображення with
          | Some байты -> 
             use потокПамяти = new System.IO.MemoryStream(байты)
             ref (new Bitmap(потокПамяти) :> Avalonia.Media.IImage)           
@@ -92,11 +92,11 @@ type ГрафичнеВікно private () =
    static member ЗаполнитьПрямоугольник(x:int,y:int,ширина:int,высота:int) =
       ГрафичнеВікно.ЗаполнитьПрямоугольник(float x,float y,float ширина,float высота)
    static member ЗаполнитьТреугольник(x1,y1,x2,y2,x3,y3) =
-      ЗаполнитьТреугольник(Треугольник(x1,y1,x2,y2,x3,y3),пензлик()) |> нарисовать
+      ЗаполнитьТреугольник(Трикутник(x1,y1,x2,y2,x3,y3),пензлик()) |> нарисовать
    static member ЗаповнитиЕліпс(x,y,ширина,высота) =
-      ЗаповнитиЕліпс(Эллипс(ширина,высота),пензлик()) |> намалюватиУ (x,y)
+      ЗаповнитиЕліпс(Елліпс(ширина,высота),пензлик()) |> намалюватиУ (x,y)
    static member ЗаповнитиЕліпс(x:int,y:int,ширина:int,высота:int) =
-      ЗаповнитиЕліпс(Эллипс(float ширина,float высота),пензлик()) |> намалюватиУ (float x,float y)
+      ЗаповнитиЕліпс(Елліпс(float ширина,float высота),пензлик()) |> намалюватиУ (float x,float y)
    static member ОстанняКнопка with get() = Моя.Апплікація.ОстанняКнопка
    static member КнопкаОтпущена with set callback = Моя.Апплікація.KeyUp <- callback
    static member КнопкаНатиснута with set callback = Моя.Апплікація.KeyDown <- callback 

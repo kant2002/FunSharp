@@ -13,6 +13,6 @@
     <EmbeddedResource Include="tube2.png" LogicalName="tube2.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ісх\ВеселШарп.Бiблiотека.fsproj" />
+    <ProjectReference Include="..\..\ісх\ВеселШарп.Бібліотека.fsproj" />
   </ItemGroup>
 </Project>

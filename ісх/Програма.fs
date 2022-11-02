@@ -1,4 +1,4 @@
-﻿namespace Бiблiотека
+﻿namespace Бібліотека
 
 open System
 open System.Threading

@@ -1,4 +1,4 @@
-﻿module Бiблiотека.Звук
+﻿module Бібліотека.Звук
 
 open System.Media
 

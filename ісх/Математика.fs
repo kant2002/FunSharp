@@ -1,4 +1,4 @@
-﻿module Бiблiотека.Математика
+﻿module Бібліотека.Математика
 
 let private ранд = System.Random()
 let ОтриматиРадіани (град:float) = град * System.Math.PI / 180.

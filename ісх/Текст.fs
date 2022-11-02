@@ -1,4 +1,4 @@
-﻿namespace Бiблiотека
+﻿namespace Бібліотека
 
 module Текст =
    let Добавить(a:string,b:obj) = a + b.ToString()

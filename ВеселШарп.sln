@@ -3,19 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33006.217
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ВеселШарп.Бiблiотека", "ісх\ВеселШарп.Бiблiотека.fsproj", "{D17DE6DC-A64B-4A97-B66B-21338289DFC6}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "ВеселШарп.Бібліотека", "ісх\ВеселШарп.Бібліотека.fsproj", "{D17DE6DC-A64B-4A97-B66B-21338289DFC6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ігри", "Ігри", "{8B1CDF39-DA8F-4841-8042-5A86638C12CA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Приклади", "Приклади", "{A3310CF2-DBF6-4E2A-9B07-692C61C70AA4}"
 	ProjectSection(SolutionItems) = preProject
-		приклади\ИграРакетка.fsx = приклади\ИграРакетка.fsx
 		приклади\Годинник.fsx = приклади\Годинник.fsx
+		приклади\ИграРакетка.fsx = приклади\ИграРакетка.fsx
 		приклади\Калькулятор.fsx = приклади\Калькулятор.fsx
 		приклади\Коло.fsx = приклади\Коло.fsx
 		приклади\Малювання.fsx = приклади\Малювання.fsx
-		приклади\ПтичкаХлоп.fsx = приклади\ПтичкаХлоп.fsx
 		приклади\Переміщення.fsx = приклади\Переміщення.fsx
+		приклади\ПтичкаХлоп.fsx = приклади\ПтичкаХлоп.fsx
 		приклади\ФрактальнеДерево.fsx = приклади\ФрактальнеДерево.fsx
 		приклади\Черепаха.fsx = приклади\Черепаха.fsx
 	EndProjectSection

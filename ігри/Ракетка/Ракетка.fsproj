@@ -7,6 +7,6 @@
     <Compile Include="Ракетка.fs" />
   </ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\ісх\ВеселШарп.Бiблiотека.fsproj" />
+		<ProjectReference Include="..\..\ісх\ВеселШарп.Бібліотека.fsproj" />
 	</ItemGroup>
 </Project>

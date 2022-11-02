@@ -1,4 +1,4 @@
-﻿namespace Бiблiотека
+﻿namespace Бібліотека
 
 [<Sealed>]
 type Таймер private () =

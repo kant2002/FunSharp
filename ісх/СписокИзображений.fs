@@ -1,20 +1,20 @@
-﻿namespace Бiблiотека
+﻿namespace Бібліотека
 
 open System
 
 [<Sealed>]
 type СписокЗображень private () =
    static let зображення = Словник<string,byte[]>()
-   static member ЗавантажитиЗображення(путь:string) =
-      let имя = "ImageList" + Guid.NewGuid().ToString()
-      let байты =
-         if путь.StartsWith("http:") || путь.StartsWith("https:") 
-         then Хттп.ЗавантажитиБайти путь
-         else Ресурс.ЗавантажитиБайти путь
-      зображення.Add(имя, байты)
-      имя
-   static member internal ПопробоватьПолучитьБайтыИзображения(имя:string) =
-      match зображення.TryGetValue(имя) with
+   static member ЗавантажитиЗображення(шлях:string) =
+      let імя = "СписокЗображень" + Guid.NewGuid().ToString()
+      let байти =
+         if шлях.StartsWith("http:") || шлях.StartsWith("https:") 
+         then Хттп.ЗавантажитиБайти шлях
+         else Ресурс.ЗавантажитиБайти шлях
+      зображення.Add(імя, байти)
+      імя
+   static member internal СпробуватиОтриматиБайтиЗображення(імя:string) =
+      match зображення.TryGetValue(імя) with
       | true, байты -> Some(байты)
       | false, _ -> None
 

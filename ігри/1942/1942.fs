@@ -3,7 +3,7 @@
 #r "./bin/debug/FunSharp.dll"
 #endif
 
-open Бiблiотека
+open Бібліотека
 
 type System.Collections.Generic.Dictionary<'TKey,'TValue> with
    member this.GetOrDefault(ключ:'TKey,значение:'TValue) =

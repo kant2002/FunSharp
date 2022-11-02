@@ -1,4 +1,4 @@
-﻿module internal Бiблiотека.Хттп
+﻿module internal Бібліотека.Хттп
 
 open System.IO
 open System.Net

@@ -1,4 +1,4 @@
-﻿module Бiблiотека.Кольори
+﻿module Бібліотека.Кольори
 
 let AliceBlue = Колір(255uy,240uy,248uy,255uy)
 let AntiqueWhite = Колір(255uy,250uy,235uy,215uy)

@@ -3,7 +3,7 @@
 #r "./bin/debug/FunSharp.dll"
 #endif
 
-open Бiблiотека
+open Бібліотека
 
 // Asteroids Game
 // Copyright (C) 2009, Jason T. Jacques 
