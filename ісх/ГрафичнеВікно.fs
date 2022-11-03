@@ -99,7 +99,7 @@ type ГрафичнеВікно private () =
       ЗаповнитиЕліпс(Елліпс(float ширина,float высота),пензлик()) |> намалюватиУ (float x,float y)
    static member ОстанняКнопка with get() = Моя.Апплікація.ОстанняКнопка
    static member КлавішаДогори with set callback = Моя.Апплікація.KeyUp <- callback
-   static member КлавішаДонизу with set callback = Моя.Апплікація.KeyDown <- callback 
+   static member КлавішаНатиснута with set callback = Моя.Апплікація.KeyDown <- callback 
    static member МишаX with get() = Моя.Апплікація.МишаX
    static member МишаY with get() = Моя.Апплікація.МишаY
    static member МишаДонизу with set callback = Моя.Апплікація.MouseDown <- callback
