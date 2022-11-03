@@ -3,12 +3,17 @@ Fun cross-platform graphics library, based on [Small Basic](http://smallbasic.co
 
 ## Deployment
 
-FunSharp runs on Raspbian, Linux and Windows.
+FunSharp runs on Raspbian, Linux, Windows and MacOS.
 
 ## Dependencies
 
-FunSharp uses Mono's [Xwt](https://github.com/mono/xwt) and [Gtk#](http://www.mono-project.com/docs/gui/gtksharp/) libraries.
-On Windows you will need to install [Gtk# for .Net](http://www.mono-project.com/download/#download-win)
+FunSharp uses [Avalonia](https://github.com/AvaloniaUI/Avalonia)
+
+## Other languages
+
+This project has translations to other languages
+- [Ukrainian](https://github.com/kant2002/funsharp)
+- [Russian](https://github.com/kant2002/funsharp/tree/%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0)
 
 ## Building
 
