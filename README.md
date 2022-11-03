@@ -16,7 +16,7 @@
 ## Другие языки
 
 Этот прооект также переведен на другие языки
-- [Украинский](https://github.com/kant2002/funsharp)
+- [Українська](https://github.com/kant2002/funsharp)
 - [English](https://github.com/kant2002/funsharp/tree/main)
 
 ## Сборка
