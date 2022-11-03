@@ -7,11 +7,17 @@
 
 ## Развертывание
 
-ВеселШарп запускается на Raspbian, Linux и Windows.
+ВеселШарп запускается на Raspbian, Linux, Windows и MacOS.
 
 ## Зависимости
 
-ВеселШарп исользует Mono-вский [Xwt](https://github.com/mono/xwt) и [Gtk#](http://www.mono-project.com/docs/gui/gtksharp/).
+ВеселШарп использует [Avalonia](https://github.com/AvaloniaUI/Avalonia).
+
+## Другие языки
+
+Этот прооект также переведен на другие языки
+- [Украинский](https://github.com/kant2002/funsharp)
+- [English](https://github.com/kant2002/funsharp/tree/main)
 
 ## Сборка
 
