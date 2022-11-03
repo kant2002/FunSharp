@@ -1,9 +1,7 @@
 ﻿namespace Library
 
 open System
-open System.IO
 open System.Collections.Generic
-open Xwt.Drawing
 
 [<Sealed>]
 type ImageList private () =

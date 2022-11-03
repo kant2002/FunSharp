@@ -1,6 +1,6 @@
-﻿#I "../lib"
-#r "../lib/Xwt.dll"
-#r "../src/bin/Debug/FunSharp.Library.dll"
+﻿#r "nuget: Avalonia.Desktop, 11.0.0-preview3"
+#r "nuget: Avalonia.Themes.Fluent, 11.0.0-preview3"
+#r "../src/bin/Debug/net7.0/FunSharp.Library.dll"
 
 open Library
 

@@ -51,13 +51,13 @@ type Turtle private () =
          GraphicsWindow.DrawLine(_x,_y,x',y')
       _x <- x'
       _y <- y'
-      My.App.Canvas.Turtle.Offset <- Xwt.Point(_x,_y)
+      My.App.Canvas.Turtle.Offset <- Avalonia.Point(_x,_y)
       show ()
    static member Move(distance:int) =
       Turtle.Move (float distance)
    static member MoveTo(x:float,y:float) =
       _x <- x; _y <- y
-      My.App.Canvas.Turtle.Offset <- Xwt.Point(_x,_y)
+      My.App.Canvas.Turtle.Offset <- Avalonia.Point(_x,_y)
       show()
    static member MoveTo(x:int, y:int) = 
       Turtle.MoveTo(float x, float y)

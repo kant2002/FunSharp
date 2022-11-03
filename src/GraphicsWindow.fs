@@ -1,6 +1,7 @@
 ﻿namespace Library
 
 open System
+open Avalonia.Media.Imaging
 
 [<Sealed>]
 type GraphicsWindow private () =   
@@ -21,7 +22,7 @@ type GraphicsWindow private () =
       with get () = backgroundColor
       and set color = 
          backgroundColor <- color
-         My.App.Invoke (fun () -> My.App.Canvas.BackgroundColor <- toXwtColor color)
+         My.App.Invoke (fun () -> My.App.Canvas.Background <- new Avalonia.Media.SolidColorBrush(toXwtColor color))
    static member Width
       with get () = width
       and set newWidth =
@@ -63,7 +64,7 @@ type GraphicsWindow private () =
          match ImageList.TryGetImageBytes imageName with
          | Some bytes -> 
             use memoryStream = new System.IO.MemoryStream(bytes)
-            ref (Xwt.Drawing.Image.FromStream(memoryStream))           
+            ref (new Bitmap(memoryStream) :> Avalonia.Media.IImage)
          | None ->
             if imageName.StartsWith("http:") || imageName.StartsWith("https:") 
             then
@@ -75,7 +76,7 @@ type GraphicsWindow private () =
                 } |> Async.Start
                 imageRef
             else
-                ref (Xwt.Drawing.Image.FromResource(imageName))
+                ref (new Bitmap(Reflection.Assembly.GetEntryAssembly().GetManifestResourceStream(imageName)) :> Avalonia.Media.IImage)
       DrawImage(imageRef,x,y) |> draw
    static member DrawImage(imageName,x:int,y:int) =
       GraphicsWindow.DrawImage(imageName, float x, float y)

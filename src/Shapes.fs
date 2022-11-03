@@ -1,10 +1,10 @@
 ﻿namespace Library
 
-open Xwt
 open System
 open System.Collections.Generic
+open Avalonia.Media.Imaging
 
-type internal ShapeInfo = { Shape:Shape; mutable Offset:Point; mutable Opacity:float }
+type internal ShapeInfo = { Shape:Shape; mutable Offset:Avalonia.Point; mutable Opacity:float }
 
 [<Sealed>]
 type Shapes private () =
@@ -14,7 +14,7 @@ type Shapes private () =
       Font(GraphicsWindow.FontSize,GraphicsWindow.FontName,GraphicsWindow.FontBold, GraphicsWindow.FontItalic)
    static let shapes = Dictionary<string,ShapeInfo>()
    static let addShape name shape =
-      let info = { Shape=shape; Offset=Point(); Opacity=1.0 }
+      let info = { Shape=shape; Offset=Avalonia.Point(); Opacity=1.0 }
       shapes.Add(name,info)      
       addDrawing (DrawShape(name,shape))
    static let onShape shapeName action =
@@ -51,7 +51,7 @@ type Shapes private () =
       match ImageList.TryGetImageBytes(imageName) with
       | Some bytes ->
          let stream = new System.IO.MemoryStream(bytes)
-         let image = Xwt.Drawing.Image.FromStream(stream)
+         let image = new Avalonia.Media.Imaging.Bitmap(stream) :> Avalonia.Media.IImage
          ImageShape(ref image) |> addShape name
       | None ->
          let imageRef = 
@@ -68,7 +68,7 @@ type Shapes private () =
                let imageRef = ref null                 
                My.App.Invoke(fun () ->
                   use stream = Resource.GetStream(imageName)
-                  imageRef := Xwt.Drawing.Image.FromStream(stream)
+                  imageRef := new Bitmap(stream) :> Avalonia.Media.IImage
                )
                imageRef
          ImageShape(imageRef) |> addShape name
@@ -83,7 +83,7 @@ type Shapes private () =
       My.App.Invoke (fun () -> My.App.Canvas.SetShapeVisibility(shapeName,true))      
    static member Move(shapeName,x,y) =
       onShape shapeName (fun info ->
-         info.Offset <- Point(x,y)
+         info.Offset <- Avalonia.Point(x,y)
          My.App.Invoke (fun () -> My.App.Canvas.MoveShape(shapeName,info.Offset))
       )
    static member Move(shapeName,x:int,y:int) =

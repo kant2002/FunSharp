@@ -11,7 +11,7 @@ type Color =
 
 [<AutoOpen>]
 module internal ColorConverter =
-   let toXwtColor (color:Color) = Xwt.Drawing.Color.FromBytes(color.R, color.G, color.B, color.A)
+   let toXwtColor (color:Color) = Avalonia.Media.Color.FromArgb(color.R, color.G, color.B, color.A)
 
 type internal Width = float
 type internal Height = float
@@ -34,7 +34,7 @@ type internal Shape =
    | RectShape of Rect * Pen * Color
    | TriangleShape of Triangle * Pen * Color
    | EllipseShape of Ellipse * Pen * Color
-   | ImageShape of Xwt.Drawing.Image ref
+   | ImageShape of Avalonia.Media.IImage ref
    | TextShape of string ref * Font * Color
 
 type internal Drawing =
@@ -42,7 +42,7 @@ type internal Drawing =
    | DrawRect of Rect * Pen
    | DrawTriangle of Triangle * Pen
    | DrawEllipse of Ellipse * Pen
-   | DrawImage of Xwt.Drawing.Image ref * float * float
+   | DrawImage of Avalonia.Media.IImage ref * float * float
    | DrawText of float * float * string * Font * Color
    | DrawBoundText of float * float * float * string * Font * Color
    | FillRect of Rect * Color

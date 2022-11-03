@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net48</TargetFramework>
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <TargetFramework>net7.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Compile Include="DrawingTypes.fs" />
+    <Compile Include="Math.fs" />
 		<Compile Include="Draw.fs" />
 		<Compile Include="DrawingCanvas.fs" />
 		<Compile Include="Colors.fs" />
@@ -20,7 +21,6 @@
 		<Compile Include="Mouse.fs" />
 		<Compile Include="Clock.fs" />
 		<Compile Include="Timer.fs" />
-		<Compile Include="Math.fs" />
 		<Compile Include="Text.fs" />
 		<Compile Include="Sound.fs" />
 		<Compile Include="Program.fs" />
@@ -35,6 +35,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Xwt.Gtk3" Version="0.2.251" />
-	</ItemGroup>
+    <PackageReference Include="System.Windows.Extensions" Version="6.0.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview3" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0-preview3" />
+  </ItemGroup>
 </Project>

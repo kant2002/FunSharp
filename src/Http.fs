@@ -11,12 +11,13 @@ let LoadBytes (url:string) =
    responseStream.CopyTo(memoryStream)
    memoryStream.GetBuffer()
 
-open Xwt.Drawing
+open Avalonia.Media.Imaging
+open Avalonia.Media
 
 let LoadImageAsync (url:string) = async {
    let request = HttpWebRequest.Create(url)
    use! response = request.AsyncGetResponse()      
    use stream = response.GetResponseStream()
-   return Image.FromStream(stream)
+   return new Bitmap(stream) :> IImage
    }
 
