@@ -12,8 +12,8 @@ FunSharp uses [Avalonia](https://github.com/AvaloniaUI/Avalonia)
 ## Other languages
 
 This project has translations to other languages
-- [Ukrainian](https://github.com/kant2002/funsharp)
-- [Russian](https://github.com/kant2002/funsharp/tree/%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0)
+- [Українська](https://github.com/kant2002/funsharp)
+- [Русский](https://github.com/kant2002/funsharp/tree/%D0%B3%D0%BE%D0%BB%D0%BE%D0%B2%D0%BD%D0%B0)
 
 ## Building
 
