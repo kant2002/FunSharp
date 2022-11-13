@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <FSharpRoot></FSharpRoot>
+	  <FSharpPreferNetFrameworkTools>false</FSharpPreferNetFrameworkTools>
+	  <DotnetFscCompilerPath>$(FSharpRoot)artifacts/bin/fsc/Debug/net7.0/fsc.dll</DotnetFscCompilerPath>
+    <Fsc_DotNET_DotnetFscCompilerPath>$(FSharpRoot)artifacts/bin/fsc/Debug/net7.0/fsc.dll</Fsc_DotNET_DotnetFscCompilerPath>
+  </PropertyGroup>
+</Project>

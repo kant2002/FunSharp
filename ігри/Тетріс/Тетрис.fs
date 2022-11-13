@@ -25,7 +25,7 @@ let mutable наступнийШматок = ""
 let mutable кількістьh = 0
 let mutable xпоз = 0
 let mutable yпоз = 0
-let mutable зроблено = 0
+let mutable ``зроблено`` = 0
 let mutable напрямокРуху = 0
 let mutable неправильнийРух = 0
 let mutable затримка = 0
@@ -58,9 +58,9 @@ let rec ГоловнийЦикл () =
   СтворитиШматок() // in: template ret: h
   наступнийШматок <- h
 
-  let mutable кінець = 0
+  let mutable ``кінець`` = 0
   let mutable затримкаСесії = ПОЧАТКОВАЗАТРИМКА
-  while кінець = 0 do
+  while ``кінець`` = 0 do
     if затримкаСесії > КІНЦЕВАЗАТРИМКА then
       затримкаСесії <- затримкаСесії - 1    
 
@@ -75,16 +75,16 @@ let rec ГоловнийЦикл () =
     h <- цейШматок
 
     yпоз <- 0
-    зроблено <- 0
+    ``зроблено`` <- 0
     xпоз <- 3 // always drop from column 3
     ПеревіритиЗупинку() // in: ypos, xpos, h ret: done
-    if зроблено = 1 then
+    if ``зроблено`` = 1 then
       yпоз <- yпоз - 1
       ПереміститиШматок()  // in: ypos, xpos, h
-      кінець <- 1    
+      ``кінець`` <- 1    
 
     let mutable yпоздельта = 0
-    while зроблено = 0 || yпоздельта > 0 do
+    while ``зроблено`` = 0 || yпоздельта > 0 do
       ПереміститиШматок()   // in: ypos, xpos, h
 
       // Delay, but break if the delay get set to 0 if the piece gets dropped
@@ -274,7 +274,7 @@ and ПідтвердитиРух () = // in: ypos, xpos, h, moveDirection ret: i
     i <- i + 1 
 
 and ПеревіритиЗупинку () = // in: ypos, xpos, h ret: done
-  зроблено <- 0
+  ``зроблено`` <- 0
   let mutable i = 0
   while i < КВАДРАТИ do
     let v = шаблони.[шматкиДоШаблонів.[h]].Значення.[i]
@@ -284,13 +284,13 @@ and ПеревіритиЗупинку () = // in: ypos, xpos, h ret: done
     let y = Математика.Залишок(v, 10)
 
     if y + yпоз > ВИСОТАХ || плями.[(x + xпоз) + (y + yпоз) * ШИРИНАХ] <> "." then
-      зроблено <- 1
+      ``зроблено`` <- 1
       i <- КВАДРАТИ // force getting out of the loop   
 
     i <- i + 1 
 
   // If we need to stop the piece, move the box handles to the canvas
-  if зроблено = 1 then
+  if ``зроблено`` = 1 then
     for i = 0 to КВАДРАТИ - 1 do
       let v = шаблони.[шматкиДоШаблонів.[h]].Значення.[i]
       //x = Math.Floor(v/10)
