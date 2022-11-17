@@ -61,7 +61,7 @@
   нехай змінливий ``кінець`` = 0
   нехай змінливий затримкаСесії = ПОЧАТКОВАЗАТРИМКА
   доки ``кінець`` = 0 зробити
-    if затримкаСесії > КІНЦЕВАЗАТРИМКА then
+    якщо затримкаСесії > КІНЦЕВАЗАТРИМКА then
       затримкаСесії <- затримкаСесії - 1    
 
     затримка <- затримкаСесії
@@ -78,7 +78,7 @@
     ``зроблено`` <- 0
     xпоз <- 3 // always drop from column 3
     ПеревіритиЗупинку() // in: ypos, xpos, h ret: done
-    if ``зроблено`` = 1 then
+    якщо ``зроблено`` = 1 then
       yпоз <- yпоз - 1
       ПереміститиШматок()  // in: ypos, xpos, h
       ``кінець`` <- 1    
@@ -93,7 +93,7 @@
         Програма.Затримка(10)
         індексЗатримки <- індексЗатримки - 10      
 
-      if yпоздельта > 0 then
+      якщо yпоздельта > 0 then
         yпоздельта <- yпоздельта - 1  // used to create freespin, when the piece is rotated
       else
         yпоз <- yпоз + 1            // otherwise, move the piece down.      
@@ -103,31 +103,31 @@
 
 та ОбробитиКнопки () =
   // Зупинити гру
-  if ГрафичнеВікно.ОстанняКнопка = "Escape" then
+  якщо ГрафичнеВікно.ОстанняКнопка = "Escape" then
     Програма.Закінчити()  
 
   // Перемістити фигуру вліво
-  if ГрафичнеВікно.ОстанняКнопка = "Left" then
+  якщо ГрафичнеВікно.ОстанняКнопка = "Left" then
     напрямокРуху <- -1
     ПідтвердитиРух()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
-    if неправильнийРух = 0 then
+    якщо неправильнийРух = 0 then
       xпоз <- xпоз + напрямокРуху   
     ПереміститиШматок()   // in: ypos, xpos, h 
 
   // Перемістити фигуру вправо
-  if ГрафичнеВікно.ОстанняКнопка = "Right" then
+  якщо ГрафичнеВікно.ОстанняКнопка = "Right" then
     напрямокРуху <- 1
     ПідтвердитиРух()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
-    if неправильнийРух = 0 then
+    якщо неправильнийРух = 0 then
       xпоз <- xпоз + напрямокРуху    
     ПереміститиШматок()  // in: ypos, xpos, h  
 
   // Перемістити фигуру вниз
-  if ГрафичнеВікно.ОстанняКнопка = "Down" || ГрафичнеВікно.ОстанняКнопка = "Space" then
+  якщо ГрафичнеВікно.ОстанняКнопка = "Down" || ГрафичнеВікно.ОстанняКнопка = "Space" then
     затримка <- 0
  
   // Повернути фигуру
-  if ГрафичнеВікно.ОстанняКнопка = "Up" then
+  якщо ГрафичнеВікно.ОстанняКнопка = "Up" then
     базовийшаблон <- шматкиДоШаблонів.[h]
     шаблон <- "temptemplate"
     обертання <- "CW"
@@ -135,14 +135,14 @@
 
     шматкиДоШаблонів.[h] <- шаблон
     напрямокРуху <- 0
-    ПідтвердитиРух()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
+    ПідтвердитиРух()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 якщо move is invalid, otherwise 0
 
     // See if it can be moved so that it will rotate.
     нехай xпозсхр = xпоз
     нехай змінливий yпоздельта = 0
     доки yпоздельта = 0 && Математика.Модуль(xпозсхр - xпоз) < 3 зробити // move up to 3 times only
       // if the rotation move worked, copy the temp to "rotatedtemplate" and use that from now on
-      if неправильнийРух = 0 then
+      якщо неправильнийРух = 0 then
         базовийшаблон <- шаблон
         шаблон <- "rotatedtemplate"
         шматкиДоШаблонів.[h] <- шаблон
@@ -156,9 +156,9 @@
       else
         // if the rotated piece can't be placed, move it left or right and try again.
         xпоз <- xпоз - неправильнийРух
-        ПідтвердитиРух()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
+        ПідтвердитиРух()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 якщо move is invalid, otherwise 0
 
-    if неправильнийРух <> 0 then
+    якщо неправильнийРух <> 0 then
       xпоз <- xпозсхр
       шматкиДоШаблонів.[h] <- базовийшаблон
       шаблон <- ""
@@ -181,11 +181,11 @@
 та СкопіюватиШматок () = // in basetemplate, template, rotation 
   нехай L = шаблони.[базовийшаблон].Розм
 
-  if not (шаблони.ContainsKey шаблон) then
+  якщо not (шаблони.ContainsKey шаблон) then
       шаблони.[шаблон] <-
          { Значення=[|0;0;0;0|]; Колір=Кольори.Black; Розм=0; ViewX=0; ViewY=0 }        
 
-  if обертання = "CW" then
+  якщо обертання = "CW" then
     for i = 0 to КВАДРАТИ - 1 зробити // x' = y y' = L - 1 - x
       нехай v = шаблони.[базовийшаблон].Значення.[i]
 
@@ -259,15 +259,15 @@
     нехай x = Математика.Floor(float v / 10.0)
     нехай y = Математика.Залишок(v, 10)
 
-    if (x + xпоз + напрямокРуху) < 0 then
+    якщо (x + xпоз + напрямокРуху) < 0 then
       неправильнийРух <- -1
       i <- КВАДРАТИ // force getting out of the loop    
 
-    if (x + xпоз + напрямокРуху) >= ШИРИНАХ then
+    якщо (x + xпоз + напрямокРуху) >= ШИРИНАХ then
       неправильнийРух <- 1
       i <- КВАДРАТИ // force getting out of the loop   
 
-    if плями.[(x + xпоз + напрямокРуху) + (y + yпоз) * ШИРИНАХ] <> "." then
+    якщо плями.[(x + xпоз + напрямокРуху) + (y + yпоз) * ШИРИНАХ] <> "." then
       неправильнийРух <- 2
       i <- КВАДРАТИ // force getting out of the loop    
 
@@ -283,21 +283,21 @@
     нехай x = Математика.Floor(float v / 10.0)
     нехай y = Математика.Залишок(v, 10)
 
-    if y + yпоз > ВИСОТАХ || плями.[(x + xпоз) + (y + yпоз) * ШИРИНАХ] <> "." then
+    якщо y + yпоз > ВИСОТАХ || плями.[(x + xпоз) + (y + yпоз) * ШИРИНАХ] <> "." then
       ``зроблено`` <- 1
       i <- КВАДРАТИ // force getting out of the loop   
 
     i <- i + 1 
 
   // If we need to stop the piece, move the box handles to the canvas
-  if ``зроблено`` = 1 then
+  якщо ``зроблено`` = 1 then
     for i = 0 to КВАДРАТИ - 1 зробити
       нехай v = шаблони.[шматкиДоШаблонів.[h]].Значення.[i]
       //x = Math.Floor(v/10)
       //y = Math.Remainder(v, 10)
       нехай x = (Математика.Floor(float v / 10.0) + xпоз)
       нехай y = (Математика.Залишок(v, 10) + yпоз - 1)
-      if y >= 0 then
+      якщо y >= 0 then
          плями.[x + y * ШИРИНАХ] <- шматки.[h].[i]
 
     // 1 points for every piece successfully dropped
@@ -319,12 +319,12 @@
       x <- 0
       доки x < ШИРИНАХ зробити
         нехай piece = плями.[x + y * ШИРИНАХ]
-        if piece = "." then
+        якщо piece = "." then
           x <- ШИРИНАХ        
         x <- x + 1    
 
       // if non of them were empty (i.e "."), then remove the line.
-      if x = ШИРИНАХ then
+      якщо x = ШИРИНАХ then
 
         // Delete the line
         for x1 = 0 to ШИРИНАХ - 1 зробити
@@ -338,7 +338,7 @@
             плями.[x1 + y1 * ШИРИНАХ] <- piece
             Фігури.Перемістити(piece, Фігури.ОтриматиЛіво(piece), Фігури.ОтриматиВерх(piece) + float ШИРИНАК)
 
-  if лінійОчищено > 0 then
+  якщо лінійОчищено > 0 then
     рахунок <- рахунок + 100 * int (Математика.Округляти(float лінійОчищено * 2.15 - 1.0))
     НадрукуватиРахунок()
 

@@ -1,4 +1,4 @@
-﻿module internal Бібліотека.Ресурс
+﻿module внутрішній Бібліотека.Ресурс
 
 нехай private збірка = System.Reflection.Assembly.GetEntryAssembly()
 нехай ОтриматиСтрум шлях =

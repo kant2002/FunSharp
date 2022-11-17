@@ -10,7 +10,7 @@
 відкрити Avalonia.Controls
 відкрити Avalonia.Threading
 
-тип Callback = delegate of unit -> unit
+тип Callback = делегат з unit -> unit
 
 тип АппАвалонії() =
     inherit Avalonia.Application()
@@ -19,7 +19,7 @@
         сам.Styles.Add(тема)
 
 
-тип internal МояАпплікація () =
+тип внутрішній МояАпплікація () =
    нехай змінливий приховане : bool = true
    нехай змінливий головнеВікно : Window = null
    нехай змінливий головнеПолотно : ПолотноДляМалювання = null
@@ -38,7 +38,7 @@
    нехай запуститиНаІКПотоці (дія: Func<'a>) =
     нехай змінливий результат : 'a = null
     async {
-        let! x = Dispatcher.UIThread.InvokeAsync(дія) |> Async.AwaitTask
+        нехай! x = Dispatcher.UIThread.InvokeAsync(дія) |> Async.AwaitTask
         результат <- x
     } |> Async.RunSynchronously
     результат
@@ -46,45 +46,45 @@
       головнеПолотно <- new ПолотноДляМалювання(Background=new Avalonia.Media.SolidColorBrush(доКольораАвалонії Кольори.White))
       головнеПолотно.KeyUp.Add(fun арги -> 
          останняКлавіша <- арги.Key.ToString()
-         if клавішаВниз <> null then клавішаВниз.Invoke()
+         якщо клавішаВниз <> null then клавішаВниз.Invoke()
       )
       головнеПолотно.KeyDown.Add(fun арги ->
          останняКлавіша <- арги.Key.ToString()
-         if клавішаВгору <> null then клавішаВгору.Invoke()
+         якщо клавішаВгору <> null then клавішаВгору.Invoke()
       )
       головнеПолотно.PointerPressed.Add(fun арги ->
          нехай точка = арги.GetCurrentPoint(головнеПолотно)
          мишаX <- точка.Position.X
          мишаY <- точка.Position.Y
-         if точка.Properties.IsLeftButtonPressed then ліваКлавішаВниз <-true
-         if точка.Properties.IsRightButtonPressed then праваКлавішаВниз <-true
-         if мишиВниз <> null then мишиВниз.Invoke()
+         якщо точка.Properties.IsLeftButtonPressed then ліваКлавішаВниз <-true
+         якщо точка.Properties.IsRightButtonPressed then праваКлавішаВниз <-true
+         якщо мишиВниз <> null then мишиВниз.Invoke()
       )
       головнеПолотно.PointerReleased.Add(fun args ->
          нехай точка = args.GetCurrentPoint(головнеПолотно)
          мишаX <- точка.Position.X
          мишаY <- точка.Position.Y
-         if точка.Properties.IsLeftButtonPressed then ліваКлавішаВниз <- false
-         if мишаВгору <> null then мишаВгору.Invoke()
+         якщо точка.Properties.IsLeftButtonPressed then ліваКлавішаВниз <- false
+         якщо мишаВгору <> null then мишаВгору.Invoke()
       )
       головнеПолотно.PointerMoved.Add(fun args ->
          нехай позиція = args.GetPosition(головнеПолотно)
          мишаX <- позиція.X
          мишаY <- позиція.Y
-         if мишаРухається <> null then мишаРухається.Invoke()
+         якщо мишаРухається <> null then мишаРухається.Invoke()
       )
       головнеВікно.Content <- головнеПолотно
       головнеПолотно.Focusable <- true
       головнеПолотно.Focus()
    нехай показатиВікно () = 
-      if приховане then головнеВікно.Show(); приховане <- false
+      якщо приховане then головнеВікно.Show(); приховане <- false
    нехай сховатиВікно () = 
-      if not приховане then головнеВікно.Hide(); приховане <- true
+      якщо not приховане then головнеВікно.Hide(); приховане <- true
    нехай змінливий timerDisposable : IDisposable = null
    нехай установитьИнтервалТаймера (мс:int) =
-      if timerDisposable <> null then timerDisposable.Dispose()
+      якщо timerDisposable <> null then timerDisposable.Dispose()
       нехай таймер = new System.Timers.Timer(мс)
-      таймер.Elapsed.Add(fun (_) -> if not таймерПризупинено then цокТаймера.Invoke())
+      таймер.Elapsed.Add(fun (_) -> якщо not таймерПризупинено then цокТаймера.Invoke())
       таймер.Start()
       timerDisposable <- таймер
    
@@ -101,7 +101,7 @@
    нехай запуститиПотікДодатка () =
       use ініційован = new AutoResetEvent(false)
       нехай потік = Thread(ParameterizedThreadStart запуститиДодаток)
-      if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) then потік.SetApartmentState(ApartmentState.STA)
+      якщо RuntimeInformation.IsOSPlatform(OSPlatform.Windows) then потік.SetApartmentState(ApartmentState.STA)
       потік.Start(fun () -> ініційован.Set() |> ignore)
       ініційован.WaitOne() |> ignore
    зробити запуститиПотікДодатка()
@@ -145,7 +145,7 @@
     )
 
 [<Sealed>]
-тип internal Моя private () = 
+тип внутрішній Моя private () = 
    static нехай змінливий аплікація = None
    static нехай сінх = obj ()
    static нехай уFsi () =
@@ -156,7 +156,7 @@
    static нехай закритиАплікацію () =
       lock (сінх) (fun () ->
          (Application.Current.ApplicationLifetime :?> IClassicDesktopStyleApplicationLifetime).TryShutdown(0) |> ignore
-         if not (уFsi()) then
+         якщо not (уFsi()) then
             Environment.Exit(0)
          аплікація <- None       
       )
@@ -175,7 +175,7 @@
    static member Апплікація = отриматиАплікацію ()
 
 [<AutoOpen>]
-module internal ДодатиМалюнок =
+module внутрішній ДодатиМалюнок =
    нехай додатиМалюнок drawing =
       Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.ДодатиМалюнок(drawing))
    нехай додатиМалюнокУ drawing (x,y) =

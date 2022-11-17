@@ -1,4 +1,4 @@
-﻿module internal Бібліотека.Малювати
+﻿module внутрішній Бібліотека.Малювати
 
 відкрити Avalonia.Media
 відкрити Avalonia
@@ -16,9 +16,9 @@
 нехай кМакету текст (Шрифт(розмір,родина,жирний,курсив)) колір =
    нехай макет = new FormattedText(текст, System.Globalization.CultureInfo.InvariantCulture, FlowDirection.LeftToRight, Typeface.Default, 1, new SolidColorBrush(колір, 1.))
    макет.SetFontSize(розмір/2.0)      
-   if жирний then макет.SetFontWeight(FontWeight.Bold)
-   if курсив then макет.SetFontStyle(FontStyle.Italic)
-   if родина <> "" then макет.SetFontFamily(родина)
+   якщо жирний then макет.SetFontWeight(FontWeight.Bold)
+   якщо курсив then макет.SetFontStyle(FontStyle.Italic)
+   якщо родина <> "" then макет.SetFontFamily(родина)
    макет
  
 тип ІнфоМалюнка = { 
@@ -80,7 +80,7 @@
       нехай перо = new Pen(new SolidColorBrush(колірАвалонії, 1.0), ширина)
       конт.DrawEllipse(null, перо, Avalonia.Point(x,y),ш,в)
    | НамалюватиЗображення(зображення,x',y') ->
-      if зображення.Value <> null then         
+      якщо зображення.Value <> null then         
          намалюватиЗображення конт інфо зображення.Value (x+x',y+y') |> ignore
    | НамалюватиТекст(x,y,текст,шрифт,цвет) ->
       нехай колірАвалонії = доКольораАвалонії цвет
@@ -133,5 +133,5 @@
       нехай макет = кМакету textRef.Value шрифт колірАвалонії
       конт.DrawText(макет, Avalonia.Point(x,y))
    | НамалюватиФігуру(_,ФігураЗображения(зображення)) ->
-      if зображення.Value <> null then                 
+      якщо зображення.Value <> null then                 
          намалюватиЗображення конт інфо зображення.Value (x,y) |> ignore
