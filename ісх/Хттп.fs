@@ -1,4 +1,4 @@
-﻿module внутрішній Бібліотека.Хттп
+﻿модуль внутрішній Бібліотека.Хттп
 
 відкрити System.IO
 відкрити System.Net
@@ -6,8 +6,8 @@
 нехай ЗавантажитиБайти (url:string) =
    нехай запит = HttpWebRequest.Create(url)
    нехай відповідь = запит.GetResponse()
-   use струмВідповіді = відповідь.GetResponseStream()
-   use струмПамяті = new MemoryStream()
+   вживати струмВідповіді = відповідь.GetResponseStream()
+   вживати струмПамяті = новий MemoryStream()
    струмВідповіді.CopyTo(струмПамяті)
    струмПамяті.GetBuffer()
 
@@ -16,8 +16,8 @@
 
 нехай ЗавантажитиЗображенняАсінх (url:string) = async {
    нехай запит = HttpWebRequest.Create(url)
-   use! відповідь = запит.AsyncGetResponse()
-   use струм = відповідь.GetResponseStream()
-   return new Bitmap(струм) :> IImage
+   вживати! відповідь = запит.AsyncGetResponse()
+   вживати струм = відповідь.GetResponseStream()
+   повернути новий Bitmap(струм) :> IImage
    }
 

@@ -1,16 +1,16 @@
 ﻿простір Бібліотека
 
 тип Колір = 
-   struct
-      val A:byte
-      val R:byte
-      val G:byte
-      val B:byte
-   end
-   new (a,r,g,b) = { A=a; R=r; G=g; B=b }
+   структ
+      знач A:byte
+      знач R:byte
+      знач G:byte
+      знач B:byte
+   кінець
+   новий (a,r,g,b) = { A=a; R=r; G=g; B=b }
 
 [<AutoOpen>]
-module внутрішній ПеретворювачКольорів =
+модуль внутрішній ПеретворювачКольорів =
    нехай доКольораАвалонії (color:Колір) = Avalonia.Media.Color.FromArgb(color.A, color.R, color.G, color.B)
 
 тип внутрішній Ширина = float
