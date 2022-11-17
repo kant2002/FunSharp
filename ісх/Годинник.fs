@@ -1,8 +1,8 @@
-﻿namespace Бібліотека
+﻿простір Бібліотека
 
-open System
+відкрити System
 
-type Годинник private () =
+тип Годинник private () =
    static member Рік = DateTime.Now.Year
    static member Місяць = DateTime.Now.Month
    static member День = DateTime.Now.Day

@@ -2,15 +2,15 @@
 #r "nuget: Avalonia.Themes.Fluent, 11.0.0-preview3"
 #r "../ісх/bin/Debug/net7.0/ВеселШарп.Бібліотека.dll"
 
-open Бібліотека
+відкрити Бібліотека
 
-let фон = Фігури.ДодатиЗображення("http://flappycreator.com/default/bg.png")
-let земля = Фігури.ДодатиЗображення("http://flappycreator.com/default/ground.png")
-let птиця = Фігури.ДодатиЗображення("http://flappycreator.com/default/bird_sing.png")
-let труба1 = СписокЗображень.ЗавантажитиЗображення("http://flappycreator.com/default/tube1.png")
-let труба2 = СписокЗображень.ЗавантажитиЗображення("http://flappycreator.com/default/tube2.png")
-let т1 = Фігури.ДодатиЗображення(труба1)
-let т2 = Фігури.ДодатиЗображення(труба2)
+нехай фон = Фігури.ДодатиЗображення("http://flappycreator.com/default/bg.png")
+нехай земля = Фігури.ДодатиЗображення("http://flappycreator.com/default/ground.png")
+нехай птиця = Фігури.ДодатиЗображення("http://flappycreator.com/default/bird_sing.png")
+нехай труба1 = СписокЗображень.ЗавантажитиЗображення("http://flappycreator.com/default/tube1.png")
+нехай труба2 = СписокЗображень.ЗавантажитиЗображення("http://flappycreator.com/default/tube2.png")
+нехай т1 = Фігури.ДодатиЗображення(труба1)
+нехай т2 = Фігури.ДодатиЗображення(труба2)
 
 Фігури.Перемістити(т1, 150.0, 50.0-320.0)
 Фігури.Перемістити(т2, 150.0, 150.0)

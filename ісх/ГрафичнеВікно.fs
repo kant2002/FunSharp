@@ -1,49 +1,49 @@
-﻿namespace Бібліотека
+﻿простір Бібліотека
 
-open System
-open Avalonia.Media.Imaging
-open Avalonia.Media
+відкрити System
+відкрити Avalonia.Media.Imaging
+відкрити Avalonia.Media
 
 [<Sealed>]
-type ГрафичнеВікно private () =   
-   static let рнд = Random()
-   static let mutable фоновийКолір = Кольори.White
-   static let mutable ширина = 640
-   static let mutable висота = 480
-   static let перо () = Перо(ГрафичнеВікно.КолірПера,ГрафичнеВікно.ШиринаПера)
-   static let пензлик () = ГрафичнеВікно.КолірПензлика
-   static let шрифт () = 
+тип ГрафичнеВікно private () =   
+   static нехай рнд = Random()
+   static нехай змінливий фоновийКолір = Кольори.White
+   static нехай змінливий ширина = 640
+   static нехай змінливий висота = 480
+   static нехай перо () = Перо(ГрафичнеВікно.КолірПера,ГрафичнеВікно.ШиринаПера)
+   static нехай пензлик () = ГрафичнеВікно.КолірПензлика
+   static нехай шрифт () = 
       Шрифт.Шрифт(ГрафичнеВікно.РозмірШрифта,ГрафичнеВікно.ІмяШрифта,ГрафичнеВікно.ЖирністьШрифта, ГрафичнеВікно.КурсивністьШрифта)
-   static let намалювати малюнок = додатиМалюнок малюнок      
-   static let намалюватиУ (x,y) малюнок = додатиМалюнокУ малюнок (x,y)
+   static нехай намалювати малюнок = додатиМалюнок малюнок      
+   static нехай намалюватиУ (x,y) малюнок = додатиМалюнокУ малюнок (x,y)
    static member Заголовок
-      with set заголовок =
+      із set заголовок =
          Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Вікно.Title <- заголовок)
    static member КолірФона
-      with get () = фоновийКолір
-      and set цвет = 
+      із get () = фоновийКолір
+      та set цвет = 
          фоновийКолір <- цвет
          Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.Background <- new Avalonia.Media.SolidColorBrush(доКольораАвалонії цвет))
    static member Ширина
-      with get () = ширина
-      and set новаШирина =
+      із get () = ширина
+      та set новаШирина =
          ширина <- новаШирина
          Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.ВстановитиШиринуВікна(float новаШирина))
    static member Висота
-      with get () = висота
-      and set новаВысота =
+      із get () = висота
+      та set новаВысота =
          висота <- новаВысота
          Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.ВстановитиВисотуВікна(float новаВысота))
    static member МожнаЗмінитиРозмір
-      with get () = true
-      and set (значення:bool) = ()
-   static member val КолірПера = Кольори.Black with get, set
-   static member val ШиринаПера = 2.0 with get, set
-   static member val КолірПензлика = Кольори.Purple with get,set
-   static member val РозмірШрифта = 12.0 with get,set
-   static member val ІмяШрифта = "" with get,set
-   static member val ЖирністьШрифта = false with get,set
-   static member val КурсивністьШрифта = false with get,set
+      із get () = true
+      та set (значення:bool) = ()
+   static member val КолірПера = Кольори.Black із get, set
+   static member val ШиринаПера = 2.0 із get, set
+   static member val КолірПензлика = Кольори.Purple із get,set
+   static member val РозмірШрифта = 12.0 із get,set
+   static member val ІмяШрифта = "" із get,set
+   static member val ЖирністьШрифта = false із get,set
+   static member val КурсивністьШрифта = false із get,set
    static member Очистити () =
       Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.ОчиститиМалюнки())
    static member НамалюватиЛінію(x1,y1,x2,y2) =
@@ -61,15 +61,15 @@ type ГрафичнеВікно private () =
    static member НамалюватиЕліпс(x:int,y:int,width:int,height:int) =
       ГрафичнеВікно.НамалюватиЕліпс(float x, float y, float width, float height)
    static member НамалюватиЗображення(імяЗображення,x,y) =
-      let посиланняЗображення =
-         match СписокЗображень.СпробуватиОтриматиБайтиЗображення імяЗображення with
+      нехай посиланняЗображення =
+         match СписокЗображень.СпробуватиОтриматиБайтиЗображення імяЗображення із
          | Some байти -> 
             use потокПамяти = new System.IO.MemoryStream(байти)
             ref (new Bitmap(потокПамяти) :> Avalonia.Media.IImage)           
          | None ->
             if імяЗображення.StartsWith("http:") || імяЗображення.StartsWith("https:") 
             then
-                let посиланняЗображення = ref null
+                нехай посиланняЗображення = ref null
                 async {
                    let! зображення = Хттп.ЗавантажитиЗображенняАсінх імяЗображення
                    посиланняЗображення := зображення
@@ -97,17 +97,17 @@ type ГрафичнеВікно private () =
       ЗаповнитиЕліпс(Елліпс(ширина,высота),пензлик()) |> намалюватиУ (x,y)
    static member ЗаповнитиЕліпс(x:int,y:int,ширина:int,высота:int) =
       ЗаповнитиЕліпс(Елліпс(float ширина,float высота),пензлик()) |> намалюватиУ (float x,float y)
-   static member ОстанняКнопка with get() = Моя.Апплікація.ОстанняКнопка
-   static member КлавішаДогори with set callback = Моя.Апплікація.KeyUp <- callback
-   static member КлавішаНатиснута with set callback = Моя.Апплікація.KeyDown <- callback 
-   static member МишаX with get() = Моя.Апплікація.МишаX
-   static member МишаY with get() = Моя.Апплікація.МишаY
-   static member МишаДонизу with set callback = Моя.Апплікація.MouseDown <- callback
-   static member МышьДогори with set callback = Моя.Апплікація.MouseUp <- callback
-   static member МишаПереміщена with set callback = Моя.Апплікація.MouseMove <- callback
+   static member ОстанняКнопка із get() = Моя.Апплікація.ОстанняКнопка
+   static member КлавішаДогори із set callback = Моя.Апплікація.KeyUp <- callback
+   static member КлавішаНатиснута із set callback = Моя.Апплікація.KeyDown <- callback 
+   static member МишаX із get() = Моя.Апплікація.МишаX
+   static member МишаY із get() = Моя.Апплікація.МишаY
+   static member МишаДонизу із set callback = Моя.Апплікація.MouseDown <- callback
+   static member МышьДогори із set callback = Моя.Апплікація.MouseUp <- callback
+   static member МишаПереміщена із set callback = Моя.Апплікація.MouseMove <- callback
    static member ОтриматиКолірЗRGB(r,g,b) = Колір(255uy,byte r,byte g,byte b)
    static member ОтриматиВипадковийКолір() : Колір =
-      let байты = [|1uy..3uy|]
+      нехай байты = [|1uy..3uy|]
       рнд.NextBytes(байты)
       Колір(255uy,байты.[0],байты.[1],байты.[2])
    static member Показати() = Моя.Апплікація.Показати()

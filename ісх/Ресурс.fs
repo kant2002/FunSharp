@@ -1,12 +1,12 @@
 ﻿module internal Бібліотека.Ресурс
 
-let private збірка = System.Reflection.Assembly.GetEntryAssembly()
-let ОтриматиСтрум шлях =
+нехай private збірка = System.Reflection.Assembly.GetEntryAssembly()
+нехай ОтриматиСтрум шлях =
     збірка.GetManifestResourceStream(шлях)
-let ЗавантажитиБайти шлях =
+нехай ЗавантажитиБайти шлях =
     use струм = ОтриматиСтрум(шлях)
-    let довжина = int струм.Length
-    let байти = Array.zeroCreate довжина
+    нехай довжина = int струм.Length
+    нехай байти = Array.zeroCreate довжина
     струм.Read(байти, 0, довжина) |> ignore
     байти
 

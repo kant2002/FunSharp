@@ -1,6 +1,6 @@
-﻿namespace Бібліотека
+﻿простір Бібліотека
 
-type Колір = 
+тип Колір = 
    struct
       val A:byte
       val R:byte
@@ -11,25 +11,25 @@ type Колір =
 
 [<AutoOpen>]
 module internal ПеретворювачКольорів =
-   let доКольораАвалонії (color:Колір) = Avalonia.Media.Color.FromArgb(color.A, color.R, color.G, color.B)
+   нехай доКольораАвалонії (color:Колір) = Avalonia.Media.Color.FromArgb(color.A, color.R, color.G, color.B)
 
-type internal Ширина = float
-type internal Висота = float
-type internal Розмір = float
-type internal Родина = string
-type internal Жирний = bool
-type internal Курсив = bool
-type internal X = float
-type internal Y = float
+тип internal Ширина = float
+тип internal Висота = float
+тип internal Розмір = float
+тип internal Родина = string
+тип internal Жирний = bool
+тип internal Курсив = bool
+тип internal X = float
+тип internal Y = float
 
-type internal Перо = Перо of Колір * Ширина
-type internal Шрифт = Шрифт of Розмір * Родина * Жирний * Курсив
-type internal Лінія = Лінія of X * Y * X * Y
-type internal Прямокутник = Прямокутник of Ширина * Висота
-type internal Трикутник = Трикутник of X * Y * X * Y * X * Y
-type internal Елліпс = Елліпс of Ширина * Висота
+тип internal Перо = Перо of Колір * Ширина
+тип internal Шрифт = Шрифт of Розмір * Родина * Жирний * Курсив
+тип internal Лінія = Лінія of X * Y * X * Y
+тип internal Прямокутник = Прямокутник of Ширина * Висота
+тип internal Трикутник = Трикутник of X * Y * X * Y * X * Y
+тип internal Елліпс = Елліпс of Ширина * Висота
 
-type internal Фігура =
+тип internal Фігура =
    | ФігураЛінії of Лінія * Перо   
    | ФігураПрямокутника of Прямокутник * Перо * Колір
    | ФігураТрикутника of Трикутник * Перо * Колір
@@ -37,7 +37,7 @@ type internal Фігура =
    | ФігураЗображения of Avalonia.Media.IImage ref
    | ФігураТекста of string ref * Шрифт * Колір
 
-type internal Малювання =
+тип internal Малювання =
    | НамалюватиЛінію of Лінія * Перо
    | НамалюватиПрямокутник of Прямокутник * Перо
    | НамалюватиТрикутник of Трикутник * Перо

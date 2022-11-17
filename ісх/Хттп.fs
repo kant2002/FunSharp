@@ -1,21 +1,21 @@
 ﻿module internal Бібліотека.Хттп
 
-open System.IO
-open System.Net
+відкрити System.IO
+відкрити System.Net
 
-let ЗавантажитиБайти (url:string) =
-   let запит = HttpWebRequest.Create(url)
-   let відповідь = запит.GetResponse()
+нехай ЗавантажитиБайти (url:string) =
+   нехай запит = HttpWebRequest.Create(url)
+   нехай відповідь = запит.GetResponse()
    use струмВідповіді = відповідь.GetResponseStream()
    use струмПамяті = new MemoryStream()
    струмВідповіді.CopyTo(струмПамяті)
    струмПамяті.GetBuffer()
 
-open Avalonia.Media.Imaging
-open Avalonia.Media
+відкрити Avalonia.Media.Imaging
+відкрити Avalonia.Media
 
-let ЗавантажитиЗображенняАсінх (url:string) = async {
-   let запит = HttpWebRequest.Create(url)
+нехай ЗавантажитиЗображенняАсінх (url:string) = async {
+   нехай запит = HttpWebRequest.Create(url)
    use! відповідь = запит.AsyncGetResponse()
    use струм = відповідь.GetResponseStream()
    return new Bitmap(струм) :> IImage

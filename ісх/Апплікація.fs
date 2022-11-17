@@ -1,48 +1,48 @@
-﻿namespace Бібліотека
+﻿простір Бібліотека
 
-open System
-open System.Runtime.InteropServices
-open System.Threading
-open System.Threading.Tasks
-open Avalonia
-open Avalonia.Themes.Fluent
-open Avalonia.Controls.ApplicationLifetimes
-open Avalonia.Controls
-open Avalonia.Threading
+відкрити System
+відкрити System.Runtime.InteropServices
+відкрити System.Threading
+відкрити System.Threading.Tasks
+відкрити Avalonia
+відкрити Avalonia.Themes.Fluent
+відкрити Avalonia.Controls.ApplicationLifetimes
+відкрити Avalonia.Controls
+відкрити Avalonia.Threading
 
-type Callback = delegate of unit -> unit
+тип Callback = delegate of unit -> unit
 
-type АппАвалонії() =
+тип АппАвалонії() =
     inherit Avalonia.Application()
     override сам.Initialize() =
-        let тема = new FluentTheme(new Uri("avares://ВеселШарп.Бібліотека"), Mode = FluentThemeMode.Light)
+        нехай тема = new FluentTheme(new Uri("avares://ВеселШарп.Бібліотека"), Mode = FluentThemeMode.Light)
         сам.Styles.Add(тема)
 
 
-type internal МояАпплікація () =
-   let mutable приховане : bool = true
-   let mutable головнеВікно : Window = null
-   let mutable головнеПолотно : ПолотноДляМалювання = null
-   let mutable клавішаВгору = Callback(ignore)
-   let mutable клавішаВниз = Callback(ignore)   
-   let mutable мишиВниз = Callback(ignore)
-   let mutable мишаВгору = Callback(ignore)
-   let mutable мишаРухається = Callback(ignore)
-   let mutable цокТаймера = Callback(ignore)
-   let mutable таймерПризупинено = false
-   let mutable останняКлавіша = ""
-   let mutable мишаX = 0.0
-   let mutable мишаY = 0.0
-   let mutable ліваКлавішаВниз = false
-   let mutable праваКлавішаВниз = false
-   let запуститиНаІКПотоці (дія: Func<'a>) =
-    let mutable результат : 'a = null
+тип internal МояАпплікація () =
+   нехай змінливий приховане : bool = true
+   нехай змінливий головнеВікно : Window = null
+   нехай змінливий головнеПолотно : ПолотноДляМалювання = null
+   нехай змінливий клавішаВгору = Callback(ignore)
+   нехай змінливий клавішаВниз = Callback(ignore)   
+   нехай змінливий мишиВниз = Callback(ignore)
+   нехай змінливий мишаВгору = Callback(ignore)
+   нехай змінливий мишаРухається = Callback(ignore)
+   нехай змінливий цокТаймера = Callback(ignore)
+   нехай змінливий таймерПризупинено = false
+   нехай змінливий останняКлавіша = ""
+   нехай змінливий мишаX = 0.0
+   нехай змінливий мишаY = 0.0
+   нехай змінливий ліваКлавішаВниз = false
+   нехай змінливий праваКлавішаВниз = false
+   нехай запуститиНаІКПотоці (дія: Func<'a>) =
+    нехай змінливий результат : 'a = null
     async {
         let! x = Dispatcher.UIThread.InvokeAsync(дія) |> Async.AwaitTask
         результат <- x
     } |> Async.RunSynchronously
     результат
-   let ініціюватиПолотно () =
+   нехай ініціюватиПолотно () =
       головнеПолотно <- new ПолотноДляМалювання(Background=new Avalonia.Media.SolidColorBrush(доКольораАвалонії Кольори.White))
       головнеПолотно.KeyUp.Add(fun арги -> 
          останняКлавіша <- арги.Key.ToString()
@@ -53,7 +53,7 @@ type internal МояАпплікація () =
          if клавішаВгору <> null then клавішаВгору.Invoke()
       )
       головнеПолотно.PointerPressed.Add(fun арги ->
-         let точка = арги.GetCurrentPoint(головнеПолотно)
+         нехай точка = арги.GetCurrentPoint(головнеПолотно)
          мишаX <- точка.Position.X
          мишаY <- точка.Position.Y
          if точка.Properties.IsLeftButtonPressed then ліваКлавішаВниз <-true
@@ -61,14 +61,14 @@ type internal МояАпплікація () =
          if мишиВниз <> null then мишиВниз.Invoke()
       )
       головнеПолотно.PointerReleased.Add(fun args ->
-         let точка = args.GetCurrentPoint(головнеПолотно)
+         нехай точка = args.GetCurrentPoint(головнеПолотно)
          мишаX <- точка.Position.X
          мишаY <- точка.Position.Y
          if точка.Properties.IsLeftButtonPressed then ліваКлавішаВниз <- false
          if мишаВгору <> null then мишаВгору.Invoke()
       )
       головнеПолотно.PointerMoved.Add(fun args ->
-         let позиція = args.GetPosition(головнеПолотно)
+         нехай позиція = args.GetPosition(головнеПолотно)
          мишаX <- позиція.X
          мишаY <- позиція.Y
          if мишаРухається <> null then мишаРухається.Invoke()
@@ -76,35 +76,35 @@ type internal МояАпплікація () =
       головнеВікно.Content <- головнеПолотно
       головнеПолотно.Focusable <- true
       головнеПолотно.Focus()
-   let показатиВікно () = 
+   нехай показатиВікно () = 
       if приховане then головнеВікно.Show(); приховане <- false
-   let сховатиВікно () = 
+   нехай сховатиВікно () = 
       if not приховане then головнеВікно.Hide(); приховане <- true
-   let mutable timerDisposable : IDisposable = null
-   let установитьИнтервалТаймера (мс:int) =
+   нехай змінливий timerDisposable : IDisposable = null
+   нехай установитьИнтервалТаймера (мс:int) =
       if timerDisposable <> null then timerDisposable.Dispose()
-      let таймер = new System.Timers.Timer(мс)
+      нехай таймер = new System.Timers.Timer(мс)
       таймер.Elapsed.Add(fun (_) -> if not таймерПризупинено then цокТаймера.Invoke())
       таймер.Start()
       timerDisposable <- таймер
    
-   let запуститиДодаток наІніц =      
-      let апп = AppBuilder.Configure<АппАвалонії>().UsePlatformDetect();
+   нехай запуститиДодаток наІніц =      
+      нехай апп = AppBuilder.Configure<АппАвалонії>().UsePlatformDetect();
       апп.AfterSetup(fun (_) ->
         головнеВікно <- new Window(Title="Додаток", (* Padding = WidgetSpacing(), *) Width=640.0, Height=480.0)
         ініціюватиПолотно ()
         показатиВікно ()         
-        let наИниц = unbox<unit->unit> наІніц
+        нехай наИниц = unbox<unit->unit> наІніц
         наИниц ()
       ) |> ignore
       апп.StartWithClassicDesktopLifetime(Environment.GetCommandLineArgs()) |> ignore
-   let запуститиПотікДодатка () =
+   нехай запуститиПотікДодатка () =
       use ініційован = new AutoResetEvent(false)
-      let потік = Thread(ParameterizedThreadStart запуститиДодаток)
+      нехай потік = Thread(ParameterizedThreadStart запуститиДодаток)
       if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) then потік.SetApartmentState(ApartmentState.STA)
       потік.Start(fun () -> ініційован.Set() |> ignore)
       ініційован.WaitOne() |> ignore
-   do запуститиПотікДодатка()
+   зробити запуститиПотікДодатка()
    member апп.Вікно = головнеВікно
    member апп.ВстановитиШиринуВікна(ширина) =
       сховатиВікно()     
@@ -117,24 +117,24 @@ type internal МояАпплікація () =
    member апп.Полотно = головнеПолотно
    member апп.Викликати дія = Dispatcher.UIThread.Post дія 
    member апп.ВикликатиЗРезультатом действие = запуститиНаІКПотоці действие 
-   member апп.KeyUp with set callback = клавішаВгору <- callback
-   member апп.KeyDown with set callback = клавішаВниз <- callback
-   member апп.ОстанняКнопка with get() = останняКлавіша
-   member апп.MouseDown with set callback = мишиВниз <- callback
-   member апп.MouseUp with set callback = мишаВгору <- callback
-   member апп.MouseMove with set callback = мишаРухається <- callback
-   member апп.МишаX with get() = мишаX
-   member апп.МишаY with get() = мишаY
-   member апп.ЛіваКнопкаНатиснута with get() = ліваКлавішаВниз
-   member апп.ПраваКнопкаНатиснута with get() = праваКлавішаВниз
+   member апп.KeyUp із set callback = клавішаВгору <- callback
+   member апп.KeyDown із set callback = клавішаВниз <- callback
+   member апп.ОстанняКнопка із get() = останняКлавіша
+   member апп.MouseDown із set callback = мишиВниз <- callback
+   member апп.MouseUp із set callback = мишаВгору <- callback
+   member апп.MouseMove із set callback = мишаРухається <- callback
+   member апп.МишаX із get() = мишаX
+   member апп.МишаY із get() = мишаY
+   member апп.ЛіваКнопкаНатиснута із get() = ліваКлавішаВниз
+   member апп.ПраваКнопкаНатиснута із get() = праваКлавішаВниз
    member апп.Показати() = апп.Викликати (fun () -> показатиВікно())
    member апп.Сховати() = апп.Викликати (fun () -> сховатиВікно())
-   member апп.TimerTick with set callback = цокТаймера <- callback
+   member апп.TimerTick із set callback = цокТаймера <- callback
    member апп.ПаузаТаймера() = таймерПризупинено <- true
    member апп.ВідновитиТаймер() = таймерПризупинено <- false
-   member апп.TimerInterval with set ms = апп.Викликати(fun () -> установитьИнтервалТаймера ms)
+   member апп.TimerInterval із set ms = апп.Викликати(fun () -> установитьИнтервалТаймера ms)
    member апп.ПоказатьСообщение(текст:string,заголовок) = 
-    let в = new Window()
+    нехай в = new Window()
     в.Title <- заголовок
     в.Content <- TextBlock(Text = текст)
     в.Width <- 200
@@ -145,27 +145,27 @@ type internal МояАпплікація () =
     )
 
 [<Sealed>]
-type internal Моя private () = 
-   static let mutable аплікація = None
-   static let сінх = obj ()
-   static let уFsi () =
-      let args = System.Environment.GetCommandLineArgs()
-      let netFxFsi = args.Length > 0 && System.IO.Path.GetFileName(args.[0]) = "fsi.exe"
-      let netcoreFsi = args.Length > 1 && System.IO.Path.GetFileName(args.[1]) = "fsi"
+тип internal Моя private () = 
+   static нехай змінливий аплікація = None
+   static нехай сінх = obj ()
+   static нехай уFsi () =
+      нехай args = System.Environment.GetCommandLineArgs()
+      нехай netFxFsi = args.Length > 0 && System.IO.Path.GetFileName(args.[0]) = "fsi.exe"
+      нехай netcoreFsi = args.Length > 1 && System.IO.Path.GetFileName(args.[1]) = "fsi"
       netFxFsi || netcoreFsi
-   static let закритиАплікацію () =
+   static нехай закритиАплікацію () =
       lock (сінх) (fun () ->
          (Application.Current.ApplicationLifetime :?> IClassicDesktopStyleApplicationLifetime).TryShutdown(0) |> ignore
          if not (уFsi()) then
             Environment.Exit(0)
          аплікація <- None       
       )
-   static let отриматиАплікацію () =
+   static нехай отриматиАплікацію () =
       lock (сінх) (fun () ->
-         match аплікація with
+         match аплікація із
          | Some аплікація -> аплікація
          | None ->
-            let новаАплікація = МояАпплікація()
+            нехай новаАплікація = МояАпплікація()
             аплікація <- Some (новаАплікація)
             новаАплікація.Вікно.Closed.Add(fun e ->
                закритиАплікацію()
@@ -176,8 +176,8 @@ type internal Моя private () =
 
 [<AutoOpen>]
 module internal ДодатиМалюнок =
-   let додатиМалюнок drawing =
+   нехай додатиМалюнок drawing =
       Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.ДодатиМалюнок(drawing))
-   let додатиМалюнокУ drawing (x,y) =
+   нехай додатиМалюнокУ drawing (x,y) =
       Моя.Апплікація.Викликати (fun () -> Моя.Апплікація.Полотно.ДодатиМалюнокУ(drawing,Point(x,y)))
 

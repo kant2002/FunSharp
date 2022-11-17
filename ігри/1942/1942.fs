@@ -22,7 +22,7 @@
 
 //-------------------------
 // or load from web url
-//let Путь= "http://imode.free.fr/images1942/"
+//нехай Путь= "http://imode.free.fr/images1942/"
 нехай Шлях = ""
 //-------------------------
 
@@ -306,7 +306,7 @@
       нехай Час = час_Ворогів.[i]
       нехай etl = шляхВорога.[вNBR].[1].GetOrDefault(uu, 0.0)  //enemy own timeLine
       якщо (Час=etl) тоді  //время повернуть врага
-         let rr = шляхВорога.[вNBR].[2].GetOrDefault(uu+1, 0.0)            
+         нехай rr = шляхВорога.[вNBR].[2].GetOrDefault(uu+1, 0.0)            
          Фігури.Повернути(массив_Ворогів.[i],rr)
       якщо (Час > etl)  тоді
          uu <- uu+1
@@ -455,11 +455,11 @@
 
    нехай змінливий i1 = 1
    доки i1 <= Гравець_КількістьКуль зробити
-      // player bullet position
+      // позиція кулі ігрока
       нехай назваФігури = Кули_Гравця.[i1]
       нехай Player_Ammox = int (Фігури.ОтриматиЛіво(назваФігури))
       нехай Player_Ammoy = int (Фігури.ОтриматиВерх(назваФігури))
-      нехай px1=Player_Ammox+розмір_кулі_ігрока/3   // in order to have a more precise collison than the bullet image size
+      нехай px1=Player_Ammox+розмір_кулі_ігрока/3   // щоб отримати більш точне зіткнення, ніж розмір зображення кулі
       нехай py1=Player_Ammoy+розмір_кулі_ігрока/3
       нехай px2=px1+2*розмір_кулі_ігрока/3
       нехай py2=py1+2*розмір_кулі_ігрока/3
@@ -476,8 +476,8 @@
 
          якщо ( (ax1 < px1 && ax2 > px1) || (ax1 < px2 && ax2 > px2) ) тоді
             якщо ( (ay1 < py1 && ay2 > py1) || (ay1 < py2 && ay2 > py2) ) тоді
-               // collision between enemy nbr i2 and player bullet i
-               // remove bullet i and animate explosion and remove enemy i2
+               // зіткнення між ворогом nbr i2 та кулею гравця i
+               // видалити кулю i та анімувати вибух і видалити ворога i2
                якщо not куліВидалені тоді 
                   ВидалитиКулю_Гравця(i1)
                   куліВидалені <- true
@@ -1047,7 +1047,7 @@
    рівень1.[1].[4] <- 0   // at y coordinate level1[1][4]
    рівень1.[1].[5] <- 1   // 1 for create enemy at the left side; 2 for the right side of screen
    рівень1.[1].[6] <- 4   // level[1][6] is the number of enemies
-   рівень1.[1].[7] <- 1   // type of enemy
+   рівень1.[1].[7] <- 1   // тип ворога
    рівень1.[2] <- Словник()
    рівень1.[2].[1] <- 80
    рівень1.[2].[2] <- 6

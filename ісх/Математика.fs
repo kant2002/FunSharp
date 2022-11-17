@@ -1,14 +1,14 @@
 ﻿module Бібліотека.Математика
 
-let private ранд = System.Random()
-let ОтриматиРадіани (град:float) = град * System.Math.PI / 180.
-let ОтриматиВипадковеЧисло(n) = ранд.Next(n) + 1
-let inline Залишок(x,y) = x % y
-let Кос(угол) = cos угол
-let Син(угол) = sin угол
-let АркТан(угол) = atan угол
-let inline Модуль(n) = abs n
-let inline Floor(n) = floor n |> int
-let inline Округляти(n) = round n
-let inline КвадратнийКорінь(d) = sqrt d
-let inline Ступінь(x,n) = pown x n
+нехай private ранд = System.Random()
+нехай ОтриматиРадіани (град:float) = град * System.Math.PI / 180.
+нехай ОтриматиВипадковеЧисло(n) = ранд.Next(n) + 1
+нехай inline Залишок(x,y) = x % y
+нехай Кос(угол) = cos угол
+нехай Син(угол) = sin угол
+нехай АркТан(угол) = atan угол
+нехай inline Модуль(n) = abs n
+нехай inline Floor(n) = floor n |> int
+нехай inline Округляти(n) = round n
+нехай inline КвадратнийКорінь(d) = sqrt d
+нехай inline Ступінь(x,n) = pown x n

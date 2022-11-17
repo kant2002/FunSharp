@@ -1,20 +1,20 @@
-﻿namespace Бібліотека
+﻿простір Бібліотека
 
-open Avalonia
-open Avalonia.Controls
-open Avalonia.Media.Imaging
-open Avalonia.Threading
-open Малювати
+відкрити Avalonia
+відкрити Avalonia.Controls
+відкрити Avalonia.Media.Imaging
+відкрити Avalonia.Threading
+відкрити Малювати
 
 [<AllowNullLiteral>]
-type internal ПолотноДляМалювання () =
+тип internal ПолотноДляМалювання () =
    inherit Canvas ()
-   let зображенняЧерепахи = new Bitmap(typeof<ПолотноДляМалювання>.Assembly.GetManifestResourceStream("ВеселШарп.Бібліотека.черепаха.png"))
-   let малюнки = ResizeArray<ІнфоМалюнка>()
-   let черепаха =
-      let ш,в = зображенняЧерепахи.Size.Width, зображенняЧерепахи.Size.Height
+   нехай зображенняЧерепахи = new Bitmap(typeof<ПолотноДляМалювання>.Assembly.GetManifestResourceStream("ВеселШарп.Бібліотека.черепаха.png"))
+   нехай малюнки = ResizeArray<ІнфоМалюнка>()
+   нехай черепаха =
+      нехай ш,в = зображенняЧерепахи.Size.Width, зображенняЧерепахи.Size.Height
       {Малюнок=НамалюватиЗображення(ref зображенняЧерепахи,-ш/2.,-в/2.); Зсув=Point(); Непрозорість=None; Видно=false; Обертання=None; Масштаб=None}
-   let наФігуру імяФігури ф =
+   нехай наФігуру імяФігури ф =
       малюнки
       |> Seq.tryPick (function
          | { Малюнок=НамалюватиФігуру(name,_) } as info when name = імяФігури -> Some info 
@@ -59,6 +59,6 @@ type internal ПолотноДляМалювання () =
       полотно.Children.Remove(елемент) |> ignore
    override this.Render(конт) =
       base.Render(конт)
-      for малюнок in малюнки do 
+      for малюнок in малюнки зробити 
          if малюнок.Видно then намалювати конт малюнок
       if черепаха.Видно then намалювати конт черепаха
