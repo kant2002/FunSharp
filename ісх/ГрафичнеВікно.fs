@@ -68,7 +68,7 @@
             ref (new Bitmap(потокПамяти) :> Avalonia.Media.IImage)           
          | None ->
             якщо імяЗображення.StartsWith("http:") || імяЗображення.StartsWith("https:") 
-            then
+            тоді
                 нехай посиланняЗображення = ref null
                 async {
                    нехай! зображення = Хттп.ЗавантажитиЗображенняАсінх імяЗображення
@@ -76,7 +76,7 @@
                    Моя.Апплікація.Викликати(fun () -> Моя.Апплікація.Полотно.ЗробитиНедійсним())
                 } |> Async.Start
                 посиланняЗображення
-            else
+            інакше
                 ref (new Bitmap(Reflection.Assembly.GetEntryAssembly().GetManifestResourceStream(імяЗображення)) :> IImage)
       НамалюватиЗображення(посиланняЗображення,x,y) |> намалювати
    static member НамалюватиЗображення(імяЗображення,x:int,y:int) =
