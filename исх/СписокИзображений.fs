@@ -1,22 +1,22 @@
-﻿namespace Библиотека
+﻿пространство Библиотека
 
-open System
+открыть System
 
 [<Sealed>]
-type СписокИзображений private () =
-   static let изображения = Словарь<string,byte[]>()
-   static member ЗагрузитьИзображение(путь:string) =
-      let имя = "ImageList" + Guid.NewGuid().ToString()
-      let байты =
-         if путь.StartsWith("http:") || путь.StartsWith("https:") 
-         then Хттп.ЗагрузитьБайты путь
-         else Ресурс.ЗагрузитьБайты путь
+тип СписокИзображений частный () =
+   статический пусть изображения = Словарь<string,byte[]>()
+   статический член ЗагрузитьИзображение(путь:string) =
+      пусть имя = "ImageList" + Guid.NewGuid().ToString()
+      пусть байты =
+         если путь.StartsWith("http:") || путь.StartsWith("https:") 
+         тогда Хттп.ЗагрузитьБайты путь
+         иначе Ресурс.ЗагрузитьБайты путь
       изображения.Add(имя, байты)
       имя
-   static member internal ПопробоватьПолучитьБайтыИзображения(имя:string) =
-      match изображения.TryGetValue(имя) with
-      | true, байты -> Some(байты)
-      | false, _ -> None
+   статический член внутренний ПопробоватьПолучитьБайтыИзображения(имя:string) =
+      сопоставить изображения.TryGetValue(имя) с
+      | истина, байты -> Some(байты)
+      | ложь, _ -> None
 
 
 

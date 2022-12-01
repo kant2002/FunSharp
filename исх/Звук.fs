@@ -1,20 +1,20 @@
-﻿module Библиотека.Звук
+﻿модуль Библиотека.Звук
 
-open System.Media
+открыть System.Media
 
-type private ИМаркер = interface end
+тип частный ИМаркер = интерфейс конец
 
-let private играть name =
-    let сборка = System.Reflection.Assembly.GetAssembly(typeof<ИМаркер>)
-    let поток = сборка.GetManifestResourceStream(name+".wav")
-    let проигрыватель = new SoundPlayer(поток)
+пусть частный играть name =
+    пусть сборка = System.Reflection.Assembly.GetAssembly(typeof<ИМаркер>)
+    пусть поток = сборка.GetManifestResourceStream(name+".wav")
+    пусть проигрыватель = новый SoundPlayer(поток)
     проигрыватель.Play()   
 
-let ИгратьЗвонок () =
+пусть ИгратьЗвонок () =
     играть "Звонок"
 
-let ИгратьПерезвон () =
+пусть ИгратьПерезвон () =
     играть "Перезвон"
 
-let ИгратьЩелчек () =
+пусть ИгратьЩелчек () =
     играть "Щелчек"

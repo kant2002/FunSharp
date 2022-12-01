@@ -2,15 +2,15 @@
 #r "nuget: Avalonia.Themes.Fluent, 11.0.0-preview3"
 #r "../исх/bin/Debug/net7.0/ВеселШарп.Библиотека.dll"
 
-open Библиотека
+открыть Библиотека
 
-let фон = Фигуры.ДобавитьИзображение("http://flappycreator.com/default/bg.png")
-let земля = Фигуры.ДобавитьИзображение("http://flappycreator.com/default/ground.png")
-let птица = Фигуры.ДобавитьИзображение("http://flappycreator.com/default/bird_sing.png")
-let труба1 = СписокИзображений.ЗагрузитьИзображение("http://flappycreator.com/default/tube1.png")
-let труба2 = СписокИзображений.ЗагрузитьИзображение("http://flappycreator.com/default/tube2.png")
-let т1 = Фигуры.ДобавитьИзображение(труба1)
-let т2 = Фигуры.ДобавитьИзображение(труба2)
+пусть фон = Фигуры.ДобавитьИзображение("http://flappycreator.com/default/bg.png")
+пусть земля = Фигуры.ДобавитьИзображение("http://flappycreator.com/default/ground.png")
+пусть птица = Фигуры.ДобавитьИзображение("http://flappycreator.com/default/bird_sing.png")
+пусть труба1 = СписокИзображений.ЗагрузитьИзображение("http://flappycreator.com/default/tube1.png")
+пусть труба2 = СписокИзображений.ЗагрузитьИзображение("http://flappycreator.com/default/tube2.png")
+пусть т1 = Фигуры.ДобавитьИзображение(труба1)
+пусть т2 = Фигуры.ДобавитьИзображение(труба2)
 
 Фигуры.Переместить(т1, 150.0, 50.0-320.0)
 Фигуры.Переместить(т2, 150.0, 150.0)

@@ -1,23 +1,23 @@
-﻿module internal Библиотека.Хттп
+﻿модуль внутренний Библиотека.Хттп
 
-open System.IO
-open System.Net
+открыть System.IO
+открыть System.Net
 
-let ЗагрузитьБайты (url:string) =
-   let запрос = HttpWebRequest.Create(url)
-   let ответ = запрос.GetResponse()
-   use потокОтвета = ответ.GetResponseStream()
-   use потокПамяти = new MemoryStream()
+пусть ЗагрузитьБайты (url:string) =
+   пусть запрос = HttpWebRequest.Create(url)
+   пусть ответ = запрос.GetResponse()
+   использовать потокОтвета = ответ.GetResponseStream()
+   использовать потокПамяти = новый MemoryStream()
    потокОтвета.CopyTo(потокПамяти)
    потокПамяти.GetBuffer()
 
-open Avalonia.Media.Imaging
-open Avalonia.Media
+открыть Avalonia.Media.Imaging
+открыть Avalonia.Media
 
-let ЗагрузитьИзображениеАсинх (url:string) = async {
-   let запрос = HttpWebRequest.Create(url)
-   use! ответ = запрос.AsyncGetResponse()
-   use поток = ответ.GetResponseStream()
-   return new Bitmap(поток) :> IImage
+пусть ЗагрузитьИзображениеАсинх (url:string) = async {
+   пусть запрос = HttpWebRequest.Create(url)
+   использовать! ответ = запрос.AsyncGetResponse()
+   использовать поток = ответ.GetResponseStream()
+   return новый Bitmap(поток) :> IImage
    }
 

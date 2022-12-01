@@ -1,12 +1,12 @@
-﻿namespace Библиотека
+﻿пространство Библиотека
 
-open System
+открыть System
 
-type Часы private () =
-   static member Год = DateTime.Now.Year
-   static member Месяц = DateTime.Now.Month
-   static member День = DateTime.Now.Day
-   static member Час = DateTime.Now.Hour
-   static member Минута = DateTime.Now.Minute
-   static member Секунда = DateTime.Now.Second
-   static member ПрошедшиеМиллисекунды = Environment.TickCount
+тип Часы частный () =
+   статический член Год = DateTime.Now.Year
+   статический член Месяц = DateTime.Now.Month
+   статический член День = DateTime.Now.Day
+   статический член Час = DateTime.Now.Hour
+   статический член Минута = DateTime.Now.Minute
+   статический член Секунда = DateTime.Now.Second
+   статический член ПрошедшиеМиллисекунды = Environment.TickCount

@@ -1,14 +1,14 @@
-﻿module Библиотека.Математика
+﻿модуль Библиотека.Математика
 
-let private ранд = System.Random()
-let ВзятьРадианы (град:float) = град * System.Math.PI / 180.
-let ВзятьСлучайноеЧисло(n) = ранд.Next(n) + 1
-let inline Остаток(x,y) = x % y
-let Кос(угол) = cos угол
-let Син(угол) = sin угол
-let АркТан(угол) = atan угол
-let inline Модуль(n) = abs n
-let inline Floor(n) = floor n |> int
-let inline Округлить(n) = round n
-let inline КвадратныйКорень(d) = sqrt d
-let inline Степень(x,n) = pown x n
+пусть частный ранд = System.Random()
+пусть ВзятьРадианы (град:float) = град * System.Math.PI / 180.
+пусть ВзятьСлучайноеЧисло(n) = ранд.Next(n) + 1
+пусть встроенный Остаток(x,y) = x % y
+пусть Кос(угол) = cos угол
+пусть Син(угол) = sin угол
+пусть АркТан(угол) = atan угол
+пусть встроенный Модуль(n) = abs n
+пусть встроенный Floor(n) = floor n |> int
+пусть встроенный Округлить(n) = round n
+пусть встроенный КвадратныйКорень(d) = sqrt d
+пусть встроенный Степень(x,n) = pown x n

@@ -1,4 +1,4 @@
-﻿namespace Библиотека
+﻿пространство Библиотека
 
-type Словарь<'ТКлюч,'ТЗначение> = System.Collections.Generic.Dictionary<'ТКлюч,'ТЗначение>
+тип Словарь<'ТКлюч,'ТЗначение> = System.Collections.Generic.Dictionary<'ТКлюч,'ТЗначение>
 

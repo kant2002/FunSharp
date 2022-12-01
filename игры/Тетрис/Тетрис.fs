@@ -3,68 +3,68 @@
 #r "./bin/debug/FunSharp.dll"
 #endif
 
-open Библиотека
+открыть Библиотека
 
-let mutable КВАДРАТЫ = 4      // number of boxes per piece
-let mutable ШИРИНАК = 25    // box width in pixels
-let mutable СМЕЩЩЕНИЕX = 40   // Screen X offset in pixels of where the board starts
-let mutable СМЕЩЩЕНИЕY = 40   // Screen Y offset in pixels of where the board starts
-let mutable ШИРИНАХ = 10    // Canvas Width, in number of boxes
-let mutable ВЫСОТАХ = 20   // Canvas Height, in number of boxes.
-let mutable НАЧАЛЬНАЯЗАДЕРЖКА = 800
-let mutable КОНЕЧНАЯЗАДЕРЖКА = 175
-let mutable ПРЕДПРОСМОТР_xпоз = 13
-let mutable ПРЕДПРОСМОТР_yпоз = 2
+пусть изменяемый КВАДРАТЫ = 4      // number of boxes per piece
+пусть изменяемый ШИРИНАК = 25    // box width in pixels
+пусть изменяемый СМЕЩЩЕНИЕX = 40   // Screen X offset in pixels of where the board starts
+пусть изменяемый СМЕЩЩЕНИЕY = 40   // Screen Y offset in pixels of where the board starts
+пусть изменяемый ШИРИНАХ = 10    // Canvas Width, in number of boxes
+пусть изменяемый ВЫСОТАХ = 20   // Canvas Height, in number of boxes.
+пусть изменяемый НАЧАЛЬНАЯЗАДЕРЖКА = 800
+пусть изменяемый КОНЕЧНАЯЗАДЕРЖКА = 175
+пусть изменяемый ПРЕДПРОСМОТР_xпоз = 13
+пусть изменяемый ПРЕДПРОСМОТР_yпоз = 2
 
-let mutable шаблон = ""
-let mutable базовыйшаблон = ""
-let mutable вращение = ""
-let mutable h = ""
-let mutable следующийКусок = ""
-let mutable количествоh = 0
-let mutable xпоз = 0
-let mutable yпоз = 0
-let mutable ``готово`` = 0
-let mutable направлениеДвижения = 0
-let mutable неверноеДвижение = 0
-let mutable задержка = 0
-let mutable счет = 0
+пусть изменяемый шаблон = ""
+пусть изменяемый базовыйшаблон = ""
+пусть изменяемый вращение = ""
+пусть изменяемый h = ""
+пусть изменяемый следующийКусок = ""
+пусть изменяемый количествоh = 0
+пусть изменяемый xпоз = 0
+пусть изменяемый yпоз = 0
+пусть изменяемый ``готово`` = 0
+пусть изменяемый направлениеДвижения = 0
+пусть изменяемый неверноеДвижение = 0
+пусть изменяемый задержка = 0
+пусть изменяемый счет = 0
 
-type Шаблон = {
+тип Шаблон = {
    Значения : int[]
-   mutable Цвет : Цвет
-   mutable Разм : int
-   mutable ViewX : int
-   mutable ViewY : int
+   изменяемый Цвет : Цвет
+   изменяемый Разм : int
+   изменяемый ViewX : int
+   изменяемый ViewY : int
    }
 
 /// Named templates
-let шаблоны = Словарь<string,Шаблон>()
+пусть шаблоны = Словарь<string,Шаблон>()
 /// Array of box shape names
-type Квадраты () as this=
-   inherit ResizeArray<string>()
-   do for i = 0 to КВАДРАТЫ-1 do this.Add("")
+тип Квадраты () как this=
+   наследует ResizeArray<string>()
+   сделать для i = 0 до КВАДРАТЫ-1 сделать this.Add("")
 /// Piece name to boxes
-let куски = System.Collections.Generic.Dictionary<string,Квадраты>()
+пусть куски = System.Collections.Generic.Dictionary<string,Квадраты>()
 /// Piece name to template name
-let кускиКШаблонам = System.Collections.Generic.Dictionary<string,string>()
+пусть кускиКШаблонам = System.Collections.Generic.Dictionary<string,string>()
 /// Spots on the grid as shape names
-let spots = Array.create (ШИРИНАХ*(ВЫСОТАХ+1)) ""
+пусть spots = Array.create (ШИРИНАХ*(ВЫСОТАХ+1)) ""
 
-let rec ГлавныйЦикл () =
+пусть рек ГлавныйЦикл () =
   шаблон <- Текст.Добавить("template", Математика.ВзятьСлучайноеЧисло(7))
 
   СоздатьКусок() // in: template ret: h
   следующийКусок <- h
 
-  let mutable ``конец`` = 0
-  let mutable задержкаСессии = НАЧАЛЬНАЯЗАДЕРЖКА
-  while ``конец`` = 0 do
-    if задержкаСессии > КОНЕЧНАЯЗАДЕРЖКА then
+  пусть изменяемый ``конец`` = 0
+  пусть изменяемый задержкаСессии = НАЧАЛЬНАЯЗАДЕРЖКА
+  пока ``конец`` = 0 сделать
+    если задержкаСессии > КОНЕЧНАЯЗАДЕРЖКА тогда
       задержкаСессии <- задержкаСессии - 1    
 
     задержка <- задержкаСессии
-    let этотКусок = следующийКусок
+    пусть этотКусок = следующийКусок
     шаблон <- Текст.Добавить("template", Математика.ВзятьСлучайноеЧисло(7))
 
     СоздатьКусок() // in: template ret: h
@@ -77,56 +77,56 @@ let rec ГлавныйЦикл () =
     ``готово`` <- 0
     xпоз <- 3 // always drop from column 3
     ПроверитьОстановку() // in: ypos, xpos, h ret: done
-    if ``готово`` = 1 then
+    если ``готово`` = 1 тогда
       yпоз <- yпоз - 1
       ПереместитьКусок()  // in: ypos, xpos, h
       ``конец`` <- 1    
 
-    let mutable yпоздельта = 0
-    while ``готово`` = 0 || yпоздельта > 0 do
+    пусть изменяемый yпоздельта = 0
+    пока ``готово`` = 0 || yпоздельта > 0 сделать
       ПереместитьКусок()   // in: ypos, xpos, h
 
       // Delay, but break if the delay get set to 0 if the piece gets dropped
-      let mutable индексЗадержки = задержка
-      while индексЗадержки > 0 && задержка > 0 do
+      пусть изменяемый индексЗадержки = задержка
+      пока индексЗадержки > 0 && задержка > 0 сделать
         Программа.Задержка(10)
         индексЗадержки <- индексЗадержки - 10      
 
-      if yпоздельта > 0 then
+      если yпоздельта > 0 тогда
         yпоздельта <- yпоздельта - 1  // used to create freespin, when the piece is rotated
-      else
+      иначе
         yпоз <- yпоз + 1            // otherwise, move the piece down.      
 
       // Check if the piece should stop.
       ПроверитьОстановку() // in: ypos, xpos, h ret: done    
 
-and ОбработатьКнопки () =
+и ОбработатьКнопки () =
   // Остановить игру
-  if ГрафическоеОкно.ПоследняяКнопка = "Escape" then
+  если ГрафическоеОкно.ПоследняяКнопка = "Escape" тогда
     Программа.Закончить()  
 
   // Переместить фигуру влево
-  if ГрафическоеОкно.ПоследняяКнопка = "Left" then
+  если ГрафическоеОкно.ПоследняяКнопка = "Left" тогда
     направлениеДвижения <- -1
     ВалидироватьДвижение()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
-    if неверноеДвижение = 0 then
+    если неверноеДвижение = 0 тогда
       xпоз <- xпоз + направлениеДвижения   
     ПереместитьКусок()   // in: ypos, xpos, h 
 
   // Переместить фигуру вправо
-  if ГрафическоеОкно.ПоследняяКнопка = "Right" then
+  если ГрафическоеОкно.ПоследняяКнопка = "Right" тогда
     направлениеДвижения <- 1
     ВалидироватьДвижение()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
-    if неверноеДвижение = 0 then
+    если неверноеДвижение = 0 тогда
       xпоз <- xпоз + направлениеДвижения    
     ПереместитьКусок()  // in: ypos, xpos, h  
 
   // Переместить фигуру вниз
-  if ГрафическоеОкно.ПоследняяКнопка = "Down" || ГрафическоеОкно.ПоследняяКнопка = "Space" then
+  если ГрафическоеОкно.ПоследняяКнопка = "Down" || ГрафическоеОкно.ПоследняяКнопка = "Space" тогда
     задержка <- 0
  
   // Повернуть фигуру
-  if ГрафическоеОкно.ПоследняяКнопка = "Up" then
+  если ГрафическоеОкно.ПоследняяКнопка = "Up" тогда
     базовыйшаблон <- кускиКШаблонам.[h]
     шаблон <- "temptemplate"
     вращение <- "CW"
@@ -137,11 +137,11 @@ and ОбработатьКнопки () =
     ВалидироватьДвижение()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
 
     // See if it can be moved so that it will rotate.
-    let xпозсхр = xпоз
-    let mutable yпоздельта = 0
-    while yпоздельта = 0 && Математика.Модуль(xпозсхр - xпоз) < 3 do // move up to 3 times only
+    пусть xпозсхр = xпоз
+    пусть изменяемый yпоздельта = 0
+    пока yпоздельта = 0 && Математика.Модуль(xпозсхр - xпоз) < 3 сделать // move up to 3 times only
       // if the rotation move worked, copy the temp to "rotatedtemplate" and use that from now on
-      if неверноеДвижение = 0 then
+      если неверноеДвижение = 0 тогда
         базовыйшаблон <- шаблон
         шаблон <- "rotatedtemplate"
         кускиКШаблонам.[h] <- шаблон
@@ -149,26 +149,26 @@ and ОбработатьКнопки () =
         СкопироватьКусок()  // in basetemplate, template, rotation
         yпоздельта <- 1 // Don't move down if we rotate
         ПереместитьКусок()  // in: ypos, xpos, h
-      elif неверноеДвижение = 2 then
+      инесли неверноеДвижение = 2 тогда
         // Don't support shifting piece when hitting another piece to the right or left.
         xпоз <- 99 // exit the loop
-      else
+      иначе
         // if the rotated piece can't be placed, move it left or right and try again.
         xпоз <- xпоз - неверноеДвижение
         ВалидироватьДвижение()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
 
-    if неверноеДвижение <> 0 then
+    если неверноеДвижение <> 0 тогда
       xпоз <- xпозсхр
       кускиКШаблонам.[h] <- базовыйшаблон
       шаблон <- ""
 
-and НарисоватьПредпросмотрКуска () =
+и НарисоватьПредпросмотрКуска () =
   xпоз <- ПРЕДПРОСМОТР_xпоз
   yпоз <- ПРЕДПРОСМОТР_yпоз
   h <- следующийКусок
 
-  let СМЕЩЩЕНИЕXСОХР = СМЕЩЩЕНИЕX
-  let СМЕЩЩЕНИЕYСОХР = СМЕЩЩЕНИЕY
+  пусть СМЕЩЩЕНИЕXСОХР = СМЕЩЩЕНИЕX
+  пусть СМЕЩЩЕНИЕYСОХР = СМЕЩЩЕНИЕY
   СМЕЩЩЕНИЕX <- СМЕЩЩЕНИЕX - 20 + шаблоны.[кускиКШаблонам.[h]].ViewX
   СМЕЩЩЕНИЕY <- СМЕЩЩЕНИЕY + шаблоны.[кускиКШаблонам.[h]].ViewY
   ПереместитьКусок()  // in: ypos, xpos, h
@@ -177,41 +177,41 @@ and НарисоватьПредпросмотрКуска () =
   СМЕЩЩЕНИЕY <- СМЕЩЩЕНИЕYСОХР
 
 // creates template that's a rotated basetemplate
-and СкопироватьКусок () = // in basetemplate, template, rotation 
-  let L = шаблоны.[базовыйшаблон].Разм
+и СкопироватьКусок () = // in basetemplate, template, rotation 
+  пусть L = шаблоны.[базовыйшаблон].Разм
 
-  if not (шаблоны.ContainsKey шаблон) then
+  если not (шаблоны.ContainsKey шаблон) тогда
       шаблоны.[шаблон] <-
          { Значения=[|0;0;0;0|]; Цвет=Цвета.Black; Разм=0; ViewX=0; ViewY=0 }        
 
-  if вращение = "CW" then
-    for i = 0 to КВАДРАТЫ - 1 do // x' = y y' = L - 1 - x
-      let v = шаблоны.[базовыйшаблон].Значения.[i]
+  если вращение = "CW" тогда
+    для i = 0 до КВАДРАТЫ - 1 сделать // x' = y y' = L - 1 - x
+      пусть v = шаблоны.[базовыйшаблон].Значения.[i]
 
       //x = Math.Floor(v/10)
       //y = Math.Remainder(v, 10)
 
       // new x and y
-      let x = (Математика.Остаток(v, 10))
-      let y = (L - 1 - Математика.Floor(float v/10.0))
+      пусть x = (Математика.Остаток(v, 10))
+      пусть y = (L - 1 - Математика.Floor(float v/10.0))
       шаблоны.[шаблон].Значения.[i] <- x * 10 + y
     
   // Против часовой стрелки сейчас не используется
-  elif вращение = "CCW" then
-    for i = 0 to КВАДРАТЫ - 1 do // x' = L - 1 - y y' = x
-      let v = шаблоны.[базовыйшаблон].Значения.[i]
+  инесли вращение = "CCW" тогда
+    для i = 0 до КВАДРАТЫ - 1 сделать // x' = L - 1 - y y' = x
+      пусть v = шаблоны.[базовыйшаблон].Значения.[i]
       //x = Math.Floor(v/10)
       //y = Math.Remainder(v, 10)
 
       // new x and y
-      let x = (L - 1 - Математика.Остаток(v, 10))
-      let y = Математика.Floor(float v / 10.0)
+      пусть x = (L - 1 - Математика.Остаток(v, 10))
+      пусть y = Математика.Floor(float v / 10.0)
       шаблоны.[шаблон].Значения.[i] <- x * 10 + y
     
-  elif вращение = "COPY" then
-    for i = 0 to КВАДРАТЫ - 1 do
+  инесли вращение = "COPY" тогда
+    для i = 0 до КВАДРАТЫ - 1 сделать
       шаблоны.[шаблон].Значения.[i] <- шаблоны.[базовыйшаблон].Значения.[i]
-  else
+  иначе
     ГрафическоеОкно.ПоказатьСообщение("invalid parameter", "Error")
     Программа.Закончить() 
 
@@ -221,7 +221,7 @@ and СкопироватьКусок () = // in basetemplate, template, rotation
   шаблоны.[шаблон].ViewX <- шаблоны.[базовыйшаблон].ViewX
   шаблоны.[шаблон].ViewY <- шаблоны.[базовыйшаблон].ViewY
 
-and СоздатьКусок () = // in: template ret: h
+и СоздатьКусок () = // in: template ret: h
   // Create a new handle, representing an arrayName, that will represent the piece
   количествоh <- количествоh + 1
   h <- Текст.Добавить("piece", количествоh)
@@ -233,70 +233,70 @@ and СоздатьКусок () = // in: template ret: h
   ГрафическоеОкно.ЦветКисти <- шаблоны.[шаблон].Цвет
 
   куски.[h] <- Квадраты()
-  for i = 0 to КВАДРАТЫ - 1 do
-    let s = Фигуры.ДобавитьПрямоугольник(ШИРИНАК, ШИРИНАК)
+  для i = 0 до КВАДРАТЫ - 1 сделать
+    пусть s = Фигуры.ДобавитьПрямоугольник(ШИРИНАК, ШИРИНАК)
     Фигуры.Переместить(s, -ШИРИНАК, -ШИРИНАК) // move off screen
     куски.[h].[i] <- s    
 
-and ПереместитьКусок () = // in: ypos, xpos, h. ypos/xpos is 0-19, representing the top/left box coordinate of the piece on the canvas. h returned by CreatePiece
-  for i = 0 to КВАДРАТЫ - 1 do
-    let v = шаблоны.[кускиКШаблонам.[h]].Значения.[i]
-    let x = Математика.Floor(float v / 10.0)
-    let y = Математика.Остаток(v, 10)
+и ПереместитьКусок () = // in: ypos, xpos, h. ypos/xpos is 0-19, representing the top/left box coordinate of the piece on the canvas. h returned by CreatePiece
+  для i = 0 до КВАДРАТЫ - 1 сделать
+    пусть v = шаблоны.[кускиКШаблонам.[h]].Значения.[i]
+    пусть x = Математика.Floor(float v / 10.0)
+    пусть y = Математика.Остаток(v, 10)
 
     // Array.GetValue(h, i) = box for piece h.
     // xpos/ypos = are topleft of shape. x/y is the box offset within the shape.
     Фигуры.Переместить(куски.[h].[i], СМЕЩЩЕНИЕX + xпоз * ШИРИНАК + x * ШИРИНАК, СМЕЩЩЕНИЕY + yпоз * ШИРИНАК + y * ШИРИНАК)  
 
-and ВалидироватьДвижение () = // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
-  let mutable i = 0
+и ВалидироватьДвижение () = // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
+  пусть изменяемый i = 0
   неверноеДвижение <- 0
-  while i < КВАДРАТЫ do
-    let v = шаблоны.[кускиКШаблонам.[h]].Значения.[i]
+  пока i < КВАДРАТЫ сделать
+    пусть v = шаблоны.[кускиКШаблонам.[h]].Значения.[i]
 
     // x/y is the box offset within the shape.
-    let x = Математика.Floor(float v / 10.0)
-    let y = Математика.Остаток(v, 10)
+    пусть x = Математика.Floor(float v / 10.0)
+    пусть y = Математика.Остаток(v, 10)
 
-    if (x + xпоз + направлениеДвижения) < 0 then
+    если (x + xпоз + направлениеДвижения) < 0 тогда
       неверноеДвижение <- -1
       i <- КВАДРАТЫ // force getting out of the loop    
 
-    if (x + xпоз + направлениеДвижения) >= ШИРИНАХ then
+    если (x + xпоз + направлениеДвижения) >= ШИРИНАХ тогда
       неверноеДвижение <- 1
       i <- КВАДРАТЫ // force getting out of the loop   
 
-    if spots.[(x + xпоз + направлениеДвижения) + (y + yпоз) * ШИРИНАХ] <> "." then
+    если spots.[(x + xпоз + направлениеДвижения) + (y + yпоз) * ШИРИНАХ] <> "." тогда
       неверноеДвижение <- 2
       i <- КВАДРАТЫ // force getting out of the loop    
 
     i <- i + 1 
 
-and ПроверитьОстановку () = // in: ypos, xpos, h ret: done
+и ПроверитьОстановку () = // in: ypos, xpos, h ret: done
   ``готово`` <- 0
-  let mutable i = 0
-  while i < КВАДРАТЫ do
-    let v = шаблоны.[кускиКШаблонам.[h]].Значения.[i]
+  пусть изменяемый i = 0
+  пока i < КВАДРАТЫ сделать
+    пусть v = шаблоны.[кускиКШаблонам.[h]].Значения.[i]
 
     // x/y is the box offset within the shape.
-    let x = Математика.Floor(float v / 10.0)
-    let y = Математика.Остаток(v, 10)
+    пусть x = Математика.Floor(float v / 10.0)
+    пусть y = Математика.Остаток(v, 10)
 
-    if y + yпоз > ВЫСОТАХ || spots.[(x + xпоз) + (y + yпоз) * ШИРИНАХ] <> "." then
+    если y + yпоз > ВЫСОТАХ || spots.[(x + xпоз) + (y + yпоз) * ШИРИНАХ] <> "." тогда
       ``готово`` <- 1
       i <- КВАДРАТЫ // force getting out of the loop   
 
     i <- i + 1 
 
-  // If we need to stop the piece, move the box handles to the canvas
-  if ``готово`` = 1 then
-    for i = 0 to КВАДРАТЫ - 1 do
-      let v = шаблоны.[кускиКШаблонам.[h]].Значения.[i]
+  // If we need to stop the piece, move the box handles до the canvas
+  если ``готово`` = 1 тогда
+    для i = 0 до КВАДРАТЫ - 1 сделать
+      пусть v = шаблоны.[кускиКШаблонам.[h]].Значения.[i]
       //x = Math.Floor(v/10)
       //y = Math.Remainder(v, 10)
-      let x = (Математика.Floor(float v / 10.0) + xпоз)
-      let y = (Математика.Остаток(v, 10) + yпоз - 1)
-      if y >= 0 then
+      пусть x = (Математика.Floor(float v / 10.0) + xпоз)
+      пусть y = (Математика.Остаток(v, 10) + yпоз - 1)
+      если y >= 0 тогда
          spots.[x + y * ШИРИНАХ] <- куски.[h].[i]
 
     // 1 points for every piece successfully dropped
@@ -306,42 +306,42 @@ and ПроверитьОстановку () = // in: ypos, xpos, h ret: done
     // Delete cleared lines
     DeleteLines()
 
-and DeleteLines () =
-  let mutable linesCleared = 0
+и DeleteLines () =
+  пусть изменяемый linesCleared = 0
 
   // Iterate over each row, starting from the bottom
-  for y = ВЫСОТАХ - 1 downto 0 do
+  для y = ВЫСОТАХ - 1 downto 0 сделать
 
     // Check to see if the whole row is filled
-    let mutable x = ШИРИНАХ
-    while x = ШИРИНАХ do
+    пусть изменяемый x = ШИРИНАХ
+    пока x = ШИРИНАХ сделать
       x <- 0
-      while x < ШИРИНАХ do
-        let piece = spots.[x + y * ШИРИНАХ]
-        if piece = "." then
+      пока x < ШИРИНАХ сделать
+        пусть piece = spots.[x + y * ШИРИНАХ]
+        если piece = "." тогда
           x <- ШИРИНАХ        
         x <- x + 1    
 
       // if non of them were empty (i.e "."), then remove the line.
-      if x = ШИРИНАХ then
+      если x = ШИРИНАХ тогда
 
         // Delete the line
-        for x1 = 0 to ШИРИНАХ - 1 do
+        для x1 = 0 до ШИРИНАХ - 1 сделать
           Фигуры.Удалить(spots.[x1 + y * ШИРИНАХ])
         linesCleared <- linesCleared + 1
 
         // Move everything else down one.
-        for y1 = y downto 1 do
-          for x1 = 0 to ШИРИНАХ - 1 do
-            let piece = spots.[x1 + (y1 - 1) * ШИРИНАХ]
+        для y1 = y downto 1 сделать
+          для x1 = 0 до ШИРИНАХ - 1 сделать
+            пусть piece = spots.[x1 + (y1 - 1) * ШИРИНАХ]
             spots.[x1 + y1 * ШИРИНАХ] <- piece
             Фигуры.Переместить(piece, Фигуры.ПолучитьЛево(piece), Фигуры.ПолучитьВерх(piece) + float ШИРИНАК)
 
-  if linesCleared > 0 then
+  если linesCleared > 0 тогда
     счет <- счет + 100 * int (Математика.Округлить(float linesCleared * 2.15 - 1.0))
     НапечататьСчет()
 
-and НастроитьХолст () =
+и НастроитьХолст () =
 // GraphicsWindow.DrawResizedImage( Flickr.GetRandomPicture( "bricks" ), 0, 0, GraphicsWindow.Width, GraphicsWindow.Height)
 
   ГрафическоеОкно.ЦветКисти <- ГрафическоеОкно.ЦветФона
@@ -350,8 +350,8 @@ and НастроитьХолст () =
   Программа.Задержка(200)
   ГрафическоеОкно.ШиринаПера <- 1.0
   ГрафическоеОкно.ЦветПера <- Цвета.Pink
-  for x = 0 to ШИРИНАХ-1 do
-    for y = 0 to ВЫСОТАХ-1 do
+  для x = 0 до ШИРИНАХ-1 сделать
+    для y = 0 до ВЫСОТАХ-1 сделать
       spots.[x + y * ШИРИНАХ] <- "." // "." indicates spot is free
       ГрафическоеОкно.НарисоватьПрямоугольник(СМЕЩЩЕНИЕX + x * ШИРИНАК, СМЕЩЩЕНИЕY + y * ШИРИНАК, ШИРИНАК, ШИРИНАК)
 
@@ -368,8 +368,8 @@ and НастроитьХолст () =
 
   ГрафическоеОкно.ЦветПера <- Цвета.Black
   ГрафическоеОкно.ЦветКисти <- Цвета.Pink
-  let x = СМЕЩЩЕНИЕX + ПРЕДПРОСМОТР_xпоз * ШИРИНАК - ШИРИНАК
-  let y = СМЕЩЩЕНИЕY + ПРЕДПРОСМОТР_yпоз * ШИРИНАК - ШИРИНАК
+  пусть x = СМЕЩЩЕНИЕX + ПРЕДПРОСМОТР_xпоз * ШИРИНАК - ШИРИНАК
+  пусть y = СМЕЩЩЕНИЕY + ПРЕДПРОСМОТР_yпоз * ШИРИНАК - ШИРИНАК
   ГрафическоеОкно.ЗаполнитьПрямоугольник(x - 20, y, ШИРИНАК * 5, ШИРИНАК * 6)
   ГрафическоеОкно.НарисоватьПрямоугольник(x - 20, y, ШИРИНАК * 5, ШИРИНАК * 6)
 
@@ -377,7 +377,7 @@ and НастроитьХолст () =
   ГрафическоеОкно.НарисоватьПрямоугольник(x - 20, y + 190, 310, 170)
 
   ГрафическоеОкно.ЦветКисти <- Цвета.Black
-  ГрафическоеОкно.КурсивностьШрифта <- false
+  ГрафическоеОкно.КурсивностьШрифта <- ложь
   ГрафическоеОкно.ИмяШрифта <- "Comic Sans MS"
   ГрафическоеОкно.РазмерШрифта <- 16.0
   ГрафическоеОкно.НарисоватьТекст(x, y + 200, "Game control keys:")
@@ -385,13 +385,13 @@ and НастроитьХолст () =
   ГрафическоеОкно.НарисоватьТекст(x + 25, y + 240, "Right Arrow = Move piece right")
   ГрафическоеОкно.НарисоватьТекст(x + 25, y + 260, "Up Arrow = Rotate piece")
   ГрафическоеОкно.НарисоватьТекст(x + 25, y + 280, "Down Arrow = Drop piece")
-  ГрафическоеОкно.НарисоватьТекст(x, y + 320, "Press to stop game")
+  ГрафическоеОкно.НарисоватьТекст(x, y + 320, "Press до stop game")
 
   Программа.Задержка(200) // without this delay, the above text will use the fontsize of the score 
 
   ГрафическоеОкно.ЦветКисти <- Цвета.Black
   ГрафическоеОкно.ИмяШрифта <- "Georgia"
-  ГрафическоеОкно.КурсивностьШрифта <- true
+  ГрафическоеОкно.КурсивностьШрифта <- истина
   ГрафическоеОкно.РазмерШрифта <- 36.0
   ГрафическоеОкно.НарисоватьТекст(x - 20, y + 400, "Small Basic Tetris")
   Программа.Задержка(200) // without this delay, the above text will use the fontsize of the score 
@@ -402,19 +402,19 @@ and НастроитьХолст () =
   счет <- 0
   НапечататьСчет()
 
-and НапечататьСчет () =
+и НапечататьСчет () =
   ГрафическоеОкно.ШиринаПера <- 4.0
   ГрафическоеОкно.ЦветКисти <- Цвета.Pink
   ГрафическоеОкно.ЗаполнитьПрямоугольник(480, 65, 150, 50)
   ГрафическоеОкно.ЦветКисти <- Цвета.Black
   ГрафическоеОкно.НарисоватьПрямоугольник(480, 65, 150, 50)
-  ГрафическоеОкно.КурсивностьШрифта <- false
+  ГрафическоеОкно.КурсивностьШрифта <- ложь
   ГрафическоеОкно.РазмерШрифта <- 32.0
   ГрафическоеОкно.ИмяШрифта <- "Impact"
   ГрафическоеОкно.ЦветКисти <- Цвета.Black
   ГрафическоеОкно.НарисоватьТекст(485, 70, Текст.Добавить(Текст.ПолучитьПодТекст( "00000000", 0, 8 - Текст.ПолучитьДлину( string счет ) ), счет))
 
-and НастроитьШаблоны () =
+и НастроитьШаблоны () =
   // each piece has 4 boxes.
   // the index of each entry within a piece represents the box number (1-4)
   // the value of each entry represents to box zero-based box coordinate within the piece: tens place is x, ones place y
@@ -460,7 +460,7 @@ and НастроитьШаблоны () =
 ГрафическоеОкно.КнопкаНажата <- Callback(ОбработатьКнопки)
 ГрафическоеОкно.ЦветФона <- ГрафическоеОкно.ПолучитьЦветИзRGB( 253, 252, 251 )
 
-while true do
+пока истина сделать
   КВАДРАТЫ <- 4      // number of boxes per piece
   ШИРИНАК <- 25    // box width in pixels
   СМЕЩЩЕНИЕX <- 40   // Screen X offset in pixels of where the board starts
