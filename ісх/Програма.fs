@@ -1,13 +1,13 @@
-﻿namespace Бібліотека
+﻿простір Бібліотека
 
-open System
-open System.Threading
-open Avalonia
-open Avalonia.Controls.ApplicationLifetimes
+відкрити System
+відкрити System.Threading
+відкрити Avalonia
+відкрити Avalonia.Controls.ApplicationLifetimes
 
 [<Sealed>]
-type Програма private () =
-   static member Затримка(мс:int) = Thread.Sleep(мс)
-   static member Закінчити() = 
-      Моя.Апплікація.Викликати(fun () -> (Application.Current.ApplicationLifetime :?> IClassicDesktopStyleApplicationLifetime).Shutdown(0))
+тип Програма приватний () =
+   статичний член Затримка(мс:int) = Thread.Sleep(мс)
+   статичний член Закінчити() = 
+      Моя.Апплікація.Викликати(фун () -> (Application.Current.ApplicationLifetime :?> IClassicDesktopStyleApplicationLifetime).Shutdown(0))
       Environment.Exit(0)

@@ -1,12 +1,12 @@
-﻿namespace Бібліотека
+﻿простір Бібліотека
 
-open System
+відкрити System
 
-type Годинник private () =
-   static member Рік = DateTime.Now.Year
-   static member Місяць = DateTime.Now.Month
-   static member День = DateTime.Now.Day
-   static member Година = DateTime.Now.Hour
-   static member Хвилина = DateTime.Now.Minute
-   static member Секунда = DateTime.Now.Second
-   static member МинуліМілісекунди = Environment.TickCount
+тип Годинник приватний () =
+   статичний член Рік = DateTime.Now.Year
+   статичний член Місяць = DateTime.Now.Month
+   статичний член День = DateTime.Now.Day
+   статичний член Година = DateTime.Now.Hour
+   статичний член Хвилина = DateTime.Now.Minute
+   статичний член Секунда = DateTime.Now.Second
+   статичний член МинуліМілісекунди = Environment.TickCount

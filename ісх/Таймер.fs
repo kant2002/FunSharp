@@ -1,8 +1,8 @@
-﻿namespace Бібліотека
+﻿простір Бібліотека
 
 [<Sealed>]
-type Таймер private () =
-   static member Пауза() = Моя.Апплікація.ПаузаТаймера()
-   static member Відновити() = Моя.Апплікація.ВідновитиТаймер()
-   static member Тик with set (callback:Callback) = Моя.Апплікація.TimerTick <- callback
-   static member Интервал with set (ms:int) = Моя.Апплікація.TimerInterval <- ms
+тип Таймер приватний () =
+   статичний член Пауза() = Моя.Апплікація.ПаузаТаймера()
+   статичний член Відновити() = Моя.Апплікація.ВідновитиТаймер()
+   статичний член Тик із set (callback:Callback) = Моя.Апплікація.TimerTick <- callback
+   статичний член Интервал із set (ms:int) = Моя.Апплікація.TimerInterval <- ms

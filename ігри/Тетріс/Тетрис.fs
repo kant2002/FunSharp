@@ -4,68 +4,68 @@
 #r "../../ісх/bin/Debug/net7.0/ВеселШарп.Бібліотека.dll"
 #endif
 
-open Бібліотека
+відкрити Бібліотека
 
-let mutable КВАДРАТИ = 4      // number of boxes per piece
-let mutable ШИРИНАК = 25    // box width in pixels
-let mutable ЗМІЩЕННЯX = 40   // Screen X offset in pixels of where the board starts
-let mutable ЗМІЩЕННЯY = 40   // Screen Y offset in pixels of where the board starts
-let mutable ШИРИНАХ = 10    // Canvas Width, in number of boxes
-let mutable ВИСОТАХ = 20   // Canvas Height, in number of boxes.
-let mutable ПОЧАТКОВАЗАТРИМКА = 800
-let mutable КІНЦЕВАЗАТРИМКА = 175
-let mutable ПЕРЕДГЛЯД_xпоз = 13
-let mutable ПЕРЕДГЛЯД_yпоз = 2
+нехай змінливий КВАДРАТИ = 4      // number of boxes per piece
+нехай змінливий ШИРИНАК = 25    // box width in pixels
+нехай змінливий ЗМІЩЕННЯX = 40   // Screen X offset in pixels of where the board starts
+нехай змінливий ЗМІЩЕННЯY = 40   // Screen Y offset in pixels of where the board starts
+нехай змінливий ШИРИНАХ = 10    // Canvas Width, in number of boxes
+нехай змінливий ВИСОТАХ = 20   // Canvas Height, in number of boxes.
+нехай змінливий ПОЧАТКОВАЗАТРИМКА = 800
+нехай змінливий КІНЦЕВАЗАТРИМКА = 175
+нехай змінливий ПЕРЕДГЛЯД_xпоз = 13
+нехай змінливий ПЕРЕДГЛЯД_yпоз = 2
 
-let mutable шаблон = ""
-let mutable базовийшаблон = ""
-let mutable обертання = ""
-let mutable h = ""
-let mutable наступнийШматок = ""
-let mutable кількістьh = 0
-let mutable xпоз = 0
-let mutable yпоз = 0
-let mutable зроблено = 0
-let mutable напрямокРуху = 0
-let mutable неправильнийРух = 0
-let mutable затримка = 0
-let mutable рахунок = 0
+нехай змінливий шаблон = ""
+нехай змінливий базовийшаблон = ""
+нехай змінливий обертання = ""
+нехай змінливий h = ""
+нехай змінливий наступнийШматок = ""
+нехай змінливий кількістьh = 0
+нехай змінливий xпоз = 0
+нехай змінливий yпоз = 0
+нехай змінливий ``зроблено`` = 0
+нехай змінливий напрямокРуху = 0
+нехай змінливий неправильнийРух = 0
+нехай змінливий затримка = 0
+нехай змінливий рахунок = 0
 
-type Шаблон = {
+тип Шаблон = {
    Значення : int[]
-   mutable Колір : Колір
-   mutable Розм : int
-   mutable ViewX : int
-   mutable ViewY : int
+   змінливий Колір : Колір
+   змінливий Розм : int
+   змінливий ViewX : int
+   змінливий ViewY : int
    }
 
 /// Named templates
-let шаблони = Словник<string,Шаблон>()
+нехай шаблони = Словник<string,Шаблон>()
 /// Array of box shape names
-type Квадрати () as this=
-   inherit ResizeArray<string>()
-   do for i = 0 to КВАДРАТИ-1 do this.Add("")
+тип Квадрати () як this=
+   успадкує ResizeArray<string>()
+   зробити для i = 0 до КВАДРАТИ-1 зробити this.Add("")
 /// Piece name to boxes
-let шматки = Словник<string,Квадрати>()
+нехай шматки = Словник<string,Квадрати>()
 /// Piece name to template name
-let шматкиДоШаблонів = Словник<string,string>()
+нехай шматкиДоШаблонів = Словник<string,string>()
 /// Spots on the grid as shape names
-let плями = Array.create (ШИРИНАХ*(ВИСОТАХ+1)) ""
+нехай плями = Array.create (ШИРИНАХ*(ВИСОТАХ+1)) ""
 
-let rec ГоловнийЦикл () =
+нехай рек ГоловнийЦикл () =
   шаблон <- Текст.Додати("template", Математика.ОтриматиВипадковеЧисло(7))
 
   СтворитиШматок() // in: template ret: h
   наступнийШматок <- h
 
-  let mutable кінець = 0
-  let mutable затримкаСесії = ПОЧАТКОВАЗАТРИМКА
-  while кінець = 0 do
-    if затримкаСесії > КІНЦЕВАЗАТРИМКА then
+  нехай змінливий ``кінець`` = 0
+  нехай змінливий затримкаСесії = ПОЧАТКОВАЗАТРИМКА
+  доки ``кінець`` = 0 зробити
+    якщо затримкаСесії > КІНЦЕВАЗАТРИМКА тоді
       затримкаСесії <- затримкаСесії - 1    
 
     затримка <- затримкаСесії
-    let цейШматок = наступнийШматок
+    нехай цейШматок = наступнийШматок
     шаблон <- Текст.Додати("template", Математика.ОтриматиВипадковеЧисло(7))
 
     СтворитиШматок() // in: template ret: h
@@ -75,59 +75,59 @@ let rec ГоловнийЦикл () =
     h <- цейШматок
 
     yпоз <- 0
-    зроблено <- 0
+    ``зроблено`` <- 0
     xпоз <- 3 // always drop from column 3
     ПеревіритиЗупинку() // in: ypos, xpos, h ret: done
-    if зроблено = 1 then
+    якщо ``зроблено`` = 1 тоді
       yпоз <- yпоз - 1
       ПереміститиШматок()  // in: ypos, xpos, h
-      кінець <- 1    
+      ``кінець`` <- 1    
 
-    let mutable yпоздельта = 0
-    while зроблено = 0 || yпоздельта > 0 do
+    нехай змінливий yпоздельта = 0
+    доки ``зроблено`` = 0 || yпоздельта > 0 зробити
       ПереміститиШматок()   // in: ypos, xpos, h
 
       // Delay, but break if the delay get set to 0 if the piece gets dropped
-      let mutable індексЗатримки = затримка
-      while індексЗатримки > 0 && затримка > 0 do
+      нехай змінливий індексЗатримки = затримка
+      доки індексЗатримки > 0 && затримка > 0 зробити
         Програма.Затримка(10)
         індексЗатримки <- індексЗатримки - 10      
 
-      if yпоздельта > 0 then
+      якщо yпоздельта > 0 тоді
         yпоздельта <- yпоздельта - 1  // used to create freespin, when the piece is rotated
-      else
+      інакше
         yпоз <- yпоз + 1            // otherwise, move the piece down.      
 
       // Check if the piece should stop.
       ПеревіритиЗупинку() // in: ypos, xpos, h ret: done    
 
-and ОбробитиКнопки () =
+та ОбробитиКнопки () =
   // Зупинити гру
-  if ГрафичнеВікно.ОстанняКнопка = "Escape" then
+  якщо ГрафичнеВікно.ОстанняКнопка = "Escape" тоді
     Програма.Закінчити()  
 
   // Перемістити фигуру вліво
-  if ГрафичнеВікно.ОстанняКнопка = "Left" then
+  якщо ГрафичнеВікно.ОстанняКнопка = "Left" тоді
     напрямокРуху <- -1
     ПідтвердитиРух()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
-    if неправильнийРух = 0 then
+    якщо неправильнийРух = 0 тоді
       xпоз <- xпоз + напрямокРуху   
     ПереміститиШматок()   // in: ypos, xpos, h 
 
   // Перемістити фигуру вправо
-  if ГрафичнеВікно.ОстанняКнопка = "Right" then
+  якщо ГрафичнеВікно.ОстанняКнопка = "Right" тоді
     напрямокРуху <- 1
     ПідтвердитиРух()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
-    if неправильнийРух = 0 then
+    якщо неправильнийРух = 0 тоді
       xпоз <- xпоз + напрямокРуху    
     ПереміститиШматок()  // in: ypos, xpos, h  
 
   // Перемістити фигуру вниз
-  if ГрафичнеВікно.ОстанняКнопка = "Down" || ГрафичнеВікно.ОстанняКнопка = "Space" then
+  якщо ГрафичнеВікно.ОстанняКнопка = "Down" || ГрафичнеВікно.ОстанняКнопка = "Space" тоді
     затримка <- 0
  
   // Повернути фигуру
-  if ГрафичнеВікно.ОстанняКнопка = "Up" then
+  якщо ГрафичнеВікно.ОстанняКнопка = "Up" тоді
     базовийшаблон <- шматкиДоШаблонів.[h]
     шаблон <- "temptemplate"
     обертання <- "CW"
@@ -135,14 +135,14 @@ and ОбробитиКнопки () =
 
     шматкиДоШаблонів.[h] <- шаблон
     напрямокРуху <- 0
-    ПідтвердитиРух()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
+    ПідтвердитиРух()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 якщо move is invalid, otherwise 0
 
     // See if it can be moved so that it will rotate.
-    let xпозсхр = xпоз
-    let mutable yпоздельта = 0
-    while yпоздельта = 0 && Математика.Модуль(xпозсхр - xпоз) < 3 do // move up to 3 times only
+    нехай xпозсхр = xпоз
+    нехай змінливий yпоздельта = 0
+    доки yпоздельта = 0 && Математика.Модуль(xпозсхр - xпоз) < 3 зробити // move up to 3 times only
       // if the rotation move worked, copy the temp to "rotatedtemplate" and use that from now on
-      if неправильнийРух = 0 then
+      якщо неправильнийРух = 0 тоді
         базовийшаблон <- шаблон
         шаблон <- "rotatedtemplate"
         шматкиДоШаблонів.[h] <- шаблон
@@ -150,26 +150,26 @@ and ОбробитиКнопки () =
         СкопіюватиШматок()  // in basetemplate, template, rotation
         yпоздельта <- 1 // Don't move down if we rotate
         ПереміститиШматок()  // in: ypos, xpos, h
-      elif неправильнийРух = 2 then
+      інякщо неправильнийРух = 2 тоді
         // Don't support shifting piece when hitting another piece to the right or left.
         xпоз <- 99 // exit the loop
-      else
+      інакше
         // if the rotated piece can't be placed, move it left or right and try again.
         xпоз <- xпоз - неправильнийРух
-        ПідтвердитиРух()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
+        ПідтвердитиРух()  // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 якщо move is invalid, otherwise 0
 
-    if неправильнийРух <> 0 then
+    якщо неправильнийРух <> 0 тоді
       xпоз <- xпозсхр
       шматкиДоШаблонів.[h] <- базовийшаблон
       шаблон <- ""
 
-and НарисоватьПредпросмотрКуска () =
+та НарисоватьПредпросмотрКуска () =
   xпоз <- ПЕРЕДГЛЯД_xпоз
   yпоз <- ПЕРЕДГЛЯД_yпоз
   h <- наступнийШматок
 
-  let ЗМІЩЕННЯXСОХР = ЗМІЩЕННЯX
-  let ЗМІЩЕННЯYСОХР = ЗМІЩЕННЯY
+  нехай ЗМІЩЕННЯXСОХР = ЗМІЩЕННЯX
+  нехай ЗМІЩЕННЯYСОХР = ЗМІЩЕННЯY
   ЗМІЩЕННЯX <- ЗМІЩЕННЯX - 20 + шаблони.[шматкиДоШаблонів.[h]].ViewX
   ЗМІЩЕННЯY <- ЗМІЩЕННЯY + шаблони.[шматкиДоШаблонів.[h]].ViewY
   ПереміститиШматок()  // in: ypos, xpos, h
@@ -178,41 +178,41 @@ and НарисоватьПредпросмотрКуска () =
   ЗМІЩЕННЯY <- ЗМІЩЕННЯYСОХР
 
 // creates template that's a rotated basetemplate
-and СкопіюватиШматок () = // in basetemplate, template, rotation 
-  let L = шаблони.[базовийшаблон].Розм
+та СкопіюватиШматок () = // in basetemplate, template, rotation 
+  нехай L = шаблони.[базовийшаблон].Розм
 
-  if not (шаблони.ContainsKey шаблон) then
+  якщо not (шаблони.ContainsKey шаблон) тоді
       шаблони.[шаблон] <-
          { Значення=[|0;0;0;0|]; Колір=Кольори.Black; Розм=0; ViewX=0; ViewY=0 }        
 
-  if обертання = "CW" then
-    for i = 0 to КВАДРАТИ - 1 do // x' = y y' = L - 1 - x
-      let v = шаблони.[базовийшаблон].Значення.[i]
+  якщо обертання = "CW" тоді
+    для i = 0 до КВАДРАТИ - 1 зробити // x' = y y' = L - 1 - x
+      нехай v = шаблони.[базовийшаблон].Значення.[i]
 
       //x = Math.Floor(v/10)
       //y = Math.Remainder(v, 10)
 
       // new x and y
-      let x = (Математика.Залишок(v, 10))
-      let y = (L - 1 - Математика.Floor(float v/10.0))
+      нехай x = (Математика.Залишок(v, 10))
+      нехай y = (L - 1 - Математика.Floor(float v/10.0))
       шаблони.[шаблон].Значення.[i] <- x * 10 + y
     
   // Против часовой стрелки сейчас не используется
-  elif обертання = "CCW" then
-    for i = 0 to КВАДРАТИ - 1 do // x' = L - 1 - y y' = x
-      let v = шаблони.[базовийшаблон].Значення.[i]
+  інякщо обертання = "CCW" тоді
+    для i = 0 до КВАДРАТИ - 1 зробити // x' = L - 1 - y y' = x
+      нехай v = шаблони.[базовийшаблон].Значення.[i]
       //x = Math.Floor(v/10)
       //y = Math.Remainder(v, 10)
 
       // new x and y
-      let x = (L - 1 - Математика.Залишок(v, 10))
-      let y = Математика.Floor(float v / 10.0)
+      нехай x = (L - 1 - Математика.Залишок(v, 10))
+      нехай y = Математика.Floor(float v / 10.0)
       шаблони.[шаблон].Значення.[i] <- x * 10 + y
     
-  elif обертання = "COPY" then
-    for i = 0 to КВАДРАТИ - 1 do
+  інякщо обертання = "COPY" тоді
+    для i = 0 до КВАДРАТИ - 1 зробити
       шаблони.[шаблон].Значення.[i] <- шаблони.[базовийшаблон].Значення.[i]
-  else
+  інакше
     ГрафичнеВікно.ПоказатиПовідомлення("invalid parameter", "Error")
     Програма.Закінчити() 
 
@@ -222,7 +222,7 @@ and СкопіюватиШматок () = // in basetemplate, template, rotation
   шаблони.[шаблон].ViewX <- шаблони.[базовийшаблон].ViewX
   шаблони.[шаблон].ViewY <- шаблони.[базовийшаблон].ViewY
 
-and СтворитиШматок () = // in: template ret: h
+та СтворитиШматок () = // in: template ret: h
   // Create a new handle, representing an arrayName, that will represent the piece
   кількістьh <- кількістьh + 1
   h <- Текст.Додати("piece", кількістьh)
@@ -234,70 +234,70 @@ and СтворитиШматок () = // in: template ret: h
   ГрафичнеВікно.КолірПензлика <- шаблони.[шаблон].Колір
 
   шматки.[h] <- Квадрати()
-  for i = 0 to КВАДРАТИ - 1 do
-    let s = Фігури.ДодатиПрямокутник(ШИРИНАК, ШИРИНАК)
+  для i = 0 до КВАДРАТИ - 1 зробити
+    нехай s = Фігури.ДодатиПрямокутник(ШИРИНАК, ШИРИНАК)
     Фігури.Перемістити(s, -ШИРИНАК, -ШИРИНАК) // move off screen
     шматки.[h].[i] <- s    
 
-and ПереміститиШматок () = // in: ypos, xpos, h. ypos/xpos is 0-19, representing the top/left box coordinate of the piece on the canvas. h returned by CreatePiece
-  for i = 0 to КВАДРАТИ - 1 do
-    let v = шаблони.[шматкиДоШаблонів.[h]].Значення.[i]
-    let x = Математика.Floor(float v / 10.0)
-    let y = Математика.Залишок(v, 10)
+та ПереміститиШматок () = // in: ypos, xpos, h. ypos/xpos is 0-19, representing the top/left box coordinate of the piece on the canvas. h returned by CreatePiece
+  для i = 0 до КВАДРАТИ - 1 зробити
+    нехай v = шаблони.[шматкиДоШаблонів.[h]].Значення.[i]
+    нехай x = Математика.Floor(float v / 10.0)
+    нехай y = Математика.Залишок(v, 10)
 
     // Array.GetValue(h, i) = box for piece h.
     // xpos/ypos = are topleft of shape. x/y is the box offset within the shape.
     Фігури.Перемістити(шматки.[h].[i], ЗМІЩЕННЯX + xпоз * ШИРИНАК + x * ШИРИНАК, ЗМІЩЕННЯY + yпоз * ШИРИНАК + y * ШИРИНАК)  
 
-and ПідтвердитиРух () = // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
-  let mutable i = 0
+та ПідтвердитиРух () = // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 or -1 or 2 if move is invalid, otherwise 0
+  нехай змінливий i = 0
   неправильнийРух <- 0
-  while i < КВАДРАТИ do
-    let v = шаблони.[шматкиДоШаблонів.[h]].Значення.[i]
+  доки i < КВАДРАТИ зробити
+    нехай v = шаблони.[шматкиДоШаблонів.[h]].Значення.[i]
 
     // x/y is the box offset within the shape.
-    let x = Математика.Floor(float v / 10.0)
-    let y = Математика.Залишок(v, 10)
+    нехай x = Математика.Floor(float v / 10.0)
+    нехай y = Математика.Залишок(v, 10)
 
-    if (x + xпоз + напрямокРуху) < 0 then
+    якщо (x + xпоз + напрямокРуху) < 0 тоді
       неправильнийРух <- -1
       i <- КВАДРАТИ // force getting out of the loop    
 
-    if (x + xпоз + напрямокРуху) >= ШИРИНАХ then
+    якщо (x + xпоз + напрямокРуху) >= ШИРИНАХ тоді
       неправильнийРух <- 1
       i <- КВАДРАТИ // force getting out of the loop   
 
-    if плями.[(x + xпоз + напрямокРуху) + (y + yпоз) * ШИРИНАХ] <> "." then
+    якщо плями.[(x + xпоз + напрямокРуху) + (y + yпоз) * ШИРИНАХ] <> "." тоді
       неправильнийРух <- 2
       i <- КВАДРАТИ // force getting out of the loop    
 
     i <- i + 1 
 
-and ПеревіритиЗупинку () = // in: ypos, xpos, h ret: done
-  зроблено <- 0
-  let mutable i = 0
-  while i < КВАДРАТИ do
-    let v = шаблони.[шматкиДоШаблонів.[h]].Значення.[i]
+та ПеревіритиЗупинку () = // in: ypos, xpos, h ret: done
+  ``зроблено`` <- 0
+  нехай змінливий i = 0
+  доки i < КВАДРАТИ зробити
+    нехай v = шаблони.[шматкиДоШаблонів.[h]].Значення.[i]
 
     // x/y is the box offset within the shape.
-    let x = Математика.Floor(float v / 10.0)
-    let y = Математика.Залишок(v, 10)
+    нехай x = Математика.Floor(float v / 10.0)
+    нехай y = Математика.Залишок(v, 10)
 
-    if y + yпоз > ВИСОТАХ || плями.[(x + xпоз) + (y + yпоз) * ШИРИНАХ] <> "." then
-      зроблено <- 1
+    якщо y + yпоз > ВИСОТАХ || плями.[(x + xпоз) + (y + yпоз) * ШИРИНАХ] <> "." тоді
+      ``зроблено`` <- 1
       i <- КВАДРАТИ // force getting out of the loop   
 
     i <- i + 1 
 
   // If we need to stop the piece, move the box handles to the canvas
-  if зроблено = 1 then
-    for i = 0 to КВАДРАТИ - 1 do
-      let v = шаблони.[шматкиДоШаблонів.[h]].Значення.[i]
+  якщо ``зроблено`` = 1 тоді
+    для i = 0 до КВАДРАТИ - 1 зробити
+      нехай v = шаблони.[шматкиДоШаблонів.[h]].Значення.[i]
       //x = Math.Floor(v/10)
       //y = Math.Remainder(v, 10)
-      let x = (Математика.Floor(float v / 10.0) + xпоз)
-      let y = (Математика.Залишок(v, 10) + yпоз - 1)
-      if y >= 0 then
+      нехай x = (Математика.Floor(float v / 10.0) + xпоз)
+      нехай y = (Математика.Залишок(v, 10) + yпоз - 1)
+      якщо y >= 0 тоді
          плями.[x + y * ШИРИНАХ] <- шматки.[h].[i]
 
     // 1 points for every piece successfully dropped
@@ -307,42 +307,42 @@ and ПеревіритиЗупинку () = // in: ypos, xpos, h ret: done
     // Delete cleared lines
     ВидалитиЛінії()
 
-and ВидалитиЛінії () =
-  let mutable лінійОчищено = 0
+та ВидалитиЛінії () =
+  нехай змінливий лінійОчищено = 0
 
   // Iterate over each row, starting from the bottom
-  for y = ВИСОТАХ - 1 downto 0 do
+  для y = ВИСОТАХ - 1 downto 0 зробити
 
     // Check to see if the whole row is filled
-    let mutable x = ШИРИНАХ
-    while x = ШИРИНАХ do
+    нехай змінливий x = ШИРИНАХ
+    доки x = ШИРИНАХ зробити
       x <- 0
-      while x < ШИРИНАХ do
-        let piece = плями.[x + y * ШИРИНАХ]
-        if piece = "." then
+      доки x < ШИРИНАХ зробити
+        нехай piece = плями.[x + y * ШИРИНАХ]
+        якщо piece = "." тоді
           x <- ШИРИНАХ        
         x <- x + 1    
 
-      // if non of them were empty (i.e "."), then remove the line.
-      if x = ШИРИНАХ then
+      // if non of them were empty (i.e "."), тоді remove the line.
+      якщо x = ШИРИНАХ тоді
 
         // Delete the line
-        for x1 = 0 to ШИРИНАХ - 1 do
+        для x1 = 0 до ШИРИНАХ - 1 зробити
           Фігури.Видалити(плями.[x1 + y * ШИРИНАХ])
         лінійОчищено <- лінійОчищено + 1
 
         // Move everything else down one.
-        for y1 = y downto 1 do
-          for x1 = 0 to ШИРИНАХ - 1 do
-            let piece = плями.[x1 + (y1 - 1) * ШИРИНАХ]
+        для y1 = y downto 1 зробити
+          для x1 = 0 до ШИРИНАХ - 1 зробити
+            нехай piece = плями.[x1 + (y1 - 1) * ШИРИНАХ]
             плями.[x1 + y1 * ШИРИНАХ] <- piece
             Фігури.Перемістити(piece, Фігури.ОтриматиЛіво(piece), Фігури.ОтриматиВерх(piece) + float ШИРИНАК)
 
-  if лінійОчищено > 0 then
+  якщо лінійОчищено > 0 тоді
     рахунок <- рахунок + 100 * int (Математика.Округляти(float лінійОчищено * 2.15 - 1.0))
     НадрукуватиРахунок()
 
-and НалаштуватиПолотно () =
+та НалаштуватиПолотно () =
 // GraphicsWindow.DrawResizedImage( Flickr.GetRandomPicture( "bricks" ), 0, 0, GraphicsWindow.Width, GraphicsWindow.Height)
 
   ГрафичнеВікно.КолірПензлика <- ГрафичнеВікно.КолірФона
@@ -351,8 +351,8 @@ and НалаштуватиПолотно () =
   Програма.Затримка(200)
   ГрафичнеВікно.ШиринаПера <- 1.0
   ГрафичнеВікно.КолірПера <- Кольори.Pink
-  for x = 0 to ШИРИНАХ-1 do
-    for y = 0 to ВИСОТАХ-1 do
+  для x = 0 до ШИРИНАХ-1 зробити
+    для y = 0 до ВИСОТАХ-1 зробити
       плями.[x + y * ШИРИНАХ] <- "." // "." indicates spot is free
       ГрафичнеВікно.НамалюватиПрямокутник(ЗМІЩЕННЯX + x * ШИРИНАК, ЗМІЩЕННЯY + y * ШИРИНАК, ШИРИНАК, ШИРИНАК)
 
@@ -369,8 +369,8 @@ and НалаштуватиПолотно () =
 
   ГрафичнеВікно.КолірПера <- Кольори.Black
   ГрафичнеВікно.КолірПензлика <- Кольори.Pink
-  let x = ЗМІЩЕННЯX + ПЕРЕДГЛЯД_xпоз * ШИРИНАК - ШИРИНАК
-  let y = ЗМІЩЕННЯY + ПЕРЕДГЛЯД_yпоз * ШИРИНАК - ШИРИНАК
+  нехай x = ЗМІЩЕННЯX + ПЕРЕДГЛЯД_xпоз * ШИРИНАК - ШИРИНАК
+  нехай y = ЗМІЩЕННЯY + ПЕРЕДГЛЯД_yпоз * ШИРИНАК - ШИРИНАК
   ГрафичнеВікно.ЗаповнитиПрямокутник(x - 20, y, ШИРИНАК * 5, ШИРИНАК * 6)
   ГрафичнеВікно.НамалюватиПрямокутник(x - 20, y, ШИРИНАК * 5, ШИРИНАК * 6)
 
@@ -378,7 +378,7 @@ and НалаштуватиПолотно () =
   ГрафичнеВікно.НамалюватиПрямокутник(x - 20, y + 190, 310, 170)
 
   ГрафичнеВікно.КолірПензлика <- Кольори.Black
-  ГрафичнеВікно.КурсивністьШрифта <- false
+  ГрафичнеВікно.КурсивністьШрифта <- ложь
   ГрафичнеВікно.ІмяШрифта <- "Comic Sans MS"
   ГрафичнеВікно.РозмірШрифта <- 16.0
   ГрафичнеВікно.НамалюватиТекст(x, y + 200, "Game control keys:")
@@ -392,7 +392,7 @@ and НалаштуватиПолотно () =
 
   ГрафичнеВікно.КолірПензлика <- Кольори.Black
   ГрафичнеВікно.ІмяШрифта <- "Georgia"
-  ГрафичнеВікно.КурсивністьШрифта <- true
+  ГрафичнеВікно.КурсивністьШрифта <- істина
   ГрафичнеВікно.РозмірШрифта <- 36.0
   ГрафичнеВікно.НамалюватиТекст(x - 20, y + 400, "Small Basic Tetris")
   Програма.Затримка(200) // without this delay, the above text will use the fontsize of the score 
@@ -403,19 +403,19 @@ and НалаштуватиПолотно () =
   рахунок <- 0
   НадрукуватиРахунок()
 
-and НадрукуватиРахунок () =
+та НадрукуватиРахунок () =
   ГрафичнеВікно.ШиринаПера <- 4.0
   ГрафичнеВікно.КолірПензлика <- Кольори.Pink
   ГрафичнеВікно.ЗаповнитиПрямокутник(480, 65, 150, 50)
   ГрафичнеВікно.КолірПензлика <- Кольори.Black
   ГрафичнеВікно.НамалюватиПрямокутник(480, 65, 150, 50)
-  ГрафичнеВікно.КурсивністьШрифта <- false
+  ГрафичнеВікно.КурсивністьШрифта <- ложь
   ГрафичнеВікно.РозмірШрифта <- 32.0
   ГрафичнеВікно.ІмяШрифта <- "Impact"
   ГрафичнеВікно.КолірПензлика <- Кольори.Black
   ГрафичнеВікно.НамалюватиТекст(485, 70, Текст.Додати(Текст.ОтриматиЧастинуТекста( "00000000", 0, 8 - Текст.ОтриматиДовжину( string рахунок ) ), рахунок))
 
-and НалаштуватиШаблони () =
+та НалаштуватиШаблони () =
   // each piece has 4 boxes.
   // the index of each entry within a piece represents the box number (1-4)
   // the value of each entry represents to box zero-based box coordinate within the piece: tens place is x, ones place y
@@ -461,7 +461,7 @@ and НалаштуватиШаблони () =
 ГрафичнеВікно.КлавішаНатиснута <- Callback(ОбробитиКнопки)
 ГрафичнеВікно.КолірФона <- ГрафичнеВікно.ОтриматиКолірЗRGB( 253, 252, 251 )
 
-while true do
+доки істина зробити
   КВАДРАТИ <- 4      // number of boxes per piece
   ШИРИНАК <- 25    // box width in pixels
   ЗМІЩЕННЯX <- 40   // Screen X offset in pixels of where the board starts

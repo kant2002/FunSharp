@@ -1,20 +1,20 @@
-﻿module Бібліотека.Звук
+﻿модуль Бібліотека.Звук
 
-open System.Media
+відкрити System.Media
 
-type private ИМаркер = interface end
+тип приватний ИМаркер = інтерфейс кінець
 
-let private грати імя =
-    let сборка = System.Reflection.Assembly.GetAssembly(typeof<ИМаркер>)
-    let струм = сборка.GetManifestResourceStream(імя+".wav")
-    let програвач = new SoundPlayer(струм)
+нехай приватний грати імя =
+    нехай сборка = System.Reflection.Assembly.GetAssembly(typeof<ИМаркер>)
+    нехай струм = сборка.GetManifestResourceStream(імя+".wav")
+    нехай програвач = новий SoundPlayer(струм)
     програвач.Play()   
 
-let ГратиДзвінок () =
+нехай ГратиДзвінок () =
     грати "Дзвінок"
 
-let ГратиБійГодинника () =
+нехай ГратиБійГодинника () =
     грати "БійГодинника"
 
-let ГратиКлацання () =
+нехай ГратиКлацання () =
     грати "Клацання"
