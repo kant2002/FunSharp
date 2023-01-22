@@ -27,7 +27,7 @@ let Path = ""
 //-------------------------
 
 // Game area controls
-let gameWidth  = 640
+let ойынЕни  = 640
 let gameHeight = 480
 let fps = 50
 let bgs = 2 //backgroundspeed
@@ -41,7 +41,7 @@ let gameTitle = "1942, Score: "
 GraphicsWindow.Hide()
 GraphicsWindow.Title <- gameTitle + "0"
 GraphicsWindow.CanResize <- false
-GraphicsWindow.Width <- gameWidth
+GraphicsWindow.Width <- ойынЕни
 GraphicsWindow.Height <- gameHeight
 
 // Global variables
@@ -188,7 +188,7 @@ and Play () =
       incislandx.[i] <- 0
       incislandy.[i] <- 0   
    TimePlay <- 0
-   Shapes.Move(player, gameWidth/2 , gameHeight - 80 )
+   Shapes.Move(player, ойынЕни/2 , gameHeight - 80 )
    while (play = 1) do
       Program.Delay(1000/fps)
       TimePlay <- TimePlay + 1
@@ -238,7 +238,7 @@ and moveall () =
    incby <- 0.0
    GraphicsWindow.Title <- gameTitle + score.ToString() + " Lives:" + Player_Lives.ToString()
 
-   if (paddleX > (gameWidth-62) ) then
+   if (paddleX > (ойынЕни-62) ) then
       incx <- incx - bgs
       incbx <- incbx - float bgs
       for i=1 to islandcount do
@@ -320,7 +320,7 @@ and moveall () =
       if (Math.GetRandomNumber(Enemy_Agresivity)=1) then
          Enemy_ShootX <- xx1 + 16
          Enemy_ShootY <- yy1 + 4
-         if (yy1 > 0 && xx1 > 0 && yy1 < gameHeight && xx1 < gameWidth) then
+         if (yy1 > 0 && xx1 > 0 && yy1 < gameHeight && xx1 < ойынЕни) then
             // this avoid enemy fire from outside the screen
             fire_Enemy()
 
@@ -583,27 +583,27 @@ and IslandsPosition () =
    islandPos.[0].[3] <- -150
    islandPos.[1] <- Dictionary()
    islandPos.[1].[1] <- 1
-   islandPos.[1].[2] <- - int (Math.Round(float gameWidth/2.0))
+   islandPos.[1].[2] <- - int (Math.Round(float ойынЕни/2.0))
    islandPos.[1].[3] <- -150
    islandPos.[2] <- Dictionary()
    islandPos.[2].[1] <- 2
-   islandPos.[2].[2] <- -2 * int (Math.Round(float gameWidth/3.0))
+   islandPos.[2].[2] <- -2 * int (Math.Round(float ойынЕни/3.0))
    islandPos.[2].[3] <- -150
    islandPos.[3] <- Dictionary()
    islandPos.[3].[1] <- 1
-   islandPos.[3].[2] <- 2 * int (Math.Round(float gameWidth/3.0))
+   islandPos.[3].[2] <- 2 * int (Math.Round(float ойынЕни/3.0))
    islandPos.[3].[3] <- -150
    islandPos.[4] <- Dictionary()
    islandPos.[4].[1] <- 2
-   islandPos.[4].[2] <- gameWidth
+   islandPos.[4].[2] <- ойынЕни
    islandPos.[4].[3] <- -150
    islandPos.[5] <- Dictionary()
    islandPos.[5].[1] <- 3
-   islandPos.[5].[2] <- int (Math.Round(float gameWidth/3.0))
+   islandPos.[5].[2] <- int (Math.Round(float ойынЕни/3.0))
    islandPos.[5].[3] <- -150
    islandPos.[6] <- Dictionary()
    islandPos.[6].[1] <- 3
-   islandPos.[6].[2] <- -gameWidth
+   islandPos.[6].[2] <- -ойынЕни
    islandPos.[6].[3] <- -150
 
 and define_paths () =
@@ -1052,7 +1052,7 @@ and create_level1 () =  // this define the behavior of the différent squadron a
    level1.[2] <- Dictionary()
    level1.[2].[1] <- 80
    level1.[2].[2] <- 6
-   level1.[2].[3] <- gameWidth/2
+   level1.[2].[3] <- ойынЕни/2
    level1.[2].[4] <- -500
    level1.[2].[5] <- 1
    level1.[2].[6] <- 3
@@ -1076,7 +1076,7 @@ and create_level1 () =  // this define the behavior of the différent squadron a
    level1.[5] <- Dictionary()
    level1.[5].[1] <- 410
    level1.[5].[2] <- 6
-   level1.[5].[3] <- gameWidth/3
+   level1.[5].[3] <- ойынЕни/3
    level1.[5].[4] <- -50
    level1.[5].[5] <- 1
    level1.[5].[6] <- 3
@@ -1084,7 +1084,7 @@ and create_level1 () =  // this define the behavior of the différent squadron a
    level1.[6] <- Dictionary()
    level1.[6].[1] <- 430
    level1.[6].[2] <- 6
-   level1.[6].[3] <- 2*gameWidth/3
+   level1.[6].[3] <- 2*ойынЕни/3
    level1.[6].[4] <- -50
    level1.[6].[5] <- 2
    level1.[6].[6] <- 3
@@ -1092,7 +1092,7 @@ and create_level1 () =  // this define the behavior of the différent squadron a
 
    level1.[5].[1] <- 500
    level1.[5].[2] <- 6
-   level1.[5].[3] <- gameWidth/3
+   level1.[5].[3] <- ойынЕни/3
    level1.[5].[4] <- -50
    level1.[5].[5] <- 1
    level1.[5].[6] <- 6
@@ -1109,7 +1109,7 @@ and create_level1 () =  // this define the behavior of the différent squadron a
    level1.[7] <- Dictionary()
    level1.[7].[1] <- 690
    level1.[7].[2] <- 6
-   level1.[7].[3] <- gameWidth/3
+   level1.[7].[3] <- ойынЕни/3
    level1.[7].[4] <- -50
    level1.[7].[5] <- 2
    level1.[7].[6] <- 3
@@ -1118,7 +1118,7 @@ and create_level1 () =  // this define the behavior of the différent squadron a
       level1.[7+i] <- Dictionary()
       level1.[7+i].[1] <- 700+50*i
       level1.[7+i].[2] <- 6
-      level1.[7+i].[3] <- Math.GetRandomNumber(gameWidth)
+      level1.[7+i].[3] <- Math.GetRandomNumber(ойынЕни)
       level1.[7+i].[4] <- -50 + i
       level1.[7+i].[5] <- Math.GetRandomNumber(2)
       level1.[7+i].[6] <- Math.GetRandomNumber(3)
@@ -1126,7 +1126,7 @@ and create_level1 () =  // this define the behavior of the différent squadron a
    level1.[18] <- Dictionary()
    level1.[18].[1] <- 1300
    level1.[18].[2] <- 1
-   level1.[18].[3] <- gameWidth
+   level1.[18].[3] <- ойынЕни
    level1.[18].[4] <- -10
    level1.[18].[5] <- 2
    level1.[18].[6] <- 6
@@ -1156,7 +1156,7 @@ and create_level1 () =  // this define the behavior of the différent squadron a
      level1.[38+i] <- Dictionary()
      level1.[38+i].[1] <- 2450+100*i
      level1.[38+i].[2] <- 6
-     level1.[38+i].[3] <- Math.GetRandomNumber(gameWidth)
+     level1.[38+i].[3] <- Math.GetRandomNumber(ойынЕни)
      level1.[38+i].[4] <- -50 + i
      level1.[38+i].[5] <- Math.GetRandomNumber(2)
      level1.[38+i].[6] <- Math.GetRandomNumber(5)
