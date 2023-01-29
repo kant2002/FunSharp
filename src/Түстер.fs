@@ -1,4 +1,4 @@
-﻿module Library.Colors
+﻿module Library.Түстер
 
 let AliceBlue = Түс(255uy,240uy,248uy,255uy)
 let AntiqueWhite = Түс(255uy,250uy,235uy,215uy)
@@ -7,7 +7,7 @@ let Aquamarine = Түс(255uy,127uy,255uy,212uy)
 let Azure = Түс(255uy,240uy,255uy,255uy)
 let Beige = Түс(255uy,245uy,245uy,220uy)
 let Bisque = Түс(255uy,255uy,228uy,196uy)
-let Black = Түс(255uy,0uy,0uy,0uy)
+let Қара = Түс(255uy,0uy,0uy,0uy)
 let BlanchedAlmond = Түс(255uy,255uy,235uy,205uy)
 let Blue = Түс(255uy,0uy,0uy,255uy)
 let BlueViolet = Түс(255uy,138uy,43uy,226uy)
@@ -137,7 +137,7 @@ let Transparent = Түс(0uy,255uy,255uy,255uy)
 let Turquoise = Түс(255uy,64uy,224uy,208uy)
 let Violet = Түс(255uy,238uy,130uy,238uy)
 let Wheat = Түс(255uy,245uy,222uy,179uy)
-let White = Түс(255uy,255uy,255uy,255uy)
+let Ақ = Түс(255uy,255uy,255uy,255uy)
 let WhiteSmoke = Түс(255uy,245uy,245uy,245uy)
 let Yellow = Түс(255uy,255uy,255uy,0uy)
 let YellowGreen = Түс(255uy,154uy,205uy,50uy)

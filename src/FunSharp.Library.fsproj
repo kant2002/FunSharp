@@ -9,7 +9,7 @@
     <Compile Include="Math.fs" />
 		<Compile Include="Draw.fs" />
 		<Compile Include="DrawingCanvas.fs" />
-		<Compile Include="Colors.fs" />
+		<Compile Include="Түстер.fs" />
 		<Compile Include="App.fs" />
 		<Compile Include="Http.fs" />
 		<Compile Include="Resource.fs" />

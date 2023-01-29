@@ -4,7 +4,7 @@
 
 open Library
 
-GraphicsWindow.PenColor <- Colors.Purple
+GraphicsWindow.PenColor <- Түстер.Purple
 Turtle.X <- 150.
 Turtle.Y <- 150.
 for i in 0..5..200 do

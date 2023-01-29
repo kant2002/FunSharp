@@ -41,7 +41,7 @@ type internal MyApp () =
     } |> Async.RunSynchronously
     result
    let initCanvas () =
-      mainCanvas <- new DrawingCanvas(Background=new Avalonia.Media.SolidColorBrush(toXwtColor Colors.White))
+      mainCanvas <- new DrawingCanvas(Background=new Avalonia.Media.SolidColorBrush(toXwtColor Түстер.Ақ))
       mainCanvas.KeyUp.Add(fun args -> 
          lastKey <- args.Key.ToString()
          if keyDown <> null then keyDown.Invoke()

@@ -35,7 +35,7 @@ let mutable collisionDetected = false
 let mutable passed = 0
 let mutable lastKey = ""
 let mutable lastems = 0
-let color = dict [1,Colors.Orange; 2, Colors.Cyan; 3, Colors.Lime]
+let color = dict [1,Түстер.Orange; 2, Түстер.Cyan; 3, Түстер.Lime]
 let size = dict [1,20; 2,16; 3,12]
 let mutable score = "<shape name>"
 let mutable iMin = 0
@@ -48,7 +48,7 @@ let objects = ResizeArray<Object>()
 let rec Closing () =
    Timer.Pause()
    Turtle.Turn(720)
-   GraphicsWindow.ҚылқаламТүсі <- Colors.White
+   GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
    GraphicsWindow.FontName <- "Trebuchet MS"
    GraphicsWindow.FontSize <- 40.0
    let x = (gw - 217) / 2
@@ -59,7 +59,7 @@ and Opening () =
    let url = "" // "http://www.nonkit.com/smallbasic.files/"
    let bigTurtle = Shapes.AddImage(url + "Turtle.png")
    Shapes.Move(bigTurtle, 180, 140)
-   GraphicsWindow.ҚылқаламТүсі <- Colors.White
+   GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
    GraphicsWindow.FontName <- "Trebuchet MS"
    GraphicsWindow.FontSize <- 50.0
    let x = (gw - 443) / 2
@@ -82,12 +82,12 @@ and Game () =
    Turtle.PenUp()
    let x = gw / 2
    let y = gh - 40
-   GraphicsWindow.ҚылқаламТүсі <- Colors.White
+   GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
    GraphicsWindow.FontSize <- 18.0
    score <- Shapes.AddText("0")
    Shapes.Move(score, 20, 20)
    if debug then
-     GraphicsWindow.ҚылқаламТүсі <- Colors.White
+     GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
      GraphicsWindow.FontSize <- 12.0
      pos <- Shapes.AddText("(" + x.ToString() + "," + y.ToString() + ")")
      GraphicsWindow.PenWidth <- 1.0
@@ -121,7 +121,7 @@ and Game () =
      else
        Program.Delay(100)      
 and Init () =
-   GraphicsWindow.АяТүсі <- Colors.DodgerBlue
+   GraphicsWindow.АяТүсі <- Түстер.DodgerBlue
    GraphicsWindow.Width <- gw
    GraphicsWindow.Биіктік <- gh   
    passed <- 0

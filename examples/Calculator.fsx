@@ -13,7 +13,7 @@ GraphicsWindow.Title <- "Calculator v. 1.0 by Alex_2000"
 
 GraphicsWindow.АяТүсі = GraphicsWindow.GetColorFromRGB(240, 240, 240)
 GraphicsWindow.FontBold <- false
-GraphicsWindow.ҚылқаламТүсі <- Colors.Black
+GraphicsWindow.ҚылқаламТүсі <- Түстер.Black
 
 let m = Shapes.AddText("M")
 Shapes.Move(m, 22, 62)
@@ -39,7 +39,7 @@ let C5 = C4 + (222-181)*N
 let T0 = C0
 let T1 = T0 + (139-58)*N
 let T2 = T1 + (202-139)*N 
-GraphicsWindow.ҚылқаламТүсі <- Colors.Red
+GraphicsWindow.ҚылқаламТүсі <- Түстер.Red
 let keyMC = Controls.AddButton("MC", C0, R1)
 Controls.SetSize(keyMC, 35*N, 25*N)
 let keyMR = Controls.AddButton("MR", C0, R2)
@@ -66,7 +66,7 @@ Controls.SetSize(keyplus, 35*N, 25*N)
 let keyravno = Controls.AddButton("=", C5, R4)
 Controls.SetSize(keyravno, 35*N, 25*N)
 
-GraphicsWindow.ҚылқаламТүсі <- Colors.Blue
+GraphicsWindow.ҚылқаламТүсі <- Түстер.Blue
 let key7 = Controls.AddButton("7", C1, R1)
 Controls.SetSize(key7, 35*N, 25*N)
 let key8 = Controls.AddButton("8", C2, R1)

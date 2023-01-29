@@ -161,8 +161,8 @@ let rec Init() =
 
    player <- Shapes.AddImage(player0)
    GraphicsWindow.FontSize <- 20.0
-   GraphicsWindow.АяТүсі <- Colors.Gray
-   GraphicsWindow.PenColor <- Colors.Yellow
+   GraphicsWindow.АяТүсі <- Түстер.Gray
+   GraphicsWindow.PenColor <- Түстер.Yellow
 
 
 

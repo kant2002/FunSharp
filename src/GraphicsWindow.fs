@@ -6,7 +6,7 @@ open Avalonia.Media.Imaging
 [<Sealed>]
 type GraphicsWindow private () =   
    static let rnd = Random()
-   static let mutable аяТүсі = Colors.White
+   static let mutable аяТүсі = Түстер.Ақ
    static let mutable width = 640
    static let mutable биіктік = 480
    static let pen () = Pen(GraphicsWindow.PenColor,GraphicsWindow.PenWidth)
@@ -36,9 +36,9 @@ type GraphicsWindow private () =
    static member CanResize
       with get () = true
       and set (value:bool) = ()
-   static member val PenColor = Colors.Black with get, set
+   static member val PenColor = Түстер.Қара with get, set
    static member val PenWidth = 2.0 with get, set
-   static member val ҚылқаламТүсі = Colors.Purple with get,set
+   static member val ҚылқаламТүсі = Түстер.Purple with get,set
    static member val FontSize = 12.0 with get,set
    static member val FontName = "" with get,set
    static member val FontBold = false with get,set

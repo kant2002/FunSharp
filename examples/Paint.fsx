@@ -6,9 +6,9 @@ open Library
 
 let onKeyDown () =
    match GraphicsWindow.LastKey with
-   | "K1" -> GraphicsWindow.PenColor <- Colors.Red
-   | "K2" -> GraphicsWindow.PenColor <- Colors.Blue
-   | "K3" -> GraphicsWindow.PenColor <- Colors.LightGreen
+   | "K1" -> GraphicsWindow.PenColor <- Түстер.Red
+   | "K2" -> GraphicsWindow.PenColor <- Түстер.Blue
+   | "K3" -> GraphicsWindow.PenColor <- Түстер.LightGreen
    | "c" -> GraphicsWindow.Clear()
    | s -> printfn "'%s'" s; System.Diagnostics.Debug.WriteLine(s)
 
@@ -27,8 +27,8 @@ let onMouseMove () =
    prevX <- x
    prevY <- y
 
-GraphicsWindow.АяТүсі <- Colors.Black
-GraphicsWindow.PenColor <- Colors.White
+GraphicsWindow.АяТүсі <- Түстер.Black
+GraphicsWindow.PenColor <- Түстер.White
 GraphicsWindow.MouseDown <- Callback(onMouseDown)
 GraphicsWindow.MouseMove <- Callback(onMouseMove)
 GraphicsWindow.KeyDown <- Callback(onKeyDown)

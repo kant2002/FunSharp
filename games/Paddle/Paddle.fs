@@ -12,9 +12,9 @@ let OnMouseMove () =
 
 let PrintScore () =
   // Clear the score first and then draw the real score text
-  GraphicsWindow.ҚылқаламТүсі <- Colors.White
+  GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
   GraphicsWindow.FillRectangle(10, 10, 200, 20)
-  GraphicsWindow.ҚылқаламТүсі <- Colors.Black
+  GraphicsWindow.ҚылқаламТүсі <- Түстер.Қара
   GraphicsWindow.DrawText(10, 10, "Score: " + score.ToString())
 
 GraphicsWindow.FontSize <- 14.0

@@ -182,7 +182,7 @@ and CopyPiece () = // in basetemplate, template, rotation
 
   if not (templates.ContainsKey template) then
       templates.[template] <-
-         { Values=[|0;0;0;0|]; Color=Colors.Black; Dim=0; ViewX=0; ViewY=0 }        
+         { Values=[|0;0;0;0|]; Color=Түстер.Қара; Dim=0; ViewX=0; ViewY=0 }        
 
   if rotation = "CW" then
     for i = 0 to BOXES - 1 do // x' = y y' = L - 1 - x
@@ -229,7 +229,7 @@ and CreatePiece () = // in: template ret: h
   pieceToTemplate.[h] <- template
 
   GraphicsWindow.PenWidth <- 1.0
-  GraphicsWindow.PenColor <- Colors.Black
+  GraphicsWindow.PenColor <- Түстер.Қара
   GraphicsWindow.ҚылқаламТүсі <- templates.[template].Color
 
   pieces.[h] <- Boxes()
@@ -349,25 +349,25 @@ and SetupCanvas () =
 
   Program.Delay(200)
   GraphicsWindow.PenWidth <- 1.0
-  GraphicsWindow.PenColor <- Colors.Pink
+  GraphicsWindow.PenColor <- Түстер.Pink
   for x = 0 to CWIDTH-1 do
     for y = 0 to CHEIGHT-1 do
       spots.[x + y * CWIDTH] <- "." // "." indicates spot is free
       GraphicsWindow.DrawRectangle(XOFFSET + x * BWIDTH, YOFFSET + y * BWIDTH, BWIDTH, BWIDTH)
 
   GraphicsWindow.PenWidth <- 4.0
-  GraphicsWindow.PenColor <- Colors.Black
+  GraphicsWindow.PenColor <- Түстер.Қара
   GraphicsWindow.DrawLine(XOFFSET, YOFFSET, XOFFSET, YOFFSET + CHEIGHT*BWIDTH)
   GraphicsWindow.DrawLine(XOFFSET + CWIDTH*BWIDTH, YOFFSET, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
   GraphicsWindow.DrawLine(XOFFSET, YOFFSET + CHEIGHT*BWIDTH, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
 
-  GraphicsWindow.PenColor <- Colors.Lime
+  GraphicsWindow.PenColor <- Түстер.Lime
   GraphicsWindow.DrawLine(XOFFSET - 4, YOFFSET, XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 6)
   GraphicsWindow.DrawLine(XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 6)
   GraphicsWindow.DrawLine(XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 4, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 4)
 
-  GraphicsWindow.PenColor <- Colors.Black
-  GraphicsWindow.ҚылқаламТүсі <- Colors.Pink
+  GraphicsWindow.PenColor <- Түстер.Қара
+  GraphicsWindow.ҚылқаламТүсі <- Түстер.Pink
   let x = XOFFSET + PREVIEW_xpos * BWIDTH - BWIDTH
   let y = YOFFSET + PREVIEW_ypos * BWIDTH - BWIDTH
   GraphicsWindow.FillRectangle(x - 20, y, BWIDTH * 5, BWIDTH * 6)
@@ -376,7 +376,7 @@ and SetupCanvas () =
   GraphicsWindow.FillRectangle(x - 20, y + 190, 310, 170)
   GraphicsWindow.DrawRectangle(x - 20, y + 190, 310, 170)
 
-  GraphicsWindow.ҚылқаламТүсі <- Colors.Black
+  GraphicsWindow.ҚылқаламТүсі <- Түстер.Қара
   GraphicsWindow.FontItalic <- false
   GraphicsWindow.FontName <- "Comic Sans MS"
   GraphicsWindow.FontSize <- 16.0
@@ -389,7 +389,7 @@ and SetupCanvas () =
 
   Program.Delay(200) // without this delay, the above text will use the fontsize of the score 
 
-  GraphicsWindow.ҚылқаламТүсі <- Colors.Black
+  GraphicsWindow.ҚылқаламТүсі <- Түстер.Қара
   GraphicsWindow.FontName <- "Georgia"
   GraphicsWindow.FontItalic <- true
   GraphicsWindow.FontSize <- 36.0
@@ -404,14 +404,14 @@ and SetupCanvas () =
 
 and PrintScore () =
   GraphicsWindow.PenWidth <- 4.0
-  GraphicsWindow.ҚылқаламТүсі <- Colors.Pink
+  GraphicsWindow.ҚылқаламТүсі <- Түстер.Pink
   GraphicsWindow.FillRectangle(480, 65, 150, 50)
-  GraphicsWindow.ҚылқаламТүсі <- Colors.Black
+  GraphicsWindow.ҚылқаламТүсі <- Түстер.Қара
   GraphicsWindow.DrawRectangle(480, 65, 150, 50)
   GraphicsWindow.FontItalic <- false
   GraphicsWindow.FontSize <- 32.0
   GraphicsWindow.FontName <- "Impact"
-  GraphicsWindow.ҚылқаламТүсі <- Colors.Black
+  GraphicsWindow.ҚылқаламТүсі <- Түстер.Қара
   GraphicsWindow.DrawText(485, 70, Text.Append(Text.GetSubText( "00000000", 0, 8 - Text.GetLength( string score ) ), score))
 
 and SetupTemplates () =
@@ -422,38 +422,38 @@ and SetupTemplates () =
   //_X_
   //_X_
   //_XX
-  templates.["template1"] <- { Values=[|10;11;12;22|]; Color=Colors.Yellow; Dim=3; ViewX = -12; ViewY = 12 }
+  templates.["template1"] <- { Values=[|10;11;12;22|]; Color=Түстер.Yellow; Dim=3; ViewX = -12; ViewY = 12 }
 
   //_X_
   //_X_
   //XX_
-  templates.["template2"] <- { Values=[|10;11;12;02|]; Color=Colors.Magenta; Dim=3; ViewX=12; ViewY=12 }
+  templates.["template2"] <- { Values=[|10;11;12;02|]; Color=Түстер.Magenta; Dim=3; ViewX=12; ViewY=12 }
 
   //_X_
   //XXX
   //_
-  templates.["template3"] <- { Values=[|10;01;11;21|]; Color=Colors.Gray; Dim=3; ViewX=0; ViewY=25}
+  templates.["template3"] <- { Values=[|10;01;11;21|]; Color=Түстер.Gray; Dim=3; ViewX=0; ViewY=25}
 
   //XX_
   //XX_
   //_
-  templates.["template4"] <- { Values=[|00;10;01;11|]; Color=Colors.Cyan; Dim=2; ViewX=12; ViewY=25 }
+  templates.["template4"] <- { Values=[|00;10;01;11|]; Color=Түстер.Cyan; Dim=2; ViewX=12; ViewY=25 }
 
   //XX_
   //_XX
   //_
-  templates.["template5"] <- { Values=[|00;10;11;21|]; Color=Colors.Green; Dim=3; ViewX=0; ViewY=25 }
+  templates.["template5"] <- { Values=[|00;10;11;21|]; Color=Түстер.Green; Dim=3; ViewX=0; ViewY=25 }
 
   //_XX
   //XX_
   //_
-  templates.["template6"] <- { Values=[|10;20;01;11|]; Color=Colors.Blue; Dim=3; ViewX=0; ViewY=25}
+  templates.["template6"] <- { Values=[|10;20;01;11|]; Color=Түстер.Blue; Dim=3; ViewX=0; ViewY=25}
 
   //_X
   //_X
   //_X
   //_X
-  templates.["template7"] <- { Values=[|10;11;12;13|]; Color=Colors.Red; Dim=4; ViewX=0; ViewY=0}
+  templates.["template7"] <- { Values=[|10;11;12;13|]; Color=Түстер.Red; Dim=4; ViewX=0; ViewY=0}
 
 GraphicsWindow.Биіктік <- 580
 GraphicsWindow.Width <- 700
