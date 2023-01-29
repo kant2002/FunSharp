@@ -5,11 +5,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Asteroids.fs" />
-    <EmbeddedResource Include="Asteroids_BigRock.png" />
-    <EmbeddedResource Include="Asteroids_MediumRock.png" />
-    <EmbeddedResource Include="Asteroids_SmallRock.png" />
-    <EmbeddedResource Include="Asteroids_Ship.png" />
-    <EmbeddedResource Include="Asteroids_Sky.png" />
+    <EmbeddedResource Include="Asteroids_BigRock.png" LogicalName="Asteroids_BigRock.png" />
+    <EmbeddedResource Include="Asteroids_MediumRock.png" LogicalName="Asteroids_MediumRock.png" />
+    <EmbeddedResource Include="Asteroids_SmallRock.png" LogicalName="Asteroids_SmallRock.png" />
+    <EmbeddedResource Include="Asteroids_Ship.png" LogicalName="Asteroids_Ship.png" />
+    <EmbeddedResource Include="Asteroids_Sky.png" LogicalName="Asteroids_Sky.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\FunSharp.Library.fsproj" />

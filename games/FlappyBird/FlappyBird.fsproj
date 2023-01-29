@@ -5,12 +5,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Program.fs" />
-    <EmbeddedResource Include="bg.png" />
-    <EmbeddedResource Include="bird.png" />
-    <EmbeddedResource Include="bird_sing.png" />
-    <EmbeddedResource Include="ground.png" />
-    <EmbeddedResource Include="tube1.png" />
-    <EmbeddedResource Include="tube2.png" />
+    <EmbeddedResource Include="bg.png" LogicalName="bg.png" />
+    <EmbeddedResource Include="bird.png" LogicalName="bird.png" />
+    <EmbeddedResource Include="bird_sing.png" LogicalName="bird_sing.png" />
+    <EmbeddedResource Include="ground.png" LogicalName="ground.png" />
+    <EmbeddedResource Include="tube1.png" LogicalName="tube1.png" />
+    <EmbeddedResource Include="tube2.png" LogicalName="tube2.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\FunSharp.Library.fsproj" />

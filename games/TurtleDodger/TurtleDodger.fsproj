@@ -4,10 +4,10 @@
     <OutputType>WinExe</OutputType>
 	</PropertyGroup>
 	<ItemGroup>
-		<EmbeddedResource Include="Turtle.png" />
+    <EmbeddedResource Include="turtle.png" LogicalName="turtle.png" />
 		<Compile Include="TurtleDodger.fs" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\FunSharp.Library.fsproj" />
-	</ItemGroup>
+	</ItemGroup>	
 </Project>
