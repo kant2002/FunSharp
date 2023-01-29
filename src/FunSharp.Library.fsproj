@@ -22,7 +22,7 @@
 		<Compile Include="Clock.fs" />
 		<Compile Include="Timer.fs" />
 		<Compile Include="Text.fs" />
-		<Compile Include="Sound.fs" />
+		<Compile Include="Дыбыс.fs" />
 		<Compile Include="Program.fs" />
 		<Compile Include="Collections.fs" />
 		<EmbeddedResource Include="turtle.png" />
