@@ -4,7 +4,7 @@
 
 open Library
 
-GraphicsWindow.BackgroundColor <- Colors.Black
+GraphicsWindow.АяТүсі <- Colors.Black
 for i = 1 to 1200 do
-   GraphicsWindow.BrushColor <- GraphicsWindow.GetRandomColor()
+   GraphicsWindow.ҚылқаламТүсі <- GraphicsWindow.GetRandomColor()
    GraphicsWindow.FillEllipse(Math.GetRandomNumber(800), Math.GetRandomNumber(600), 30, 30)

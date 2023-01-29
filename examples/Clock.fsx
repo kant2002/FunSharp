@@ -7,22 +7,22 @@ open System.Collections.Generic
 open Library
 
 let GW = float GraphicsWindow.Width
-let GH = float GraphicsWindow.Height
-let Radius = 200.0
+let GH = float GraphicsWindow.Биіктік
+let Радиус = 200.0
 let MidX = GW/2.0
 let MidY = GW/2.0
 
 let initWindow () =
    GraphicsWindow.Show()
    GraphicsWindow.Title <- "Analog Clock"
-   GraphicsWindow.BackgroundColor <- Colors.Black
-   GraphicsWindow.BrushColor <- Colors.BurlyWood
-   GraphicsWindow.DrawEllipse(MidX-Radius-15.,MidY-Radius-5.,Radius*2.+30.,Radius*2.+20.)
-   GraphicsWindow.FillEllipse(MidX-Radius-15.,MidY-Radius-5.,Radius*2.+30.,Radius*2.+20.)
+   GraphicsWindow.АяТүсі <- Colors.Black
+   GraphicsWindow.ҚылқаламТүсі <- Colors.BurlyWood
+   GraphicsWindow.DrawEllipse(MidX-Радиус-15.,MidY-Радиус-5.,Радиус*2.+30.,Радиус*2.+20.)
+   GraphicsWindow.FillEllipse(MidX-Радиус-15.,MidY-Радиус-5.,Радиус*2.+30.,Радиус*2.+20.)
    for angle in 1.0..180.0 do
-     let x = MidX+(Radius+15.)*Math.Cos(Math.GetRadians(angle))
-     let y1 = MidY+Radius*Math.Sin(Math.GetRadians(angle))+15.
-     let y2 = MidY+(Radius+15.)*Math.Sin(Math.GetRadians(-angle))+10.
+     let x = MidX+(Радиус+15.)*Math.Cos(Math.АлуРадианы(angle))
+     let y1 = MidY+Радиус*Math.Sin(Math.АлуРадианы(angle))+15.
+     let y2 = MidY+(Радиус+15.)*Math.Sin(Math.АлуРадианы(-angle))+10.
      let blue = Math.GetRandomNumber(40)+30
      GraphicsWindow.PenWidth <- Math.GetRandomNumber(5) |> float
      let color = 
@@ -32,12 +32,12 @@ let initWindow () =
          blue)
      GraphicsWindow.PenColor <- color
      Shapes.AddLine(x,y1,x,y2) |> ignore
-   GraphicsWindow.BrushColor <- Colors.White   
+   GraphicsWindow.ҚылқаламТүсі <- Colors.White   
    let ClockNum = Dictionary()
    for i in 1. .. 12. do
-     let Radians = Math.GetRadians(-i * 30. + 90.)
+     let Radians = Math.АлуРадианы(-i * 30. + 90.)
      ClockNum.[i] <- Shapes.AddText(i.ToString())
-     Shapes.Move(ClockNum.[i],MidX-4.+Radius*Math.Cos(Radians),MidY-4.-Radius*Math.Sin(Radians))   
+     Shapes.Move(ClockNum.[i],MidX-4.+Радиус*Math.Cos(Radians),MidY-4.-Радиус*Math.Sin(Radians))   
    
 let mutable HourHand = "<shape name>"
 let mutable MinuteHand = "<shape name>"
@@ -55,8 +55,8 @@ let setHands () =
        Shapes.AddLine(
          MidX,
          MidY,
-         MidX+Radius/2.*Math.Cos(Math.GetRadians(Hour*30.-90.)),
-         MidY+Radius/2.*Math.Sin(Math.GetRadians(Hour*30.-90.)))   
+         MidX+Радиус/2.*Math.Cos(Math.АлуРадианы(Hour*30.-90.)),
+         MidY+Радиус/2.*Math.Sin(Math.АлуРадианы(Hour*30.-90.)))   
    if float Clock.Minute <> Minute then
      Shapes.Remove(MinuteHand)
      Minute <- float Clock.Minute + float Clock.Second/60.
@@ -66,8 +66,8 @@ let setHands () =
        Shapes.AddLine(
          MidX,
          MidY,
-         MidX+Radius/1.2*Math.Cos(Math.GetRadians(Minute*6.-90.)),
-         MidY+Radius/1.2*Math.Sin(Math.GetRadians(Minute*6.-90.)))   
+         MidX+Радиус/1.2*Math.Cos(Math.АлуРадианы(Minute*6.-90.)),
+         MidY+Радиус/1.2*Math.Sin(Math.АлуРадианы(Minute*6.-90.)))   
    if float Clock.Second <> Second then
      Shapes.Remove(SecondHand)
      Second <- float Clock.Second
@@ -77,8 +77,8 @@ let setHands () =
        Shapes.AddLine(
          MidX,
          MidY,
-         MidX+Radius*Math.Cos(Math.GetRadians(Second*6.-90.)),
-         MidY+Radius*Math.Sin(Math.GetRadians(Second*6.-90.)))
+         MidX+Радиус*Math.Cos(Math.АлуРадианы(Second*6.-90.)),
+         MidY+Радиус*Math.Sin(Math.АлуРадианы(Second*6.-90.)))
    
 initWindow()
 while true do

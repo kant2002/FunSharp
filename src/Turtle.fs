@@ -8,7 +8,7 @@ type Turtle private () =
    static let mutable speed = 0
    static let mutable angle = 0.0
    static let mutable _x = float GraphicsWindow.Width / 2.0
-   static let mutable _y = float GraphicsWindow.Height / 2.0
+   static let mutable _y = float GraphicsWindow.Биіктік / 2.0
    static let mutable isPenDown = true
    static let show () =
       if not userHidden then

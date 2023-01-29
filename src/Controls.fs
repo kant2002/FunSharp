@@ -15,7 +15,7 @@ type Controls private () =
           let name = "Button" + Guid.NewGuid().ToString()
           let button = new Button(Content = label)
           button.Click.Add(fun _ -> lastClickedButton <- name; onClick.Invoke())
-          //toXwtColor(GraphicsWindow.BrushColor)      
+          //toXwtColor(GraphicsWindow.ҚылқаламТүсі)      
           controls.Add(name,button)
           positions.Add(name,(x,y))            
           My.App.Canvas.AddChild(button,float x,float y)
@@ -27,7 +27,7 @@ type Controls private () =
         let name = "TextBox" + Guid.NewGuid().ToString()
         let control = new TextBox()
         control.Text <- "Boo"
-        // toXwtColor(GraphicsWindow.BrushColor)
+        // toXwtColor(GraphicsWindow.ҚылқаламТүсі)
         controls.Add(name,control)
         positions.Add(name,(x,y))
         My.App.Canvas.AddChild(control,float x,float y)

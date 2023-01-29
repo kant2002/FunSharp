@@ -48,7 +48,7 @@ let objects = ResizeArray<Object>()
 let rec Closing () =
    Timer.Pause()
    Turtle.Turn(720)
-   GraphicsWindow.BrushColor <- Colors.White
+   GraphicsWindow.ҚылқаламТүсі <- Colors.White
    GraphicsWindow.FontName <- "Trebuchet MS"
    GraphicsWindow.FontSize <- 40.0
    let x = (gw - 217) / 2
@@ -59,7 +59,7 @@ and Opening () =
    let url = "" // "http://www.nonkit.com/smallbasic.files/"
    let bigTurtle = Shapes.AddImage(url + "Turtle.png")
    Shapes.Move(bigTurtle, 180, 140)
-   GraphicsWindow.BrushColor <- Colors.White
+   GraphicsWindow.ҚылқаламТүсі <- Colors.White
    GraphicsWindow.FontName <- "Trebuchet MS"
    GraphicsWindow.FontSize <- 50.0
    let x = (gw - 443) / 2
@@ -82,12 +82,12 @@ and Game () =
    Turtle.PenUp()
    let x = gw / 2
    let y = gh - 40
-   GraphicsWindow.BrushColor <- Colors.White
+   GraphicsWindow.ҚылқаламТүсі <- Colors.White
    GraphicsWindow.FontSize <- 18.0
    score <- Shapes.AddText("0")
    Shapes.Move(score, 20, 20)
    if debug then
-     GraphicsWindow.BrushColor <- Colors.White
+     GraphicsWindow.ҚылқаламТүсі <- Colors.White
      GraphicsWindow.FontSize <- 12.0
      pos <- Shapes.AddText("(" + x.ToString() + "," + y.ToString() + ")")
      GraphicsWindow.PenWidth <- 1.0
@@ -121,9 +121,9 @@ and Game () =
      else
        Program.Delay(100)      
 and Init () =
-   GraphicsWindow.BackgroundColor <- Colors.DodgerBlue
+   GraphicsWindow.АяТүсі <- Colors.DodgerBlue
    GraphicsWindow.Width <- gw
-   GraphicsWindow.Height <- gh   
+   GraphicsWindow.Биіктік <- gh   
    passed <- 0
    collisionDetected <- false
 and OnTick () =
@@ -163,7 +163,7 @@ and AddObject () =
    iMax <- iMax + 1
    GraphicsWindow.PenWidth <- 1.0
    let kind = Math.GetRandomNumber(3)
-   GraphicsWindow.BrushColor <- color.[kind]
+   GraphicsWindow.ҚылқаламТүсі <- color.[kind]
    let sz = size.[kind]
    let shapeName = Shapes.AddRectangle(sz, sz)
    let x = Math.GetRandomNumber(gw - 20) + 10

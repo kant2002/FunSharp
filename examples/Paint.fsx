@@ -27,7 +27,7 @@ let onMouseMove () =
    prevX <- x
    prevY <- y
 
-GraphicsWindow.BackgroundColor <- Colors.Black
+GraphicsWindow.АяТүсі <- Colors.Black
 GraphicsWindow.PenColor <- Colors.White
 GraphicsWindow.MouseDown <- Callback(onMouseDown)
 GraphicsWindow.MouseMove <- Callback(onMouseMove)

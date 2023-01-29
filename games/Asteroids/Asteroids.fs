@@ -89,10 +89,10 @@ let rec Init () =
    GraphicsWindow.Title <- gameTitle + "0"
    //GraphicsWindow.CanResize <- "False"
    GraphicsWindow.Width <- int gameWidth
-   GraphicsWindow.Height <-int gameHeight
+   GraphicsWindow.Биіктік <-int gameHeight
 
-   GraphicsWindow.BackgroundColor <- backColor
-   GraphicsWindow.BrushColor <- backColor
+   GraphicsWindow.АяТүсі <- backColor
+   GraphicsWindow.ҚылқаламТүсі <- backColor
    GraphicsWindow.DrawImage(background, 0, 0)
 
    LevelCheck()
@@ -138,30 +138,30 @@ and ChangeDirection () =
 // Move all on screen items
 and Move  () =
    // Move player
-   let x = Math.Remainder(Shapes.GetLeft(player) + (Math.Cos(Math.GetRadians(playerAngle - 90.0)) * playerSpeed) + gameWidth, gameWidth)
-   let y = Math.Remainder(Shapes.GetTop(player) + (Math.Sin(Math.GetRadians(playerAngle - 90.0)) * playerSpeed) + gameHeight, gameHeight)
+   let x = Math.Remainder(Shapes.GetLeft(player) + (Math.Cos(Math.АлуРадианы(playerAngle - 90.0)) * playerSpeed) + gameWidth, gameWidth)
+   let y = Math.Remainder(Shapes.GetTop(player) + (Math.Sin(Math.АлуРадианы(playerAngle - 90.0)) * playerSpeed) + gameHeight, gameHeight)
    Shapes.Move(player, x, y)
 
    // Move rocks
    for i = 0 to rockCount-1 do
-     let x = Math.Remainder(Shapes.GetLeft(rock.[i]) + (Math.Cos(Math.GetRadians(rockAngle.[i] - 90.0)) * rockSpeed) + gameWidth, gameWidth)
-     let y = Math.Remainder(Shapes.GetTop(rock.[i]) + (Math.Sin(Math.GetRadians(rockAngle.[i] - 90.0)) * rockSpeed) + gameHeight, gameHeight)
+     let x = Math.Remainder(Shapes.GetLeft(rock.[i]) + (Math.Cos(Math.АлуРадианы(rockAngle.[i] - 90.0)) * rockSpeed) + gameWidth, gameWidth)
+     let y = Math.Remainder(Shapes.GetTop(rock.[i]) + (Math.Sin(Math.АлуРадианы(rockAngle.[i] - 90.0)) * rockSpeed) + gameHeight, gameHeight)
      Shapes.Move(rock.[i], x, y)
 
    // Move ammo
    for i = 0 to ammoCount-1 do
-     let x = Math.Remainder(Shapes.GetLeft(ammo.[i]) + (Math.Cos(Math.GetRadians(ammoAngle.[i] - 90.0)) * ammoSpeed) + gameWidth, gameWidth)
-     let y = Math.Remainder(Shapes.GetTop(ammo.[i]) + (Math.Sin(Math.GetRadians(ammoAngle.[i] - 90.0)) * ammoSpeed) + gameHeight, gameHeight)
+     let x = Math.Remainder(Shapes.GetLeft(ammo.[i]) + (Math.Cos(Math.АлуРадианы(ammoAngle.[i] - 90.0)) * ammoSpeed) + gameWidth, gameWidth)
+     let y = Math.Remainder(Shapes.GetTop(ammo.[i]) + (Math.Sin(Math.АлуРадианы(ammoAngle.[i] - 90.0)) * ammoSpeed) + gameHeight, gameHeight)
      Shapes.Move(ammo.[i], x, y)
      ammoAge.[i] <- ammoAge.[i] + 1
 
 // Check for collisions between onscreen items
 and CollisionCheck () =
    // Calculate player bounding box.
-   px1 <- Shapes.GetLeft(player) - ( (Math.Abs(playerWidth * Math.Cos(Math.GetRadians(playerAngle)) + playerHeight * Math.Sin(Math.GetRadians(playerAngle))) - playerWidth) / 2.0)
-   py1 <- Shapes.GetTop(player) - ( (Math.Abs(playerWidth * Math.Sin(Math.GetRadians(playerAngle)) + playerHeight * Math.Cos(Math.GetRadians(playerAngle))) - playerHeight) / 2.0)
-   px2 <- px1 + Math.Abs(playerWidth * Math.Cos(Math.GetRadians(playerAngle)) + playerHeight * Math.Sin(Math.GetRadians(playerAngle)))
-   py2 <- py1 + Math.Abs(playerWidth * Math.Sin(Math.GetRadians(playerAngle)) + playerHeight * Math.Cos(Math.GetRadians(playerAngle)))
+   px1 <- Shapes.GetLeft(player) - ( (Math.Abs(playerWidth * Math.Cos(Math.АлуРадианы(playerAngle)) + playerHeight * Math.Sin(Math.АлуРадианы(playerAngle))) - playerWidth) / 2.0)
+   py1 <- Shapes.GetTop(player) - ( (Math.Abs(playerWidth * Math.Sin(Math.АлуРадианы(playerAngle)) + playerHeight * Math.Cos(Math.АлуРадианы(playerAngle))) - playerHeight) / 2.0)
+   px2 <- px1 + Math.Abs(playerWidth * Math.Cos(Math.АлуРадианы(playerAngle)) + playerHeight * Math.Sin(Math.АлуРадианы(playerAngle)))
+   py2 <- py1 + Math.Abs(playerWidth * Math.Sin(Math.АлуРадианы(playerAngle)) + playerHeight * Math.Cos(Math.АлуРадианы(playerAngle)))
 
    // Re-order co-oridinates if they are the wrong way arround
    if (px1 > px2) then

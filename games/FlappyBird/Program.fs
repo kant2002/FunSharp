@@ -1,7 +1,7 @@
 ﻿open Library
 
 GraphicsWindow.Width <- 288
-GraphicsWindow.Height <- 440
+GraphicsWindow.Биіктік <- 440
 
 let bg = Shapes.AddImage("bg.png")
 let ground = Shapes.AddImage("ground.png")

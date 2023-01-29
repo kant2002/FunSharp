@@ -1,7 +1,7 @@
 ﻿open Library
 
 let gw = float GraphicsWindow.Width
-let gh = float GraphicsWindow.Height
+let gh = float GraphicsWindow.Биіктік
 let paddle = Shapes.AddRectangle(120, 12)
 let ball = Shapes.AddEllipse(16, 16)
 let mutable score = 0
@@ -12,9 +12,9 @@ let OnMouseMove () =
 
 let PrintScore () =
   // Clear the score first and then draw the real score text
-  GraphicsWindow.BrushColor <- Colors.White
+  GraphicsWindow.ҚылқаламТүсі <- Colors.White
   GraphicsWindow.FillRectangle(10, 10, 200, 20)
-  GraphicsWindow.BrushColor <- Colors.Black
+  GraphicsWindow.ҚылқаламТүсі <- Colors.Black
   GraphicsWindow.DrawText(10, 10, "Score: " + score.ToString())
 
 GraphicsWindow.FontSize <- 14.0

@@ -32,7 +32,7 @@ let mutable score = 0
 
 type Template = {
    Values : int[]
-   mutable Color : Color
+   mutable Color : Түс
    mutable Dim : int
    mutable ViewX : int
    mutable ViewY : int
@@ -230,7 +230,7 @@ and CreatePiece () = // in: template ret: h
 
   GraphicsWindow.PenWidth <- 1.0
   GraphicsWindow.PenColor <- Colors.Black
-  GraphicsWindow.BrushColor <- templates.[template].Color
+  GraphicsWindow.ҚылқаламТүсі <- templates.[template].Color
 
   pieces.[h] <- Boxes()
   for i = 0 to BOXES - 1 do
@@ -342,9 +342,9 @@ and DeleteLines () =
     PrintScore()
 
 and SetupCanvas () =
-// GraphicsWindow.DrawResizedImage( Flickr.GetRandomPicture( "bricks" ), 0, 0, GraphicsWindow.Width, GraphicsWindow.Height)
+// GraphicsWindow.DrawResizedImage( Flickr.GetRandomPicture( "bricks" ), 0, 0, GraphicsWindow.Width, GraphicsWindow.Биіктік)
 
-  GraphicsWindow.BrushColor <- GraphicsWindow.BackgroundColor
+  GraphicsWindow.ҚылқаламТүсі <- GraphicsWindow.АяТүсі
   GraphicsWindow.FillRectangle(XOFFSET, YOFFSET, CWIDTH*BWIDTH, CHEIGHT*BWIDTH)
 
   Program.Delay(200)
@@ -367,7 +367,7 @@ and SetupCanvas () =
   GraphicsWindow.DrawLine(XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 4, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 4)
 
   GraphicsWindow.PenColor <- Colors.Black
-  GraphicsWindow.BrushColor <- Colors.Pink
+  GraphicsWindow.ҚылқаламТүсі <- Colors.Pink
   let x = XOFFSET + PREVIEW_xpos * BWIDTH - BWIDTH
   let y = YOFFSET + PREVIEW_ypos * BWIDTH - BWIDTH
   GraphicsWindow.FillRectangle(x - 20, y, BWIDTH * 5, BWIDTH * 6)
@@ -376,7 +376,7 @@ and SetupCanvas () =
   GraphicsWindow.FillRectangle(x - 20, y + 190, 310, 170)
   GraphicsWindow.DrawRectangle(x - 20, y + 190, 310, 170)
 
-  GraphicsWindow.BrushColor <- Colors.Black
+  GraphicsWindow.ҚылқаламТүсі <- Colors.Black
   GraphicsWindow.FontItalic <- false
   GraphicsWindow.FontName <- "Comic Sans MS"
   GraphicsWindow.FontSize <- 16.0
@@ -389,7 +389,7 @@ and SetupCanvas () =
 
   Program.Delay(200) // without this delay, the above text will use the fontsize of the score 
 
-  GraphicsWindow.BrushColor <- Colors.Black
+  GraphicsWindow.ҚылқаламТүсі <- Colors.Black
   GraphicsWindow.FontName <- "Georgia"
   GraphicsWindow.FontItalic <- true
   GraphicsWindow.FontSize <- 36.0
@@ -404,14 +404,14 @@ and SetupCanvas () =
 
 and PrintScore () =
   GraphicsWindow.PenWidth <- 4.0
-  GraphicsWindow.BrushColor <- Colors.Pink
+  GraphicsWindow.ҚылқаламТүсі <- Colors.Pink
   GraphicsWindow.FillRectangle(480, 65, 150, 50)
-  GraphicsWindow.BrushColor <- Colors.Black
+  GraphicsWindow.ҚылқаламТүсі <- Colors.Black
   GraphicsWindow.DrawRectangle(480, 65, 150, 50)
   GraphicsWindow.FontItalic <- false
   GraphicsWindow.FontSize <- 32.0
   GraphicsWindow.FontName <- "Impact"
-  GraphicsWindow.BrushColor <- Colors.Black
+  GraphicsWindow.ҚылқаламТүсі <- Colors.Black
   GraphicsWindow.DrawText(485, 70, Text.Append(Text.GetSubText( "00000000", 0, 8 - Text.GetLength( string score ) ), score))
 
 and SetupTemplates () =
@@ -455,10 +455,10 @@ and SetupTemplates () =
   //_X
   templates.["template7"] <- { Values=[|10;11;12;13|]; Color=Colors.Red; Dim=4; ViewX=0; ViewY=0}
 
-GraphicsWindow.Height <- 580
+GraphicsWindow.Биіктік <- 580
 GraphicsWindow.Width <- 700
 GraphicsWindow.KeyDown <- Callback(HandleKey)
-GraphicsWindow.BackgroundColor <- GraphicsWindow.GetColorFromRGB( 253, 252, 251 )
+GraphicsWindow.АяТүсі <- GraphicsWindow.GetColorFromRGB( 253, 252, 251 )
 
 while true do
   BOXES <- 4      // number of boxes per piece

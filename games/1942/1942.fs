@@ -42,7 +42,7 @@ GraphicsWindow.Hide()
 GraphicsWindow.Title <- gameTitle + "0"
 GraphicsWindow.CanResize <- false
 GraphicsWindow.Width <- ойынЕни
-GraphicsWindow.Height <- gameHeight
+GraphicsWindow.Биіктік <- gameHeight
 
 // Global variables
 
@@ -161,7 +161,7 @@ let rec Init() =
 
    player <- Shapes.AddImage(player0)
    GraphicsWindow.FontSize <- 20.0
-   GraphicsWindow.BackgroundColor <- Colors.Gray
+   GraphicsWindow.АяТүсі <- Colors.Gray
    GraphicsWindow.PenColor <- Colors.Yellow
 
 
