@@ -1,0 +1,35 @@
+<Project>
+	<PropertyGroup Label="Shared customizations">
+		<FSharpRoot>C:\d\github\dotnet\fsharp\</FSharpRoot>
+	</PropertyGroup>
+	
+  <PropertyGroup Condition="$(FSharpRoot) != ''">
+	  <FSharpCompilerPath>$(FSharpRoot)artifacts\bin\fsc\Debug\net472\</FSharpCompilerPath>
+	  <FSharpPreferNetFrameworkTools>false</FSharpPreferNetFrameworkTools>
+  </PropertyGroup>
+	
+  <PropertyGroup Condition="$(FSharpRoot) != ''" Label="Path to .NET SDK">
+	  <NetCoreRoot>C:\Program Files\dotnet\</NetCoreRoot>
+	  <NETCoreSdkVersion>7.0.100</NETCoreSdkVersion>
+  </PropertyGroup>
+
+	<PropertyGroup Condition="$(FSharpRoot) != ''">
+		<Fsc_DotNet_CompilerPath>$(FSharpCompilerPath)</Fsc_DotNet_CompilerPath>
+		<Fsc_NetFramework_ToolPath>$(VsInstallRoot)/Common7/IDE/CommonExtensions/Microsoft/FSharp/Tools/</Fsc_NetFramework_ToolPath>
+
+		<Fsc_DotNET_ToolPath>$(NetCoreRoot)</Fsc_DotNET_ToolPath>
+		<Fsc_DotNET_ToolExe>dotnet.exe</Fsc_DotNET_ToolExe>
+		<Fsc_DotNET__FSharpCoreLibraryPacksFolder>$(Fsc_DotNet_CompilerPath)library-packs</Fsc_DotNET__FSharpCoreLibraryPacksFolder>
+		<FscToolPath>$(Fsc_Dotnet_ToolPath)</FscToolPath>
+		<FscToolExe>$(Fsc_Dotnet_ToolExe)</FscToolExe>
+		<FsiToolPath>$(Fsc_Dotnet_ToolPath)</FsiToolPath>
+		<FsiToolExe>$(Fsc_Dotnet_ToolExe)</FsiToolExe>
+	</PropertyGroup>
+	
+	<PropertyGroup Condition="$(FSharpRoot) != ''" Label="CLI customization">
+		<DotnetFscCompilerPath>$(FSharpRoot)artifacts/bin/fsc/Debug/net7.0/fsc.dll</DotnetFscCompilerPath>
+		<Fsc_DotNET_DotnetFscCompilerPath>$(FSharpRoot)artifacts/bin/fsc/Debug/net7.0/fsc.dll</Fsc_DotNET_DotnetFscCompilerPath>
+		<DotnetFsiCompilerPath>$(FSharpRoot)artifacts/bin/fsc/Debug/net7.0/fsi.dll</DotnetFsiCompilerPath>
+		<Fsi_DotNET_DotnetFsiCompilerPath>$(FSharpRoot)artifacts/bin/fsc/Debug/net7.0/fsi.dll</Fsi_DotNET_DotnetFsiCompilerPath>
+	</PropertyGroup>
+</Project>
