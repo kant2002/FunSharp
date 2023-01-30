@@ -15,7 +15,7 @@ let MidY = GW/2.0
 let initWindow () =
    GraphicsWindow.Show()
    GraphicsWindow.Title <- "Analog Clock"
-   GraphicsWindow.АяТүсі <- Түстер.Black
+   GraphicsWindow.АяТүсі <- Түстер.Қара
    GraphicsWindow.ҚылқаламТүсі <- Түстер.BurlyWood
    GraphicsWindow.DrawEllipse(MidX-Радиус-15.,MidY-Радиус-5.,Радиус*2.+30.,Радиус*2.+20.)
    GraphicsWindow.FillEllipse(MidX-Радиус-15.,MidY-Радиус-5.,Радиус*2.+30.,Радиус*2.+20.)
@@ -49,7 +49,7 @@ let setHands () =
    if (float Clock.Hour + float Clock.Minute/60. + float Clock.Second/3600. <> Hour) then
      Shapes.Remove(HourHand)
      Hour <- float Clock.Hour + float Clock.Minute/60. + float Clock.Second/3600.
-     GraphicsWindow.PenColor <- Түстер.Black
+     GraphicsWindow.PenColor <- Түстер.Қара
      GraphicsWindow.PenWidth <- 3.
      HourHand <- 
        Shapes.AddLine(

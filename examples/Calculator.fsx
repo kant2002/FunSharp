@@ -13,7 +13,7 @@ GraphicsWindow.Title <- "Calculator v. 1.0 by Alex_2000"
 
 GraphicsWindow.АяТүсі = GraphicsWindow.GetColorFromRGB(240, 240, 240)
 GraphicsWindow.FontBold <- false
-GraphicsWindow.ҚылқаламТүсі <- Түстер.Black
+GraphicsWindow.ҚылқаламТүсі <- Түстер.Қара
 
 let m = Shapes.AddText("M")
 Shapes.Move(m, 22, 62)
