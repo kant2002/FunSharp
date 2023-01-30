@@ -10,11 +10,11 @@ type Түс =
    new (a,r,g,b) = { A=a; R=r; G=g; B=b }
 
 [<AutoOpen>]
-module internal ColorConverter =
-   let toXwtColor (color:Түс) = Avalonia.Media.Color.FromArgb(color.R, color.G, color.B, color.A)
+module internal ТүсТүрлендіргіші =
+   let toXwtColor (түс:Түс) = Avalonia.Media.Color.FromArgb(түс.R, түс.G, түс.B, түс.A)
 
 type internal Width = float
-type internal Height = float
+type internal Биіктік = float
 type internal Size = float
 type internal Family = string
 type internal IsBold = bool
@@ -23,11 +23,11 @@ type internal X = float
 type internal Y = float
 
 type internal Pen = Pen of Түс * Width
-type internal Font = Font of Size * Family * IsBold * IsItalic
+type internal Қаріп = Font of Size * Family * IsBold * IsItalic
 type internal Line = Line of X * Y * X * Y
-type internal Rect = Rect of Width * Height
+type internal Rect = Rect of Width * Биіктік
 type internal Triangle = Triangle of X * Y * X * Y * X * Y
-type internal Ellipse = Ellipse of Width * Height
+type internal Ellipse = Ellipse of Width * Биіктік
 
 type internal Shape =
    | LineShape of Line * Pen   
@@ -35,7 +35,7 @@ type internal Shape =
    | TriangleShape of Triangle * Pen * Түс
    | EllipseShape of Ellipse * Pen * Түс
    | ImageShape of Avalonia.Media.IImage ref
-   | TextShape of string ref * Font * Түс
+   | TextShape of string ref * Қаріп * Түс
 
 type internal Drawing =
    | DrawLine of Line * Pen
@@ -43,8 +43,8 @@ type internal Drawing =
    | DrawTriangle of Triangle * Pen
    | DrawEllipse of Ellipse * Pen
    | DrawImage of Avalonia.Media.IImage ref * float * float
-   | DrawText of float * float * string * Font * Түс
-   | DrawBoundText of float * float * float * string * Font * Түс
+   | DrawText of float * float * string * Қаріп * Түс
+   | DrawBoundText of float * float * float * string * Қаріп * Түс
    | FillRect of Rect * Түс
    | FillTriangle of Triangle * Түс
    | FillEllipse of Ellipse * Түс

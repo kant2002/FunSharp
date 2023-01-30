@@ -12,7 +12,7 @@ type GraphicsWindow private () =
    static let pen () = Pen(GraphicsWindow.PenColor,GraphicsWindow.PenWidth)
    static let brush () = GraphicsWindow.ҚылқаламТүсі
    static let font () = 
-      Font.Font(GraphicsWindow.FontSize,GraphicsWindow.FontName,GraphicsWindow.FontBold, GraphicsWindow.FontItalic)
+      Қаріп.Font(GraphicsWindow.FontSize,GraphicsWindow.FontName,GraphicsWindow.FontBold, GraphicsWindow.FontItalic)
    static let draw drawing = addDrawing drawing      
    static let drawAt (x,y) drawing = addDrawingAt drawing (x,y)
    static member Title
