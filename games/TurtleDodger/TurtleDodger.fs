@@ -136,8 +136,8 @@ and OnTick () =
      ScrollObject()
      scrolling <- false
    if debug then
-     let x = Math.Floor(Тасбақа.X)
-     let y = Math.Floor(Тасбақа.Y)
+     let x = Математика.Floor(Тасбақа.X)
+     let y = Математика.Floor(Тасбақа.Y)
      Shapes.SetText(pos, "(" + x.ToString() + "," + y.ToString() + ")")
      Shapes.Move(cross1, x, y)
      Shapes.Move(cross2, x, y)
@@ -145,9 +145,9 @@ and ScrollObject () =
    for i = iMin to iMax-1 do
      let x = objects.[i].X
      let y = objects.[i].Y + 5
-     let tx = Math.Floor(Тасбақа.X) |> int
-     let ty = Math.Floor(Тасбақа.Y) |> int
-     let d = Math.SquareRoot(float (Math.Power(tx - x, 2) + Math.Power(ty - y, 2))) |> int
+     let tx = Математика.Floor(Тасбақа.X) |> int
+     let ty = Математика.Floor(Тасбақа.Y) |> int
+     let d = Математика.SquareRoot(float (Математика.Power(tx - x, 2) + Математика.Power(ty - y, 2))) |> int
      if d < (size.[objects.[i].Kind] + 16) / 2 then
        collisionDetected <- true   
      if y > gh then
@@ -162,15 +162,15 @@ and ScrollObject () =
 and AddObject () =   
    iMax <- iMax + 1
    GraphicsWindow.PenWidth <- 1.0
-   let kind = Math.АлуКездейсоқСаны(3)
+   let kind = Математика.АлуКездейсоқСаны(3)
    GraphicsWindow.ҚылқаламТүсі <- color.[kind]
    let sz = size.[kind]
    let shapeName = Shapes.AddRectangle(sz, sz)
-   let x = Math.АлуКездейсоқСаны(gw - 20) + 10
+   let x = Математика.АлуКездейсоқСаны(gw - 20) + 10
    let y = -20
    objects.Add({ X = x; Y=y; Kind=kind; ShapeName=shapeName})
    Shapes.Move(shapeName, x, y)
-   Shapes.Rotate(shapeName, Math.АлуКездейсоқСаны(360))
+   Shapes.Rotate(shapeName, Математика.АлуКездейсоқСаны(360))
 and OnKeyDown () =
    if not moving then
      moving <- true

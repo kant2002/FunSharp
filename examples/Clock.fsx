@@ -20,24 +20,24 @@ let initWindow () =
    GraphicsWindow.DrawEllipse(MidX-Радиус-15.,MidY-Радиус-5.,Радиус*2.+30.,Радиус*2.+20.)
    GraphicsWindow.ТолтыруЭллипс(MidX-Радиус-15.,MidY-Радиус-5.,Радиус*2.+30.,Радиус*2.+20.)
    for angle in 1.0..180.0 do
-     let x = MidX+(Радиус+15.)*Math.Cos(Math.АлуРадианы(angle))
-     let y1 = MidY+Радиус*Math.Sin(Math.АлуРадианы(angle))+15.
-     let y2 = MidY+(Радиус+15.)*Math.Sin(Math.АлуРадианы(-angle))+10.
-     let blue = Math.АлуКездейсоқСаны(40)+30
-     GraphicsWindow.PenWidth <- Math.АлуКездейсоқСаны(5) |> float
+     let x = MidX+(Радиус+15.)*Математика.Cos(Математика.АлуРадианы(angle))
+     let y1 = MidY+Радиус*Математика.Sin(Математика.АлуРадианы(angle))+15.
+     let y2 = MidY+(Радиус+15.)*Математика.Sin(Математика.АлуРадианы(-angle))+10.
+     let blue = Математика.АлуКездейсоқСаны(40)+30
+     GraphicsWindow.PenWidth <- Математика.АлуКездейсоқСаны(5) |> float
      let color = 
        GraphicsWindow.GetColorFromRGB(
-         blue+100+Math.АлуКездейсоқСаны(10),
-         blue+60+Math.АлуКездейсоқСаны(20),
+         blue+100+Математика.АлуКездейсоқСаны(10),
+         blue+60+Математика.АлуКездейсоқСаны(20),
          blue)
      GraphicsWindow.ҚаламТүсі <- color
      Shapes.AddLine(x,y1,x,y2) |> ignore
    GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ   
    let ClockNum = Dictionary()
    for i in 1. .. 12. do
-     let Radians = Math.АлуРадианы(-i * 30. + 90.)
+     let Radians = Математика.АлуРадианы(-i * 30. + 90.)
      ClockNum.[i] <- Shapes.AddText(i.ToString())
-     Shapes.Move(ClockNum.[i],MidX-4.+Радиус*Math.Cos(Radians),MidY-4.-Радиус*Math.Sin(Radians))   
+     Shapes.Move(ClockNum.[i],MidX-4.+Радиус*Математика.Cos(Radians),MidY-4.-Радиус*Математика.Sin(Radians))   
    
 let mutable HourHand = "<shape name>"
 let mutable MinuteHand = "<shape name>"
@@ -55,8 +55,8 @@ let setHands () =
        Shapes.AddLine(
          MidX,
          MidY,
-         MidX+Радиус/2.*Math.Cos(Math.АлуРадианы(Hour*30.-90.)),
-         MidY+Радиус/2.*Math.Sin(Math.АлуРадианы(Hour*30.-90.)))   
+         MidX+Радиус/2.*Математика.Cos(Математика.АлуРадианы(Hour*30.-90.)),
+         MidY+Радиус/2.*Математика.Sin(Математика.АлуРадианы(Hour*30.-90.)))   
    if float Clock.Minute <> Minute then
      Shapes.Remove(MinuteHand)
      Minute <- float Clock.Minute + float Clock.Second/60.
@@ -66,8 +66,8 @@ let setHands () =
        Shapes.AddLine(
          MidX,
          MidY,
-         MidX+Радиус/1.2*Math.Cos(Math.АлуРадианы(Minute*6.-90.)),
-         MidY+Радиус/1.2*Math.Sin(Math.АлуРадианы(Minute*6.-90.)))   
+         MidX+Радиус/1.2*Математика.Cos(Математика.АлуРадианы(Minute*6.-90.)),
+         MidY+Радиус/1.2*Математика.Sin(Математика.АлуРадианы(Minute*6.-90.)))   
    if float Clock.Second <> Second then
      Shapes.Remove(SecondHand)
      Second <- float Clock.Second
@@ -77,8 +77,8 @@ let setHands () =
        Shapes.AddLine(
          MidX,
          MidY,
-         MidX+Радиус*Math.Cos(Math.АлуРадианы(Second*6.-90.)),
-         MidY+Радиус*Math.Sin(Math.АлуРадианы(Second*6.-90.)))
+         MidX+Радиус*Математика.Cos(Математика.АлуРадианы(Second*6.-90.)),
+         MidY+Радиус*Математика.Sin(Математика.АлуРадианы(Second*6.-90.)))
    
 initWindow()
 while true do

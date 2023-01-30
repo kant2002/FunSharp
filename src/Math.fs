@@ -1,4 +1,4 @@
-﻿module Library.Math
+﻿module Library.Математика
 
 let private кезд = System.Random()
 let АлуРадианы (deg:float) = deg * System.Math.PI / 180.

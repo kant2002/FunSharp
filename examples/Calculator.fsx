@@ -134,7 +134,7 @@ let clicked () =
       Controls.SetTextBoxText(t, Text.Append("-", Controls.GetTextBoxText(t)))
       p <- 1
     else
-      Controls.SetTextBoxText(t, string (Math.Abs(float (Controls.GetTextBoxText(t)))))
+      Controls.SetTextBoxText(t, string (Математика.Abs(float (Controls.GetTextBoxText(t)))))
       p <- 0   
   elif Controls.LastClickedButton = keyplus then
     a <- Controls.GetTextBoxText(t)
@@ -153,7 +153,7 @@ let clicked () =
     Controls.SetTextBoxText(t, "")
     знак <- "/"
   elif Controls.LastClickedButton = keysqrt then
-    Controls.SetTextBoxText(t, string (Math.SquareRoot(float(Controls.GetTextBoxText(t)))))
+    Controls.SetTextBoxText(t, string (Математика.SquareRoot(float(Controls.GetTextBoxText(t)))))
   elif Controls.LastClickedButton = keynax then
     Controls.SetTextBoxText(t, string (1.0/float (Controls.GetTextBoxText(t))))
   elif Controls.LastClickedButton = keyC then

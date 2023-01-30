@@ -52,7 +52,7 @@ let pieceToTemplate = System.Collections.Generic.Dictionary<string,string>()
 let spots = Array.create (CWIDTH*(CHEIGHT+1)) ""
 
 let rec MainLoop () =
-  template <- Text.Append("template", Math.АлуКездейсоқСаны(7))
+  template <- Text.Append("template", Математика.АлуКездейсоқСаны(7))
 
   CreatePiece() // in: template ret: h
   nextPiece <- h
@@ -65,7 +65,7 @@ let rec MainLoop () =
 
     delay <- sessionDelay
     let thisPiece = nextPiece
-    template <- Text.Append("template", Math.АлуКездейсоқСаны(7))
+    template <- Text.Append("template", Математика.АлуКездейсоқСаны(7))
 
     CreatePiece() // in: template ret: h
     nextPiece <- h
@@ -139,7 +139,7 @@ and HandleKey () =
     // See if it can be moved so that it will rotate.
     let xposbk = xpos
     let mutable yposdelta = 0
-    while yposdelta = 0 && Math.Abs(xposbk - xpos) < 3 do // move up to 3 times only
+    while yposdelta = 0 && Математика.Abs(xposbk - xpos) < 3 do // move up to 3 times only
       // if the rotation move worked, copy the temp to "rotatedtemplate" and use that from now on
       if invalidMove = 0 then
         basetemplate <- template
@@ -192,8 +192,8 @@ and CopyPiece () = // in basetemplate, template, rotation
       //y = Math.Remainder(v, 10)
 
       // new x and y
-      let x = (Math.Remainder(v, 10))
-      let y = (L - 1 - Math.Floor(float v/10.0))
+      let x = (Математика.Remainder(v, 10))
+      let y = (L - 1 - Математика.Floor(float v/10.0))
       templates.[template].Values.[i] <- x * 10 + y
     
   // Count-Cockwise is not currently used
@@ -204,8 +204,8 @@ and CopyPiece () = // in basetemplate, template, rotation
       //y = Math.Remainder(v, 10)
 
       // new x and y
-      let x = (L - 1 - Math.Remainder(v, 10))
-      let y = Math.Floor(float v / 10.0)
+      let x = (L - 1 - Математика.Remainder(v, 10))
+      let y = Математика.Floor(float v / 10.0)
       templates.[template].Values.[i] <- x * 10 + y
     
   elif rotation = "COPY" then
@@ -241,8 +241,8 @@ and CreatePiece () = // in: template ret: h
 and MovePiece () = // in: ypos, xpos, h. ypos/xpos is 0-19, representing the top/left box coordinate of the piece on the canvas. h returned by CreatePiece
   for i = 0 to BOXES - 1 do
     let v = templates.[pieceToTemplate.[h]].Values.[i]
-    let x = Math.Floor(float v / 10.0)
-    let y = Math.Remainder(v, 10)
+    let x = Математика.Floor(float v / 10.0)
+    let y = Математика.Remainder(v, 10)
 
     // Array.GetValue(h, i) = box for piece h.
     // xpos/ypos = are topleft of shape. x/y is the box offset within the shape.
@@ -255,8 +255,8 @@ and ValidateMove () = // in: ypos, xpos, h, moveDirection ret: invalidMove = 1 o
     let v = templates.[pieceToTemplate.[h]].Values.[i]
 
     // x/y is the box offset within the shape.
-    let x = Math.Floor(float v / 10.0)
-    let y = Math.Remainder(v, 10)
+    let x = Математика.Floor(float v / 10.0)
+    let y = Математика.Remainder(v, 10)
 
     if (x + xpos + moveDirection) < 0 then
       invalidMove <- -1
@@ -279,8 +279,8 @@ and CheckStop () = // in: ypos, xpos, h ret: done
     let v = templates.[pieceToTemplate.[h]].Values.[i]
 
     // x/y is the box offset within the shape.
-    let x = Math.Floor(float v / 10.0)
-    let y = Math.Remainder(v, 10)
+    let x = Математика.Floor(float v / 10.0)
+    let y = Математика.Remainder(v, 10)
 
     if y + ypos > CHEIGHT || spots.[(x + xpos) + (y + ypos) * CWIDTH] <> "." then
       ``done`` <- 1
@@ -294,8 +294,8 @@ and CheckStop () = // in: ypos, xpos, h ret: done
       let v = templates.[pieceToTemplate.[h]].Values.[i]
       //x = Math.Floor(v/10)
       //y = Math.Remainder(v, 10)
-      let x = (Math.Floor(float v / 10.0) + xpos)
-      let y = (Math.Remainder(v, 10) + ypos - 1)
+      let x = (Математика.Floor(float v / 10.0) + xpos)
+      let y = (Математика.Remainder(v, 10) + ypos - 1)
       if y >= 0 then
          spots.[x + y * CWIDTH] <- pieces.[h].[i]
 
@@ -338,7 +338,7 @@ and DeleteLines () =
             Shapes.Move(piece, Shapes.GetLeft(piece), Shapes.GetTop(piece) + float BWIDTH)
 
   if linesCleared > 0 then
-    score <- score + 100 * int (Math.Round(float linesCleared * 2.15 - 1.0))
+    score <- score + 100 * int (Математика.Round(float linesCleared * 2.15 - 1.0))
     PrintScore()
 
 and SetupCanvas () =

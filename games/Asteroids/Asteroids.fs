@@ -132,36 +132,36 @@ and ChangeDirection () =
    elif (GraphicsWindow.LastKey = fireKey) then
      Fire()
    elif (GraphicsWindow.LastKey = pauseKey) then
-     pause <- Math.Remainder(pause + 1, 2)  
+     pause <- Математика.Remainder(pause + 1, 2)  
    Shapes.Rotate(player, playerAngle)
 
 // Move all on screen items
 and Move  () =
    // Move player
-   let x = Math.Remainder(Shapes.GetLeft(player) + (Math.Cos(Math.АлуРадианы(playerAngle - 90.0)) * playerSpeed) + gameWidth, gameWidth)
-   let y = Math.Remainder(Shapes.GetTop(player) + (Math.Sin(Math.АлуРадианы(playerAngle - 90.0)) * playerSpeed) + gameHeight, gameHeight)
+   let x = Математика.Remainder(Shapes.GetLeft(player) + (Математика.Cos(Математика.АлуРадианы(playerAngle - 90.0)) * playerSpeed) + gameWidth, gameWidth)
+   let y = Математика.Remainder(Shapes.GetTop(player) + (Математика.Sin(Математика.АлуРадианы(playerAngle - 90.0)) * playerSpeed) + gameHeight, gameHeight)
    Shapes.Move(player, x, y)
 
    // Move rocks
    for i = 0 to rockCount-1 do
-     let x = Math.Remainder(Shapes.GetLeft(rock.[i]) + (Math.Cos(Math.АлуРадианы(rockAngle.[i] - 90.0)) * rockSpeed) + gameWidth, gameWidth)
-     let y = Math.Remainder(Shapes.GetTop(rock.[i]) + (Math.Sin(Math.АлуРадианы(rockAngle.[i] - 90.0)) * rockSpeed) + gameHeight, gameHeight)
+     let x = Математика.Remainder(Shapes.GetLeft(rock.[i]) + (Математика.Cos(Математика.АлуРадианы(rockAngle.[i] - 90.0)) * rockSpeed) + gameWidth, gameWidth)
+     let y = Математика.Remainder(Shapes.GetTop(rock.[i]) + (Математика.Sin(Математика.АлуРадианы(rockAngle.[i] - 90.0)) * rockSpeed) + gameHeight, gameHeight)
      Shapes.Move(rock.[i], x, y)
 
    // Move ammo
    for i = 0 to ammoCount-1 do
-     let x = Math.Remainder(Shapes.GetLeft(ammo.[i]) + (Math.Cos(Math.АлуРадианы(ammoAngle.[i] - 90.0)) * ammoSpeed) + gameWidth, gameWidth)
-     let y = Math.Remainder(Shapes.GetTop(ammo.[i]) + (Math.Sin(Math.АлуРадианы(ammoAngle.[i] - 90.0)) * ammoSpeed) + gameHeight, gameHeight)
+     let x = Математика.Remainder(Shapes.GetLeft(ammo.[i]) + (Математика.Cos(Математика.АлуРадианы(ammoAngle.[i] - 90.0)) * ammoSpeed) + gameWidth, gameWidth)
+     let y = Математика.Remainder(Shapes.GetTop(ammo.[i]) + (Математика.Sin(Математика.АлуРадианы(ammoAngle.[i] - 90.0)) * ammoSpeed) + gameHeight, gameHeight)
      Shapes.Move(ammo.[i], x, y)
      ammoAge.[i] <- ammoAge.[i] + 1
 
 // Check for collisions between onscreen items
 and CollisionCheck () =
    // Calculate player bounding box.
-   px1 <- Shapes.GetLeft(player) - ( (Math.Abs(playerWidth * Math.Cos(Math.АлуРадианы(playerAngle)) + playerHeight * Math.Sin(Math.АлуРадианы(playerAngle))) - playerWidth) / 2.0)
-   py1 <- Shapes.GetTop(player) - ( (Math.Abs(playerWidth * Math.Sin(Math.АлуРадианы(playerAngle)) + playerHeight * Math.Cos(Math.АлуРадианы(playerAngle))) - playerHeight) / 2.0)
-   px2 <- px1 + Math.Abs(playerWidth * Math.Cos(Math.АлуРадианы(playerAngle)) + playerHeight * Math.Sin(Math.АлуРадианы(playerAngle)))
-   py2 <- py1 + Math.Abs(playerWidth * Math.Sin(Math.АлуРадианы(playerAngle)) + playerHeight * Math.Cos(Math.АлуРадианы(playerAngle)))
+   px1 <- Shapes.GetLeft(player) - ( (Математика.Abs(playerWidth * Математика.Cos(Математика.АлуРадианы(playerAngle)) + playerHeight * Математика.Sin(Математика.АлуРадианы(playerAngle))) - playerWidth) / 2.0)
+   py1 <- Shapes.GetTop(player) - ( (Математика.Abs(playerWidth * Математика.Sin(Математика.АлуРадианы(playerAngle)) + playerHeight * Математика.Cos(Математика.АлуРадианы(playerAngle))) - playerHeight) / 2.0)
+   px2 <- px1 + Математика.Abs(playerWidth * Математика.Cos(Математика.АлуРадианы(playerAngle)) + playerHeight * Математика.Sin(Математика.АлуРадианы(playerAngle)))
+   py2 <- py1 + Математика.Abs(playerWidth * Математика.Sin(Математика.АлуРадианы(playerAngle)) + playerHeight * Математика.Cos(Математика.АлуРадианы(playerAngle)))
 
    // Re-order co-oridinates if they are the wrong way arround
    if (px1 > px2) then
@@ -221,9 +221,9 @@ and AddRock () =
          size,x,y
       else
          // Choose a random size and position
-         let size = rockMin * Math.АлуКездейсоқСаны(rockTypes)
-         let x = Math.АлуКездейсоқСаны(int gameWidth - size)
-         let y = Math.АлуКездейсоқСаны(int gameHeight - size)
+         let size = rockMin * Математика.АлуКездейсоқСаны(rockTypes)
+         let x = Математика.АлуКездейсоқСаны(int gameWidth - size)
+         let y = Математика.АлуКездейсоқСаны(int gameHeight - size)
          size,float x,float y
    // Draw the rock
    GraphicsWindow.ҚаламТүсі <- rockColor
@@ -234,7 +234,7 @@ and AddRock () =
    rock.Add(Shapes.AddImage(image))
    //Shapes.Zoom(rock.[rockCount],1.0,1.0)
    Shapes.Move(rock.[rockCount], x, y)
-   rockAngle.Add(float (Math.АлуКездейсоқСаны(360)))
+   rockAngle.Add(float (Математика.АлуКездейсоқСаны(360)))
    rockSize.Add(size)
    rockCount <- rockCount + 1
 
@@ -246,7 +246,7 @@ and RemoveRock nextRemove =
    if (removeSize > 1) then
      // ... add new rocks until we have made up for it being broken apart...
      while (removeSize > 0) do
-       nextSize <- Math.АлуКездейсоқСаны(removeSize - 1)
+       nextSize <- Математика.АлуКездейсоқСаны(removeSize - 1)
        nextPosition <- rock.[nextRemove]
        removeSize <- removeSize - nextSize
        AddRock ()

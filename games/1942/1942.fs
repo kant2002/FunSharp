@@ -157,7 +157,7 @@ let rec Init() =
    island_Array.[4] <- Shapes.AddImage(island4)
    island_Array.[5] <- Shapes.AddImage(island5)
    for i = 6 to islandcount do
-      island_Array.[i] <- island_Array.[Math.Remainder(i,4)]
+      island_Array.[i] <- island_Array.[Математика.Remainder(i,4)]
 
    player <- Shapes.AddImage(player0)
    GraphicsWindow.FontSize <- 20.0
@@ -182,7 +182,7 @@ and Play () =
    let mutable j=0
 
    for i=1 to islandcount do
-      j <- Math.Remainder(i,6)
+      j <- Математика.Remainder(i,6)
       posy.[i] <- islandPos.[j].[2]
       posx.[i] <- islandPos.[j].[3]
       incislandx.[i] <- 0
@@ -269,8 +269,8 @@ and moveall () =
 
    for i=1 to islandcount do
       if ((posy.[i]+incislandy.[i]) > (gameHeight+15)) then // relaunch island if no more visible
-         let R = int (Math.Round(float (Math.АлуКездейсоқСаны(nbrisland))))
-         let AA = Math.Remainder(TimePlay,6)
+         let R = int (Математика.Round(float (Математика.АлуКездейсоқСаны(nbrisland))))
+         let AA = Математика.Remainder(TimePlay,6)
          // give new coordinates
          posx.[i] <- islandPos.[AA].[2]
          posy.[i] <- islandPos.[AA].[3]
@@ -287,8 +287,8 @@ and moveall () =
       Player_AmmoAge.[i] <- oldAge + 1
    // Move Enemy ammo
    for iea = 1 to Enemy_AmmoCount do
-      let dx = (Math.Sin((Enemy_Ammo_Angle.[iea] )) * float Enemy_Ammospeed)
-      let dy = (Math.Cos((Enemy_Ammo_Angle.[iea] )) * float Enemy_Ammospeed)
+      let dx = (Математика.Sin((Enemy_Ammo_Angle.[iea] )) * float Enemy_Ammospeed)
+      let dy = (Математика.Cos((Enemy_Ammo_Angle.[iea] )) * float Enemy_Ammospeed)
       let Enemy_Ammox = Shapes.GetLeft(Enemy_Ammo.[iea]) + dx + incbx
       let Enemy_Ammoy = Shapes.GetTop(Enemy_Ammo.[iea]) + dy + incby * 0.1
       Shapes.Move(Enemy_Ammo.[iea], Enemy_Ammox, Enemy_Ammoy)
@@ -317,7 +317,7 @@ and moveall () =
       let xx = float xx1+enemyPath.[eNBR].[3].GetOrDefault(uu, 0.0)+incbx
       let yy = float yy1+enemyPath.[eNBR].[4].GetOrDefault(uu, 0.0)+incby*0.1
       // Randomly fire-enemy
-      if (Math.АлуКездейсоқСаны(Enemy_Agresivity)=1) then
+      if (Математика.АлуКездейсоқСаны(Enemy_Agresivity)=1) then
          Enemy_ShootX <- xx1 + 16
          Enemy_ShootY <- yy1 + 4
          if (yy1 > 0 && xx1 > 0 && yy1 < gameHeight && xx1 < ойынЕни) then
@@ -378,7 +378,7 @@ and fire_Enemy () =
    // Add the Enemy Ammo
    Enemy_AmmoCount <- Enemy_AmmoCount + 1
    Enemy_Ammo.[Enemy_AmmoCount] <- Shapes.AddImage(Enemy_bullet)
-   Enemy_Ammo_Angle.[Enemy_AmmoCount] <- Math.ArcTan(float(paddleX- Enemy_ShootX+player_size/2)/float(paddleY-Enemy_ShootY))
+   Enemy_Ammo_Angle.[Enemy_AmmoCount] <- Математика.ArcTan(float(paddleX- Enemy_ShootX+player_size/2)/float(paddleY-Enemy_ShootY))
    let shape = Enemy_Ammo.[Enemy_AmmoCount]
    Shapes.Move(shape, Enemy_ShootX, Enemy_ShootY)
 
@@ -583,15 +583,15 @@ and IslandsPosition () =
    islandPos.[0].[3] <- -150
    islandPos.[1] <- Dictionary()
    islandPos.[1].[1] <- 1
-   islandPos.[1].[2] <- - int (Math.Round(float ойынЕни/2.0))
+   islandPos.[1].[2] <- - int (Математика.Round(float ойынЕни/2.0))
    islandPos.[1].[3] <- -150
    islandPos.[2] <- Dictionary()
    islandPos.[2].[1] <- 2
-   islandPos.[2].[2] <- -2 * int (Math.Round(float ойынЕни/3.0))
+   islandPos.[2].[2] <- -2 * int (Математика.Round(float ойынЕни/3.0))
    islandPos.[2].[3] <- -150
    islandPos.[3] <- Dictionary()
    islandPos.[3].[1] <- 1
-   islandPos.[3].[2] <- 2 * int (Math.Round(float ойынЕни/3.0))
+   islandPos.[3].[2] <- 2 * int (Математика.Round(float ойынЕни/3.0))
    islandPos.[3].[3] <- -150
    islandPos.[4] <- Dictionary()
    islandPos.[4].[1] <- 2
@@ -599,7 +599,7 @@ and IslandsPosition () =
    islandPos.[4].[3] <- -150
    islandPos.[5] <- Dictionary()
    islandPos.[5].[1] <- 3
-   islandPos.[5].[2] <- int (Math.Round(float ойынЕни/3.0))
+   islandPos.[5].[2] <- int (Математика.Round(float ойынЕни/3.0))
    islandPos.[5].[3] <- -150
    islandPos.[6] <- Dictionary()
    islandPos.[6].[1] <- 3
@@ -1118,11 +1118,11 @@ and create_level1 () =  // this define the behavior of the différent squadron a
       level1.[7+i] <- Dictionary()
       level1.[7+i].[1] <- 700+50*i
       level1.[7+i].[2] <- 6
-      level1.[7+i].[3] <- Math.АлуКездейсоқСаны(ойынЕни)
+      level1.[7+i].[3] <- Математика.АлуКездейсоқСаны(ойынЕни)
       level1.[7+i].[4] <- -50 + i
-      level1.[7+i].[5] <- Math.АлуКездейсоқСаны(2)
-      level1.[7+i].[6] <- Math.АлуКездейсоқСаны(3)
-      level1.[7+i].[7] <- Math.АлуКездейсоқСаны(2)
+      level1.[7+i].[5] <- Математика.АлуКездейсоқСаны(2)
+      level1.[7+i].[6] <- Математика.АлуКездейсоқСаны(3)
+      level1.[7+i].[7] <- Математика.АлуКездейсоқСаны(2)
    level1.[18] <- Dictionary()
    level1.[18].[1] <- 1300
    level1.[18].[2] <- 1
@@ -1135,32 +1135,32 @@ and create_level1 () =  // this define the behavior of the différent squadron a
    for i=1 to 10 do
       level1.[18+i] <- Dictionary()
       level1.[18+i].[1] <- 1330+50*i
-      level1.[18+i].[2] <- 4+Math.АлуКездейсоқСаны(2)
-      level1.[18+i].[3] <- Math.АлуКездейсоқСаны(50)
+      level1.[18+i].[2] <- 4+Математика.АлуКездейсоқСаны(2)
+      level1.[18+i].[3] <- Математика.АлуКездейсоқСаны(50)
       level1.[18+i].[4] <- i
       level1.[18+i].[5] <- 1
-      level1.[18+i].[6] <- Math.АлуКездейсоқСаны(3)
-      level1.[18+i].[7] <- Math.АлуКездейсоқСаны(2)
+      level1.[18+i].[6] <- Математика.АлуКездейсоқСаны(3)
+      level1.[18+i].[7] <- Математика.АлуКездейсоқСаны(2)
 
    for i= 1 to 10 do
       level1.[28+i] <- Dictionary()
       level1.[28+i].[1] <- 1900+50*i
-      level1.[28+i].[2] <- 4+Math.АлуКездейсоқСаны(2)
-      level1.[28+i].[3] <- -Math.АлуКездейсоқСаны(50)
+      level1.[28+i].[2] <- 4+Математика.АлуКездейсоқСаны(2)
+      level1.[28+i].[3] <- -Математика.АлуКездейсоқСаны(50)
       level1.[28+i].[4] <- i
       level1.[28+i].[5] <- 1
-      level1.[28+i].[6] <- Math.АлуКездейсоқСаны(3)
-      level1.[28+i].[7] <- Math.АлуКездейсоқСаны(2)
+      level1.[28+i].[6] <- Математика.АлуКездейсоқСаны(3)
+      level1.[28+i].[7] <- Математика.АлуКездейсоқСаны(2)
 
    for i= 1 to 10 do
      level1.[38+i] <- Dictionary()
      level1.[38+i].[1] <- 2450+100*i
      level1.[38+i].[2] <- 6
-     level1.[38+i].[3] <- Math.АлуКездейсоқСаны(ойынЕни)
+     level1.[38+i].[3] <- Математика.АлуКездейсоқСаны(ойынЕни)
      level1.[38+i].[4] <- -50 + i
-     level1.[38+i].[5] <- Math.АлуКездейсоқСаны(2)
-     level1.[38+i].[6] <- Math.АлуКездейсоқСаны(5)
-     level1.[38+i].[7] <- Math.АлуКездейсоқСаны(2)
+     level1.[38+i].[5] <- Математика.АлуКездейсоқСаны(2)
+     level1.[38+i].[6] <- Математика.АлуКездейсоқСаны(5)
+     level1.[38+i].[7] <- Математика.АлуКездейсоқСаны(2)
 
 //Presentation
 // todo

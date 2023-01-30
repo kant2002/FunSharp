@@ -13,7 +13,7 @@ type Түс =
 module internal ТүсТүрлендіргіші =
    let toXwtColor (түс:Түс) = Avalonia.Media.Color.FromArgb(түс.R, түс.G, түс.B, түс.A)
 
-type internal Width = float
+type internal Ен = float
 type internal Биіктік = float
 type internal Size = float
 type internal Family = string
@@ -22,12 +22,12 @@ type internal IsItalic = bool
 type internal X = float
 type internal Y = float
 
-type internal Pen = Pen of Түс * Width
+type internal Pen = Pen of Түс * Ен
 type internal Қаріп = Font of Size * Family * IsBold * IsItalic
 type internal Line = Line of X * Y * X * Y
-type internal Rect = Rect of Width * Биіктік
+type internal Rect = Rect of Ен * Биіктік
 type internal Triangle = Triangle of X * Y * X * Y * X * Y
-type internal Ellipse = Ellipse of Width * Биіктік
+type internal Ellipse = Ellipse of Ен * Биіктік
 
 type internal Shape =
    | LineShape of Line * Pen   
