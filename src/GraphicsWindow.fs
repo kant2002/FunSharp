@@ -6,10 +6,10 @@ open Avalonia.Media.Imaging
 [<Sealed>]
 type GraphicsWindow private () =   
    static let rnd = Random()
-   static let mutable аяТүсі = Түстер.Ақ
-   static let mutable width = 640
+   static let mutable фонныңТүсі = Түстер.Ақ
+   static let mutable ен = 640
    static let mutable биіктік = 480
-   static let pen () = Pen(GraphicsWindow.PenColor,GraphicsWindow.PenWidth)
+   static let pen () = Pen(GraphicsWindow.ҚаламТүсі,GraphicsWindow.PenWidth)
    static let brush () = GraphicsWindow.ҚылқаламТүсі
    static let font () = 
       Қаріп.Font(GraphicsWindow.FontSize,GraphicsWindow.FontName,GraphicsWindow.FontBold, GraphicsWindow.FontItalic)
@@ -18,16 +18,16 @@ type GraphicsWindow private () =
    static member Title
       with set title =
          My.App.Invoke (fun () -> My.App.Window.Title <- title)
-   static member АяТүсі
-      with get () = аяТүсі
+   static member ФонныңТүсі
+      with get () = фонныңТүсі
       and set түс = 
-         аяТүсі <- түс
+         фонныңТүсі <- түс
          My.App.Invoke (fun () -> My.App.Canvas.Background <- new Avalonia.Media.SolidColorBrush(toXwtColor түс))
-   static member Width
-      with get () = width
-      and set newWidth =
-         width <- newWidth
-         My.App.Invoke (fun () -> My.App.SetWindowWidth(float newWidth))
+   static member Ен
+      with get () = ен
+      and set жаңаЕні =
+         ен <- жаңаЕні
+         My.App.Invoke (fun () -> My.App.SetWindowWidth(float жаңаЕні))
    static member Биіктік
       with get () = биіктік
       and set жаңаБиіктігі =
@@ -36,9 +36,9 @@ type GraphicsWindow private () =
    static member CanResize
       with get () = true
       and set (value:bool) = ()
-   static member val PenColor = Түстер.Қара with get, set
+   static member val ҚаламТүсі = Түстер.Қара with get, set
    static member val PenWidth = 2.0 with get, set
-   static member val ҚылқаламТүсі = Түстер.Purple with get,set
+   static member val ҚылқаламТүсі = Түстер.Күлгін with get,set
    static member val FontSize = 12.0 with get,set
    static member val FontName = "" with get,set
    static member val FontBold = false with get,set
@@ -92,9 +92,9 @@ type GraphicsWindow private () =
       GraphicsWindow.FillRectangle(float x,float y,float width,float height)
    static member FillTriangle(x1,y1,x2,y2,x3,y3) =
       FillTriangle(Triangle(x1,y1,x2,y2,x3,y3),brush()) |> draw
-   static member FillEllipse(x,y,width,height) =
+   static member ТолтыруЭллипс(x,y,width,height) =
       FillEllipse(Ellipse(width,height),brush()) |> drawAt (x,y)
-   static member FillEllipse(x:int,y:int,width:int,height:int) =
+   static member ТолтыруЭллипс(x:int,y:int,width:int,height:int) =
       FillEllipse(Ellipse(float width,float height),brush()) |> drawAt (float x,float y)
    static member LastKey with get() = My.App.LastKey
    static member KeyUp with set callback = My.App.KeyUp <- callback
@@ -105,7 +105,7 @@ type GraphicsWindow private () =
    static member MouseUp with set callback = My.App.MouseUp <- callback
    static member MouseMove with set callback = My.App.MouseMove <- callback
    static member GetColorFromRGB(r,g,b) = Түс(255uy,byte r,byte g,byte b)
-   static member GetRandomColor() : Түс =
+   static member АлуКездейсоқТүсі() : Түс =
       let bytes = [|1uy..3uy|]
       rnd.NextBytes(bytes)
       Түс(255uy,bytes.[0],bytes.[1],bytes.[2])

@@ -1,6 +1,6 @@
 ﻿open Library
 
-GraphicsWindow.Width <- 288
+GraphicsWindow.Ен <- 288
 GraphicsWindow.Биіктік <- 440
 
 let bg = Shapes.AddImage("bg.png")

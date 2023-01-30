@@ -4,7 +4,7 @@
 
 open Library
 
-GraphicsWindow.АяТүсі <- Түстер.Қара
+GraphicsWindow.ФонныңТүсі <- Түстер.Қара
 for i = 1 to 1200 do
-   GraphicsWindow.ҚылқаламТүсі <- GraphicsWindow.GetRandomColor()
-   GraphicsWindow.FillEllipse(Math.GetRandomNumber(800), Math.GetRandomNumber(600), 30, 30)
+   GraphicsWindow.ҚылқаламТүсі <- GraphicsWindow.АлуКездейсоқТүсі()
+   GraphicsWindow.ТолтыруЭллипс(Math.АлуКездейсоқСаны(800), Math.АлуКездейсоқСаны(600), 30, 30)

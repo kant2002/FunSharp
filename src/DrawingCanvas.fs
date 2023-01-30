@@ -11,9 +11,9 @@ type internal DrawingCanvas () =
    inherit Canvas ()
    let turtleImage = new Bitmap(typeof<DrawingCanvas>.Assembly.GetManifestResourceStream("FunSharp.Library.turtle.png"))
    let drawings = ResizeArray<DrawingInfo>()
-   let turtle =
-      let w,h = turtleImage.Size.Width, turtleImage.Size.Height
-      {Drawing=DrawImage(ref turtleImage,-w/2.,-h/2.); Offset=Point(); Opacity=None; IsVisible=false; Rotation=None; Scale=None}
+   let тасбақа =
+      let е,б = turtleImage.Size.Width, turtleImage.Size.Height
+      {Drawing=DrawImage(ref turtleImage,-е/2.,-б/2.); Offset=Point(); Opacity=None; IsVisible=false; Rotation=None; Scale=None}
    let onShape shapeName f =
       drawings
       |> Seq.tryPick (function
@@ -21,7 +21,7 @@ type internal DrawingCanvas () =
          | _ -> None
       )
       |> Option.iter f   
-   member canvas.Turtle = turtle
+   member canvas.Тасбақа = тасбақа
    member canvas.ClearDrawings() =
       drawings.Clear()
       canvas.InvalidateVisual()
@@ -61,4 +61,4 @@ type internal DrawingCanvas () =
       base.Render(ctx)      
       for drawing in drawings do 
          if drawing.IsVisible then draw ctx drawing
-      if turtle.IsVisible then draw ctx turtle
+      if тасбақа.IsVisible then draw ctx тасбақа

@@ -6,7 +6,7 @@ open System
 open System.Collections.Generic
 open Library
 
-let GW = float GraphicsWindow.Width
+let GW = float GraphicsWindow.Ен
 let GH = float GraphicsWindow.Биіктік
 let Радиус = 200.0
 let MidX = GW/2.0
@@ -15,24 +15,24 @@ let MidY = GW/2.0
 let initWindow () =
    GraphicsWindow.Show()
    GraphicsWindow.Title <- "Analog Clock"
-   GraphicsWindow.АяТүсі <- Түстер.Қара
+   GraphicsWindow.ФонныңТүсі <- Түстер.Қара
    GraphicsWindow.ҚылқаламТүсі <- Түстер.BurlyWood
    GraphicsWindow.DrawEllipse(MidX-Радиус-15.,MidY-Радиус-5.,Радиус*2.+30.,Радиус*2.+20.)
-   GraphicsWindow.FillEllipse(MidX-Радиус-15.,MidY-Радиус-5.,Радиус*2.+30.,Радиус*2.+20.)
+   GraphicsWindow.ТолтыруЭллипс(MidX-Радиус-15.,MidY-Радиус-5.,Радиус*2.+30.,Радиус*2.+20.)
    for angle in 1.0..180.0 do
      let x = MidX+(Радиус+15.)*Math.Cos(Math.АлуРадианы(angle))
      let y1 = MidY+Радиус*Math.Sin(Math.АлуРадианы(angle))+15.
      let y2 = MidY+(Радиус+15.)*Math.Sin(Math.АлуРадианы(-angle))+10.
-     let blue = Math.GetRandomNumber(40)+30
-     GraphicsWindow.PenWidth <- Math.GetRandomNumber(5) |> float
+     let blue = Math.АлуКездейсоқСаны(40)+30
+     GraphicsWindow.PenWidth <- Math.АлуКездейсоқСаны(5) |> float
      let color = 
        GraphicsWindow.GetColorFromRGB(
-         blue+100+Math.GetRandomNumber(10),
-         blue+60+Math.GetRandomNumber(20),
+         blue+100+Math.АлуКездейсоқСаны(10),
+         blue+60+Math.АлуКездейсоқСаны(20),
          blue)
-     GraphicsWindow.PenColor <- color
+     GraphicsWindow.ҚаламТүсі <- color
      Shapes.AddLine(x,y1,x,y2) |> ignore
-   GraphicsWindow.ҚылқаламТүсі <- Түстер.White   
+   GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ   
    let ClockNum = Dictionary()
    for i in 1. .. 12. do
      let Radians = Math.АлуРадианы(-i * 30. + 90.)
@@ -49,7 +49,7 @@ let setHands () =
    if (float Clock.Hour + float Clock.Minute/60. + float Clock.Second/3600. <> Hour) then
      Shapes.Remove(HourHand)
      Hour <- float Clock.Hour + float Clock.Minute/60. + float Clock.Second/3600.
-     GraphicsWindow.PenColor <- Түстер.Қара
+     GraphicsWindow.ҚаламТүсі <- Түстер.Қара
      GraphicsWindow.PenWidth <- 3.
      HourHand <- 
        Shapes.AddLine(
@@ -60,7 +60,7 @@ let setHands () =
    if float Clock.Minute <> Minute then
      Shapes.Remove(MinuteHand)
      Minute <- float Clock.Minute + float Clock.Second/60.
-     GraphicsWindow.PenColor <- Түстер.Blue
+     GraphicsWindow.ҚаламТүсі <- Түстер.Blue
      GraphicsWindow.PenWidth <- 2.
      MinuteHand <- 
        Shapes.AddLine(
@@ -71,7 +71,7 @@ let setHands () =
    if float Clock.Second <> Second then
      Shapes.Remove(SecondHand)
      Second <- float Clock.Second
-     GraphicsWindow.PenColor <- Түстер.Red
+     GraphicsWindow.ҚаламТүсі <- Түстер.Red
      GraphicsWindow.PenWidth <- 1.
      SecondHand <- 
        Shapes.AddLine(

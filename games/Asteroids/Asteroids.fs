@@ -88,16 +88,16 @@ let rec Init () =
    GraphicsWindow.Hide()
    GraphicsWindow.Title <- gameTitle + "0"
    //GraphicsWindow.CanResize <- "False"
-   GraphicsWindow.Width <- int gameWidth
+   GraphicsWindow.Ен <- int gameWidth
    GraphicsWindow.Биіктік <-int gameHeight
 
-   GraphicsWindow.АяТүсі <- backColor
+   GraphicsWindow.ФонныңТүсі <- backColor
    GraphicsWindow.ҚылқаламТүсі <- backColor
    GraphicsWindow.DrawImage(background, 0, 0)
 
    LevelCheck()
 
-   GraphicsWindow.PenColor <- playerColor
+   GraphicsWindow.ҚаламТүсі <- playerColor
    player <- Shapes.AddImage(path + "Asteroids_Ship.png")
    // player = Shapes.AddTriangle(playerWidth/2, 0, 0, playerHeight, playerWidth, playerHeight)
    Shapes.Move(player, (gameWidth - playerWidth) / 2.0, (float gameHeight - playerHeight) / 2.0)
@@ -221,12 +221,12 @@ and AddRock () =
          size,x,y
       else
          // Choose a random size and position
-         let size = rockMin * Math.GetRandomNumber(rockTypes)
-         let x = Math.GetRandomNumber(int gameWidth - size)
-         let y = Math.GetRandomNumber(int gameHeight - size)
+         let size = rockMin * Math.АлуКездейсоқСаны(rockTypes)
+         let x = Math.АлуКездейсоқСаны(int gameWidth - size)
+         let y = Math.АлуКездейсоқСаны(int gameHeight - size)
          size,float x,float y
    // Draw the rock
-   GraphicsWindow.PenColor <- rockColor
+   GraphicsWindow.ҚаламТүсі <- rockColor
    let image =
       if size = 60 then bigRock
       elif size = 40 then medRock
@@ -234,7 +234,7 @@ and AddRock () =
    rock.Add(Shapes.AddImage(image))
    //Shapes.Zoom(rock.[rockCount],1.0,1.0)
    Shapes.Move(rock.[rockCount], x, y)
-   rockAngle.Add(float (Math.GetRandomNumber(360)))
+   rockAngle.Add(float (Math.АлуКездейсоқСаны(360)))
    rockSize.Add(size)
    rockCount <- rockCount + 1
 
@@ -246,7 +246,7 @@ and RemoveRock nextRemove =
    if (removeSize > 1) then
      // ... add new rocks until we have made up for it being broken apart...
      while (removeSize > 0) do
-       nextSize <- Math.GetRandomNumber(removeSize - 1)
+       nextSize <- Math.АлуКездейсоқСаны(removeSize - 1)
        nextPosition <- rock.[nextRemove]
        removeSize <- removeSize - nextSize
        AddRock ()
@@ -283,7 +283,7 @@ and Fire () =
    while (ammoCount > (ammoMax - 1)) do     
      RemoveAmmo 0
    // Add the ammo
-   GraphicsWindow.PenColor <- ammoColor   
+   GraphicsWindow.ҚаламТүсі <- ammoColor   
    ammo.Add(Shapes.AddEllipse(ammoSize, ammoSize))
    Shapes.Move(ammo.[ammoCount], (px1 + px2 - ammoSize) / 2.0, (py1 + py2 - ammoSize) / 2.0)
    ammoAngle.Add(playerAngle)

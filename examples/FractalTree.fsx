@@ -9,12 +9,12 @@ let delta = 10.0
 
 let rec drawTree distance =
    if distance > 0.0 then
-      Turtle.Move(distance)
-      Turtle.Turn(angle)
+      Тасбақа.Жылжытуға(distance)
+      Тасбақа.Бұру(angle)
       drawTree(distance - delta)
-      Turtle.Turn(-angle * 2.0)
+      Тасбақа.Бұру(-angle * 2.0)
       drawTree(distance - delta)
-      Turtle.Turn(angle)
-      Turtle.Move(-distance)
+      Тасбақа.Бұру(angle)
+      Тасбақа.Жылжытуға(-distance)
 
 drawTree 60.0

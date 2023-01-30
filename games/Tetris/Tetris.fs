@@ -52,7 +52,7 @@ let pieceToTemplate = System.Collections.Generic.Dictionary<string,string>()
 let spots = Array.create (CWIDTH*(CHEIGHT+1)) ""
 
 let rec MainLoop () =
-  template <- Text.Append("template", Math.GetRandomNumber(7))
+  template <- Text.Append("template", Math.АлуКездейсоқСаны(7))
 
   CreatePiece() // in: template ret: h
   nextPiece <- h
@@ -65,7 +65,7 @@ let rec MainLoop () =
 
     delay <- sessionDelay
     let thisPiece = nextPiece
-    template <- Text.Append("template", Math.GetRandomNumber(7))
+    template <- Text.Append("template", Math.АлуКездейсоқСаны(7))
 
     CreatePiece() // in: template ret: h
     nextPiece <- h
@@ -229,7 +229,7 @@ and CreatePiece () = // in: template ret: h
   pieceToTemplate.[h] <- template
 
   GraphicsWindow.PenWidth <- 1.0
-  GraphicsWindow.PenColor <- Түстер.Қара
+  GraphicsWindow.ҚаламТүсі <- Түстер.Қара
   GraphicsWindow.ҚылқаламТүсі <- templates.[template].Color
 
   pieces.[h] <- Boxes()
@@ -344,29 +344,29 @@ and DeleteLines () =
 and SetupCanvas () =
 // GraphicsWindow.DrawResizedImage( Flickr.GetRandomPicture( "bricks" ), 0, 0, GraphicsWindow.Width, GraphicsWindow.Биіктік)
 
-  GraphicsWindow.ҚылқаламТүсі <- GraphicsWindow.АяТүсі
+  GraphicsWindow.ҚылқаламТүсі <- GraphicsWindow.ФонныңТүсі
   GraphicsWindow.FillRectangle(XOFFSET, YOFFSET, CWIDTH*BWIDTH, CHEIGHT*BWIDTH)
 
   Program.Delay(200)
   GraphicsWindow.PenWidth <- 1.0
-  GraphicsWindow.PenColor <- Түстер.Pink
+  GraphicsWindow.ҚаламТүсі <- Түстер.Pink
   for x = 0 to CWIDTH-1 do
     for y = 0 to CHEIGHT-1 do
       spots.[x + y * CWIDTH] <- "." // "." indicates spot is free
       GraphicsWindow.DrawRectangle(XOFFSET + x * BWIDTH, YOFFSET + y * BWIDTH, BWIDTH, BWIDTH)
 
   GraphicsWindow.PenWidth <- 4.0
-  GraphicsWindow.PenColor <- Түстер.Қара
+  GraphicsWindow.ҚаламТүсі <- Түстер.Қара
   GraphicsWindow.DrawLine(XOFFSET, YOFFSET, XOFFSET, YOFFSET + CHEIGHT*BWIDTH)
   GraphicsWindow.DrawLine(XOFFSET + CWIDTH*BWIDTH, YOFFSET, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
   GraphicsWindow.DrawLine(XOFFSET, YOFFSET + CHEIGHT*BWIDTH, XOFFSET + CWIDTH*BWIDTH, YOFFSET + CHEIGHT*BWIDTH)
 
-  GraphicsWindow.PenColor <- Түстер.Lime
+  GraphicsWindow.ҚаламТүсі <- Түстер.Lime
   GraphicsWindow.DrawLine(XOFFSET - 4, YOFFSET, XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 6)
   GraphicsWindow.DrawLine(XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 6)
   GraphicsWindow.DrawLine(XOFFSET - 4, YOFFSET + CHEIGHT*BWIDTH + 4, XOFFSET + CWIDTH*BWIDTH + 4, YOFFSET + CHEIGHT*BWIDTH + 4)
 
-  GraphicsWindow.PenColor <- Түстер.Қара
+  GraphicsWindow.ҚаламТүсі <- Түстер.Қара
   GraphicsWindow.ҚылқаламТүсі <- Түстер.Pink
   let x = XOFFSET + PREVIEW_xpos * BWIDTH - BWIDTH
   let y = YOFFSET + PREVIEW_ypos * BWIDTH - BWIDTH
@@ -456,9 +456,9 @@ and SetupTemplates () =
   templates.["template7"] <- { Values=[|10;11;12;13|]; Color=Түстер.Red; Dim=4; ViewX=0; ViewY=0}
 
 GraphicsWindow.Биіктік <- 580
-GraphicsWindow.Width <- 700
+GraphicsWindow.Ен <- 700
 GraphicsWindow.KeyDown <- Callback(HandleKey)
-GraphicsWindow.АяТүсі <- GraphicsWindow.GetColorFromRGB( 253, 252, 251 )
+GraphicsWindow.ФонныңТүсі <- GraphicsWindow.GetColorFromRGB( 253, 252, 251 )
 
 while true do
   BOXES <- 4      // number of boxes per piece

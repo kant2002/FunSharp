@@ -4,11 +4,11 @@
 
 open Library
 
-let ball = Shapes.AddRectangle(200.0, 100.0)
+let доп = Shapes.AddRectangle(200.0, 100.0)
 
 let OnMouseDown () =
   let x = GraphicsWindow.MouseX
   let y = GraphicsWindow.MouseY
-  Shapes.Move(ball, x, y)
+  Shapes.Move(доп, x, y)
 
 GraphicsWindow.MouseDown <- Callback(OnMouseDown)

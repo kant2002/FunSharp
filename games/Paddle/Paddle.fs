@@ -1,6 +1,6 @@
 ﻿open Library
 
-let gw = float GraphicsWindow.Width
+let gw = float GraphicsWindow.Ен
 let gh = float GraphicsWindow.Биіктік
 let paddle = Shapes.AddRectangle(120, 12)
 let ball = Shapes.AddEllipse(16, 16)

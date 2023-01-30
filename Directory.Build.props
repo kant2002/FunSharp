@@ -1,6 +1,6 @@
 <Project>
 	<PropertyGroup Label="Shared customizations">
-		<FSharpRoot>C:\d\github\dotnet\fsharp\</FSharpRoot>
+		<FSharpRoot></FSharpRoot>
 	</PropertyGroup>
 	
   <PropertyGroup Condition="$(FSharpRoot) != ''">

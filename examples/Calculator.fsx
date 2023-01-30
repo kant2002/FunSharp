@@ -7,11 +7,11 @@ open Library
 let mutable p = 0
 
 GraphicsWindow.CanResize <- false
-GraphicsWindow.Width <- 260
+GraphicsWindow.Ен <- 260
 GraphicsWindow.Биіктік <- 230
 GraphicsWindow.Title <- "Calculator v. 1.0 by Alex_2000"
 
-GraphicsWindow.АяТүсі = GraphicsWindow.GetColorFromRGB(240, 240, 240)
+GraphicsWindow.ФонныңТүсі = GraphicsWindow.GetColorFromRGB(240, 240, 240)
 GraphicsWindow.FontBold <- false
 GraphicsWindow.ҚылқаламТүсі <- Түстер.Қара
 

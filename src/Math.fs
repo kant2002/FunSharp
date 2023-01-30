@@ -1,8 +1,8 @@
 ﻿module Library.Math
 
-let private rand = System.Random()
+let private кезд = System.Random()
 let АлуРадианы (deg:float) = deg * System.Math.PI / 180.
-let GetRandomNumber(n) = rand.Next(n) + 1
+let АлуКездейсоқСаны(n) = кезд.Next(n) + 1
 let inline Remainder(x,y) = x % y
 let Cos(angle) = cos angle
 let Sin(angle) = sin angle

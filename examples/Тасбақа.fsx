@@ -4,9 +4,9 @@
 
 open Library
 
-GraphicsWindow.PenColor <- Түстер.Purple
-Turtle.X <- 150.
-Turtle.Y <- 150.
+GraphicsWindow.ҚаламТүсі <- Түстер.Күлгін
+Тасбақа.X <- 150.
+Тасбақа.Y <- 150.
 for i in 0..5..200 do
-   Turtle.Move(i)
-   Turtle.Turn(90)
+   Тасбақа.Жылжытуға(i)
+   Тасбақа.Бұру(90)

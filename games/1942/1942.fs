@@ -41,7 +41,7 @@ let gameTitle = "1942, Score: "
 GraphicsWindow.Hide()
 GraphicsWindow.Title <- gameTitle + "0"
 GraphicsWindow.CanResize <- false
-GraphicsWindow.Width <- ойынЕни
+GraphicsWindow.Ен <- ойынЕни
 GraphicsWindow.Биіктік <- gameHeight
 
 // Global variables
@@ -161,8 +161,8 @@ let rec Init() =
 
    player <- Shapes.AddImage(player0)
    GraphicsWindow.FontSize <- 20.0
-   GraphicsWindow.АяТүсі <- Түстер.Gray
-   GraphicsWindow.PenColor <- Түстер.Yellow
+   GraphicsWindow.ФонныңТүсі <- Түстер.Gray
+   GraphicsWindow.ҚаламТүсі <- Түстер.Yellow
 
 
 
@@ -269,7 +269,7 @@ and moveall () =
 
    for i=1 to islandcount do
       if ((posy.[i]+incislandy.[i]) > (gameHeight+15)) then // relaunch island if no more visible
-         let R = int (Math.Round(float (Math.GetRandomNumber(nbrisland))))
+         let R = int (Math.Round(float (Math.АлуКездейсоқСаны(nbrisland))))
          let AA = Math.Remainder(TimePlay,6)
          // give new coordinates
          posx.[i] <- islandPos.[AA].[2]
@@ -317,7 +317,7 @@ and moveall () =
       let xx = float xx1+enemyPath.[eNBR].[3].GetOrDefault(uu, 0.0)+incbx
       let yy = float yy1+enemyPath.[eNBR].[4].GetOrDefault(uu, 0.0)+incby*0.1
       // Randomly fire-enemy
-      if (Math.GetRandomNumber(Enemy_Agresivity)=1) then
+      if (Math.АлуКездейсоқСаны(Enemy_Agresivity)=1) then
          Enemy_ShootX <- xx1 + 16
          Enemy_ShootY <- yy1 + 4
          if (yy1 > 0 && xx1 > 0 && yy1 < gameHeight && xx1 < ойынЕни) then
@@ -1118,11 +1118,11 @@ and create_level1 () =  // this define the behavior of the différent squadron a
       level1.[7+i] <- Dictionary()
       level1.[7+i].[1] <- 700+50*i
       level1.[7+i].[2] <- 6
-      level1.[7+i].[3] <- Math.GetRandomNumber(ойынЕни)
+      level1.[7+i].[3] <- Math.АлуКездейсоқСаны(ойынЕни)
       level1.[7+i].[4] <- -50 + i
-      level1.[7+i].[5] <- Math.GetRandomNumber(2)
-      level1.[7+i].[6] <- Math.GetRandomNumber(3)
-      level1.[7+i].[7] <- Math.GetRandomNumber(2)
+      level1.[7+i].[5] <- Math.АлуКездейсоқСаны(2)
+      level1.[7+i].[6] <- Math.АлуКездейсоқСаны(3)
+      level1.[7+i].[7] <- Math.АлуКездейсоқСаны(2)
    level1.[18] <- Dictionary()
    level1.[18].[1] <- 1300
    level1.[18].[2] <- 1
@@ -1135,32 +1135,32 @@ and create_level1 () =  // this define the behavior of the différent squadron a
    for i=1 to 10 do
       level1.[18+i] <- Dictionary()
       level1.[18+i].[1] <- 1330+50*i
-      level1.[18+i].[2] <- 4+Math.GetRandomNumber(2)
-      level1.[18+i].[3] <- Math.GetRandomNumber(50)
+      level1.[18+i].[2] <- 4+Math.АлуКездейсоқСаны(2)
+      level1.[18+i].[3] <- Math.АлуКездейсоқСаны(50)
       level1.[18+i].[4] <- i
       level1.[18+i].[5] <- 1
-      level1.[18+i].[6] <- Math.GetRandomNumber(3)
-      level1.[18+i].[7] <- Math.GetRandomNumber(2)
+      level1.[18+i].[6] <- Math.АлуКездейсоқСаны(3)
+      level1.[18+i].[7] <- Math.АлуКездейсоқСаны(2)
 
    for i= 1 to 10 do
       level1.[28+i] <- Dictionary()
       level1.[28+i].[1] <- 1900+50*i
-      level1.[28+i].[2] <- 4+Math.GetRandomNumber(2)
-      level1.[28+i].[3] <- -Math.GetRandomNumber(50)
+      level1.[28+i].[2] <- 4+Math.АлуКездейсоқСаны(2)
+      level1.[28+i].[3] <- -Math.АлуКездейсоқСаны(50)
       level1.[28+i].[4] <- i
       level1.[28+i].[5] <- 1
-      level1.[28+i].[6] <- Math.GetRandomNumber(3)
-      level1.[28+i].[7] <- Math.GetRandomNumber(2)
+      level1.[28+i].[6] <- Math.АлуКездейсоқСаны(3)
+      level1.[28+i].[7] <- Math.АлуКездейсоқСаны(2)
 
    for i= 1 to 10 do
      level1.[38+i] <- Dictionary()
      level1.[38+i].[1] <- 2450+100*i
      level1.[38+i].[2] <- 6
-     level1.[38+i].[3] <- Math.GetRandomNumber(ойынЕни)
+     level1.[38+i].[3] <- Math.АлуКездейсоқСаны(ойынЕни)
      level1.[38+i].[4] <- -50 + i
-     level1.[38+i].[5] <- Math.GetRandomNumber(2)
-     level1.[38+i].[6] <- Math.GetRandomNumber(5)
-     level1.[38+i].[7] <- Math.GetRandomNumber(2)
+     level1.[38+i].[5] <- Math.АлуКездейсоқСаны(2)
+     level1.[38+i].[6] <- Math.АлуКездейсоқСаны(5)
+     level1.[38+i].[7] <- Math.АлуКездейсоқСаны(2)
 
 //Presentation
 // todo

@@ -47,7 +47,7 @@ let objects = ResizeArray<Object>()
 
 let rec Closing () =
    Timer.Pause()
-   Turtle.Turn(720)
+   Тасбақа.Бұру(720)
    GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
    GraphicsWindow.FontName <- "Trebuchet MS"
    GraphicsWindow.FontSize <- 40.0
@@ -78,8 +78,8 @@ and Ready () =
      Program.Delay(200)
    Shapes.Remove(ready)
 and Game () =
-   Turtle.Speed <- 7
-   Turtle.PenUp()
+   Тасбақа.Speed <- 7
+   Тасбақа.PenUp()
    let x = gw / 2
    let y = gh - 40
    GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
@@ -96,8 +96,8 @@ and Game () =
      Shapes.Move(cross1, x, y)
      Shapes.Move(cross2, x, y)
      Shapes.Move(pos, gw - 100, 20)   
-   Turtle.MoveTo(x, y)
-   Turtle.Angle <- 0.0   
+   Тасбақа.MoveTo(x, y)
+   Тасбақа.Angle <- 0.0   
    moving <- false
    scrolling <- false
    Ready()
@@ -110,19 +110,19 @@ and Game () =
    while not collisionDetected do
      if moving then
        if lastKey = "Left" then
-         Turtle.TurnLeft()
-         Turtle.Move(30)
-         Turtle.TurnRight()
+         Тасбақа.СолғаБұру()
+         Тасбақа.Жылжытуға(30)
+         Тасбақа.ОңғаБұру()
        elif lastKey = "Right" then
-         Turtle.TurnRight()
-         Turtle.Move(30)
-         Turtle.TurnLeft()      
+         Тасбақа.ОңғаБұру()
+         Тасбақа.Жылжытуға(30)
+         Тасбақа.СолғаБұру()      
        moving <- false
      else
        Program.Delay(100)      
 and Init () =
-   GraphicsWindow.АяТүсі <- Түстер.DodgerBlue
-   GraphicsWindow.Width <- gw
+   GraphicsWindow.ФонныңТүсі <- Түстер.DodgerBlue
+   GraphicsWindow.Ен <- gw
    GraphicsWindow.Биіктік <- gh   
    passed <- 0
    collisionDetected <- false
@@ -136,8 +136,8 @@ and OnTick () =
      ScrollObject()
      scrolling <- false
    if debug then
-     let x = Math.Floor(Turtle.X)
-     let y = Math.Floor(Turtle.Y)
+     let x = Math.Floor(Тасбақа.X)
+     let y = Math.Floor(Тасбақа.Y)
      Shapes.SetText(pos, "(" + x.ToString() + "," + y.ToString() + ")")
      Shapes.Move(cross1, x, y)
      Shapes.Move(cross2, x, y)
@@ -145,8 +145,8 @@ and ScrollObject () =
    for i = iMin to iMax-1 do
      let x = objects.[i].X
      let y = objects.[i].Y + 5
-     let tx = Math.Floor(Turtle.X) |> int
-     let ty = Math.Floor(Turtle.Y) |> int
+     let tx = Math.Floor(Тасбақа.X) |> int
+     let ty = Math.Floor(Тасбақа.Y) |> int
      let d = Math.SquareRoot(float (Math.Power(tx - x, 2) + Math.Power(ty - y, 2))) |> int
      if d < (size.[objects.[i].Kind] + 16) / 2 then
        collisionDetected <- true   
@@ -162,15 +162,15 @@ and ScrollObject () =
 and AddObject () =   
    iMax <- iMax + 1
    GraphicsWindow.PenWidth <- 1.0
-   let kind = Math.GetRandomNumber(3)
+   let kind = Math.АлуКездейсоқСаны(3)
    GraphicsWindow.ҚылқаламТүсі <- color.[kind]
    let sz = size.[kind]
    let shapeName = Shapes.AddRectangle(sz, sz)
-   let x = Math.GetRandomNumber(gw - 20) + 10
+   let x = Math.АлуКездейсоқСаны(gw - 20) + 10
    let y = -20
    objects.Add({ X = x; Y=y; Kind=kind; ShapeName=shapeName})
    Shapes.Move(shapeName, x, y)
-   Shapes.Rotate(shapeName, Math.GetRandomNumber(360))
+   Shapes.Rotate(shapeName, Math.АлуКездейсоқСаны(360))
 and OnKeyDown () =
    if not moving then
      moving <- true
