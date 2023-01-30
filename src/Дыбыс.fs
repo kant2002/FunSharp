@@ -1,4 +1,4 @@
-﻿module Library.Дыбыс
+﻿module Кітапхана.Дыбыс
 
 open System.Media
 

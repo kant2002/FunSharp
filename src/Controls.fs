@@ -1,4 +1,4 @@
-﻿namespace Library
+﻿namespace Кітапхана
 
 open System
 open Avalonia.Controls

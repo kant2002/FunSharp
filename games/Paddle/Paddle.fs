@@ -1,4 +1,4 @@
-﻿open Library
+﻿open Кітапхана
 
 let gw = float GraphicsWindow.Ен
 let gh = float GraphicsWindow.Биіктік

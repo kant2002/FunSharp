@@ -1,4 +1,4 @@
-﻿namespace Library
+﻿namespace Кітапхана
 
 module Text =
    let Append(a:string,b:obj) = a + b.ToString()

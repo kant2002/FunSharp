@@ -4,7 +4,7 @@
 
 open System
 open System.Collections.Generic
-open Library
+open Кітапхана
 
 let GW = float GraphicsWindow.Ен
 let GH = float GraphicsWindow.Биіктік

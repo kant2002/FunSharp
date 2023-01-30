@@ -1,4 +1,4 @@
-﻿module internal Library.Draw
+﻿module internal Кітапхана.Draw
 
 open Avalonia.Media
 open Avalonia
@@ -22,7 +22,7 @@ let toLayout text (Font(size,family,isBold,isItalic)) color =
    layout
  
 type DrawingInfo = { 
-   Drawing:Library.Drawing; 
+   Drawing:Кітапхана.Drawing; 
    mutable Offset:Point; 
    mutable Opacity:float option
    mutable IsVisible:bool 
@@ -37,7 +37,7 @@ let drawImage (ctx:DrawingContext) (info:DrawingInfo) (image:IImage) (x,y) =
       let currentTransform = ctx.CurrentTransform;
       let source = new Rect(new Point(0.0,0.0),image.Size)
       ctx.PushPreTransform (Matrix.CreateTranslation(x+w/2.0,y+h/2.0)) |> ignore
-      ctx.PushPreTransform (Matrix.CreateRotation(Library.Математика.АлуРадианы angle)) |> ignore
+      ctx.PushPreTransform (Matrix.CreateRotation(Кітапхана.Математика.АлуРадианы angle)) |> ignore
       ctx.PushPreTransform (Matrix.CreateTranslation(-w / 2.0, -h / 2.0)) |> ignore
       match info.Scale with
       | Some(sx,sy) -> ctx.PushPreTransform (Matrix.CreateScale(sx,sy)) |> ignore

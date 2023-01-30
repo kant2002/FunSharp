@@ -3,7 +3,7 @@
 #r "./bin/debug/FunSharp.dll"
 #endif
 
-open Library
+open Кітапхана
 
 // Turtle Dodger 0.5b
 // Copyright (c) 2014 Nonki Takahashi.

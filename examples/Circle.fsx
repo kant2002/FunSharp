@@ -2,7 +2,7 @@
 #r "nuget: Avalonia.Themes.Fluent, 11.0.0-preview3"
 #r "../src/bin/Debug/net7.0/FunSharp.Library.dll"
 
-open Library
+open Кітапхана
 
 GraphicsWindow.ФонныңТүсі <- Түстер.Қара
 for i = 1 to 1200 do

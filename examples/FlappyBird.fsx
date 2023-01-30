@@ -2,7 +2,7 @@
 #r "nuget: Avalonia.Themes.Fluent, 11.0.0-preview3"
 #r "../src/bin/Debug/net7.0/FunSharp.Library.dll"
 
-open Library
+open Кітапхана
 
 let bg = Shapes.AddImage("http://flappycreator.com/default/bg.png")
 let ground = Shapes.AddImage("http://flappycreator.com/default/ground.png")

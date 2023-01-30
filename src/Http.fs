@@ -1,4 +1,4 @@
-﻿module internal Library.Http
+﻿module internal Кітапхана.Http
 
 open System.IO
 open System.Net

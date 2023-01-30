@@ -1,4 +1,4 @@
-﻿namespace Library
+﻿namespace Кітапхана
 
 type Түс = 
    struct

@@ -1,4 +1,4 @@
-﻿open Library
+﻿open Кітапхана
 
 GraphicsWindow.Ен <- 288
 GraphicsWindow.Биіктік <- 440

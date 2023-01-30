@@ -1,4 +1,4 @@
-﻿module Library.Түстер
+﻿module Кітапхана.Түстер
 
 let AliceBlue = Түс(255uy,240uy,248uy,255uy)
 let AntiqueWhite = Түс(255uy,250uy,235uy,215uy)

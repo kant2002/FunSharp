@@ -3,7 +3,7 @@
 #r "./bin/debug/FunSharp.dll"
 #endif
 
-open Library
+open Кітапхана
 
 let mutable BOXES = 4      // number of boxes per piece
 let mutable BWIDTH = 25    // box width in pixels
