@@ -15,38 +15,38 @@ module internal ТүсТүрлендіргіші =
 
 type internal Ен = float
 type internal Биіктік = float
-type internal Size = float
-type internal Family = string
+type internal Көлем = float
+type internal Топ = string
 type internal IsBold = bool
 type internal IsItalic = bool
 type internal X = float
 type internal Y = float
 
-type internal Pen = Pen of Түс * Ен
-type internal Қаріп = Font of Size * Family * IsBold * IsItalic
-type internal Line = Line of X * Y * X * Y
+type internal Қауырсын = Қауырсын of Түс * Ен
+type internal Қаріп = Font of Көлем * Топ * IsBold * IsItalic
+type internal Сызық = Сызық of X * Y * X * Y
 type internal Rect = Rect of Ен * Биіктік
-type internal Triangle = Triangle of X * Y * X * Y * X * Y
-type internal Ellipse = Ellipse of Ен * Биіктік
+type internal Үшбұрыш = Үшбұрыш of X * Y * X * Y * X * Y
+type internal Эллипс = Эллипс of Ен * Биіктік
 
 type internal Shape =
-   | LineShape of Line * Pen   
-   | RectShape of Rect * Pen * Түс
-   | TriangleShape of Triangle * Pen * Түс
-   | EllipseShape of Ellipse * Pen * Түс
+   | LineShape of Сызық * Қауырсын   
+   | RectShape of Rect * Қауырсын * Түс
+   | TriangleShape of Үшбұрыш * Қауырсын * Түс
+   | EllipseShape of Эллипс * Қауырсын * Түс
    | ImageShape of Avalonia.Media.IImage ref
    | TextShape of string ref * Қаріп * Түс
 
 type internal Drawing =
-   | DrawLine of Line * Pen
-   | DrawRect of Rect * Pen
-   | DrawTriangle of Triangle * Pen
-   | DrawEllipse of Ellipse * Pen
+   | DrawLine of Сызық * Қауырсын
+   | DrawRect of Rect * Қауырсын
+   | DrawTriangle of Үшбұрыш * Қауырсын
+   | DrawEllipse of Эллипс * Қауырсын
    | DrawImage of Avalonia.Media.IImage ref * float * float
    | DrawText of float * float * string * Қаріп * Түс
    | DrawBoundText of float * float * float * string * Қаріп * Түс
    | FillRect of Rect * Түс
-   | FillTriangle of Triangle * Түс
-   | FillEllipse of Ellipse * Түс
+   | FillTriangle of Үшбұрыш * Түс
+   | FillEllipse of Эллипс * Түс
    | DrawShape of string * Shape
 

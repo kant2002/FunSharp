@@ -7,8 +7,8 @@ open Avalonia.Media.Imaging
 type internal ShapeInfo = { Shape:Shape; mutable Offset:Avalonia.Point; mutable Opacity:float }
 
 [<Sealed>]
-type Shapes private () =
-   static let pen () = Pen(GraphicsWindow.ҚаламТүсі,GraphicsWindow.PenWidth)
+type Пішіндері private () =
+   static let pen () = Қауырсын(GraphicsWindow.ҚаламТүсі,GraphicsWindow.PenWidth)
    static let brush () = GraphicsWindow.ҚылқаламТүсі
    static let font () = 
       Font(GraphicsWindow.FontSize,GraphicsWindow.FontName,GraphicsWindow.FontBold, GraphicsWindow.FontItalic)
@@ -26,26 +26,26 @@ type Shapes private () =
       My.App.Invoke (fun () -> My.App.Canvas.RemoveShape(shapeName))
    static member AddLine(x1,y1,x2,y2) =
       let name = genName "Line"
-      LineShape(Line(x1,y1,x2,y2),pen()) |> addShape name
+      LineShape(Сызық(x1,y1,x2,y2),pen()) |> addShape name
       name
    static member AddLine(x1:int,y1:int,x2:int,y2:int) =
-      Shapes.AddLine(float x1, float y1, float x2, float y2)
+      Пішіндері.AddLine(float x1, float y1, float x2, float y2)
    static member AddRectangle(width,height) =
       let name = genName "Rectangle"
       RectShape(Rect(width,height),pen(),brush()) |> addShape name
       name
    static member AddRectangle(width:int,height:int) =
-      Shapes.AddRectangle(float width, float height)
+      Пішіндері.AddRectangle(float width, float height)
    static member AddTriangle(x1,y1,x2,y2,x3,y3) =
       let name = genName "Triangle"
-      TriangleShape(Triangle(x1,y1,x2,y2,x3,y3),pen(),brush()) |> addShape name
+      TriangleShape(Үшбұрыш(x1,y1,x2,y2,x3,y3),pen(),brush()) |> addShape name
       name
    static member AddEllipse(width,height) =
       let name = genName "Ellipse"
-      EllipseShape(Ellipse(width,height),pen(),brush()) |> addShape name
+      EllipseShape(Эллипс(width,height),pen(),brush()) |> addShape name
       name
    static member AddEllipse(width:int,height:int) =
-      Shapes.AddEllipse(float width,float height)
+      Пішіндері.AddEllipse(float width,float height)
    static member AddImage(imageName) =
       let name = genName "Image"
       match ImageList.TryGetImageBytes(imageName) with
@@ -81,13 +81,13 @@ type Shapes private () =
       My.App.Invoke (fun () -> My.App.Canvas.SetShapeVisibility(shapeName,false))      
    static member ShowShape(shapeName) =
       My.App.Invoke (fun () -> My.App.Canvas.SetShapeVisibility(shapeName,true))      
-   static member Move(shapeName,x,y) =
+   static member Жылжытуға(shapeName,x,y) =
       onShape shapeName (fun info ->
          info.Offset <- Avalonia.Point(x,y)
          My.App.Invoke (fun () -> My.App.Canvas.MoveShape(shapeName,info.Offset))
       )
    static member Move(shapeName,x:int,y:int) =
-      Shapes.Move(shapeName, float x, float y)
+      Пішіндері.Жылжытуға(shapeName, float x, float y)
    static member GetLeft(shapeName) =      
       match shapes.TryGetValue(shapeName) with
       | true, info -> info.Offset.X
@@ -102,7 +102,7 @@ type Shapes private () =
          My.App.Invoke (fun () -> My.App.Canvas.SetShapeOpacity(shapeName,opacity))
       )
    static member SetOpacity(shapeName, opacity:int) =
-      Shapes.SetOpacity(shapeName, float opacity)
+      Пішіндері.SetOpacity(shapeName, float opacity)
    static member GetOpacity(shapeName) =
       match shapes.TryGetValue(shapeName) with
       | true, info -> info.Opacity
@@ -113,7 +113,7 @@ type Shapes private () =
          My.App.Invoke (fun () -> My.App.Canvas.SetShapeRotation(shapeName,angle))
       | false, _ -> ()
    static member Rotate(shapeName, angle:int) =
-      Shapes.Rotate(shapeName, float angle)
+      Пішіндері.Rotate(shapeName, float angle)
    static member Zoom(shapeName, scaleX, scaleY) =
       match shapes.TryGetValue(shapeName) with
       | true, info ->
@@ -127,7 +127,7 @@ type Shapes private () =
          | _ -> invalidOp "Expecting text shape"
       )       
    static member Animate(shapeName,x:float,y:float,ms:int) =
-      Shapes.Move(shapeName, x, y)
+      Пішіндері.Жылжытуға(shapeName, x, y)
    static member Animate(shapeName,x:int,y:int,ms:int) =
-      Shapes.Animate(shapeName, float x, float y, ms)
+      Пішіндері.Animate(shapeName, float x, float y, ms)
 

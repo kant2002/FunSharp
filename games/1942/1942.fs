@@ -150,16 +150,16 @@ let rec Init() =
    IslandsPosition()
    create_level1()
 
-   fond <- Shapes.AddImage(background)
-   island_Array.[1] <- Shapes.AddImage(island1)
-   island_Array.[2] <- Shapes.AddImage(island2)
-   island_Array.[3] <- Shapes.AddImage(island3)
-   island_Array.[4] <- Shapes.AddImage(island4)
-   island_Array.[5] <- Shapes.AddImage(island5)
+   fond <- Пішіндері.AddImage(background)
+   island_Array.[1] <- Пішіндері.AddImage(island1)
+   island_Array.[2] <- Пішіндері.AddImage(island2)
+   island_Array.[3] <- Пішіндері.AddImage(island3)
+   island_Array.[4] <- Пішіндері.AddImage(island4)
+   island_Array.[5] <- Пішіндері.AddImage(island5)
    for i = 6 to islandcount do
       island_Array.[i] <- island_Array.[Математика.Remainder(i,4)]
 
-   player <- Shapes.AddImage(player0)
+   player <- Пішіндері.AddImage(player0)
    GraphicsWindow.FontSize <- 20.0
    GraphicsWindow.ФонныңТүсі <- Түстер.Gray
    GraphicsWindow.ҚаламТүсі <- Түстер.Yellow
@@ -188,7 +188,7 @@ and Play () =
       incislandx.[i] <- 0
       incislandy.[i] <- 0   
    TimePlay <- 0
-   Shapes.Move(player, ойынЕни/2 , gameHeight - 80 )
+   Пішіндері.Move(player, ойынЕни/2 , gameHeight - 80 )
    while (play = 1) do
       Program.Delay(1000/fps)
       TimePlay <- TimePlay + 1
@@ -208,7 +208,7 @@ and Play () =
             squadron <- squadron + 1
                  
          if (TimePlay > 4000) then
-            Shapes.Move(Shapes.AddImage(``end``), 230,200)
+            Пішіндері.Move(Пішіндері.AddImage(``end``), 230,200)
             Program.Delay(5000)
             Program.End()     
          lock ammoSync (fun () ->  
@@ -221,16 +221,16 @@ and Play () =
          AgePlayer_Ammo()
 
 and OnMouseMove () =
-   paddleX <- int GraphicsWindow.MouseX - player_size / 2
-   paddleY <- int GraphicsWindow.MouseY - player_size
+   paddleX <- int GraphicsWindow.ТінтуірX - player_size / 2
+   paddleY <- int GraphicsWindow.ТінтуірY - player_size
 
    if (paddleX < 0) then
       paddleX <- 0   
-   Shapes.Move(player, paddleX , paddleY )
+   Пішіндері.Move(player, paddleX , paddleY )
 
 and OnMouseDown () =
-   ShootX <- GraphicsWindow.MouseX - 15.0 // in order to be from the neck of the plane
-   ShootY <- GraphicsWindow.MouseY - 80.0
+   ShootX <- GraphicsWindow.ТінтуірX - 15.0 // in order to be from the neck of the plane
+   ShootY <- GraphicsWindow.ТінтуірY - 80.0
    Fire()
 
 and moveall () =
@@ -252,12 +252,12 @@ and moveall () =
          incislandx.[i] <- incislandx.[i] + bgs          
       if (incx = 32 ) then
          incx <- 0
-   Shapes.Move(fond,incx - 32 ,incy - 32)
+   Пішіндері.Move(fond,incx - 32 ,incy - 32)
 
    for i=1 to islandcount do
       let islx = posx.[i]+incislandx.[i]
       let isly = posy.[i]+incislandy.[i]
-      Shapes.Move(island_Array.[i],islx,isly)
+      Пішіндері.Move(island_Array.[i],islx,isly)
 
    incy <- incy + bgs
    incby <- incby + float bgs
@@ -274,24 +274,24 @@ and moveall () =
          // give new coordinates
          posx.[i] <- islandPos.[AA].[2]
          posy.[i] <- islandPos.[AA].[3]
-         Shapes.Move(island_Array.[R],posx.[i],posy.[i])
+         Пішіндері.Move(island_Array.[R],posx.[i],posy.[i])
          incislandy.[i] <- 0
          incislandx.[i] <- 0         
    // Move playerammo
    for i = 1 to Player_AmmoCount do
       let shapeName = Player_Ammo.[i]
-      let Player_Ammox = Shapes.GetLeft(shapeName) + incbx
-      let Player_Ammoy = Shapes.GetTop(shapeName) - Player_Ammospeed
-      Shapes.Move(shapeName, Player_Ammox, Player_Ammoy)
+      let Player_Ammox = Пішіндері.GetLeft(shapeName) + incbx
+      let Player_Ammoy = Пішіндері.GetTop(shapeName) - Player_Ammospeed
+      Пішіндері.Жылжытуға(shapeName, Player_Ammox, Player_Ammoy)
       let oldAge = Player_AmmoAge.GetOrDefault(i, 0)
       Player_AmmoAge.[i] <- oldAge + 1
    // Move Enemy ammo
    for iea = 1 to Enemy_AmmoCount do
       let dx = (Математика.Sin((Enemy_Ammo_Angle.[iea] )) * float Enemy_Ammospeed)
       let dy = (Математика.Cos((Enemy_Ammo_Angle.[iea] )) * float Enemy_Ammospeed)
-      let Enemy_Ammox = Shapes.GetLeft(Enemy_Ammo.[iea]) + dx + incbx
-      let Enemy_Ammoy = Shapes.GetTop(Enemy_Ammo.[iea]) + dy + incby * 0.1
-      Shapes.Move(Enemy_Ammo.[iea], Enemy_Ammox, Enemy_Ammoy)
+      let Enemy_Ammox = Пішіндері.GetLeft(Enemy_Ammo.[iea]) + dx + incbx
+      let Enemy_Ammoy = Пішіндері.GetTop(Enemy_Ammo.[iea]) + dy + incby * 0.1
+      Пішіндері.Жылжытуға(Enemy_Ammo.[iea], Enemy_Ammox, Enemy_Ammoy)
       let oldAge =
          match Enemy_AmmoAge.TryGetValue(iea) with
          | true, n -> n
@@ -308,7 +308,7 @@ and moveall () =
       let etl = enemyPath.[eNBR].[1].GetOrDefault(uu, 0.0)  //enemy own timeLine
       if (Time=etl) then  //it's time to rotate enemy
          let rr = enemyPath.[eNBR].[2].GetOrDefault(uu+1, 0.0)            
-         Shapes.Rotate(enemy_Array.[i],rr)
+         Пішіндері.Rotate(enemy_Array.[i],rr)
       if (Time > etl)  then
          uu <- uu+1
          enemy_line.[i] <- uu    // next line for enemy move      
@@ -324,7 +324,7 @@ and moveall () =
             // this avoid enemy fire from outside the screen
             fire_Enemy()
 
-      Shapes.Move(enemy_Array.[i],xx,yy)
+      Пішіндері.Жылжытуға(enemy_Array.[i],xx,yy)
       enemy_PosX.[i] <- int xx
       enemy_PosY.[i] <- int yy
       enemy_TimeLine.[i] <- Time + 1.0
@@ -338,7 +338,7 @@ and moveall () =
       i <- i + 1
       
 and RemovePlayer_Ammo (player_Ammo_nextRemove) =
-   Shapes.Remove(Player_Ammo.[player_Ammo_nextRemove])
+   Пішіндері.Remove(Player_Ammo.[player_Ammo_nextRemove])
    for iz = player_Ammo_nextRemove to Player_AmmoCount - 1 do
        Player_Ammo.[iz] <- Player_Ammo.[iz+1]
        Player_AmmoAge.[iz] <- Player_AmmoAge.[iz+1]
@@ -347,7 +347,7 @@ and RemovePlayer_Ammo (player_Ammo_nextRemove) =
    Player_AmmoCount <- Player_AmmoCount - 1
 
 and RemoveEnemy_Ammo (enemy_Ammo_nextRemove) =
-   Shapes.Remove(Enemy_Ammo.[enemy_Ammo_nextRemove])
+   Пішіндері.Remove(Enemy_Ammo.[enemy_Ammo_nextRemove])
    for irea = enemy_Ammo_nextRemove to Enemy_AmmoCount - 1 do
        Enemy_Ammo.[irea] <- Enemy_Ammo.[irea+1]      
        Enemy_AmmoAge.[irea] <-
@@ -366,8 +366,8 @@ and Fire () =
 
       // Add the player Ammo
       Player_AmmoCount <- Player_AmmoCount + 1
-      Player_Ammo.[Player_AmmoCount] <- Shapes.AddImage(bullet0)
-      Shapes.Move(Player_Ammo.[Player_AmmoCount], ShootX, ShootY)
+      Player_Ammo.[Player_AmmoCount] <- Пішіндері.AddImage(bullet0)
+      Пішіндері.Жылжытуға(Player_Ammo.[Player_AmmoCount], ShootX, ShootY)
    )
 
 and fire_Enemy () =
@@ -377,10 +377,10 @@ and fire_Enemy () =
 
    // Add the Enemy Ammo
    Enemy_AmmoCount <- Enemy_AmmoCount + 1
-   Enemy_Ammo.[Enemy_AmmoCount] <- Shapes.AddImage(Enemy_bullet)
+   Enemy_Ammo.[Enemy_AmmoCount] <- Пішіндері.AddImage(Enemy_bullet)
    Enemy_Ammo_Angle.[Enemy_AmmoCount] <- Математика.ArcTan(float(paddleX- Enemy_ShootX+player_size/2)/float(paddleY-Enemy_ShootY))
    let shape = Enemy_Ammo.[Enemy_AmmoCount]
-   Shapes.Move(shape, Enemy_ShootX, Enemy_ShootY)
+   Пішіндері.Move(shape, Enemy_ShootX, Enemy_ShootY)
 
 //Check playerammo age
 and AgePlayer_Ammo () =
@@ -393,7 +393,7 @@ and AgeEnemy_Ammo () =
       RemoveEnemy_Ammo(1)
 
 and remove_enemy (next_enemy_remove) =
-   Shapes.Remove(enemy_Array.[next_enemy_remove])
+   Пішіндері.Remove(enemy_Array.[next_enemy_remove])
    // Remove all references from the arrays
    for ii = next_enemy_remove to enemy_Count - 1 do
       enemy_Array.[ii] <- enemy_Array.[ii+1]
@@ -417,9 +417,9 @@ and create_enemies_left () =
       enemy_Count <- enemy_Count + 1
       enemy_PathNBR.[enemy_Count] <- pathNBR
       if (enemy_type = 2) then
-         enemy_Array.[enemy_Count] <- Shapes.AddImage(enemy2)
+         enemy_Array.[enemy_Count] <- Пішіндері.AddImage(enemy2)
       else
-         enemy_Array.[enemy_Count] <- Shapes.AddImage(enemy)
+         enemy_Array.[enemy_Count] <- Пішіндері.AddImage(enemy)
       enemy_line.[enemy_Count] <- 1
       enemy_PosX.[enemy_Count] <- enemyPosX1
       enemy_PosY.[enemy_Count] <- enemyPosY1
@@ -430,7 +430,7 @@ and create_enemies_left () =
    for i=(enemy_Count-enemy_Nbr+1) to enemy_Count do
       let xxx = enemy_PosX.[i]
       let yyy = enemy_PosY.[i]
-      Shapes.Move(enemy_Array.[i],xxx,yyy)
+      Пішіндері.Move(enemy_Array.[i],xxx,yyy)
 
 and create_enemies_right () =
 
@@ -438,7 +438,7 @@ and create_enemies_right () =
    for i=1 to enemy_Nbr do
       enemy_Count <- enemy_Count + 1
       enemy_PathNBR.[enemy_Count] <- pathNBR
-      enemy_Array.[enemy_Count] <- Shapes.AddImage(enemy)
+      enemy_Array.[enemy_Count] <- Пішіндері.AddImage(enemy)
       enemy_line.[enemy_Count] <- 1
       enemy_PosX.[enemy_Count] <- enemyPosX1
       enemy_PosY.[enemy_Count] <- enemyPosY1
@@ -450,7 +450,7 @@ and create_enemies_right () =
    for i=(enemy_Count-enemy_Nbr+1) to enemy_Count do
       let xxx=enemy_PosX.[i]
       let yyy=enemy_PosY.[i]
-      Shapes.Move(enemy_Array.[i],xxx,yyy)
+      Пішіндері.Move(enemy_Array.[i],xxx,yyy)
    
 and Collision_pbe () =  // for player-bullet and enemies
 
@@ -458,8 +458,8 @@ and Collision_pbe () =  // for player-bullet and enemies
    while i1 <= Player_AmmoCount do
       // player bullet position
       let shapeName = Player_Ammo.[i1]
-      let Player_Ammox = int (Shapes.GetLeft(shapeName))
-      let Player_Ammoy = int (Shapes.GetTop(shapeName))
+      let Player_Ammox = int (Пішіндері.GetLeft(shapeName))
+      let Player_Ammoy = int (Пішіндері.GetTop(shapeName))
       let px1=Player_Ammox+player_bullet_size/3   // in order to have a more precise collison than the bullet image size
       let py1=Player_Ammoy+player_bullet_size/3
       let px2=px1+2*player_bullet_size/3
@@ -485,14 +485,14 @@ and Collision_pbe () =  // for player-bullet and enemies
                let next_enemy_remove = i2
                remove_enemy(next_enemy_remove)
                // begin animation for explosion at coordinate ax1, ay1
-               let toto = Shapes.AddImage(enemy_expl1)
-               Shapes.Move(toto,ax1,ay1)
+               let toto = Пішіндері.AddImage(enemy_expl1)
+               Пішіндері.Move(toto,ax1,ay1)
                Program.Delay(30)
-               Shapes.Remove(toto)
-               let toto = Shapes.AddImage(enemy_expl2)
-               Shapes.Move(toto,ax1,ay1)
+               Пішіндері.Remove(toto)
+               let toto = Пішіндері.AddImage(enemy_expl2)
+               Пішіндері.Move(toto,ax1,ay1)
                Program.Delay(30)
-               Shapes.Remove(toto)
+               Пішіндері.Remove(toto)
                score <- score + 100
 
          i2 <- i2 + 1
@@ -501,8 +501,8 @@ and Collision_pbe () =  // for player-bullet and enemies
       i1 <- i1 + 1
 
 and Collision_ep () =   // for enemies and player 
-   let px1 = int (Shapes.GetLeft(player))
-   let py1 = int (Shapes.GetTop(player))
+   let px1 = int (Пішіндері.GetLeft(player))
+   let py1 = int (Пішіндері.GetTop(player))
    let px2 = px1 + player_size
    let py2 = py1 + player_size
 
@@ -523,14 +523,14 @@ and Collision_ep () =   // for enemies and player
             // animate explosion and decrease lives            
             remove_enemy(i2)
             // begin animation for explosion at coordinate ax1, ay1
-            let toto = Shapes.AddImage(enemy_expl1)
-            Shapes.Move(toto,ax1,ay1)
+            let toto = Пішіндері.AddImage(enemy_expl1)
+            Пішіндері.Move(toto,ax1,ay1)
             Program.Delay(30)
-            Shapes.Remove(toto)
-            let toto = Shapes.AddImage(player_expl)
-            Shapes.Move(toto,ax1,ay1)
+            Пішіндері.Remove(toto)
+            let toto = Пішіндері.AddImage(player_expl)
+            Пішіндері.Move(toto,ax1,ay1)
             Program.Delay(300)
-            Shapes.Remove(toto)
+            Пішіндері.Remove(toto)
             Player_Lives <- Player_Lives - 1
             if (Player_Lives = 0) then
                Program.End()
@@ -547,8 +547,8 @@ and Collision_ep () =   // for enemies and player
    while i3 <= Enemy_AmmoCount do
       // enemy position 
 
-      let ax1=int (Shapes.GetLeft(Enemy_Ammo.[i3]))
-      let ay1=int (Shapes.GetTop(Enemy_Ammo.[i3]))
+      let ax1=int (Пішіндері.GetLeft(Enemy_Ammo.[i3]))
+      let ay1=int (Пішіндері.GetTop(Enemy_Ammo.[i3]))
 
       let ax2=ax1+enemy_ammo_size
       let ay2=ay1+enemy_ammo_size
@@ -561,14 +561,14 @@ and Collision_ep () =   // for enemies and player
             RemoveEnemy_Ammo(i3)
 
             // begin animation for explosion at coordinate ax1, ay1
-            let toto = Shapes.AddImage(enemy_expl1)
-            Shapes.Move(toto,paddleX+ player_size/2,paddleY+ player_size/2)
+            let toto = Пішіндері.AddImage(enemy_expl1)
+            Пішіндері.Move(toto,paddleX+ player_size/2,paddleY+ player_size/2)
             Program.Delay(30)
-            Shapes.Remove(toto)
-            let toto = Shapes.AddImage(player_expl)
-            Shapes.Move(toto,paddleX+ player_size/2,paddleY+ player_size/2)
+            Пішіндері.Remove(toto)
+            let toto = Пішіндері.AddImage(player_expl)
+            Пішіндері.Move(toto,paddleX+ player_size/2,paddleY+ player_size/2)
             Program.Delay(300)
-            Shapes.Remove(toto)
+            Пішіндері.Remove(toto)
             Player_Lives <- Player_Lives - 1
             if (Player_Lives = 0) then
                Program.End()

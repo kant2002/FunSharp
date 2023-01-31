@@ -9,7 +9,7 @@ type GraphicsWindow private () =
    static let mutable фонныңТүсі = Түстер.Ақ
    static let mutable ен = 640
    static let mutable биіктік = 480
-   static let pen () = Pen(GraphicsWindow.ҚаламТүсі,GraphicsWindow.PenWidth)
+   static let pen () = Қауырсын(GraphicsWindow.ҚаламТүсі,GraphicsWindow.PenWidth)
    static let brush () = GraphicsWindow.ҚылқаламТүсі
    static let font () = 
       Қаріп.Font(GraphicsWindow.FontSize,GraphicsWindow.FontName,GraphicsWindow.FontBold, GraphicsWindow.FontItalic)
@@ -46,7 +46,7 @@ type GraphicsWindow private () =
    static member Clear () =
       My.App.Invoke (fun () -> My.App.Canvas.ClearDrawings())
    static member DrawLine(x1,y1,x2,y2) =
-      DrawLine(Line(x1,y1,x2,y2),pen()) |> draw
+      DrawLine(Сызық(x1,y1,x2,y2),pen()) |> draw
    static member DrawLine(x1:int,y1:int,x2:int,y2:int) =
       GraphicsWindow.DrawLine(float x1, float y1, float x2, float y2)
    static member DrawRectangle(x,y,width,height) =
@@ -54,9 +54,9 @@ type GraphicsWindow private () =
    static member DrawRectangle(x:int,y:int,width:int,height:int) =
       GraphicsWindow.DrawRectangle(float x, float y, float width, float height)
    static member DrawTriangle(x1,y1,x2,y2,x3,y3) =
-      DrawTriangle(Triangle(x1,y1,x2,y2,x3,y3),pen()) |> draw
+      DrawTriangle(Үшбұрыш(x1,y1,x2,y2,x3,y3),pen()) |> draw
    static member DrawEllipse(x,y,width,height) =
-      DrawEllipse(Ellipse(width,height),pen()) |> drawAt (x,y)
+      DrawEllipse(Эллипс(width,height),pen()) |> drawAt (x,y)
    static member DrawEllipse(x:int,y:int,width:int,height:int) =
       GraphicsWindow.DrawEllipse(float x, float y, float width, float height)
    static member DrawImage(imageName,x,y) =
@@ -91,16 +91,16 @@ type GraphicsWindow private () =
    static member FillRectangle(x:int,y:int,width:int,height:int) =
       GraphicsWindow.FillRectangle(float x,float y,float width,float height)
    static member FillTriangle(x1,y1,x2,y2,x3,y3) =
-      FillTriangle(Triangle(x1,y1,x2,y2,x3,y3),brush()) |> draw
+      FillTriangle(Үшбұрыш(x1,y1,x2,y2,x3,y3),brush()) |> draw
    static member ТолтыруЭллипс(x,y,width,height) =
-      FillEllipse(Ellipse(width,height),brush()) |> drawAt (x,y)
+      FillEllipse(Эллипс(width,height),brush()) |> drawAt (x,y)
    static member ТолтыруЭллипс(x:int,y:int,width:int,height:int) =
-      FillEllipse(Ellipse(float width,float height),brush()) |> drawAt (float x,float y)
+      FillEllipse(Эллипс(float width,float height),brush()) |> drawAt (float x,float y)
    static member LastKey with get() = My.App.LastKey
    static member KeyUp with set callback = My.App.KeyUp <- callback
    static member KeyDown with set callback = My.App.KeyDown <- callback 
-   static member MouseX with get() = My.App.MouseX
-   static member MouseY with get() = My.App.MouseY
+   static member ТінтуірX with get() = My.App.MouseX
+   static member ТінтуірY with get() = My.App.MouseY
    static member MouseDown with set callback = My.App.MouseDown <- callback
    static member MouseUp with set callback = My.App.MouseUp <- callback
    static member MouseMove with set callback = My.App.MouseMove <- callback

@@ -4,11 +4,11 @@
 
 open Кітапхана
 
-let доп = Shapes.AddRectangle(200.0, 100.0)
+let доп = Пішіндері.AddRectangle(200.0, 100.0)
 
 let OnMouseDown () =
-  let x = GraphicsWindow.MouseX
-  let y = GraphicsWindow.MouseY
-  Shapes.Move(доп, x, y)
+  let x = GraphicsWindow.ТінтуірX
+  let y = GraphicsWindow.ТінтуірY
+  Пішіндері.Жылжытуға(доп, x, y)
 
 GraphicsWindow.MouseDown <- Callback(OnMouseDown)

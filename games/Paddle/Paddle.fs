@@ -2,13 +2,13 @@
 
 let gw = float GraphicsWindow.Ен
 let gh = float GraphicsWindow.Биіктік
-let paddle = Shapes.AddRectangle(120, 12)
-let ball = Shapes.AddEllipse(16, 16)
+let paddle = Пішіндері.AddRectangle(120, 12)
+let ball = Пішіндері.AddEllipse(16, 16)
 let mutable score = 0
 
 let OnMouseMove () =
-  let paddleX = GraphicsWindow.MouseX
-  Shapes.Move(paddle, paddleX - 60.0, gh - 12.0)
+  let paddleX = GraphicsWindow.ТінтуірX
+  Пішіндері.Жылжытуға(paddle, paddleX - 60.0, gh - 12.0)
 
 let PrintScore () =
   // Clear the score first and then draw the real score text
@@ -37,14 +37,14 @@ while (y < gh) do
   if (y <= 0.0) then
     deltaY <- -deltaY
  
-  let padX = Shapes.GetLeft(paddle)
+  let padX = Пішіндері.GetLeft(paddle)
   if (y = gh - 28.0 && x >= padX && x <= padX + 120.0) then
     //Sound.PlayClick()
     score <- score + 10
     PrintScore()
     deltaY <- -deltaY  
 
-  Shapes.Move(ball, x, y)
+  Пішіндері.Жылжытуға(ball, x, y)
   Program.Delay(15)
   
 GraphicsWindow.ShowMessage("Your score is: " + score.ToString(), "Paddle")

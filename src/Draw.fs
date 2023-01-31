@@ -3,7 +3,7 @@
 open Avalonia.Media
 open Avalonia
 
-let makeTriangle (Triangle(x1,y1,x2,y2,x3,y3)) =
+let makeTriangle (Үшбұрыш(x1,y1,x2,y2,x3,y3)) =
     let g = new PathGeometry()
     using (g.Open()) (fun streaming -> 
         streaming.BeginFigure(Avalonia.Point(x1, y1), true)
@@ -61,21 +61,21 @@ let draw (ctx:DrawingContext) (info:DrawingInfo) =
       | Some opacity -> Color.FromArgb(byte (opacity * float color.A), color.R, color.G, color.B)
       | None -> color
    match info.Drawing with
-   | DrawLine(Line(x1,y1,x2,y2),Pen(color,width)) ->
+   | DrawLine(Сызық(x1,y1,x2,y2),Қауырсын(color,width)) ->
       let color = toXwtColor color
       let pen = new Pen(new SolidColorBrush(color, 1.0), width)
       ctx.DrawLine(pen, Avalonia.Point(x1, y1), Avalonia.Point(x2, y2))
-   | DrawRect(Rect(w,h),Pen(color,width)) ->
+   | DrawRect(Rect(w,h),Қауырсын(color,width)) ->
       let color = toXwtColor color
       let pen = new Pen(new SolidColorBrush(color, 1.0), width)
       ctx.DrawRectangle(null, pen, Avalonia.Rect(x,y,w,h))
-   | DrawTriangle(Triangle(x1,y1,x2,y2,x3,y3),Pen(color,width)) ->
+   | DrawTriangle(Үшбұрыш(x1,y1,x2,y2,x3,y3),Қауырсын(color,width)) ->
       let color = toXwtColor color
       let pen = new Pen(new SolidColorBrush(color, 1.0), width)
       ctx.DrawLine(pen, Avalonia.Point(x1, y1), Avalonia.Point(x2, y2))
       ctx.DrawLine(pen, Avalonia.Point(x2, y2), Avalonia.Point(x3, y3))
       ctx.DrawLine(pen, Avalonia.Point(x3, y3), Avalonia.Point(x1, y1))
-   | DrawEllipse(Ellipse(w,h),Pen(color,width)) ->
+   | DrawEllipse(Эллипс(w,h),Қауырсын(color,width)) ->
       let color = toXwtColor color
       let pen = new Pen(new SolidColorBrush(color, 1.0), width)
       ctx.DrawEllipse(null, pen, Avalonia.Point(x,y),w,h)
@@ -100,15 +100,15 @@ let draw (ctx:DrawingContext) (info:DrawingInfo) =
       let brush = new SolidColorBrush(color, 1.0)
       let geometry = makeTriangle triangle
       ctx.DrawGeometry(brush, null, geometry)
-   | FillEllipse(Ellipse(w,h),fillColor) ->
+   | FillEllipse(Эллипс(w,h),fillColor) ->
       let color = toXwtColor fillColor
       let brush = new SolidColorBrush(color, 1.0)
       ctx.DrawEllipse(brush, null, Avalonia.Point(x+w/2.,y+h/2.),w/2.,h/2.)
-   | DrawShape(_,LineShape(Line(x1,y1,x2,y2),Pen(color,width))) ->
+   | DrawShape(_,LineShape(Сызық(x1,y1,x2,y2),Қауырсын(color,width))) ->
       let color = toXwtColor color
       let pen = new Pen(new SolidColorBrush(color, 1.0), width)
       ctx.DrawLine(pen, Avalonia.Point(x+ x1, y+y1), Avalonia.Point(x+ x2, y+y2))
-   | DrawShape(_,RectShape(Rect(w,h),Pen(color,width),fillColor)) ->
+   | DrawShape(_,RectShape(Rect(w,h),Қауырсын(color,width),fillColor)) ->
       let currentTransform = ctx.CurrentTransform
       ctx.PushPreTransform (Matrix.CreateTranslation(x,y)) |> ignore
       match info.Rotation with
@@ -119,12 +119,12 @@ let draw (ctx:DrawingContext) (info:DrawingInfo) =
       let pen = new Pen(new SolidColorBrush(color, 1.0), width)
       ctx.DrawRectangle(new SolidColorBrush(colorBackground, 1.0), pen, Avalonia.Rect(0.,0.,w,h))
       ctx.PushSetTransform currentTransform |> ignore;
-   | DrawShape(_,TriangleShape(triangle,Pen(color,width),fillColor)) ->
+   | DrawShape(_,TriangleShape(triangle,Қауырсын(color,width),fillColor)) ->
       let brush = new SolidColorBrush(withOpacity (toXwtColor fillColor), 1.0)
       let pen = new Pen(new SolidColorBrush(toXwtColor color, 1.0), width)
       let geometry = makeTriangle triangle
       ctx.DrawGeometry(brush, pen, geometry)
-   | DrawShape(_,EllipseShape(Ellipse(w,h),Pen(color,width),fillColor)) ->
+   | DrawShape(_,EllipseShape(Эллипс(w,h),Қауырсын(color,width),fillColor)) ->
       let pen = new Pen(new SolidColorBrush(toXwtColor color, 1.0), width)
       let brush = new SolidColorBrush(withOpacity (toXwtColor fillColor), 1.0)
       ctx.DrawEllipse(brush, pen, Avalonia.Point(x,y),w,h)

@@ -16,12 +16,12 @@ let mutable prevX = 0.0
 let mutable prevY = 0.0
 
 let onMouseDown () =
-   prevX <- GraphicsWindow.MouseX
-   prevY <- GraphicsWindow.MouseY
+   prevX <- GraphicsWindow.ТінтуірX
+   prevY <- GraphicsWindow.ТінтуірY
    
 let onMouseMove () =
-   let x = GraphicsWindow.MouseX
-   let y = GraphicsWindow.MouseY
+   let x = GraphicsWindow.ТінтуірX
+   let y = GraphicsWindow.ТінтуірY
    if Mouse.IsLeftButtonDown then
       GraphicsWindow.DrawLine(prevX, prevY, x, y)
    prevX <- x

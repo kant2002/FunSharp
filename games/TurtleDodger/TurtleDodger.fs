@@ -57,8 +57,8 @@ let rec Closing () =
    Program.Delay(3000)
 and Opening () =
    let url = "" // "http://www.nonkit.com/smallbasic.files/"
-   let bigTurtle = Shapes.AddImage(url + "Turtle.png")
-   Shapes.Move(bigTurtle, 180, 140)
+   let bigTurtle = Пішіндері.AddImage(url + "Turtle.png")
+   Пішіндері.Move(bigTurtle, 180, 140)
    GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
    GraphicsWindow.FontName <- "Trebuchet MS"
    GraphicsWindow.FontSize <- 50.0
@@ -69,14 +69,14 @@ and Opening () =
    GraphicsWindow.Clear()
 and Ready () =
    GraphicsWindow.FontSize <- 40.0
-   let ready = Shapes.AddText("Ready?")
+   let ready = Пішіндері.AddText("Ready?")
    let x = (gw - 130) / 2
    let y = 100
-   Shapes.Move(ready, x, y)
+   Пішіндері.Move(ready, x, y)
    for opacity in 100 .. -10 .. 0 do
-     Shapes.SetOpacity(ready, opacity)
+     Пішіндері.SetOpacity(ready, opacity)
      Program.Delay(200)
-   Shapes.Remove(ready)
+   Пішіндері.Remove(ready)
 and Game () =
    Тасбақа.Speed <- 7
    Тасбақа.PenUp()
@@ -84,18 +84,18 @@ and Game () =
    let y = gh - 40
    GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
    GraphicsWindow.FontSize <- 18.0
-   score <- Shapes.AddText("0")
-   Shapes.Move(score, 20, 20)
+   score <- Пішіндері.AddText("0")
+   Пішіндері.Move(score, 20, 20)
    if debug then
      GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
      GraphicsWindow.FontSize <- 12.0
-     pos <- Shapes.AddText("(" + x.ToString() + "," + y.ToString() + ")")
+     pos <- Пішіндері.AddText("(" + x.ToString() + "," + y.ToString() + ")")
      GraphicsWindow.PenWidth <- 1.0
-     cross1 <- Shapes.AddLine(0, -8, 0, 8)
-     cross2 <- Shapes.AddLine(-8, 0, 8, 0)
-     Shapes.Move(cross1, x, y)
-     Shapes.Move(cross2, x, y)
-     Shapes.Move(pos, gw - 100, 20)   
+     cross1 <- Пішіндері.AddLine(0, -8, 0, 8)
+     cross2 <- Пішіндері.AddLine(-8, 0, 8, 0)
+     Пішіндері.Move(cross1, x, y)
+     Пішіндері.Move(cross2, x, y)
+     Пішіндері.Move(pos, gw - 100, 20)   
    Тасбақа.MoveTo(x, y)
    Тасбақа.Angle <- 0.0   
    moving <- false
@@ -138,9 +138,9 @@ and OnTick () =
    if debug then
      let x = Математика.Floor(Тасбақа.X)
      let y = Математика.Floor(Тасбақа.Y)
-     Shapes.SetText(pos, "(" + x.ToString() + "," + y.ToString() + ")")
-     Shapes.Move(cross1, x, y)
-     Shapes.Move(cross2, x, y)
+     Пішіндері.SetText(pos, "(" + x.ToString() + "," + y.ToString() + ")")
+     Пішіндері.Move(cross1, x, y)
+     Пішіндері.Move(cross2, x, y)
 and ScrollObject () =
    for i = iMin to iMax-1 do
      let x = objects.[i].X
@@ -152,11 +152,11 @@ and ScrollObject () =
        collisionDetected <- true   
      if y > gh then
        passed <- passed + 1
-       Shapes.SetText(score, string passed)
-       Shapes.Remove(objects.[i].ShapeName)
+       Пішіндері.SetText(score, string passed)
+       Пішіндері.Remove(objects.[i].ShapeName)
        iMin <- i + 1
      else
-       Shapes.Move(objects.[i].ShapeName, x, y)
+       Пішіндері.Move(objects.[i].ShapeName, x, y)
        objects.[i].X <- x
        objects.[i].Y <- y   
 and AddObject () =   
@@ -165,12 +165,12 @@ and AddObject () =
    let kind = Математика.АлуКездейсоқСаны(3)
    GraphicsWindow.ҚылқаламТүсі <- color.[kind]
    let sz = size.[kind]
-   let shapeName = Shapes.AddRectangle(sz, sz)
+   let shapeName = Пішіндері.AddRectangle(sz, sz)
    let x = Математика.АлуКездейсоқСаны(gw - 20) + 10
    let y = -20
    objects.Add({ X = x; Y=y; Kind=kind; ShapeName=shapeName})
-   Shapes.Move(shapeName, x, y)
-   Shapes.Rotate(shapeName, Математика.АлуКездейсоқСаны(360))
+   Пішіндері.Move(shapeName, x, y)
+   Пішіндері.Rotate(shapeName, Математика.АлуКездейсоқСаны(360))
 and OnKeyDown () =
    if not moving then
      moving <- true

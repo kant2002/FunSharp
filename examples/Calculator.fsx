@@ -15,9 +15,9 @@ GraphicsWindow.ФонныңТүсі = GraphicsWindow.GetColorFromRGB(240, 240, 2
 GraphicsWindow.FontBold <- false
 GraphicsWindow.ҚылқаламТүсі <- Түстер.Қара
 
-let m = Shapes.AddText("M")
-Shapes.Move(m, 22, 62)
-Shapes.HideShape(m)
+let m = Пішіндері.AddText("M")
+Пішіндері.Move(m, 22, 62)
+Пішіндері.HideShape(m)
 
 let N = 1
 
@@ -166,10 +166,10 @@ let clicked () =
     Controls.SetTextBoxText(t, Text.GetSubText(Controls.GetTextBoxText(t), 1, Text.GetLength(Controls.GetTextBoxText(t))-1))
   elif Controls.LastClickedButton = keyMP || Controls.LastClickedButton = keyMS then
     c <- Controls.GetTextBoxText(t)
-    Shapes.ShowShape(m)
+    Пішіндері.ShowShape(m)
   elif Controls.LastClickedButton = keyMC then
     c <- ""
-    Shapes.HideShape(m)
+    Пішіндері.HideShape(m)
   elif Controls.LastClickedButton = keyMR then
     Controls.SetTextBoxText(t, c)
   elif Controls.LastClickedButton = keyprocent then
