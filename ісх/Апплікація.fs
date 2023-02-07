@@ -15,7 +15,7 @@
 тип АппАвалонії() =
     успадкує Avalonia.Application()
     перевизначити сам.Initialize() =
-        нехай тема = новий FluentTheme(новий Uri("avares://ВеселШарп.Бібліотека"), Mode = FluentThemeMode.Light)
+        let тема = new FluentTheme()
         сам.Styles.Add(тема)
 
 
