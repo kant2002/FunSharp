@@ -79,12 +79,12 @@
    нехай показатиВікно () = 
       якщо приховане тоді головнеВікно.Show(); приховане <- ложь
    нехай сховатиВікно () = 
-      якщо not приховане тоді головнеВікно.Hide(); приховане <- істина
+      якщо не приховане тоді головнеВікно.Hide(); приховане <- істина
    нехай змінливий timerDisposable : IDisposable = нуль
    нехай установитьИнтервалТаймера (мс:int) =
       якщо timerDisposable <> нуль тоді timerDisposable.Dispose()
       нехай таймер = новий System.Timers.Timer(мс)
-      таймер.Elapsed.Add(фун (_) -> якщо not таймерПризупинено тоді цокТаймера.Invoke())
+      таймер.Elapsed.Add(фун (_) -> якщо не таймерПризупинено тоді цокТаймера.Invoke())
       таймер.Start()
       timerDisposable <- таймер
    
@@ -156,7 +156,7 @@
    статичний нехай закритиАплікацію () =
       lock (сінх) (фун () ->
          (Application.Current.ApplicationLifetime :?> IClassicDesktopStyleApplicationLifetime).TryShutdown(0) |> ignore
-         якщо not (уFsi()) тоді
+         якщо не (уFsi()) тоді
             Environment.Exit(0)
          аплікація <- None       
       )
