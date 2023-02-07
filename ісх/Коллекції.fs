@@ -47,6 +47,13 @@ module ExtraTopLevelOperators1 =
   нехай inline ігнорувати значення = ignore значення
   нехай inline не значення = not значення
 
+  тип Асинх = 
+      static member ДочекатисяЗадачу(задача) = Async.AwaitTask задача
+      static member Запустити(обчислення: Async<unit>, ?маркерСкасування: System.Threading.CancellationToken) = 
+        let маркерСкасування =
+            defaultArg маркерСкасування Async.DefaultCancellationToken
+        Async.Start( обчислення, маркерСкасування)
+
 
 ///<summary>Contains operations for working with values of type <see cref="T:Microsoft.FSharp.Collections.seq`1" />.</summary>
 [<RequireQualifiedAccess; CompilationRepresentation (CompilationRepresentationFlags.ModuleSuffix)>]

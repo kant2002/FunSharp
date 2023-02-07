@@ -14,7 +14,7 @@
 відкрити Avalonia.Media.Imaging
 відкрити Avalonia.Media
 
-нехай ЗавантажитиЗображенняАсінх (url:string) = async {
+нехай ЗавантажитиЗображенняАсінх (url:string) = асинх {
    нехай запит = HttpWebRequest.Create(url)
    вживати! відповідь = запит.AsyncGetResponse()
    вживати струм = відповідь.GetResponseStream()

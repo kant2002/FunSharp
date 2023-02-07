@@ -37,8 +37,8 @@
    нехай змінливий праваКлавішаВниз = ложь
    нехай запуститиНаІКПотоці (дія: Func<'a>) =
     нехай змінливий результат : 'a = нуль
-    async {
-        нехай! x = Dispatcher.UIThread.InvokeAsync(дія) |> Async.AwaitTask
+    асинх {
+        нехай! x = Dispatcher.UIThread.InvokeAsync(дія) |> Асинх.ДочекатисяЗадачу
         результат <- x
     } |> Async.RunSynchronously
     результат
