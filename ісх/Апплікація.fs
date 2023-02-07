@@ -15,7 +15,7 @@ type Callback = delegate of unit -> unit
 type АппАвалонії() =
     inherit Avalonia.Application()
     override сам.Initialize() =
-        let тема = new FluentTheme(new Uri("avares://ВеселШарп.Бібліотека"), Mode = FluentThemeMode.Light)
+        let тема = new FluentTheme()
         сам.Styles.Add(тема)
 
 
