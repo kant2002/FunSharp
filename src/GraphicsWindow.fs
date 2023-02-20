@@ -12,7 +12,7 @@ type GraphicsWindow private () =
    static let pen () = Қауырсын(GraphicsWindow.ҚаламТүсі,GraphicsWindow.PenWidth)
    static let brush () = GraphicsWindow.ҚылқаламТүсі
    static let font () = 
-      Қаріп.Font(GraphicsWindow.FontSize,GraphicsWindow.FontName,GraphicsWindow.FontBold, GraphicsWindow.FontItalic)
+      Қаріп.Қаріп(GraphicsWindow.FontSize,GraphicsWindow.FontName,GraphicsWindow.FontBold, GraphicsWindow.FontItalic)
    static let draw drawing = addDrawing drawing      
    static let drawAt (x,y) drawing = addDrawingAt drawing (x,y)
    static member Title
@@ -22,7 +22,7 @@ type GraphicsWindow private () =
       with get () = фонныңТүсі
       and set түс = 
          фонныңТүсі <- түс
-         My.App.Invoke (fun () -> My.App.Canvas.Background <- new Avalonia.Media.SolidColorBrush(toXwtColor түс))
+         My.App.Invoke (fun () -> My.App.Canvas.Background <- new Avalonia.Media.SolidColorBrush(авалонияТүске түс))
    static member Ен
       with get () = ен
       and set жаңаЕні =

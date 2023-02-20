@@ -4,14 +4,14 @@ open System
 open System.Collections.Generic
 open Avalonia.Media.Imaging
 
-type internal ShapeInfo = { Shape:Shape; mutable Offset:Avalonia.Point; mutable Opacity:float }
+type internal ShapeInfo = { Shape:Пішін; mutable Offset:Avalonia.Point; mutable Opacity:float }
 
 [<Sealed>]
 type Пішіндері private () =
    static let pen () = Қауырсын(GraphicsWindow.ҚаламТүсі,GraphicsWindow.PenWidth)
    static let brush () = GraphicsWindow.ҚылқаламТүсі
    static let font () = 
-      Font(GraphicsWindow.FontSize,GraphicsWindow.FontName,GraphicsWindow.FontBold, GraphicsWindow.FontItalic)
+      Қаріп(GraphicsWindow.FontSize,GraphicsWindow.FontName,GraphicsWindow.FontBold, GraphicsWindow.FontItalic)
    static let shapes = Dictionary<string,ShapeInfo>()
    static let addShape name shape =
       let info = { Shape=shape; Offset=Avalonia.Point(); Opacity=1.0 }
@@ -26,23 +26,23 @@ type Пішіндері private () =
       My.App.Invoke (fun () -> My.App.Canvas.RemoveShape(shapeName))
    static member AddLine(x1,y1,x2,y2) =
       let name = genName "Line"
-      LineShape(Сызық(x1,y1,x2,y2),pen()) |> addShape name
+      СызықПішіні(Сызық(x1,y1,x2,y2),pen()) |> addShape name
       name
    static member AddLine(x1:int,y1:int,x2:int,y2:int) =
       Пішіндері.AddLine(float x1, float y1, float x2, float y2)
    static member AddRectangle(width,height) =
       let name = genName "Rectangle"
-      RectShape(Rect(width,height),pen(),brush()) |> addShape name
+      ТікПішіні(Rect(width,height),pen(),brush()) |> addShape name
       name
    static member AddRectangle(width:int,height:int) =
       Пішіндері.AddRectangle(float width, float height)
    static member AddTriangle(x1,y1,x2,y2,x3,y3) =
       let name = genName "Triangle"
-      TriangleShape(Үшбұрыш(x1,y1,x2,y2,x3,y3),pen(),brush()) |> addShape name
+      ҮшбұрышПішіні(Үшбұрыш(x1,y1,x2,y2,x3,y3),pen(),brush()) |> addShape name
       name
    static member AddEllipse(width,height) =
       let name = genName "Ellipse"
-      EllipseShape(Эллипс(width,height),pen(),brush()) |> addShape name
+      ЭллипсПішіні(Эллипс(width,height),pen(),brush()) |> addShape name
       name
    static member AddEllipse(width:int,height:int) =
       Пішіндері.AddEllipse(float width,float height)
@@ -52,7 +52,7 @@ type Пішіндері private () =
       | Some bytes ->
          let stream = new System.IO.MemoryStream(bytes)
          let image = new Avalonia.Media.Imaging.Bitmap(stream) :> Avalonia.Media.IImage
-         ImageShape(ref image) |> addShape name
+         КескінПішіні(ref image) |> addShape name
       | None ->
          let imageRef = 
             if imageName.StartsWith("http:") || imageName.StartsWith("https:") 
@@ -71,11 +71,11 @@ type Пішіндері private () =
                   imageRef := new Bitmap(stream) :> Avalonia.Media.IImage
                )
                imageRef
-         ImageShape(imageRef) |> addShape name
+         КескінПішіні(imageRef) |> addShape name
       name
    static member AddText(text) =
       let name = genName "Text"
-      TextShape(ref text, font(), brush()) |> addShape name
+      МәтінПішіні(ref text, font(), brush()) |> addShape name
       name
    static member HideShape(shapeName) =      
       My.App.Invoke (fun () -> My.App.Canvas.SetShapeVisibility(shapeName,false))      
@@ -122,7 +122,7 @@ type Пішіндері private () =
    static member SetText(shapeName, text) =
       onShape shapeName (fun info ->
          match info.Shape with
-         | TextShape(textRef, font, color) ->
+         | МәтінПішіні(textRef, font, color) ->
             My.App.Invoke (fun () -> textRef := text; My.App.Canvas.Invalidate())
          | _ -> invalidOp "Expecting text shape"
       )       

@@ -13,7 +13,7 @@ let makeTriangle (Үшбұрыш(x1,y1,x2,y2,x3,y3)) =
     )
     g
 
-let toLayout text (Font(size,family,isBold,isItalic)) color =
+let toLayout text (Қаріп(size,family,isBold,isItalic)) color =
    let layout = new FormattedText(text, System.Globalization.CultureInfo.InvariantCulture, FlowDirection.LeftToRight, Typeface.Default, 1, new SolidColorBrush(color, 1.))
    layout.SetFontSize(size/2.0)      
    if isBold then layout.SetFontWeight(FontWeight.Bold)
@@ -62,76 +62,76 @@ let draw (ctx:DrawingContext) (info:DrawingInfo) =
       | None -> color
    match info.Drawing with
    | DrawLine(Сызық(x1,y1,x2,y2),Қауырсын(color,width)) ->
-      let color = toXwtColor color
+      let color = авалонияТүске color
       let pen = new Pen(new SolidColorBrush(color, 1.0), width)
       ctx.DrawLine(pen, Avalonia.Point(x1, y1), Avalonia.Point(x2, y2))
    | DrawRect(Rect(w,h),Қауырсын(color,width)) ->
-      let color = toXwtColor color
+      let color = авалонияТүске color
       let pen = new Pen(new SolidColorBrush(color, 1.0), width)
       ctx.DrawRectangle(null, pen, Avalonia.Rect(x,y,w,h))
    | DrawTriangle(Үшбұрыш(x1,y1,x2,y2,x3,y3),Қауырсын(color,width)) ->
-      let color = toXwtColor color
+      let color = авалонияТүске color
       let pen = new Pen(new SolidColorBrush(color, 1.0), width)
       ctx.DrawLine(pen, Avalonia.Point(x1, y1), Avalonia.Point(x2, y2))
       ctx.DrawLine(pen, Avalonia.Point(x2, y2), Avalonia.Point(x3, y3))
       ctx.DrawLine(pen, Avalonia.Point(x3, y3), Avalonia.Point(x1, y1))
    | DrawEllipse(Эллипс(w,h),Қауырсын(color,width)) ->
-      let color = toXwtColor color
+      let color = авалонияТүске color
       let pen = new Pen(new SolidColorBrush(color, 1.0), width)
       ctx.DrawEllipse(null, pen, Avalonia.Point(x,y),w,h)
    | DrawImage(image,x',y') ->
       if !image <> null then         
          drawImage ctx info !image (x+x',y+y') |> ignore
    | DrawText(x,y,text,font,color) ->
-      let color = toXwtColor color
+      let color = авалонияТүске color
       let layout = toLayout text font color
       ctx.DrawText(layout, Avalonia.Point(x,y))
    | DrawBoundText(x,y,width,text,font,color) ->
-      let color = toXwtColor color
+      let color = авалонияТүске color
       let layout = toLayout text font color
       layout.MaxTextWidth <- width      
       ctx.DrawText(layout, Avalonia.Point(x,y))
    | FillRect(Rect(w,h),fillColor) ->
-      let color = toXwtColor fillColor
+      let color = авалонияТүске fillColor
       let brush = new SolidColorBrush(color, 1.0)
       ctx.DrawRectangle(brush, null, Avalonia.Rect(x,y,w,h))
    | FillTriangle(triangle,fillColor) ->
-      let color = toXwtColor fillColor
+      let color = авалонияТүске fillColor
       let brush = new SolidColorBrush(color, 1.0)
       let geometry = makeTriangle triangle
       ctx.DrawGeometry(brush, null, geometry)
    | FillEllipse(Эллипс(w,h),fillColor) ->
-      let color = toXwtColor fillColor
+      let color = авалонияТүске fillColor
       let brush = new SolidColorBrush(color, 1.0)
       ctx.DrawEllipse(brush, null, Avalonia.Point(x+w/2.,y+h/2.),w/2.,h/2.)
-   | DrawShape(_,LineShape(Сызық(x1,y1,x2,y2),Қауырсын(color,width))) ->
-      let color = toXwtColor color
+   | DrawShape(_,СызықПішіні(Сызық(x1,y1,x2,y2),Қауырсын(color,width))) ->
+      let color = авалонияТүске color
       let pen = new Pen(new SolidColorBrush(color, 1.0), width)
       ctx.DrawLine(pen, Avalonia.Point(x+ x1, y+y1), Avalonia.Point(x+ x2, y+y2))
-   | DrawShape(_,RectShape(Rect(w,h),Қауырсын(color,width),fillColor)) ->
+   | DrawShape(_,ТікПішіні(Rect(w,h),Қауырсын(color,width),fillColor)) ->
       let currentTransform = ctx.CurrentTransform
       ctx.PushPreTransform (Matrix.CreateTranslation(x,y)) |> ignore
       match info.Rotation with
       | Some angle -> ctx.PushPreTransform (Matrix.CreateRotation(angle)) |> ignore
       | None -> ()            
-      let color = toXwtColor color
-      let colorBackground = toXwtColor fillColor
+      let color = авалонияТүске color
+      let colorBackground = авалонияТүске fillColor
       let pen = new Pen(new SolidColorBrush(color, 1.0), width)
       ctx.DrawRectangle(new SolidColorBrush(colorBackground, 1.0), pen, Avalonia.Rect(0.,0.,w,h))
       ctx.PushSetTransform currentTransform |> ignore;
-   | DrawShape(_,TriangleShape(triangle,Қауырсын(color,width),fillColor)) ->
-      let brush = new SolidColorBrush(withOpacity (toXwtColor fillColor), 1.0)
-      let pen = new Pen(new SolidColorBrush(toXwtColor color, 1.0), width)
+   | DrawShape(_,ҮшбұрышПішіні(triangle,Қауырсын(color,width),fillColor)) ->
+      let brush = new SolidColorBrush(withOpacity (авалонияТүске fillColor), 1.0)
+      let pen = new Pen(new SolidColorBrush(авалонияТүске color, 1.0), width)
       let geometry = makeTriangle triangle
       ctx.DrawGeometry(brush, pen, geometry)
-   | DrawShape(_,EllipseShape(Эллипс(w,h),Қауырсын(color,width),fillColor)) ->
-      let pen = new Pen(new SolidColorBrush(toXwtColor color, 1.0), width)
-      let brush = new SolidColorBrush(withOpacity (toXwtColor fillColor), 1.0)
+   | DrawShape(_,ЭллипсПішіні(Эллипс(w,h),Қауырсын(color,width),fillColor)) ->
+      let pen = new Pen(new SolidColorBrush(авалонияТүске color, 1.0), width)
+      let brush = new SolidColorBrush(withOpacity (авалонияТүске fillColor), 1.0)
       ctx.DrawEllipse(brush, pen, Avalonia.Point(x,y),w,h)
-   | DrawShape(_,TextShape(textRef,font,color)) ->
-      let color = toXwtColor color
+   | DrawShape(_,МәтінПішіні(textRef,font,color)) ->
+      let color = авалонияТүске color
       let layout = toLayout !textRef font color
       ctx.DrawText(layout, Avalonia.Point(x,y))
-   | DrawShape(_,ImageShape(image)) ->
+   | DrawShape(_,КескінПішіні(image)) ->
       if !image <> null then                 
          drawImage ctx info !image (x,y) |> ignore

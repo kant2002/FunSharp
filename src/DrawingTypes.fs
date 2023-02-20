@@ -11,42 +11,42 @@ type Түс =
 
 [<AutoOpen>]
 module internal ТүсТүрлендіргіші =
-   let toXwtColor (түс:Түс) = Avalonia.Media.Color.FromArgb(түс.R, түс.G, түс.B, түс.A)
+   let авалонияТүске (түс:Түс) = Avalonia.Media.Color.FromArgb(түс.R, түс.G, түс.B, түс.A)
 
 type internal Ен = float
 type internal Биіктік = float
 type internal Көлем = float
 type internal Топ = string
-type internal IsBold = bool
-type internal IsItalic = bool
+type internal ҚалыңБар = bool
+type internal КурсивБар = bool
 type internal X = float
 type internal Y = float
 
 type internal Қауырсын = Қауырсын of Түс * Ен
-type internal Қаріп = Font of Көлем * Топ * IsBold * IsItalic
+type internal Қаріп = Қаріп of Көлем * Топ * ҚалыңБар * КурсивБар
 type internal Сызық = Сызық of X * Y * X * Y
-type internal Rect = Rect of Ен * Биіктік
+type internal Тік = Rect of Ен * Биіктік // тікбұрыш
 type internal Үшбұрыш = Үшбұрыш of X * Y * X * Y * X * Y
 type internal Эллипс = Эллипс of Ен * Биіктік
 
-type internal Shape =
-   | LineShape of Сызық * Қауырсын   
-   | RectShape of Rect * Қауырсын * Түс
-   | TriangleShape of Үшбұрыш * Қауырсын * Түс
-   | EllipseShape of Эллипс * Қауырсын * Түс
-   | ImageShape of Avalonia.Media.IImage ref
-   | TextShape of string ref * Қаріп * Түс
+type internal Пішін =
+   | СызықПішіні of Сызық * Қауырсын   
+   | ТікПішіні of Тік * Қауырсын * Түс
+   | ҮшбұрышПішіні of Үшбұрыш * Қауырсын * Түс
+   | ЭллипсПішіні of Эллипс * Қауырсын * Түс
+   | КескінПішіні of Avalonia.Media.IImage ref
+   | МәтінПішіні of string ref * Қаріп * Түс
 
 type internal Drawing =
    | DrawLine of Сызық * Қауырсын
-   | DrawRect of Rect * Қауырсын
+   | DrawRect of Тік * Қауырсын
    | DrawTriangle of Үшбұрыш * Қауырсын
    | DrawEllipse of Эллипс * Қауырсын
    | DrawImage of Avalonia.Media.IImage ref * float * float
    | DrawText of float * float * string * Қаріп * Түс
    | DrawBoundText of float * float * float * string * Қаріп * Түс
-   | FillRect of Rect * Түс
+   | FillRect of Тік * Түс
    | FillTriangle of Үшбұрыш * Түс
    | FillEllipse of Эллипс * Түс
-   | DrawShape of string * Shape
+   | DrawShape of string * Пішін
 
