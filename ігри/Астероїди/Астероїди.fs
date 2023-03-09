@@ -1,9 +1,4 @@
-﻿#if INTERACTIVE
-#r "./bin/debug/Xwt.dll"
-#r "./bin/debug/FunSharp.dll"
-#endif
-
-відкрити Бібліотека
+﻿відкрити Бібліотека
 відкрити Фшарп.Ядро
 
 // Asteroids Game

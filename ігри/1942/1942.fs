@@ -1,9 +1,4 @@
-﻿#if INTERACTIVE
-#r "./bin/debug/Xwt.dll"
-#r "./bin/debug/FunSharp.dll"
-#endif
-
-відкрити Бібліотека
+﻿відкрити Бібліотека
 
 тип System.Collections.Generic.Dictionary<'TKey,'TValue> із
    член this.GetOrDefault(ключ:'TKey,значение:'TValue) =

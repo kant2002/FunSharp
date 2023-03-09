@@ -1,9 +1,4 @@
-﻿#if INTERACTIVE
-#r "./bin/debug/Xwt.dll"
-#r "./bin/debug/FunSharp.dll"
-#endif
-
-відкрити Бібліотека
+﻿відкрити Бібліотека
 
 // Turtle Dodger 0.5b
 // Copyright (c) 2014 Nonki Takahashi.

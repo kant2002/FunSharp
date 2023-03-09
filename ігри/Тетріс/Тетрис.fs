@@ -1,10 +1,4 @@
-﻿#if INTERACTIVE
-#r "nuget: Avalonia.Desktop, 11.0.0-preview3"
-#r "nuget: Avalonia.Themes.Fluent, 11.0.0-preview3"
-#r "../../ісх/bin/Debug/net7.0/ВеселШарп.Бібліотека.dll"
-#endif
-
-відкрити Бібліотека
+﻿відкрити Бібліотека
 
 нехай змінливий КВАДРАТИ = 4      // number of boxes per piece
 нехай змінливий ШИРИНАК = 25    // box width in pixels
