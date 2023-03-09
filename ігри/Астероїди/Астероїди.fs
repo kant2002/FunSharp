@@ -4,6 +4,7 @@
 #endif
 
 відкрити Бібліотека
+відкрити Фшарп.Ядро
 
 // Asteroids Game
 // Copyright (C) 2009, Jason T. Jacques 
