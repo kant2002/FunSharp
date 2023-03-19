@@ -85,19 +85,19 @@ let mutable py2 = 0.0
 
 // Setup world
 let rec Init () =
-   GraphicsWindow.Hide()
-   GraphicsWindow.Title <- gameTitle + "0"
+   ГрафикалықТерезе.Hide()
+   ГрафикалықТерезе.Title <- gameTitle + "0"
    //GraphicsWindow.CanResize <- "False"
-   GraphicsWindow.Ен <- int gameWidth
-   GraphicsWindow.Биіктік <-int gameHeight
+   ГрафикалықТерезе.Ен <- int gameWidth
+   ГрафикалықТерезе.Биіктік <-int gameHeight
 
-   GraphicsWindow.ФонныңТүсі <- backColor
-   GraphicsWindow.ҚылқаламТүсі <- backColor
-   GraphicsWindow.DrawImage(background, 0, 0)
+   ГрафикалықТерезе.ФонныңТүсі <- backColor
+   ГрафикалықТерезе.ҚылқаламТүсі <- backColor
+   ГрафикалықТерезе.DrawImage(background, 0, 0)
 
    LevelCheck()
 
-   GraphicsWindow.ҚаламТүсі <- playerColor
+   ГрафикалықТерезе.ҚаламТүсі <- playerColor
    player <- Пішіндері.AddImage(path + "Asteroids_Ship.png")
    // player = Shapes.AddTriangle(playerWidth/2, 0, 0, playerHeight, playerWidth, playerHeight)
    Пішіндері.Жылжытуға(player, (gameWidth - playerWidth) / 2.0, (float gameHeight - playerHeight) / 2.0)
@@ -105,8 +105,8 @@ let rec Init () =
 
 // Main gane routine
 and Play () =
-   GraphicsWindow.Show()
-   GraphicsWindow.KeyDown <- Callback(ChangeDirection)
+   ГрафикалықТерезе.Show()
+   ГрафикалықТерезе.KeyDown <- Callback(ChangeDirection)
 
    // Main loop
    play <- 1
@@ -121,17 +121,17 @@ and Play () =
 
 // Read key event and act
 and ChangeDirection () =   
-   if (GraphicsWindow.LastKey = rightKey) then
+   if (ГрафикалықТерезе.LastKey = rightKey) then
      playerAngle <- (playerAngle + 10.0) % 360.0
-   elif (GraphicsWindow.LastKey = leftKey) then
+   elif (ГрафикалықТерезе.LastKey = leftKey) then
      playerAngle <- (playerAngle - 10.0) % 360.0
-   elif (GraphicsWindow.LastKey = forwardKey) then
+   elif (ГрафикалықТерезе.LastKey = forwardKey) then
      playerSpeed <- playerSpeed + 1.0
-   elif (GraphicsWindow.LastKey = backKey) then
+   elif (ГрафикалықТерезе.LastKey = backKey) then
      playerSpeed <- playerSpeed - 1.0
-   elif (GraphicsWindow.LastKey = fireKey) then
+   elif (ГрафикалықТерезе.LastKey = fireKey) then
      Fire()
-   elif (GraphicsWindow.LastKey = pauseKey) then
+   elif (ГрафикалықТерезе.LastKey = pauseKey) then
      pause <- Математика.Remainder(pause + 1, 2)  
    Пішіндері.Rotate(player, playerAngle)
 
@@ -226,7 +226,7 @@ and AddRock () =
          let y = Математика.АлуКездейсоқСаны(int gameHeight - size)
          size,float x,float y
    // Draw the rock
-   GraphicsWindow.ҚаламТүсі <- rockColor
+   ГрафикалықТерезе.ҚаламТүсі <- rockColor
    let image =
       if size = 60 then bigRock
       elif size = 40 then medRock
@@ -257,7 +257,7 @@ and RemoveRock nextRemove =
      score <- score + 5   
 
    // Show updated score
-   GraphicsWindow.Title <- gameTitle + (score * pointsMultiply).ToString()
+   ГрафикалықТерезе.Title <- gameTitle + (score * pointsMultiply).ToString()
 
    // Remove all references from the arrays
    Пішіндері.Remove(rock.[nextRemove])
@@ -283,7 +283,7 @@ and Fire () =
    while (ammoCount > (ammoMax - 1)) do     
      RemoveAmmo 0
    // Add the ammo
-   GraphicsWindow.ҚаламТүсі <- ammoColor   
+   ГрафикалықТерезе.ҚаламТүсі <- ammoColor   
    ammo.Add(Пішіндері.AddEllipse(ammoSize, ammoSize))
    Пішіндері.Жылжытуға(ammo.[ammoCount], (px1 + px2 - ammoSize) / 2.0, (py1 + py2 - ammoSize) / 2.0)
    ammoAngle.Add(playerAngle)
@@ -307,7 +307,7 @@ and RemoveAmmo nextRemove =
 and EndGame () =
    play <- 0
    Пішіндері.Remove(player)
-   GraphicsWindow.ShowMessage("You scored " + (score * pointsMultiply).ToString() + " points. Thanks for Playing.", "Game Over!")
+   ГрафикалықТерезе.ShowMessage("You scored " + (score * pointsMultiply).ToString() + " points. Thanks for Playing.", "Game Over!")
 
 // Start game
 Init()

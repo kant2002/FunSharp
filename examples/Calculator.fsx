@@ -6,14 +6,14 @@ open Кітапхана
 
 let mutable p = 0
 
-GraphicsWindow.CanResize <- false
-GraphicsWindow.Ен <- 260
-GraphicsWindow.Биіктік <- 230
-GraphicsWindow.Title <- "Calculator v. 1.0 by Alex_2000"
+ГрафикалықТерезе.CanResize <- false
+ГрафикалықТерезе.Ен <- 260
+ГрафикалықТерезе.Биіктік <- 230
+ГрафикалықТерезе.Title <- "Calculator v. 1.0 by Alex_2000"
 
-GraphicsWindow.ФонныңТүсі = GraphicsWindow.GetColorFromRGB(240, 240, 240)
-GraphicsWindow.FontBold <- false
-GraphicsWindow.ҚылқаламТүсі <- Түстер.Қара
+ГрафикалықТерезе.ФонныңТүсі = ГрафикалықТерезе.GetColorFromRGB(240, 240, 240)
+ГрафикалықТерезе.FontBold <- false
+ГрафикалықТерезе.ҚылқаламТүсі <- Түстер.Қара
 
 let m = Пішіндері.AddText("M")
 Пішіндері.Move(m, 22, 62)
@@ -39,7 +39,7 @@ let C5 = C4 + (222-181)*N
 let T0 = C0
 let T1 = T0 + (139-58)*N
 let T2 = T1 + (202-139)*N 
-GraphicsWindow.ҚылқаламТүсі <- Түстер.Red
+ГрафикалықТерезе.ҚылқаламТүсі <- Түстер.Red
 let keyMC = Controls.AddButton("MC", C0, R1)
 Controls.SetSize(keyMC, 35*N, 25*N)
 let keyMR = Controls.AddButton("MR", C0, R2)
@@ -66,7 +66,7 @@ Controls.SetSize(keyplus, 35*N, 25*N)
 let keyravno = Controls.AddButton("=", C5, R4)
 Controls.SetSize(keyravno, 35*N, 25*N)
 
-GraphicsWindow.ҚылқаламТүсі <- Түстер.Blue
+ГрафикалықТерезе.ҚылқаламТүсі <- Түстер.Blue
 let key7 = Controls.AddButton("7", C1, R1)
 Controls.SetSize(key7, 35*N, 25*N)
 let key8 = Controls.AddButton("8", C2, R1)

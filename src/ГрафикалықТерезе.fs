@@ -4,15 +4,15 @@ open System
 open Avalonia.Media.Imaging
 
 [<Sealed>]
-type GraphicsWindow private () =   
+type ГрафикалықТерезе private () =   
    static let rnd = Random()
    static let mutable фонныңТүсі = Түстер.Ақ
    static let mutable ен = 640
    static let mutable биіктік = 480
-   static let pen () = Қауырсын(GraphicsWindow.ҚаламТүсі,GraphicsWindow.PenWidth)
-   static let brush () = GraphicsWindow.ҚылқаламТүсі
-   static let font () = 
-      Қаріп.Қаріп(GraphicsWindow.FontSize,GraphicsWindow.FontName,GraphicsWindow.FontBold, GraphicsWindow.FontItalic)
+   static let қалам () = Қауырсын(ГрафикалықТерезе.ҚаламТүсі,ГрафикалықТерезе.PenWidth)
+   static let қылқалам () = ГрафикалықТерезе.ҚылқаламТүсі
+   static let қаріп () = 
+      Қаріп.Қаріп(ГрафикалықТерезе.FontSize,ГрафикалықТерезе.FontName,ГрафикалықТерезе.FontBold, ГрафикалықТерезе.FontItalic)
    static let draw drawing = addDrawing drawing      
    static let drawAt (x,y) drawing = addDrawingAt drawing (x,y)
    static member Title
@@ -46,19 +46,19 @@ type GraphicsWindow private () =
    static member Clear () =
       My.App.Invoke (fun () -> My.App.Canvas.ClearDrawings())
    static member DrawLine(x1,y1,x2,y2) =
-      DrawLine(Сызық(x1,y1,x2,y2),pen()) |> draw
+      DrawLine(Сызық(x1,y1,x2,y2),қалам()) |> draw
    static member DrawLine(x1:int,y1:int,x2:int,y2:int) =
-      GraphicsWindow.DrawLine(float x1, float y1, float x2, float y2)
+      ГрафикалықТерезе.DrawLine(float x1, float y1, float x2, float y2)
    static member DrawRectangle(x,y,width,height) =
-      DrawRect(Rect(width,height),pen()) |> drawAt (x,y)
+      DrawRect(Rect(width,height),қалам()) |> drawAt (x,y)
    static member DrawRectangle(x:int,y:int,width:int,height:int) =
-      GraphicsWindow.DrawRectangle(float x, float y, float width, float height)
+      ГрафикалықТерезе.DrawRectangle(float x, float y, float width, float height)
    static member DrawTriangle(x1,y1,x2,y2,x3,y3) =
-      DrawTriangle(Үшбұрыш(x1,y1,x2,y2,x3,y3),pen()) |> draw
+      DrawTriangle(Үшбұрыш(x1,y1,x2,y2,x3,y3),қалам()) |> draw
    static member DrawEllipse(x,y,width,height) =
-      DrawEllipse(Эллипс(width,height),pen()) |> drawAt (x,y)
+      DrawEllipse(Эллипс(width,height),қалам()) |> drawAt (x,y)
    static member DrawEllipse(x:int,y:int,width:int,height:int) =
-      GraphicsWindow.DrawEllipse(float x, float y, float width, float height)
+      ГрафикалықТерезе.DrawEllipse(float x, float y, float width, float height)
    static member DrawImage(imageName,x,y) =
       let imageRef =
          match ImageList.TryGetImageBytes imageName with
@@ -79,23 +79,23 @@ type GraphicsWindow private () =
                 ref (new Bitmap(Reflection.Assembly.GetEntryAssembly().GetManifestResourceStream(imageName)) :> Avalonia.Media.IImage)
       DrawImage(imageRef,x,y) |> draw
    static member DrawImage(imageName,x:int,y:int) =
-      GraphicsWindow.DrawImage(imageName, float x, float y)
+      ГрафикалықТерезе.DrawImage(imageName, float x, float y)
    static member DrawText(x,y,text) =
-      DrawText(x,y,text,font(),brush()) |> draw
+      DrawText(x,y,text,қаріп(),қылқалам()) |> draw
    static member DrawText(x:int,y:int,text) =
-      GraphicsWindow.DrawText(float x,float y,text)
+      ГрафикалықТерезе.DrawText(float x,float y,text)
    static member DrawBoundText(x,y,width,text) =
-      DrawBoundText(x,y,width,text,font(),brush()) |> draw
+      DrawBoundText(x,y,width,text,қаріп(),қылқалам()) |> draw
    static member FillRectangle(x,y,width,height) =
-      FillRect(Rect(width,height),brush()) |> drawAt (x,y)
+      FillRect(Rect(width,height),қылқалам()) |> drawAt (x,y)
    static member FillRectangle(x:int,y:int,width:int,height:int) =
-      GraphicsWindow.FillRectangle(float x,float y,float width,float height)
+      ГрафикалықТерезе.FillRectangle(float x,float y,float width,float height)
    static member FillTriangle(x1,y1,x2,y2,x3,y3) =
-      FillTriangle(Үшбұрыш(x1,y1,x2,y2,x3,y3),brush()) |> draw
+      FillTriangle(Үшбұрыш(x1,y1,x2,y2,x3,y3),қылқалам()) |> draw
    static member ТолтыруЭллипс(x,y,width,height) =
-      FillEllipse(Эллипс(width,height),brush()) |> drawAt (x,y)
+      FillEllipse(Эллипс(width,height),қылқалам()) |> drawAt (x,y)
    static member ТолтыруЭллипс(x:int,y:int,width:int,height:int) =
-      FillEllipse(Эллипс(float width,float height),brush()) |> drawAt (float x,float y)
+      FillEllipse(Эллипс(float width,float height),қылқалам()) |> drawAt (float x,float y)
    static member LastKey with get() = My.App.LastKey
    static member KeyUp with set callback = My.App.KeyUp <- callback
    static member KeyDown with set callback = My.App.KeyDown <- callback 

@@ -7,8 +7,8 @@ open Кітапхана
 let доп = Пішіндері.AddRectangle(200.0, 100.0)
 
 let OnMouseDown () =
-  let x = GraphicsWindow.ТінтуірX
-  let y = GraphicsWindow.ТінтуірY
+  let x = ГрафикалықТерезе.ТінтуірX
+  let y = ГрафикалықТерезе.ТінтуірY
   Пішіндері.Жылжытуға(доп, x, y)
 
-GraphicsWindow.MouseDown <- Callback(OnMouseDown)
+ГрафикалықТерезе.MouseDown <- Callback(OnMouseDown)

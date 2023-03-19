@@ -20,7 +20,7 @@ open Кітапхана
 // 0.1a 2014-04-02 Created. (QZN342)
 
 let title = "Turtle Dodger 0.5b"
-GraphicsWindow.Title <- title
+ГрафикалықТерезе.Title <- title
 // Debug variables
 let debug = false
 let mutable cross1 = "<shape name>"
@@ -48,27 +48,27 @@ let objects = ResizeArray<Object>()
 let rec Closing () =
    Timer.Pause()
    Тасбақа.Бұру(720)
-   GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
-   GraphicsWindow.FontName <- "Trebuchet MS"
-   GraphicsWindow.FontSize <- 40.0
+   ГрафикалықТерезе.ҚылқаламТүсі <- Түстер.Ақ
+   ГрафикалықТерезе.FontName <- "Trebuchet MS"
+   ГрафикалықТерезе.FontSize <- 40.0
    let x = (gw - 217) / 2
    let y = 100
-   GraphicsWindow.DrawText(x, y, "GAME OVER")
+   ГрафикалықТерезе.DrawText(x, y, "GAME OVER")
    Program.Delay(3000)
 and Opening () =
    let url = "" // "http://www.nonkit.com/smallbasic.files/"
    let bigTurtle = Пішіндері.AddImage(url + "Turtle.png")
    Пішіндері.Move(bigTurtle, 180, 140)
-   GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
-   GraphicsWindow.FontName <- "Trebuchet MS"
-   GraphicsWindow.FontSize <- 50.0
+   ГрафикалықТерезе.ҚылқаламТүсі <- Түстер.Ақ
+   ГрафикалықТерезе.FontName <- "Trebuchet MS"
+   ГрафикалықТерезе.FontSize <- 50.0
    let x = (gw - 443) / 2
    let y = 40
-   GraphicsWindow.DrawText(x, y, title)
+   ГрафикалықТерезе.DrawText(x, y, title)
    Program.Delay(3000)
-   GraphicsWindow.Clear()
+   ГрафикалықТерезе.Clear()
 and Ready () =
-   GraphicsWindow.FontSize <- 40.0
+   ГрафикалықТерезе.FontSize <- 40.0
    let ready = Пішіндері.AddText("Ready?")
    let x = (gw - 130) / 2
    let y = 100
@@ -82,15 +82,15 @@ and Game () =
    Тасбақа.PenUp()
    let x = gw / 2
    let y = gh - 40
-   GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
-   GraphicsWindow.FontSize <- 18.0
+   ГрафикалықТерезе.ҚылқаламТүсі <- Түстер.Ақ
+   ГрафикалықТерезе.FontSize <- 18.0
    score <- Пішіндері.AddText("0")
    Пішіндері.Move(score, 20, 20)
    if debug then
-     GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
-     GraphicsWindow.FontSize <- 12.0
+     ГрафикалықТерезе.ҚылқаламТүсі <- Түстер.Ақ
+     ГрафикалықТерезе.FontSize <- 12.0
      pos <- Пішіндері.AddText("(" + x.ToString() + "," + y.ToString() + ")")
-     GraphicsWindow.PenWidth <- 1.0
+     ГрафикалықТерезе.PenWidth <- 1.0
      cross1 <- Пішіндері.AddLine(0, -8, 0, 8)
      cross2 <- Пішіндері.AddLine(-8, 0, 8, 0)
      Пішіндері.Move(cross1, x, y)
@@ -101,7 +101,7 @@ and Game () =
    moving <- false
    scrolling <- false
    Ready()
-   GraphicsWindow.KeyDown <- Callback(OnKeyDown)
+   ГрафикалықТерезе.KeyDown <- Callback(OnKeyDown)
    let tick = false
    Timer.Interval <- 1000 / 24
    Timer.Tick <- Callback(OnTick)
@@ -121,9 +121,9 @@ and Game () =
      else
        Program.Delay(100)      
 and Init () =
-   GraphicsWindow.ФонныңТүсі <- Түстер.DodgerBlue
-   GraphicsWindow.Ен <- gw
-   GraphicsWindow.Биіктік <- gh   
+   ГрафикалықТерезе.ФонныңТүсі <- Түстер.DodgerBlue
+   ГрафикалықТерезе.Ен <- gw
+   ГрафикалықТерезе.Биіктік <- gh   
    passed <- 0
    collisionDetected <- false
 and OnTick () =
@@ -161,9 +161,9 @@ and ScrollObject () =
        objects.[i].Y <- y   
 and AddObject () =   
    iMax <- iMax + 1
-   GraphicsWindow.PenWidth <- 1.0
+   ГрафикалықТерезе.PenWidth <- 1.0
    let kind = Математика.АлуКездейсоқСаны(3)
-   GraphicsWindow.ҚылқаламТүсі <- color.[kind]
+   ГрафикалықТерезе.ҚылқаламТүсі <- color.[kind]
    let sz = size.[kind]
    let shapeName = Пішіндері.AddRectangle(sz, sz)
    let x = Математика.АлуКездейсоқСаны(gw - 20) + 10
@@ -174,7 +174,7 @@ and AddObject () =
 and OnKeyDown () =
    if not moving then
      moving <- true
-     lastKey <- GraphicsWindow.LastKey   
+     lastKey <- ГрафикалықТерезе.LastKey   
 
 Init()
 Opening()

@@ -1,24 +1,24 @@
 ﻿open Кітапхана
 
-let gw = float GraphicsWindow.Ен
-let gh = float GraphicsWindow.Биіктік
+let gw = float ГрафикалықТерезе.Ен
+let gh = float ГрафикалықТерезе.Биіктік
 let paddle = Пішіндері.AddRectangle(120, 12)
 let ball = Пішіндері.AddEllipse(16, 16)
 let mutable score = 0
 
 let OnMouseMove () =
-  let paddleX = GraphicsWindow.ТінтуірX
+  let paddleX = ГрафикалықТерезе.ТінтуірX
   Пішіндері.Жылжытуға(paddle, paddleX - 60.0, gh - 12.0)
 
 let PrintScore () =
   // Clear the score first and then draw the real score text
-  GraphicsWindow.ҚылқаламТүсі <- Түстер.Ақ
-  GraphicsWindow.FillRectangle(10, 10, 200, 20)
-  GraphicsWindow.ҚылқаламТүсі <- Түстер.Қара
-  GraphicsWindow.DrawText(10, 10, "Score: " + score.ToString())
+  ГрафикалықТерезе.ҚылқаламТүсі <- Түстер.Ақ
+  ГрафикалықТерезе.FillRectangle(10, 10, 200, 20)
+  ГрафикалықТерезе.ҚылқаламТүсі <- Түстер.Қара
+  ГрафикалықТерезе.DrawText(10, 10, "Score: " + score.ToString())
 
-GraphicsWindow.FontSize <- 14.0
-GraphicsWindow.MouseMove <- Callback(OnMouseMove)
+ГрафикалықТерезе.FontSize <- 14.0
+ГрафикалықТерезе.MouseMove <- Callback(OnMouseMove)
 
 PrintScore()
 Дыбыс.ТартуҚоңырауды (*AndWait*) ()
@@ -47,4 +47,4 @@ while (y < gh) do
   Пішіндері.Жылжытуға(ball, x, y)
   Program.Delay(15)
   
-GraphicsWindow.ShowMessage("Your score is: " + score.ToString(), "Paddle")
+ГрафикалықТерезе.ShowMessage("Your score is: " + score.ToString(), "Paddle")

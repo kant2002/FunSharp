@@ -7,8 +7,8 @@ type Тасбақа private () =
    static let mutable userHidden = false
    static let mutable speed = 0
    static let mutable angle = 0.0
-   static let mutable _x = float GraphicsWindow.Ен / 2.0
-   static let mutable _y = float GraphicsWindow.Биіктік / 2.0
+   static let mutable _x = float ГрафикалықТерезе.Ен / 2.0
+   static let mutable _y = float ГрафикалықТерезе.Биіктік / 2.0
    static let mutable isPenDown = true
    static let show () =
       if not userHidden then
@@ -48,7 +48,7 @@ type Тасбақа private () =
       let x' = _x + қашықтық * cos r
       let y' = _y + қашықтық * sin r
       if isPenDown then
-         GraphicsWindow.DrawLine(_x,_y,x',y')
+         ГрафикалықТерезе.DrawLine(_x,_y,x',y')
       _x <- x'
       _y <- y'
       My.App.Canvas.Тасбақа.Offset <- Avalonia.Point(_x,_y)

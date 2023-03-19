@@ -1,7 +1,7 @@
 ﻿open Кітапхана
 
-GraphicsWindow.Ен <- 288
-GraphicsWindow.Биіктік <- 440
+ГрафикалықТерезе.Ен <- 288
+ГрафикалықТерезе.Биіктік <- 440
 
 let bg = Пішіндері.AddImage("bg.png")
 let ground = Пішіндері.AddImage("ground.png")
@@ -40,9 +40,9 @@ let scroll = ref 0
 let flappy = ref { X = 30.0; Y = 150.0; VY = 0.0; IsAlive=true }
 let flapme () = if (!flappy).IsAlive then flappy := flap !flappy
 
-GraphicsWindow.KeyDown <-    
-    fun () -> if GraphicsWindow.LastKey = "Space" then flapme ()
-GraphicsWindow.MouseDown <-
+ГрафикалықТерезе.KeyDown <-    
+    fun () -> if ГрафикалықТерезе.LastKey = "Space" then flapme ()
+ГрафикалықТерезе.MouseDown <-
     fun () -> flapme ()
 
 while true do

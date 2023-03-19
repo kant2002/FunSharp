@@ -8,10 +8,10 @@ type internal ShapeInfo = { Shape:Пішін; mutable Offset:Avalonia.Point; mut
 
 [<Sealed>]
 type Пішіндері private () =
-   static let pen () = Қауырсын(GraphicsWindow.ҚаламТүсі,GraphicsWindow.PenWidth)
-   static let brush () = GraphicsWindow.ҚылқаламТүсі
+   static let pen () = Қауырсын(ГрафикалықТерезе.ҚаламТүсі,ГрафикалықТерезе.PenWidth)
+   static let brush () = ГрафикалықТерезе.ҚылқаламТүсі
    static let font () = 
-      Қаріп(GraphicsWindow.FontSize,GraphicsWindow.FontName,GraphicsWindow.FontBold, GraphicsWindow.FontItalic)
+      Қаріп(ГрафикалықТерезе.FontSize,ГрафикалықТерезе.FontName,ГрафикалықТерезе.FontBold, ГрафикалықТерезе.FontItalic)
    static let shapes = Dictionary<string,ShapeInfo>()
    static let addShape name shape =
       let info = { Shape=shape; Offset=Avalonia.Point(); Opacity=1.0 }

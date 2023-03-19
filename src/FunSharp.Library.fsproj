@@ -14,7 +14,7 @@
 		<Compile Include="Http.fs" />
 		<Compile Include="Resource.fs" />
 		<Compile Include="ImageList.fs" />
-		<Compile Include="GraphicsWindow.fs" />
+		<Compile Include="ГрафикалықТерезе.fs" />
 		<Compile Include="Shapes.fs" />
 		<Compile Include="Turtle.fs" />
 		<Compile Include="Controls.fs" />
