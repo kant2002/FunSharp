@@ -34,8 +34,8 @@
 
 	<ItemGroup>
     <PackageReference Include="System.Windows.Extensions" Version="7.0.0" />
-    <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview5" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0-preview5" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.0" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0" />
     <PackageReference Include="FSharp.Core.Ukrainian" Version="0.0.2" />
 	</ItemGroup>
 </Project>

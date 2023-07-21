@@ -37,10 +37,7 @@
    нехай змінливий праваКлавішаВниз = ложь
    нехай запуститиНаІКПотоці (дія: Func<'a>) =
     нехай змінливий результат : 'a = нуль
-    асинх {
-        нехай! x = Dispatcher.UIThread.InvokeAsync(дія) |> Асинх.ДочекатисяЗадачу
-        результат <- x
-    } |> Async.RunSynchronously
+    результат <- Dispatcher.UIThread.InvokeAsync(дія).Result
     результат
    нехай ініціюватиПолотно () =
       головнеПолотно <- новий ПолотноДляМалювання(Background=новий Avalonia.Media.SolidColorBrush(доКольораАвалонії Кольори.White))

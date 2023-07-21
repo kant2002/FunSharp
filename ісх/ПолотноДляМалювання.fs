@@ -2,13 +2,17 @@
 
 відкрити Avalonia
 відкрити Avalonia.Controls
+відкрити Avalonia.LogicalTree
+відкрити Avalonia.Media
 відкрити Avalonia.Media.Imaging
+відкрити Avalonia.Metadata
 відкрити Avalonia.Threading
 відкрити Малювати
 
 [<AllowNullLiteral>]
 тип внутрішній ПолотноДляМалювання () =
-   успадкує Canvas ()
+   успадкує Control ()
+
    нехай зображенняЧерепахи = новий Bitmap(typeof<ПолотноДляМалювання>.Assembly.GetManifestResourceStream("ВеселШарп.Бібліотека.черепаха.png"))
    нехай малюнки = ResizeArray<ІнфоМалюнка>()
    нехай черепаха =
@@ -21,8 +25,18 @@
          | _ -> None
       )
       |> Option.iter ф   
-   член полотно.Черепаха = черепаха
-   член полотно.ОчиститиМалюнки() =
+   let childIndexChanged = Event<System.EventHandler<ChildIndexChangedEventArgs>, ChildIndexChangedEventArgs>()
+      
+   member val Background : IBrush = null with get, set
+
+   /// <summary>
+   /// Получает детей для <see cref="ПолотноДляМалювання"/>.
+   /// </summary>
+   [<Content>]
+   member полотно.Children = new Avalonia.Controls.Controls()
+
+   member полотно.Черепаха = черепаха
+   member полотно.ОчиститиМалюнки() =
       малюнки.Clear()
       полотно.InvalidateVisual()
    член полотно.ДодатиМалюнок(малюнок) =
@@ -58,7 +72,22 @@
    член полотно.ВидалитиДітину(елемент) =
       полотно.Children.Remove(елемент) |> ignore
    перевизначити this.Render(конт) =
+      let фон = this.Background;
+      якщо (not (isNull фон)) тоді
+        let отрисовываемыйРазмер = this.Bounds.Size
+        конт.FillRectangle(фон, new Rect(отрисовываемыйРазмер));
       база.Render(конт)
       для малюнок у малюнки зробити 
          якщо малюнок.Видно тоді намалювати конт малюнок
       якщо черепаха.Видно тоді намалювати конт черепаха
+   interface IChildIndexProvider with
+      member this.GetChildIndex child =
+        match child with
+        | :? Control -> this.Children.IndexOf(child :?> Control)
+        | _ -> -1
+      member this.TryGetTotalCount (count: byref<int>) =
+        count <- this.Children.Count
+        true
+
+      [<CLIEvent>]
+      member this.ChildIndexChanged = childIndexChanged.Publish
