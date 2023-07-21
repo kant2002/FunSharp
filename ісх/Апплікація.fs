@@ -37,10 +37,7 @@ type internal МояАпплікація () =
    let mutable праваКлавішаВниз = false
    let запуститиНаІКПотоці (дія: Func<'a>) =
     let mutable результат : 'a = null
-    async {
-        let! x = Dispatcher.UIThread.InvokeAsync(дія) |> Async.AwaitTask
-        результат <- x
-    } |> Async.RunSynchronously
+    результат <- Dispatcher.UIThread.InvokeAsync(дія).Result
     результат
    let ініціюватиПолотно () =
       головнеПолотно <- new ПолотноДляМалювання(Background=new Avalonia.Media.SolidColorBrush(доКольораАвалонії Кольори.White))

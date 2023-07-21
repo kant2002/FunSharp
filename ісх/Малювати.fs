@@ -28,31 +28,28 @@ type ІнфоМалюнка = {
    mutable Видно:bool 
    mutable Обертання:float option
    mutable Масштаб:(float * float) option
-   }
+}
 
-let намалюватиЗображення (конт:DrawingContext) (інфо:ІнфоМалюнка) (зображення:IImage) (x,y) =
+let намалюватиЗображення (конт:DrawingContext) (інфо:ІнфоМалюнка) (зображення:IImage) (x:float,y:float) =
    match інфо.Обертання with
    | Some кут ->           
-      let ш,в = зображення.Size.Width, зображення.Size.Height
-      let поточнеПеретворення = конт.CurrentTransform;
-      let джерело = new Rect(new Point(0.0,0.0),зображення.Size)
-      конт.PushPreTransform (Matrix.CreateTranslation(x+ш/2.0,y+в/2.0)) |> ignore
-      конт.PushPreTransform (Matrix.CreateRotation(Бібліотека.Математика.ОтриматиРадіани кут)) |> ignore
-      конт.PushPreTransform (Matrix.CreateTranslation(-ш / 2.0, -в / 2.0)) |> ignore
-      match інфо.Масштаб with
-      | Some(sx,sy) -> конт.PushPreTransform (Matrix.CreateScale(sx,sy)) |> ignore
-      | None -> ()    
-      конт.DrawImage(зображення, джерело)
-      конт.PushSetTransform поточнеПеретворення;
+        let ш,в = зображення.Size.Width, зображення.Size.Height
+        let джерело = new Rect(new Point(0.0,0.0),зображення.Size)
+        use _ = конт.PushTransform (Matrix.CreateTranslation(x+ш/2.0,y+в/2.0))
+        use _ = конт.PushTransform (Matrix.CreateRotation(Бібліотека.Математика.ОтриматиРадіани кут))
+        use _ = конт.PushTransform (Matrix.CreateTranslation(-ш / 2.0, -в / 2.0))
+        match інфо.Масштаб with
+        | Some(sx,sy) -> 
+            use _ = конт.PushTransform (Matrix.CreateScale(sx,sy))
+            конт.DrawImage(зображення, джерело)
+        | None -> конт.DrawImage(зображення, джерело)
    | None ->
-      let поточнеПеретворення = конт.CurrentTransform;
       match інфо.Масштаб with
       | Some(мx,мy) -> 
-         конт.PushPreTransform (Matrix.CreateScale(мx,мy)) |> ignore
+         use _ = конт.PushTransform (Matrix.CreateScale(мx,мy))
          конт.DrawImage(зображення,new Rect(x, y, зображення.Size.Width/мx,зображення.Size.Height/мy))
       | None ->
          конт.DrawImage(зображення,new Rect(x, y, зображення.Size.Width, зображення.Size.Height))
-      конт.PushSetTransform поточнеПеретворення;
 
 let намалювати (конт:DrawingContext) (інфо:ІнфоМалюнка) =
    let x,y = інфо.Зсув.X, інфо.Зсув.Y
@@ -109,16 +106,16 @@ let намалювати (конт:DrawingContext) (інфо:ІнфоМалюн�
       let перо = new Pen(new SolidColorBrush(колірАвалонії, 1.0), ширина)
       конт.DrawLine(перо, Avalonia.Point(x+ x1, y+y1), Avalonia.Point(x+ x2, y+y2))
    | НамалюватиФігуру(_,ФігураПрямокутника(Прямокутник(w,h),Перо(колір,ширина),колірЗаливки)) ->
-      let поточнеПеретворення = конт.CurrentTransform;
-      конт.PushPreTransform (Matrix.CreateTranslation(x,y)) |> ignore
-      match інфо.Обертання with
-      | Some кут -> конт.PushPreTransform (Matrix.CreateRotation(кут)) |> ignore
-      | None -> ()            
+      use _ = конт.PushTransform (Matrix.CreateTranslation(x,y))
       let колірАвалонії = доКольораАвалонії колір
       let колірЗаливкиАвалонії = доКольораАвалонії колірЗаливки
       let перо = new Pen(new SolidColorBrush(колірАвалонії, 1.0), ширина)
-      конт.DrawRectangle(new SolidColorBrush(колірЗаливкиАвалонії, 1.0), перо, Avalonia.Rect(0.,0.,w,h))
-      конт.PushSetTransform поточнеПеретворення |> ignore;
+      match інфо.Обертання with
+      | Some кут ->
+        use _ = конт.PushTransform (Matrix.CreateRotation(кут))
+        конт.DrawRectangle(new SolidColorBrush(колірЗаливкиАвалонії, 1.0), перо, Avalonia.Rect(0.,0.,w,h))
+      | None ->
+        конт.DrawRectangle(new SolidColorBrush(колірЗаливкиАвалонії, 1.0), перо, Avalonia.Rect(0.,0.,w,h))
    | НамалюватиФігуру(_,ФігураТрикутника(трикутник,Перо(колір,ширина),колірЗаливки)) ->
       let пензлик = new SolidColorBrush(зНепрозорістю (доКольораАвалонії колірЗаливки), 1.0)
       let перо = new Pen(new SolidColorBrush(доКольораАвалонії колір, 1.0), ширина)

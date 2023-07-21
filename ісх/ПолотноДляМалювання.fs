@@ -2,13 +2,17 @@
 
 open Avalonia
 open Avalonia.Controls
+open Avalonia.LogicalTree
+open Avalonia.Media
 open Avalonia.Media.Imaging
+open Avalonia.Metadata
 open Avalonia.Threading
 open Малювати
 
 [<AllowNullLiteral>]
 type internal ПолотноДляМалювання () =
-   inherit Canvas ()
+   inherit Control ()
+
    let зображенняЧерепахи = new Bitmap(typeof<ПолотноДляМалювання>.Assembly.GetManifestResourceStream("ВеселШарп.Бібліотека.черепаха.png"))
    let малюнки = ResizeArray<ІнфоМалюнка>()
    let черепаха =
@@ -21,6 +25,16 @@ type internal ПолотноДляМалювання () =
          | _ -> None
       )
       |> Option.iter ф   
+   let childIndexChanged = Event<System.EventHandler<ChildIndexChangedEventArgs>, ChildIndexChangedEventArgs>()
+      
+   member val Background : IBrush = null with get, set
+
+   /// <summary>
+   /// Получает детей для <see cref="ПолотноДляМалювання"/>.
+   /// </summary>
+   [<Content>]
+   member полотно.Children = new Avalonia.Controls.Controls()
+
    member полотно.Черепаха = черепаха
    member полотно.ОчиститиМалюнки() =
       малюнки.Clear()
@@ -58,7 +72,22 @@ type internal ПолотноДляМалювання () =
    member полотно.ВидалитиДітину(елемент) =
       полотно.Children.Remove(елемент) |> ignore
    override this.Render(конт) =
+      let фон = this.Background;
+      if (not (isNull фон)) then
+        let отрисовываемыйРазмер = this.Bounds.Size
+        конт.FillRectangle(фон, new Rect(отрисовываемыйРазмер));
       base.Render(конт)
       for малюнок in малюнки do 
          if малюнок.Видно then намалювати конт малюнок
       if черепаха.Видно then намалювати конт черепаха
+   interface IChildIndexProvider with
+      member this.GetChildIndex child =
+        match child with
+        | :? Control -> this.Children.IndexOf(child :?> Control)
+        | _ -> -1
+      member this.TryGetTotalCount (count: byref<int>) =
+        count <- this.Children.Count
+        true
+
+      [<CLIEvent>]
+      member this.ChildIndexChanged = childIndexChanged.Publish
