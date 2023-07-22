@@ -15,7 +15,7 @@ type Callback = delegate of unit -> unit
 type AvaloniaApp() =
     inherit Avalonia.Application()
     override self.Initialize() =
-        let theme = new FluentTheme(new Uri("avares://ВеселШарп.Бiблiотека"), Mode = FluentThemeMode.Light)
+        let theme = new FluentTheme()
         self.Styles.Add(theme)
 
 type internal МоеПриложение () =
@@ -36,10 +36,7 @@ type internal МоеПриложение () =
    let mutable isRightButtonDown = false
    let runOnUiThread (action: Func<'a>) =
     let mutable result : 'a = null
-    async {
-        let! x = Dispatcher.UIThread.InvokeAsync(action) |> Async.AwaitTask
-        result <- x
-    } |> Async.RunSynchronously
+    result <- Dispatcher.UIThread.InvokeAsync(action).Result
     result
    let инициализироватьХолст () =
       главныйХолст <- new ХолстДляРисования(Background=new Avalonia.Media.SolidColorBrush(кXwtЦвету Цвета.White))
