@@ -2,13 +2,16 @@
 
 открыть Avalonia
 открыть Avalonia.Controls
+открыть Avalonia.LogicalTree
+открыть Avalonia.Media
 открыть Avalonia.Media.Imaging
+открыть Avalonia.Metadata
 открыть Avalonia.Threading
 открыть Рисовать
 
 [<AllowNullLiteral>]
 тип внутренний ХолстДляРисования () =
-   наследует Canvas ()
+   наследует Control ()
    пусть изображениеЧерепахи = новый Bitmap(typeof<ХолстДляРисования>.Assembly.GetManifestResourceStream("ВеселШарп.Библиотека.черепаха.png"))
    пусть рисунки = ResizeArray<ИнфоРисунка>()
    пусть черепаха =
@@ -21,6 +24,16 @@
          | _ -> None
       )
       |> Option.iter ф   
+   пусть childIndexChanged = Event<System.EventHandler<ChildIndexChangedEventArgs>, ChildIndexChangedEventArgs>()
+      
+   член знач Background : IBrush = null with get, set
+
+   /// <summary>
+   /// Получает детей для <see cref="ПолотноДляМалювання"/>.
+   /// </summary>
+   [<Content>]
+   член полотно.Children = новый Avalonia.Controls.Controls()
+
    член холст.Черепаха = черепаха
    член холст.ОчиститьРисунки() =
       рисунки.Clear()
@@ -58,7 +71,22 @@
    член полотно.RemoveChild(element) =
       полотно.Children.Remove(element) |> ignore
    переопределить this.Render(конт) =
-      база.Render(конт)      
+      пусть фон = this.Background;
+      если (not (isNull фон)) тогда
+        пусть отрисовываемыйРазмер = this.Bounds.Size
+        конт.FillRectangle(фон, new Rect(отрисовываемыйРазмер));
+      base.Render(конт)
       для рисунок в рисунки сделать 
          если рисунок.Видим тогда нарисовать конт рисунок
       если черепаха.Видим тогда нарисовать конт черепаха
+   interface IChildIndexProvider with
+      member this.GetChildIndex child =
+        match child with
+        | :? Control -> this.Children.IndexOf(child :?> Control)
+        | _ -> -1
+      member this.TryGetTotalCount (count: byref<int>) =
+        count <- this.Children.Count
+        true
+
+      [<CLIEvent>]
+      member this.ChildIndexChanged = childIndexChanged.Publish

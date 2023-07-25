@@ -1,5 +1,5 @@
-﻿#r "nuget: Avalonia.Desktop, 11.0.0-preview3"
-#r "nuget: Avalonia.Themes.Fluent, 11.0.0-preview3"
+﻿#r "nuget: Avalonia.Desktop, 11.0.0"
+#r "nuget: Avalonia.Themes.Fluent, 11.0.0"
 #r "../исх/bin/Debug/net7.0/ВеселШарп.Библиотека.dll"
 
 открыть Библиотека

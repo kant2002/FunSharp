@@ -15,7 +15,7 @@
 тип AvaloniaApp() =
     наследует Avalonia.Application()
     переопределить self.Initialize() =
-        пусть theme = новый FluentTheme(новый Uri("avares://ВеселШарп.Бiблiотека"), Mode = FluentThemeMode.Light)
+        пусть theme = новый FluentTheme()
         self.Styles.Add(theme)
 
 тип внутренний МоеПриложение () =
@@ -36,10 +36,7 @@
    пусть изменяемый isRightButtonDown = ложь
    пусть runOnUiThread (action: Func<'a>) =
     пусть изменяемый result : 'a = нуль
-    async {
-        пусть! x = Dispatcher.UIThread.InvokeAsync(action) |> Async.AwaitTask
-        result <- x
-    } |> Async.RunSynchronously
+    result <- Dispatcher.UIThread.InvokeAsync(action).Result
     result
    пусть инициализироватьХолст () =
       главныйХолст <- новый ХолстДляРисования(Background=новый Avalonia.Media.SolidColorBrush(кXwtЦвету Цвета.White))
