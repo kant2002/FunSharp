@@ -39,7 +39,7 @@ type internal МоеПриложение () =
     result <- Dispatcher.UIThread.InvokeAsync(action).Result
     result
    let инициализироватьХолст () =
-      главныйХолст <- new ХолстДляРисования(Background=new Avalonia.Media.SolidColorBrush(кXwtЦвету Цвета.White))
+      главныйХолст <- new ХолстДляРисования(Background=new Avalonia.Media.SolidColorBrush(кXwtЦвету Цвета.Белый))
       главныйХолст.KeyUp.Add(fun args -> 
          последняяКнопка <- args.Key.ToString()
          if кнопкаВниз <> null then кнопкаВниз.Invoke()

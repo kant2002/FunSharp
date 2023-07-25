@@ -7,7 +7,7 @@ open Avalonia.Media
 [<Sealed>]
 type ГрафическоеОкно private () =   
    static let рнд = Random()
-   static let mutable фоновыйЦвет = Цвета.White
+   static let mutable фоновыйЦвет = Цвета.Белый
    static let mutable ширина = 640
    static let mutable высота = 480
    static let перо () = Перо(ГрафическоеОкно.ЦветПера,ГрафическоеОкно.ШиринаПера)
@@ -37,7 +37,7 @@ type ГрафическоеОкно private () =
    static member CanResize
       with get () = true
       and set (value:bool) = ()
-   static member val ЦветПера = Цвета.Black with get, set
+   static member val ЦветПера = Цвета.Черный with get, set
    static member val ШиринаПера = 2.0 with get, set
    static member val ЦветКисти = Цвета.Purple with get,set
    static member val РазмерШрифта = 12.0 with get,set

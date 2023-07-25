@@ -12,7 +12,7 @@ open Библиотека
 // Game area controls
 let ширинаИгры  = 640.0
 let высотаИгры = 480.0
-let цветФона = Цвета.Black
+let цветФона = Цвета.Черный
 
 // Window title
 let заголовокИгры = "Астероиды, Счет: "
@@ -30,20 +30,20 @@ let кнопкаПауза = "P"
 
 // Asteroid (rock) settings
 let скоростьАстероидов = 1.0
-let цветАстероидов = Цвета.White
+let цветАстероидов = Цвета.Белый
 let минАстероид = 20 // small size rock
 let типыАстероидов = 3 // number of rock sizes (multiples of small rock size)
 let mutable иницАстероиды = 5
 
 // Ammo settings
 let скоростьПули = 5.0
-let цветПули = Цвета.White
+let цветПули = Цвета.Белый
 let жизньПули = 60 // moves before auto destruct
 let максПули = 10
 let размерПули = 5.0
 
 // Player settings
-let цветИгрока = Цвета.White
+let цветИгрока = Цвета.Белый
 let высотаИгрока = 30.0
 let ширинаИгрока = 20.0
 let mutable игрок = ""
