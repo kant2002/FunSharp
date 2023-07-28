@@ -11,7 +11,7 @@ type Цвет =
 
 [<AutoOpen>]
 module internal КонвертерЦвета =
-   let кXwtЦвету (color:Цвет) = Avalonia.Media.Color.FromArgb(color.R, color.G, color.B, color.A)
+   let кXwtЦвету (color:Цвет) = Avalonia.Media.Color.FromArgb(color.A, color.R, color.G, color.B)
 
 type internal Ширина = float
 type internal Высота = float
