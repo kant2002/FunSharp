@@ -12,7 +12,7 @@ open Бібліотека
 // Game area controls
 let ширинаГри  = 640.0
 let высотаГри = 480.0
-let колірФону = Кольори.Black
+let колірФону = Кольори.Чорний
 
 // Window title
 let заголовокГри = "Астероїди, Рахунок: "
@@ -30,20 +30,20 @@ let кнопкаПауза = "P"
 
 // Asteroid (rock) settings
 let швидкістьАстероїдів = 1.0
-let колірАстероїдів = Кольори.White
+let колірАстероїдів = Кольори.Білий
 let минАстероїд = 20 // small size rock
 let типАстероїдів = 3 // number of rock sizes (multiples of small rock size)
 let mutable іницАстероїди = 5
 
 // Ammo settings
 let швидкістьКулі = 5.0
-let колірКулі = Кольори.White
+let колірКулі = Кольори.Білий
 let життяКулі = 60 // moves before auto destruct
 let максКуль = 10
 let розмірКулі = 5.0
 
 // Player settings
-let колірІгрока = Кольори.White
+let колірІгрока = Кольори.Білий
 let висотаІгрока = 30.0
 let ширинаІгрока = 20.0
 let mutable ігрок = ""

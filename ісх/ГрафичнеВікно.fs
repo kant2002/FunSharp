@@ -7,7 +7,7 @@ open Avalonia.Media
 [<Sealed>]
 type ГрафичнеВікно private () =   
    static let рнд = Random()
-   static let mutable фоновийКолір = Кольори.White
+   static let mutable фоновийКолір = Кольори.Білий
    static let mutable ширина = 640
    static let mutable висота = 480
    static let перо () = Перо(ГрафичнеВікно.КолірПера,ГрафичнеВікно.ШиринаПера)
@@ -37,7 +37,7 @@ type ГрафичнеВікно private () =
    static member МожнаЗмінитиРозмір
       with get () = true
       and set (значення:bool) = ()
-   static member val КолірПера = Кольори.Black with get, set
+   static member val КолірПера = Кольори.Чорний with get, set
    static member val ШиринаПера = 2.0 with get, set
    static member val КолірПензлика = Кольори.Purple with get,set
    static member val РозмірШрифта = 12.0 with get,set

@@ -40,7 +40,7 @@ type internal МояАпплікація () =
     результат <- Dispatcher.UIThread.InvokeAsync(дія).Result
     результат
    let ініціюватиПолотно () =
-      головнеПолотно <- new ПолотноДляМалювання(Background=new Avalonia.Media.SolidColorBrush(доКольораАвалонії Кольори.White))
+      головнеПолотно <- new ПолотноДляМалювання(Background=new Avalonia.Media.SolidColorBrush(доКольораАвалонії Кольори.Білий))
       головнеПолотно.KeyUp.Add(fun арги -> 
          останняКлавіша <- арги.Key.ToString()
          if клавішаВниз <> null then клавішаВниз.Invoke()
@@ -72,7 +72,7 @@ type internal МояАпплікація () =
       )
       головнеВікно.Content <- головнеПолотно
       головнеПолотно.Focusable <- true
-      головнеПолотно.Focus()
+      головнеПолотно.Focus() |> ignore
    let показатиВікно () = 
       if приховане then головнеВікно.Show(); приховане <- false
    let сховатиВікно () = 
