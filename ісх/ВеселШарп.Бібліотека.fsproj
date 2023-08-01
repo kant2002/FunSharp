@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFrameworks>net7.0;net472</TargetFrameworks>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 
@@ -33,9 +33,17 @@
 		<EmbeddedResource Include="Звук\Pause.wav" />
 	</ItemGroup>
 
-	<ItemGroup>
+	<ItemGroup Condition="$(TargetFramework) != 'net472'">
     <PackageReference Include="System.Windows.Extensions" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework) == 'net472'">
+    <Reference Include="System.Windows.Extensions" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" Version="11.0.0" />
     <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0" />
+    <PackageReference Include="FSharp.Core.Ukrainian" Version="0.0.4" />
 	</ItemGroup>
 </Project>

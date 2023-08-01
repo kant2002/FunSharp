@@ -5,7 +5,7 @@ open Avalonia.Controls
 
 [<Sealed>]
 type ЭлементиКерування private () =
-   static let mutable наКлік = Callback(ignore)
+   static let mutable наКлік = Callback(ігнорувати)
    static let mutable останняНажатаКнопка = ""
    static let элементиКерування = Словник<string,Avalonia.Controls.Control>()
    static let позиції = Словник<string,int * int>()
@@ -48,7 +48,7 @@ type ЭлементиКерування private () =
       let элементКерування = элементиКерування.[назваЕлемента] :?> TextBox
       Моя.Апплікація.Викликати( fun () ->
          элементКерування.Text <- текст
-         элементКерування.Focus() |> ignore
+         элементКерування.Focus() |> ігнорувати
       )
    /// Отримує поточний текст у вказанному текстовому полі
    static member ОтриматиТекстТекстовогоВікна(назваЕлемента) =

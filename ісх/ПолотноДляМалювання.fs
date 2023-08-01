@@ -70,7 +70,7 @@ type internal ПолотноДляМалювання () =
       Canvas.SetLeft(елемент, x)
       Canvas.SetTop(елемент, y)
    member полотно.ВидалитиДітину(елемент) =
-      полотно.Children.Remove(елемент) |> ignore
+      полотно.Children.Remove(елемент) |> ігнорувати
    override this.Render(конт) =
       let фон = this.Background;
       if (not (isNull фон)) then

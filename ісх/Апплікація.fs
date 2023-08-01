@@ -23,12 +23,12 @@ type internal МояАпплікація () =
    let mutable приховане : bool = true
    let mutable головнеВікно : Window = null
    let mutable головнеПолотно : ПолотноДляМалювання = null
-   let mutable клавішаВгору = Callback(ignore)
-   let mutable клавішаВниз = Callback(ignore)   
-   let mutable мишиВниз = Callback(ignore)
-   let mutable мишаВгору = Callback(ignore)
-   let mutable мишаРухається = Callback(ignore)
-   let mutable цокТаймера = Callback(ignore)
+   let mutable клавішаВгору = Callback(ігнорувати)
+   let mutable клавішаВниз = Callback(ігнорувати)   
+   let mutable мишиВниз = Callback(ігнорувати)
+   let mutable мишаВгору = Callback(ігнорувати)
+   let mutable мишаРухається = Callback(ігнорувати)
+   let mutable цокТаймера = Callback(ігнорувати)
    let mutable таймерПризупинено = false
    let mutable останняКлавіша = ""
    let mutable мишаX = 0.0
@@ -72,7 +72,7 @@ type internal МояАпплікація () =
       )
       головнеВікно.Content <- головнеПолотно
       головнеПолотно.Focusable <- true
-      головнеПолотно.Focus() |> ignore
+      головнеПолотно.Focus() |> ігнорувати
    let показатиВікно () = 
       if приховане then головнеВікно.Show(); приховане <- false
    let сховатиВікно () = 
@@ -93,14 +93,14 @@ type internal МояАпплікація () =
         показатиВікно ()         
         let наИниц = unbox<unit->unit> наІніц
         наИниц ()
-      ) |> ignore
-      апп.StartWithClassicDesktopLifetime(Environment.GetCommandLineArgs()) |> ignore
+      ) |> ігнорувати
+      апп.StartWithClassicDesktopLifetime(Environment.GetCommandLineArgs()) |> ігнорувати
    let запуститиПотікДодатка () =
       use ініційован = new AutoResetEvent(false)
       let потік = Thread(ParameterizedThreadStart запуститиДодаток)
       if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) then потік.SetApartmentState(ApartmentState.STA)
-      потік.Start(fun () -> ініційован.Set() |> ignore)
-      ініційован.WaitOne() |> ignore
+      потік.Start(fun () -> ініційован.Set() |> ігнорувати)
+      ініційован.WaitOne() |> ігнорувати
    do запуститиПотікДодатка()
    member апп.Вікно = головнеВікно
    member апп.ВстановитиШиринуВікна(ширина) =
@@ -137,7 +137,7 @@ type internal МояАпплікація () =
     в.Width <- 200
     в.Height <- 100
     using (new CancellationTokenSource()) (fun джерело ->
-        в.ShowDialog(головнеВікно).ContinueWith(fun _ -> джерело.Cancel(), TaskScheduler.Default) |> ignore;
+        в.ShowDialog(головнеВікно).ContinueWith(fun _ -> джерело.Cancel(), TaskScheduler.Default) |> ігнорувати;
         Dispatcher.UIThread.MainLoop(джерело.Token);
     )
 
@@ -152,7 +152,7 @@ type internal Моя private () =
       netFxFsi || netcoreFsi
    static let закритиАплікацію () =
       lock (сінх) (fun () ->
-         (Application.Current.ApplicationLifetime :?> IClassicDesktopStyleApplicationLifetime).TryShutdown(0) |> ignore
+         (Application.Current.ApplicationLifetime :?> IClassicDesktopStyleApplicationLifetime).TryShutdown(0) |> ігнорувати
          if not (уFsi()) then
             Environment.Exit(0)
          аплікація <- None       
