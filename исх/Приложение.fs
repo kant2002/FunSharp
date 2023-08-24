@@ -42,11 +42,11 @@ type internal МоеПриложение () =
       главныйХолст <- new ХолстДляРисования(Background=new Avalonia.Media.SolidColorBrush(кXwtЦвету Цвета.Белый))
       главныйХолст.KeyUp.Add(fun args -> 
          последняяКнопка <- args.Key.ToString()
-         if кнопкаВниз <> null then кнопкаВниз.Invoke()
+         if кнопкаВверх <> null then кнопкаВверх.Invoke()
       )
       главныйХолст.KeyDown.Add(fun args ->
          последняяКнопка <- args.Key.ToString()
-         if кнопкаВверх <> null then кнопкаВверх.Invoke()
+         if кнопкаВниз <> null then кнопкаВниз.Invoke()
       )
       главныйХолст.PointerPressed.Add(fun args ->
          let point = args.GetCurrentPoint(главныйХолст)
