@@ -14,7 +14,7 @@
 		<Compile Include="Апплікація.fs" />
 		<Compile Include="Хттп.fs" />
 		<Compile Include="Ресурс.fs" />
-		<Compile Include="СписокИзображений.fs" />
+		<Compile Include="СписокЗображень.fs" />
 		<Compile Include="ГрафичнеВікно.fs" />
 		<Compile Include="Фігури.fs" />
 		<Compile Include="Черепаха.fs" />

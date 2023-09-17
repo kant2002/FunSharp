@@ -34,20 +34,20 @@ let намалюватиЗображення (конт:DrawingContext) (інфо
    match інфо.Обертання with
    | Some кут ->           
         let ш,в = зображення.Size.Width, зображення.Size.Height
-        let джерело = new Rect(new Point(0.0,0.0),зображення.Size)
         use _ = конт.PushTransform (Matrix.CreateTranslation(x+ш/2.0,y+в/2.0))
         use _ = конт.PushTransform (Matrix.CreateRotation(Бібліотека.Математика.ОтриматиРадіани кут))
         use _ = конт.PushTransform (Matrix.CreateTranslation(-ш / 2.0, -в / 2.0))
         match інфо.Масштаб with
-        | Some(sx,sy) -> 
-            use _ = конт.PushTransform (Matrix.CreateScale(sx,sy))
+        | Some(мx,мy) -> 
+            let джерело = new Rect(0.0, 0.0, зображення.Size.Width*мx,зображення.Size.Height*мy)
             конт.DrawImage(зображення, джерело)
-        | None -> конт.DrawImage(зображення, джерело)
+        | None -> 
+            let джерело = new Rect(new Point(0.0,0.0),зображення.Size)
+            конт.DrawImage(зображення, джерело)
    | None ->
       match інфо.Масштаб with
       | Some(мx,мy) -> 
-         use _ = конт.PushTransform (Matrix.CreateScale(мx,мy))
-         конт.DrawImage(зображення,new Rect(x, y, зображення.Size.Width/мx,зображення.Size.Height/мy))
+         конт.DrawImage(зображення,new Rect(x, y, зображення.Size.Width*мx,зображення.Size.Height*мy))
       | None ->
          конт.DrawImage(зображення,new Rect(x, y, зображення.Size.Width, зображення.Size.Height))
 

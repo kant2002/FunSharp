@@ -76,6 +76,13 @@ type ГрафичнеВікно private () =
                    Моя.Апплікація.Викликати(fun () -> Моя.Апплікація.Полотно.ЗробитиНедійсним())
                 } |> Async.Start
                 посиланняЗображення
+            elif імяЗображення.StartsWith("file:") || імяЗображення[1] = ':'
+            then
+                let изображениеСсыл = ref null
+                let изображение = new Avalonia.Media.Imaging.Bitmap(імяЗображення) :> Avalonia.Media.IImage
+                изображениеСсыл := изображение
+                Моя.Апплікація.Викликати(fun () -> Моя.Апплікація.Полотно.ЗробитиНедійсним())
+                изображениеСсыл
             else
                 ref (new Bitmap(Reflection.Assembly.GetEntryAssembly().GetManifestResourceStream(імяЗображення)) :> IImage)
       НамалюватиЗображення(посиланняЗображення,x,y) |> намалювати
