@@ -1,6 +1,7 @@
 ﻿namespace Библиотека
 
 open System
+open System.IO
 
 [<Sealed>]
 type СписокИзображений private () =
@@ -10,6 +11,8 @@ type СписокИзображений private () =
       let байты =
          if путь.StartsWith("http:") || путь.StartsWith("https:") 
          then Хттп.ЗагрузитьБайты путь
+         elif путь.StartsWith("file:") || путь[1] = ':'
+         then File.ReadAllBytes путь
          else Ресурс.ЗагрузитьБайты путь
       изображения.Add(имя, байты)
       имя

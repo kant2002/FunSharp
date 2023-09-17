@@ -31,24 +31,23 @@ type ИнфоРисунка = {
    }
 
 let нарисоватьИзображение (конт:DrawingContext) (инфо:ИнфоРисунка) (изображение:IImage) (x,y) =
+   let ш,``в`` = изображение.Size.Width, изображение.Size.Height
    match инфо.Врашение with
    | Some угол ->           
-      let ш,``в`` = изображение.Size.Width, изображение.Size.Height
-      let source = new Rect(new Point(0.0,0.0),изображение.Size)
       use _ = конт.PushPreTransform (Matrix.CreateTranslation(x+ш/2.0,y+``в``/2.0))
       use _ = конт.PushPreTransform (Matrix.CreateRotation(Библиотека.Математика.ВзятьРадианы угол))
       use _ = конт.PushPreTransform (Matrix.CreateTranslation(-ш / 2.0, -``в`` / 2.0))
       match инфо.Масштаб with
       | Some(sx,sy) ->
-        use _ = конт.PushPreTransform (Matrix.CreateScale(sx,sy))
+        let source = new Rect(0.0,0.0,изображение.Size.Width * sx,изображение.Size.Height * sy)
         конт.DrawImage(изображение, source)
       | None ->
+        let source = new Rect(0.0,0.0,изображение.Size.Width,изображение.Size.Height)
         конт.DrawImage(изображение, source)
    | None ->
       match инфо.Масштаб with
       | Some(sx,sy) -> 
-         use _ = конт.PushPreTransform (Matrix.CreateScale(sx,sy))
-         конт.DrawImage(изображение,new Rect(x, y, изображение.Size.Width/sx,изображение.Size.Height/sy))
+         конт.DrawImage(изображение,new Rect(x, y, изображение.Size.Width * sx,изображение.Size.Height * sy))
       | None ->
          конт.DrawImage(изображение,new Rect(x, y, изображение.Size.Width, изображение.Size.Height))
 
