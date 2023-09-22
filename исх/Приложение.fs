@@ -5,18 +5,17 @@ open System.Runtime.InteropServices
 open System.Threading
 open System.Threading.Tasks
 open Avalonia
-open Avalonia.Themes.Fluent
 open Avalonia.Controls.ApplicationLifetimes
 open Avalonia.Controls
 open Avalonia.Threading
+open Avalonia.Markup.Xaml
 
 type Callback = delegate of unit -> unit
 
-type AvaloniaApp() =
+type ПриложениеАвалонии() as self =
     inherit Avalonia.Application()
-    override self.Initialize() =
-        let theme = new FluentTheme()
-        self.Styles.Add(theme)
+    do
+        AvaloniaXamlLoader.Load(self)
 
 type internal МоеПриложение () =
    let mutable скрыто : bool = true
@@ -84,7 +83,7 @@ type internal МоеПриложение () =
       timer.Start()
       timerDisposable <- timer
    let запуститьПриложение наИниц =      
-      let app = AppBuilder.Configure<AvaloniaApp>().UsePlatformDetect();
+      let app = AppBuilder.Configure<ПриложениеАвалонии>().UsePlatformDetect();
       app.AfterSetup(fun (_) ->
         главноеОкно <- new Window(Title="App", (* Padding = WidgetSpacing(), *) Width=640.0, Height=480.0)
         инициализироватьХолст ()

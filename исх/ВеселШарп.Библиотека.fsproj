@@ -39,6 +39,5 @@
     <PackageReference Update="FSharp.Core" Version="6.0.0" />
     <PackageReference Include="System.Windows.Extensions" Version="6.0.0" />
     <PackageReference Include="Avalonia.Desktop" Version="11.0.0" />
-	  <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0" />
 	</ItemGroup>
 </Project>
