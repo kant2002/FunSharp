@@ -43,7 +43,6 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" Version="11.0.0" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0" />
     <PackageReference Include="FSharp.Core.Ukrainian" Version="0.0.4" />
 	</ItemGroup>
 </Project>

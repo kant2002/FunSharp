@@ -5,18 +5,17 @@ open System.Runtime.InteropServices
 open System.Threading
 open System.Threading.Tasks
 open Avalonia
-open Avalonia.Themes.Fluent
 open Avalonia.Controls.ApplicationLifetimes
 open Avalonia.Controls
+open Avalonia.Markup.Xaml
 open Avalonia.Threading
 
 type Callback = delegate of unit -> unit
 
-type АппАвалонії() =
+type АппАвалонії() as я =
     inherit Avalonia.Application()
-    override сам.Initialize() =
-        let тема = new FluentTheme()
-        сам.Styles.Add(тема)
+    do
+        AvaloniaXamlLoader.Load(я)
 
 
 type internal МояАпплікація () =
