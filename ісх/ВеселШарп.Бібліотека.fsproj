@@ -34,7 +34,7 @@
 	</ItemGroup>
 
 	<ItemGroup Condition="$(TargetFramework) != 'net472'">
-    <PackageReference Include="System.Windows.Extensions" Version="7.0.0" />
+    <PackageReference Include="System.Windows.Extensions" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup Condition="$(TargetFramework) == 'net472'">
@@ -43,6 +43,6 @@
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" Version="11.0.0" />
-    <PackageReference Include="FSharp.Core.Ukrainian" Version="0.0.4" />
+    <PackageReference Include="FSharp.Core.Ukrainian" Version="0.0.6" />
 	</ItemGroup>
 </Project>
