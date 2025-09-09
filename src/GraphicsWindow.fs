@@ -75,6 +75,13 @@ type GraphicsWindow private () =
                    My.App.Invoke(fun () -> My.App.Canvas.Invalidate())
                 } |> Async.Start
                 imageRef
+            elif imageName.StartsWith("file:") || imageName[1] = ':'
+            then
+                let imageRef = ref null
+                let image = new Avalonia.Media.Imaging.Bitmap(imageName) :> Avalonia.Media.IImage
+                imageRef := image
+                My.App.Invoke(fun () -> My.App.Canvas.Invalidate())
+                imageRef
             else
                 ref (new Bitmap(Reflection.Assembly.GetEntryAssembly().GetManifestResourceStream(imageName)) :> Avalonia.Media.IImage)
       DrawImage(imageRef,x,y) |> draw
