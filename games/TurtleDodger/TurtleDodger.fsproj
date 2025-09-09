@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>WinExe</OutputType>
 	</PropertyGroup>
 	<ItemGroup>
-		<EmbeddedResource Include="Turtle.png" />
-		<Compile Include="TurtleDodger.fs" />
+    <EmbeddedResource Include="turtle.png" LogicalName="turtle.png" />
+    <Compile Include="TurtleDodger.fs" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\FunSharp.Library.fsproj" />

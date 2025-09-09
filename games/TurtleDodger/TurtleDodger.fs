@@ -57,7 +57,7 @@ let rec Closing () =
    Program.Delay(3000)
 and Opening () =
    let url = "" // "http://www.nonkit.com/smallbasic.files/"
-   let bigTurtle = Shapes.AddImage(url + "Turtle.png")
+   let bigTurtle = Shapes.AddImage(url + "turtle.png")
    Shapes.Move(bigTurtle, 180, 140)
    GraphicsWindow.BrushColor <- Colors.White
    GraphicsWindow.FontName <- "Trebuchet MS"
