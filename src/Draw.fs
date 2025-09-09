@@ -34,25 +34,22 @@ let drawImage (ctx:DrawingContext) (info:DrawingInfo) (image:IImage) (x,y) =
    match info.Rotation with
    | Some angle ->           
       let w,h = image.Size.Width, image.Size.Height
-      let currentTransform = ctx.CurrentTransform;
-      let source = new Rect(new Point(0.0,0.0),image.Size)
-      ctx.PushPreTransform (Matrix.CreateTranslation(x+w/2.0,y+h/2.0)) |> ignore
-      ctx.PushPreTransform (Matrix.CreateRotation(Library.Math.GetRadians angle)) |> ignore
-      ctx.PushPreTransform (Matrix.CreateTranslation(-w / 2.0, -h / 2.0)) |> ignore
-      match info.Scale with
-      | Some(sx,sy) -> ctx.PushPreTransform (Matrix.CreateScale(sx,sy)) |> ignore
-      | None -> ()    
-      ctx.DrawImage(image, source)
-      ctx.PushSetTransform currentTransform;
-   | None ->
-      let currentTransform = ctx.CurrentTransform;
+      use _ = ctx.PushTransform (Matrix.CreateTranslation(x+w/2.0,y+h/2.0))
+      use _ = ctx.PushTransform (Matrix.CreateRotation(Library.Math.GetRadians angle))
+      use _ = ctx.PushTransform (Matrix.CreateTranslation(-w / 2.0, -h / 2.0))
       match info.Scale with
       | Some(sx,sy) -> 
-         ctx.PushPreTransform (Matrix.CreateScale(sx,sy)) |> ignore
-         ctx.DrawImage(image,new Rect(x, y, image.Size.Width/sx,image.Size.Height/sy))
+        let source = new Rect(0.0, 0.0, image.Size.Width * sx, image.Size.Height * sy)
+        ctx.DrawImage(image, source)
+      | None -> 
+        let source = new Rect(new Point(0.0,0.0),image.Size)
+        ctx.DrawImage(image, source)
+   | None ->
+      match info.Scale with
+      | Some(sx,sy) -> 
+         ctx.DrawImage(image,new Rect(x, y, image.Size.Width * sx,image.Size.Height * sy))
       | None ->
          ctx.DrawImage(image,new Rect(x, y, image.Size.Width, image.Size.Height))
-      ctx.PushSetTransform currentTransform;
 
 let draw (ctx:DrawingContext) (info:DrawingInfo) =
    let x,y = info.Offset.X, info.Offset.Y
@@ -109,16 +106,16 @@ let draw (ctx:DrawingContext) (info:DrawingInfo) =
       let pen = new Pen(new SolidColorBrush(color, 1.0), width)
       ctx.DrawLine(pen, Avalonia.Point(x+ x1, y+y1), Avalonia.Point(x+ x2, y+y2))
    | DrawShape(_,RectShape(Rect(w,h),Pen(color,width),fillColor)) ->
-      let currentTransform = ctx.CurrentTransform
-      ctx.PushPreTransform (Matrix.CreateTranslation(x,y)) |> ignore
-      match info.Rotation with
-      | Some angle -> ctx.PushPreTransform (Matrix.CreateRotation(angle)) |> ignore
-      | None -> ()            
+      use _ = ctx.PushTransform (Matrix.CreateTranslation(x,y))
       let color = toXwtColor color
       let colorBackground = toXwtColor fillColor
       let pen = new Pen(new SolidColorBrush(color, 1.0), width)
-      ctx.DrawRectangle(new SolidColorBrush(colorBackground, 1.0), pen, Avalonia.Rect(0.,0.,w,h))
-      ctx.PushSetTransform currentTransform |> ignore;
+      match info.Rotation with
+      | Some angle -> 
+        use _ = ctx.PushTransform (Matrix.CreateRotation(angle))
+        ctx.DrawRectangle(new SolidColorBrush(colorBackground, 1.0), pen, Avalonia.Rect(0.,0.,w,h))
+      | None ->         
+        ctx.DrawRectangle(new SolidColorBrush(colorBackground, 1.0), pen, Avalonia.Rect(0.,0.,w,h))
    | DrawShape(_,TriangleShape(triangle,Pen(color,width),fillColor)) ->
       let brush = new SolidColorBrush(withOpacity (toXwtColor fillColor), 1.0)
       let pen = new Pen(new SolidColorBrush(toXwtColor color, 1.0), width)

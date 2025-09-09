@@ -5,10 +5,13 @@ open Avalonia.Controls
 open Avalonia.Media.Imaging
 open Avalonia.Threading
 open Draw
+open Avalonia.LogicalTree
+open Avalonia.Media
+open Avalonia.Metadata
 
 [<AllowNullLiteral>]
 type internal DrawingCanvas () =
-   inherit Canvas ()
+   inherit Control ()
    let turtleImage = new Bitmap(typeof<DrawingCanvas>.Assembly.GetManifestResourceStream("FunSharp.Library.turtle.png"))
    let drawings = ResizeArray<DrawingInfo>()
    let turtle =
@@ -20,7 +23,17 @@ type internal DrawingCanvas () =
          | { Drawing=DrawShape(name,_) } as info when name = shapeName -> Some info 
          | _ -> None
       )
-      |> Option.iter f   
+      |> Option.iter f
+   let childIndexChanged = Event<System.EventHandler<ChildIndexChangedEventArgs>, ChildIndexChangedEventArgs>()
+      
+   member val Background : IBrush = null with get, set
+
+   /// <summary>
+   /// Get children for <see cref="DrawingCanvas"/>.
+   /// </summary>
+   [<Content>]
+   member this.Children = new Avalonia.Controls.Controls()
+
    member canvas.Turtle = turtle
    member canvas.ClearDrawings() =
       drawings.Clear()
@@ -58,7 +71,23 @@ type internal DrawingCanvas () =
    member canvas.RemoveChild(element) =
       canvas.Children.Remove(element) |> ignore
    override this.Render(ctx) =
+      let фон = this.Background;
+      if (not (isNull фон)) then
+        let drawingSize = this.Bounds.Size
+        ctx.FillRectangle(фон, new Rect(drawingSize));
       base.Render(ctx)      
       for drawing in drawings do 
          if drawing.IsVisible then draw ctx drawing
       if turtle.IsVisible then draw ctx turtle
+
+   interface IChildIndexProvider with
+      member this.GetChildIndex child =
+        match child with
+        | :? Control -> this.Children.IndexOf(child :?> Control)
+        | _ -> -1
+      member this.TryGetTotalCount (count: byref<int>) =
+        count <- this.Children.Count
+        true
+
+      [<CLIEvent>]
+      member this.ChildIndexChanged = childIndexChanged.Publish

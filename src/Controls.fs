@@ -50,7 +50,7 @@ type Controls private () =
       let control = controls.[controlName] :?> TextBox
       My.App.Invoke( fun () ->
          control.Text <- text
-         control.Focus()
+         control.Focus() |> ignore
       )
    /// Gets the current text of the specified text box
    static member GetTextBoxText(controlName) =

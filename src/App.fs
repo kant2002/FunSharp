@@ -4,18 +4,18 @@ open System
 open System.Threading
 open System.Threading.Tasks
 open Avalonia
-open Avalonia.Themes.Fluent
 open Avalonia.Controls.ApplicationLifetimes
 open Avalonia.Controls
+open Avalonia.Markup.Xaml
 open Avalonia.Threading
+open System.Runtime.InteropServices
 
 type Callback = delegate of unit -> unit
 
-type AvaloniaApp() =
+type AvaloniaApp() as this =
     inherit Avalonia.Application()
-    override self.Initialize() =
-        let theme = new FluentTheme(new Uri("avares://FunSharp.Library"), Mode = FluentThemeMode.Light)
-        self.Styles.Add(theme)
+    do
+        AvaloniaXamlLoader.Load(this)
 
 type internal MyApp () =
    let mutable isHidden : bool = true
@@ -35,10 +35,7 @@ type internal MyApp () =
    let mutable isRightButtonDown = false
    let runOnUiThread (action: Func<'a>) =
     let mutable result : 'a = null
-    async {
-        let! x = Dispatcher.UIThread.InvokeAsync(action) |> Async.AwaitTask
-        result <- x
-    } |> Async.RunSynchronously
+    result <- Dispatcher.UIThread.InvokeAsync(action).Result
     result
    let initCanvas () =
       mainCanvas <- new DrawingCanvas(Background=new Avalonia.Media.SolidColorBrush(toXwtColor Colors.White))
@@ -99,7 +96,7 @@ type internal MyApp () =
    let startAppThread () =
       use isInitialized = new AutoResetEvent(false)
       let thread = Thread(ParameterizedThreadStart runApp)
-      thread.SetApartmentState(ApartmentState.STA)
+      if RuntimeInformation.IsOSPlatform(OSPlatform.Windows) then thread.SetApartmentState(ApartmentState.STA)
       thread.Start(fun () -> isInitialized.Set() |> ignore)
       isInitialized.WaitOne() |> ignore      
    do startAppThread()
@@ -149,7 +146,9 @@ type internal My private () =
    static let sync = obj ()
    static let isFsi () =
       let args = System.Environment.GetCommandLineArgs()
-      args.Length > 0 && System.IO.Path.GetFileName(args.[0]) = "fsi.exe"
+      let netFxFsi = args.Length > 0 && System.IO.Path.GetFileName(args.[0]) = "fsi.exe"
+      let netcoreFsi = args.Length > 1 && System.IO.Path.GetFileName(args.[1]) = "fsi"
+      netFxFsi || netcoreFsi
    static let closeApp () =
       lock (sync) (fun () ->
          (Application.Current.ApplicationLifetime :?> IClassicDesktopStyleApplicationLifetime).TryShutdown(0) |> ignore
