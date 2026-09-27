@@ -9,7 +9,16 @@
 
 ВеселШарп запускаєтся на Raspbian, Linux, Windows та MacOS.
 
-## Зависимости
+```
+dotnet run --project ігри/1942/1942.fsproj
+dotnet run --project ігри/Астероїди/Астероїди.fsproj
+dotnet run --project ігри/ПтичкаПомашка/ПтичкаПомашка.fsproj
+dotnet run --project ігри/Ракетка/Ракетка.fsproj
+dotnet run --project ігри/Тетріс/Тетріс.fsproj
+dotnet run --project ігри/ЧерепахаУхиляка/ЧерепахаУхиляка.fsproj
+```
+
+## Залежності
 
 ВеселШарп використовує [Avalonia](https://github.com/AvaloniaUI/Avalonia).
 

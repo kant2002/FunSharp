@@ -1,0 +1,8 @@
+<Project>
+	<!-- this should be in the targets file, since only after restore we can have the package path on disk. -->
+	<PropertyGroup>
+      <LangVersion>10</LangVersion>
+	  <DotnetFsiCompilerPath>$(PkgAndriiKurdiumov_FSharp_Compiler_Ukrainian)/lib/net10.0/fsi.dll</DotnetFsiCompilerPath>
+	  <DotnetFscCompilerPath>$(PkgAndriiKurdiumov_FSharp_Compiler_Ukrainian)/lib/net10.0/fsc.dll</DotnetFscCompilerPath>
+	</PropertyGroup>
+</Project>
