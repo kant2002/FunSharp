@@ -70,7 +70,7 @@
       Canvas.SetLeft(елемент, x)
       Canvas.SetTop(елемент, y)
    член полотно.ВидалитиДітину(елемент) =
-      полотно.Children.Remove(елемент) |> ignore
+      полотно.Children.Remove(елемент) |> ігнорувати
    перевизначити this.Render(конт) =
       let фон = this.Background;
       якщо (not (isNull фон)) тоді

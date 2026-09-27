@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/Ігри/">
+    <Project Path="ігри/1942/1942.fsproj" />
+    <Project Path="ігри/Астероїди/Астероїди.fsproj" />
+    <Project Path="ігри/ПтичкаПомашка/ПтичкаПомашка.fsproj" />
+    <Project Path="ігри/Ракетка/Ракетка.fsproj" />
+    <Project Path="ігри/Тетріс/Тетріс.fsproj" />
+    <Project Path="ігри/ЧерепахаУхиляка/ЧерепахаУхиляка.fsproj" />
+  </Folder>
+  <Folder Name="/Приклади/">
+    <File Path="приклади/Годинник.fsx" />
+    <File Path="приклади/ГраЗРакеткой.fsx" />
+    <File Path="приклади/Калькулятор.fsx" />
+    <File Path="приклади/Коло.fsx" />
+    <File Path="приклади/Малювання.fsx" />
+    <File Path="приклади/Переміщення.fsx" />
+    <File Path="приклади/ПтичкаХлоп.fsx" />
+    <File Path="приклади/ФрактальнеДерево.fsx" />
+    <File Path="приклади/Черепаха.fsx" />
+  </Folder>
+  <Project Path="ісх/ВеселШарп.Бібліотека.fsproj" />
+</Solution>

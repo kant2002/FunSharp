@@ -1,19 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
+		<TargetFramework>net10.0</TargetFramework>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<Compile Include="ТипыРисунков.fs" />
-    <Compile Include="Математика.fs" />
+        <Compile Include="Математика.fs" />
 		<Compile Include="Малювати.fs" />
 		<Compile Include="ПолотноДляМалювання.fs" />
 		<Compile Include="Кольори.fs" />
 		<Compile Include="Апплікація.fs" />
 		<Compile Include="Хттп.fs" />
 		<Compile Include="Ресурс.fs" />
-		<Compile Include="СписокИзображений.fs" />
+		<Compile Include="СписокЗображень.fs" />
 		<Compile Include="ГрафичнеВікно.fs" />
 		<Compile Include="Фігури.fs" />
 		<Compile Include="Черепаха.fs" />
@@ -32,10 +32,16 @@
 		<EmbeddedResource Include="Звук\Pause.wav" />
 	</ItemGroup>
 
-	<ItemGroup>
-    <PackageReference Include="System.Windows.Extensions" Version="7.0.0" />
+	<ItemGroup Condition="$(TargetFramework) != 'net472'">
+    <PackageReference Include="System.Windows.Extensions" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition="$(TargetFramework) == 'net472'">
+    <Reference Include="System.Windows.Extensions" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" Version="11.0.0" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0" />
-    <PackageReference Include="FSharp.Core.Ukrainian" Version="0.0.2" />
+    <PackageReference Include="FSharp.Core.Ukrainian" Version="0.0.6" />
 	</ItemGroup>
 </Project>

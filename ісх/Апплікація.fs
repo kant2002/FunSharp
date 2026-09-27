@@ -5,31 +5,30 @@
 відкрити System.Threading
 відкрити System.Threading.Tasks
 відкрити Avalonia
-відкрити Avalonia.Themes.Fluent
 відкрити Avalonia.Controls.ApplicationLifetimes
+відкрити Avalonia.Markup.Xaml
 відкрити Avalonia.Controls
 відкрити Avalonia.Threading
 
 тип Callback = делегат з unit -> unit
 
-тип АппАвалонії() =
+тип АппАвалонії() як я =
     успадкує Avalonia.Application()
-    перевизначити сам.Initialize() =
-        let тема = new FluentTheme()
-        сам.Styles.Add(тема)
+    зробити
+        AvaloniaXamlLoader.Load(я)
 
 
 тип внутрішній МояАпплікація () =
-   нехай змінливий приховане : bool = істина
-   нехай змінливий головнеВікно : Window = нуль
-   нехай змінливий головнеПолотно : ПолотноДляМалювання = нуль
-   нехай змінливий клавішаВгору = Callback(ignore)
-   нехай змінливий клавішаВниз = Callback(ignore)   
-   нехай змінливий мишиВниз = Callback(ignore)
-   нехай змінливий мишаВгору = Callback(ignore)
-   нехай змінливий мишаРухається = Callback(ignore)
-   нехай змінливий цокТаймера = Callback(ignore)
-   нехай змінливий таймерПризупинено = ложь
+   нехай змінливий приховане : bool = true
+   нехай змінливий головнеВікно : Window = null
+   нехай змінливий головнеПолотно : ПолотноДляМалювання = null
+   нехай змінливий клавішаВгору = Callback(ігнорувати)
+   нехай змінливий клавішаВниз = Callback(ігнорувати)   
+   нехай змінливий мишиВниз = Callback(ігнорувати)
+   нехай змінливий мишаВгору = Callback(ігнорувати)
+   нехай змінливий мишаРухається = Callback(ігнорувати)
+   нехай змінливий цокТаймера = Callback(ігнорувати)
+   нехай змінливий таймерПризупинено = false
    нехай змінливий останняКлавіша = ""
    нехай змінливий мишаX = 0.0
    нехай змінливий мишаY = 0.0
@@ -40,7 +39,7 @@
     результат <- Dispatcher.UIThread.InvokeAsync(дія).Result
     результат
    нехай ініціюватиПолотно () =
-      головнеПолотно <- новий ПолотноДляМалювання(Background=новий Avalonia.Media.SolidColorBrush(доКольораАвалонії Кольори.White))
+      головнеПолотно <- новий ПолотноДляМалювання(Background=новий Avalonia.Media.SolidColorBrush(доКольораАвалонії Кольори.Білий))
       головнеПолотно.KeyUp.Add(фун арги -> 
          останняКлавіша <- арги.Key.ToString()
          якщо клавішаВниз <> нуль тоді клавішаВниз.Invoke()
@@ -71,8 +70,8 @@
          якщо мишаРухається <> нуль тоді мишаРухається.Invoke()
       )
       головнеВікно.Content <- головнеПолотно
-      головнеПолотно.Focusable <- істина
-      головнеПолотно.Focus()
+      головнеПолотно.Focusable <- true
+      головнеПолотно.Focus() |> ігнорувати
    нехай показатиВікно () = 
       якщо приховане тоді головнеВікно.Show(); приховане <- ложь
    нехай сховатиВікно () = 
@@ -93,14 +92,14 @@
         показатиВікно ()         
         нехай наИниц = unbox<unit->unit> наІніц
         наИниц ()
-      ) |> ignore
-      апп.StartWithClassicDesktopLifetime(Environment.GetCommandLineArgs()) |> ignore
+      ) |> ігнорувати
+      апп.StartWithClassicDesktopLifetime(Environment.GetCommandLineArgs()) |> ігнорувати
    нехай запуститиПотікДодатка () =
       вживати ініційован = новий AutoResetEvent(ложь)
       нехай потік = Thread(ParameterizedThreadStart запуститиДодаток)
       якщо RuntimeInformation.IsOSPlatform(OSPlatform.Windows) тоді потік.SetApartmentState(ApartmentState.STA)
-      потік.Start(фун () -> ініційован.Set() |> ignore)
-      ініційован.WaitOne() |> ignore
+      потік.Start(fun () -> ініційован.Set() |> ігнорувати)
+      ініційован.WaitOne() |> ігнорувати
    зробити запуститиПотікДодатка()
    член апп.Вікно = головнеВікно
    член апп.ВстановитиШиринуВікна(ширина) =
@@ -137,7 +136,7 @@
     в.Width <- 200
     в.Height <- 100
     using (новий CancellationTokenSource()) (фун джерело ->
-        в.ShowDialog(головнеВікно).ContinueWith(фун _ -> джерело.Cancel(), TaskScheduler.Default) |> ignore;
+        в.ShowDialog(головнеВікно).ContinueWith(фун _ -> джерело.Cancel(), TaskScheduler.Default) |> ігнорувати;
         Dispatcher.UIThread.MainLoop(джерело.Token);
     )
 
@@ -152,7 +151,7 @@
       netFxFsi || netcoreFsi
    статичний нехай закритиАплікацію () =
       lock (сінх) (фун () ->
-         (Application.Current.ApplicationLifetime :?> IClassicDesktopStyleApplicationLifetime).TryShutdown(0) |> ignore
+         (Application.Current.ApplicationLifetime :?> IClassicDesktopStyleApplicationLifetime).TryShutdown(0) |> ігнорувати
          якщо не (уFsi()) тоді
             Environment.Exit(0)
          аплікація <- None       
@@ -177,4 +176,3 @@
       Моя.Апплікація.Викликати (фун () -> Моя.Апплікація.Полотно.ДодатиМалюнок(drawing))
    нехай додатиМалюнокУ drawing (x,y) =
       Моя.Апплікація.Викликати (фун () -> Моя.Апплікація.Полотно.ДодатиМалюнокУ(drawing,Point(x,y)))
-
