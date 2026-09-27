@@ -1,7 +1,7 @@
-﻿#r "nuget: Avalonia.Desktop, 11.0.0"
-#r "nuget: Avalonia.Themes.Fluent, 11.0.0"
+﻿#r "nuget: Avalonia.Desktop, 12.1.3"
+#r "nuget: System.Windows.Extensions, 10.0.12"
 #r "nuget: FSharp.Core.Ukrainian"
-#r "../ісх/bin/Debug/net472/ВеселШарп.Бібліотека.dll"
+#r "../ісх/bin/Debug/net10.0/ВеселШарп.Бібліотека.dll"
 
 open Бібліотека
 

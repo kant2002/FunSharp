@@ -9,6 +9,22 @@
 
 ВеселШарп запускаєтся на Raspbian, Linux, Windows та MacOS.
 
+## Приклади скриптів
+
+```
+dotnet fsi приклади/Годинник.fsx
+dotnet fsi приклади/ГраЗРакеткой.fsx
+dotnet fsi приклади/Калькулятор.fsx
+dotnet fsi приклади/Коло.fsx
+dotnet fsi приклади/Малювання.fsx
+dotnet fsi приклади/Переміщення.fsx
+dotnet fsi приклади/ПтичкаХлоп.fsx
+dotnet fsi приклади/ФрактальнеДерево.fsx
+dotnet fsi приклади/Черепаха.fsx
+```
+
+## Приклади програм
+
 ```
 dotnet run --project ігри/1942/1942.fsproj
 dotnet run --project ігри/Астероїди/Астероїди.fsproj
